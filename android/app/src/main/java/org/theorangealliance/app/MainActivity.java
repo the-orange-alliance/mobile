@@ -1,4 +1,4 @@
-package org.theorangealliance.flutter;
+package org.theorangealliance.app;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
