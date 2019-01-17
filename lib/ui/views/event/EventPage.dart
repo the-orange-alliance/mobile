@@ -6,6 +6,7 @@ import 'package:toa_flutter/ui/views/event/subpages/EventTeams.dart';
 import 'package:toa_flutter/ui/views/event/subpages/EventMatches.dart';
 import 'package:toa_flutter/ui/views/event/subpages/EventRankings.dart';
 import 'package:toa_flutter/ui/views/event/subpages/EventAwards.dart';
+import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class EventPage extends StatefulWidget {
   EventPage(this.event);
@@ -22,11 +23,14 @@ class EventPageState extends State<EventPage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget eventInfo = EventInfo(widget.event);
-    Widget eventTeams = EventTeams(widget.event);
-    Widget eventMatches = EventMatches(widget.event);
-    Widget eventRanking = EventRankings(widget.event);
-    Widget eventAwards = EventAwards(widget.event);
+    print('EventPageState built now');
+    TOALocalizations local = TOALocalizations.of(context);
+
+    EventInfo eventInfo = EventInfo(widget.event);
+    EventTeams eventTeams = new EventTeams(widget.event);
+    Widget eventMatches = new EventMatches(widget.event);
+    Widget eventRanking = new EventRankings(widget.event);
+    Widget eventAwards = new EventAwards(widget.event);
 
     return DefaultTabController(
       length: 5,
@@ -51,10 +55,10 @@ class EventPageState extends State<EventPage> {
               actions: <Widget>[
                 IconButton(
                   icon: Icon(MdiIcons.refresh),
-                  tooltip: 'Refresh',
+                  tooltip: local.get('general.refresh'),
                   onPressed: () {
                     // Rebuild the page
-                    // TODO: rebuild page
+                    setState(() {});
                   }
                 )
               ],
@@ -62,11 +66,11 @@ class EventPageState extends State<EventPage> {
                 indicatorColor: Colors.black,
                 isScrollable: true,
                 tabs: [
-                  Tab(text: "Info"),
-                  Tab(text: "Teams"),
-                  Tab(text: "Matches"),
-                  Tab(text: "Rankings"),
-                  Tab(text: "Awards")
+                  Tab(text: local.get('pages.event.info.title')),
+                  Tab(text: local.get('pages.event.teams.title')),
+                  Tab(text: local.get('pages.event.matches.title')),
+                  Tab(text: local.get('pages.event.rankings.title')),
+                  Tab(text: local.get('pages.event.awards.title'))
                 ]
               )
             ),

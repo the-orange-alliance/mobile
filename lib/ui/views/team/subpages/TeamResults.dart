@@ -10,16 +10,20 @@ import 'package:toa_flutter/ui/widgets/EventListItem.dart';
 import 'package:toa_flutter/ui/widgets/MatchListItem.dart';
 import 'package:toa_flutter/ui/widgets/NoDataWidget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class TeamResults extends StatelessWidget {
 
   TeamResults(this.teamKey);
-  final String teamKey;
 
+  final String teamKey;
   List<TeamParticipant> data;
+  TOALocalizations local;
 
   @override
   Widget build(BuildContext context) {
+    local = TOALocalizations.of(context);
+
     if (data == null) {
       return FutureBuilder<List<TeamParticipant>>(
         future: getTeamParticipants(teamKey),
@@ -46,7 +50,7 @@ class TeamResults extends StatelessWidget {
           }
         );
       } else {
-        return NoDataWidget(MdiIcons.calendarOutline, "No events found");
+        return NoDataWidget(MdiIcons.calendarOutline, local.get('no_data.events'));
       }
     } else {
       return Center(
@@ -69,9 +73,9 @@ class TeamResults extends StatelessWidget {
         title: Text.rich(
           TextSpan(
             children: <TextSpan>[
-              TextSpan(text: 'Qual Rank '),
+              TextSpan(text: '${local.get('pages.event.rankings.qual_rank')} '),
               TextSpan(text: '#${teamParticipant.ranking.rank} ', style: TextStyle(fontWeight: FontWeight.bold)),
-              TextSpan(text: 'with a record of '),
+              TextSpan(text: '${local.get('pages.event.rankings.with_record')} '),
               TextSpan(text: '${teamParticipant.ranking.wins}-${teamParticipant.ranking.losses}-${teamParticipant.ranking.ties}', style: TextStyle(fontWeight: FontWeight.bold)),
             ]
           )
@@ -86,7 +90,7 @@ class TeamResults extends StatelessWidget {
     } else {
       card.add(Padding(
         padding: EdgeInsets.all(12),
-        child: NoDataWidget(MdiIcons.gamepadVariant, "No matches found", mini: true)
+        child: NoDataWidget(MdiIcons.gamepadVariant, local.get('no_data.matches'), mini: true)
       ));
     }
 

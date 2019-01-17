@@ -6,16 +6,20 @@ import 'package:toa_flutter/providers/ApiV3.dart';
 import 'package:toa_flutter/ui/widgets/AwardListItem.dart';
 import 'package:toa_flutter/ui/widgets/NoDataWidget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class EventAwards extends StatelessWidget {
 
   EventAwards(this.event);
-  final Event event;
 
+  final Event event;
   List<AwardRecipient> data;
+  TOALocalizations local;
 
   @override
   Widget build(BuildContext context) {
+    local = TOALocalizations.of(context);
+
     if (data == null) {
       return FutureBuilder<List<AwardRecipient>>(
         future: ApiV3().getEventAwards(event.eventKey),
@@ -64,7 +68,7 @@ class EventAwards extends StatelessWidget {
           }
         );
       } else {
-        return NoDataWidget(MdiIcons.trophyOutline, "No awards found");
+        return NoDataWidget(MdiIcons.trophyOutline, local.get('no_data.awards'));
       }
     } else {
       return Center(
@@ -76,29 +80,41 @@ class EventAwards extends StatelessWidget {
   String getHeader(AwardRecipient awardRecipient) {
     String key = awardRecipient.awardKey;
     if (key.startsWith("INS")) {
-      return "Inspire Award";
+      return local.get('awards.inspire');
+
     } else if (key.startsWith("THK")) {
-      return "Think Award";
+      return local.get('awards.think');
+
     } else if (key.startsWith("CNT")) {
-      return "Connect Award";
+      return local.get('awards.connect');
+
     } else if (key.startsWith("INV")) {
-      return "Rockwell Collins Innovate Award";
+      return local.get('awards.innovate');
+
     } else if (key.startsWith("DSN")) {
-      return "Design Award";
+      return local.get('awards.design');
+
     } else if (key.startsWith("MOT")) {
-      return "Motivate Award";
+      return local.get('awards.motivate');
+
     } else if (key.startsWith("CTL")) {
-      return "Control Award";
+      return local.get('awards.control');
+
     } else if (key.startsWith("PRM")) {
-      return "Promote Award";
+      return local.get('awards.promote');
+
     } else if (key.startsWith("CMP")) {
-      return "Compass Award";
+      return local.get('awards.compass');
+
     } else if (key.startsWith("JUD")) {
-      return "Judges Award";
+      return local.get('awards.judges');
+
     } else if (key.startsWith("WIN")) {
-      return "Winning Alliance Award";
+      return local.get('awards.winning_alliance');
+
     } else if (key.startsWith("FIN")) {
-      return "Finalist Alliance Award";
+      return local.get('awards.finalist_alliance');
+
     } else {
       return awardRecipient.awardName;
     }

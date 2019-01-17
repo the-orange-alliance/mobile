@@ -22,7 +22,7 @@ class EventListItem extends StatelessWidget {
       },
       child: ListTile(
         title: Text(event.getFullName(), overflow: TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.w700)),
-        subtitle: Text(showDate ? event.getSubtitle() : event.getShortLocation(), overflow: TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.w500))
+        subtitle: Text(showDate ? event.getSubtitle(context) : event.getShortLocation(), overflow: TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.w500))
       )
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toa_flutter/ui/views/team/TeamPage.dart';
 import 'package:toa_flutter/models/Ranking.dart';
+import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class RankingListItem extends StatelessWidget {
 
@@ -9,12 +10,14 @@ class RankingListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TOALocalizations local = TOALocalizations.of(context);
+
     String subtitle = '';
-    subtitle += ranking.qualifyingPoints > 0 ? 'Qualification Points: ${ranking.qualifyingPoints}\n' : '';
-    subtitle += ranking.rankingPoints > 0 ? 'Ranking Points: ${ranking.rankingPoints}\n' : '';
-    subtitle += ranking.tieBreakerPoints > 0 ? 'Tie Breaker Points: ${ranking.highestQualScore}\n' : '';
-    subtitle += ranking.highestQualScore > 0 ? 'Highest Score: ${ranking.highestQualScore}\n' : '';
-    subtitle += 'Matches Played: ${ranking.played}';
+    subtitle += ranking.qualifyingPoints > 0 ? '${local.get('pages.event.rankings.qual_points')}: ${ranking.qualifyingPoints}\n' : '';
+    subtitle += ranking.rankingPoints    > 0 ? '${local.get('pages.event.rankings.ranking_points')}: ${ranking.rankingPoints}\n' : '';
+    subtitle += ranking.tieBreakerPoints > 0 ? '${local.get('pages.event.rankings.tie_beaker_points')}: ${ranking.highestQualScore}\n' : '';
+    subtitle += ranking.highestQualScore > 0 ? '${local.get('pages.event.rankings.highest_score')}: ${ranking.highestQualScore}\n' : '';
+    subtitle += '${local.get('pages.event.rankings.matches_played')}: ${ranking.played}';
 
     return Material(
       type: MaterialType.transparency,
@@ -42,7 +45,7 @@ class RankingListItem extends StatelessWidget {
                 )
               ],
             ),
-            title: Text('Team #${ranking.teamKey}'),
+            title: Text('${local.get('general.team')} #${ranking.teamKey}'),
             subtitle: Text(subtitle),
           )
         )

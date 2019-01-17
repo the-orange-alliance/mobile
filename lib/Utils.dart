@@ -1,5 +1,7 @@
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
 import 'package:toa_flutter/models/Event.dart';
+import 'package:toa_flutter/internationalization/Localizations.dart';
 import 'dart:typed_data';
 
 class Utils {
@@ -10,20 +12,24 @@ class Utils {
         date1.year == date2.year;
   }
 
-  static String dateToString(Event event) {
-    if (isSameDate(event.getStartDate(), event.getStartDate())) {
-      return DateFormat("MMM d, yyyy").format(event.getStartDate());
+  static String dateToString(Event event, BuildContext context) {
+    TOALocalizations local = TOALocalizations.of(context);
+    String format = local.get('date.date_format', defaultValue: 'MMM d, yyyy');
+    if (isSameDate(event.getStartDate(), event.getEndDate())) {
+      return DateFormat(format, local.locale.toString()).format(event.getStartDate());
     } else {
-      return DateFormat("MMM d, yyyy").format(event.getStartDate()) + " to " + DateFormat("MMM d, yyyy").format(event.getEndDate());
+      return DateFormat(format, local.locale.toString()).format(event.getStartDate()) + local.get('date.date_to_date') + DateFormat(format, local.locale.toString()).format(event.getEndDate());
     }
   }
 
-  static String eventSubtitle(Event event) {
+  static String eventSubtitle(Event event, BuildContext context) {
+    TOALocalizations local = TOALocalizations.of(context);
     String location = event.getShortLocation();
+    String date = dateToString(event, context);
     if (isSameDate(event.getStartDate(), event.getStartDate())) {
-      return location + ' on ' + DateFormat("MMM d, yyyy").format(event.getStartDate());
+      return location + local.get('date.location_on_date')  + date;
     } else {
-      return location + ' from ' + DateFormat("MMM d, yyyy").format(event.getStartDate()) + " to " + DateFormat("MMM d, yyyy").format(event.getEndDate());
+      return location + local.get('date.location_from_date') + date;
     }
   }
 

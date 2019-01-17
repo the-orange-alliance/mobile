@@ -6,16 +6,20 @@ import 'package:toa_flutter/providers/ApiV3.dart';
 import 'package:toa_flutter/ui/widgets/RankingListItem.dart';
 import 'package:toa_flutter/ui/widgets/NoDataWidget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class EventRankings extends StatelessWidget {
 
   EventRankings(this.event);
-  final Event event;
 
+  final Event event;
   List<Ranking> data;
+  TOALocalizations local;
 
   @override
   Widget build(BuildContext context) {
+    local = TOALocalizations.of(context);
+
     if (data == null) {
       return FutureBuilder<List<Ranking>>(
         future: ApiV3().getEventRankings(event.eventKey),
@@ -44,7 +48,7 @@ class EventRankings extends StatelessWidget {
           }
         );
       } else {
-        return NoDataWidget(MdiIcons.podium, "No rankings found");
+        return NoDataWidget(MdiIcons.podium, local.get('no_data.rankings'));
       }
     } else {
       return Center(

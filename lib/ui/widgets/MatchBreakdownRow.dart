@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toa_flutter/ui/Colors.dart' as TOAColors;
-import 'package:toa_flutter/ui/views/team/TeamPage.dart';
-import 'package:toa_flutter/models/Match.dart';
-import 'package:toa_flutter/models/MatchParticipant.dart';
+import 'package:toa_flutter/internationalization/Localizations.dart';
 
 enum Alliance {
   RED, BLUE
@@ -17,8 +15,11 @@ class MatchBreakdownRow extends StatelessWidget {
   final String name;
   final bool title;
 
+  TOALocalizations local;
+
   @override
   Widget build(BuildContext context) {
+    local = TOALocalizations.of(context);
     List<Widget> row = [];
 
     row.add(bulidPoints(red, points, Alliance.RED));
@@ -41,7 +42,7 @@ class MatchBreakdownRow extends StatelessWidget {
       text = '$missions (+${missions * points})';
     }
     if (title) {
-      text = '$missions Points';
+      text = '$missions ${local.get('breakdowns.points')}';
     }
 
     return Expanded(
@@ -56,7 +57,13 @@ class MatchBreakdownRow extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[Text(text, style: TextStyle(fontWeight: title ? FontWeight.w600 : FontWeight.normal))]
+          children: <Widget>[
+            Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: title ? FontWeight.w600 : FontWeight.normal)
+            )
+          ]
         )
       )
     );
@@ -76,7 +83,13 @@ class MatchBreakdownRow extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[Text(name, style: TextStyle(fontWeight: title ? FontWeight.w600 : FontWeight.normal))]
+            children: <Widget>[
+              Text(
+                name,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: title ? FontWeight.w600 : FontWeight.normal)
+              )
+            ]
           )
         )
       )

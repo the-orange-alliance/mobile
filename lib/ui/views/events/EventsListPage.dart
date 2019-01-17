@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
@@ -10,6 +11,7 @@ import 'package:toa_flutter/models/Event.dart';
 import 'package:toa_flutter/providers/Cache.dart';
 import 'package:toa_flutter/Sort.dart';
 import 'package:toa_flutter/Utils.dart';
+import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class EventsListPage extends StatefulWidget {
 
@@ -21,6 +23,7 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
   TabController tabController;
   List<Event> events = [];
   List<ContentTab> tabs = [];
+  TOALocalizations local;
 
   @override
   void initState() {
@@ -58,7 +61,7 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(bottom: 0),
-                child: Text(DateFormat("EEE").format(date).toUpperCase(), style: TextStyle(fontWeight: FontWeight.w500, color: Colors.grey, fontSize: 12), textAlign: TextAlign.center)
+                child: Text(DateFormat("EEE", local.locale.toString()).format(date).toUpperCase(), style: TextStyle(fontWeight: FontWeight.w500, color: Colors.grey, fontSize: 12), textAlign: TextAlign.center)
               ),
               Text(date.day.toString(), style: TextStyle(fontSize: 22), textAlign: TextAlign.center)
             ]
@@ -86,7 +89,7 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
       if (i > 0 && getWeekName(events[i - 1].weekKey) != getWeekName(events[i].weekKey)) {
         ScrollController scrollController = ScrollController(initialScrollOffset: findScrollOffset(firstIndexInTab, itemsPerTab));
         CustomScrollView scrollView = CustomScrollView(slivers: slivers, controller: scrollController);
-        tabs.add(ContentTab(title: getWeekName(events[i - 1].weekKey), content: scrollView));
+        tabs.add(ContentTab(key: events[i - 1].weekKey, title: getWeekName(events[i - 1].weekKey), content: scrollView));
         makeNewTabController();
         slivers = List<Widget>();
         slivers.addAll(buildSideHeaderGrids(context, firstIndex, count));
@@ -99,7 +102,7 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
       if (i + 1 == events.length) {
         ScrollController scrollController = ScrollController(initialScrollOffset: findScrollOffset(firstIndexInTab, itemsPerTab));
         CustomScrollView scrollView = CustomScrollView(slivers: slivers, controller: scrollController);
-        tabs.add(ContentTab(title: getWeekName(events[i].weekKey), content: scrollView));
+        tabs.add(ContentTab(key: events[i].weekKey, title: getWeekName(events[i].weekKey), content: scrollView));
         makeNewTabController();
         slivers = List<Widget>();
         firstIndex = i;
@@ -114,33 +117,13 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
   }
 
   String getWeekName(String weekKey) {
-    switch (weekKey) {
-      case "CMP":
-        return "FIRST Championship";
-      case "CMPHOU":
-        return "FIRST Championship - Houston";
-      case "CMPSTL":
-        return "FIRST Championship - St. Louis";
-      case "CMPDET":
-        return "FIRST Championship - Detroit";
-      case "ESR":
-        return "East Super Regional Championship";
-      case "NSR":
-        return "North Super Regional Championship";
-      case "SSR":
-        return "South Super Regional Championship";
-      case "WSR":
-        return "West Super Regional Championship";
-      case "SPR":
-        return "Super Regionals";
-      case "FOC":
-        return "Festival of Champions";
-      default:
-        if (double.parse(weekKey, (e) => null) != null) { // match a number include decimal, '+' and '-'
-          return "Week" + weekKey;
-        } else {
-          return weekKey;
-        }
+    String weekName = local.get('weeks.${weekKey.toLowerCase()}', defaultValue: '');
+    if (weekName.isNotEmpty) {
+      return weekName;
+    } else if (double.parse(weekKey, (e) => null) != null) { // match a number include decimal, '+' and '-'
+      return "Week" + weekKey;
+    } else {
+      return local.get('months.${weekKey.toLowerCase()}', defaultValue: weekKey);
     }
   }
 
@@ -167,6 +150,8 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
 
   @override
   Widget build(BuildContext context) {
+    local = TOALocalizations.of(context);
+
     Widget content;
 
     if (tabController == null) {
@@ -209,6 +194,7 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
         actions: <Widget>[
           IconButton(
             icon: Icon(MdiIcons.magnify),
+            tooltip: local.get('general.search'),
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -229,10 +215,10 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
     if (tabs != null && tabs.length > 0) {
       String month = DateFormat("MMMM", 'en_US').format(DateTime.now());
       for (int i = 0; i < tabs.length; i++) {
-        if (month.toLowerCase() == tabs[i].title.toLowerCase()) {
+        if (month.toLowerCase() == tabs[i].key.toLowerCase()) {
           return i;
         }
-        if (month.toLowerCase() == 'april' && tabs[i].title.toLowerCase() == 'march') { // World Championships
+        if (month.toLowerCase() == 'april' && tabs[i].key.toLowerCase() == 'march') { // World Championships
           return i + 1;
         }
       }

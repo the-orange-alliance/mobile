@@ -6,16 +6,20 @@ import 'package:toa_flutter/models/EventParticipant.dart';
 import 'package:toa_flutter/ui/widgets/TeamListItem.dart';
 import 'package:toa_flutter/ui/widgets/NoDataWidget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class EventTeams extends StatelessWidget {
 
   EventTeams(this.event);
-  final Event event;
 
+  Event event;
   List<EventParticipant> data;
+  TOALocalizations local;
 
   @override
   Widget build(BuildContext context) {
+    local = TOALocalizations.of(context);
+
     if (data == null) {
       return FutureBuilder<List<EventParticipant>>(
         future: ApiV3().getEventTeams(event.eventKey),
@@ -24,6 +28,7 @@ class EventTeams extends StatelessWidget {
           if (teams.data != null) {
             data = teams.data;
             data.sort(Sort().eventParticipantSorter);
+
           }
           return bulidPage();
         }
@@ -44,7 +49,7 @@ class EventTeams extends StatelessWidget {
           }
         );
       } else {
-        return NoDataWidget(MdiIcons.accountGroupOutline, "No teams found");
+        return NoDataWidget(MdiIcons.accountGroupOutline, local.get('no_data.teams'));
       }
     } else {
       return Center(

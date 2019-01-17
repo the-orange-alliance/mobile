@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:toa_flutter/Utils.dart';
 
 class Event {
@@ -141,12 +142,12 @@ class Event {
     return DateTime.parse(endDate);
   }
 
-  String getDateString() {
-    return Utils.dateToString(this);
+  String getDateString(BuildContext context) {
+    return Utils.dateToString(this, context);
   }
 
-  String getSubtitle() {
-    return Utils.eventSubtitle(this);
+  String getSubtitle(BuildContext context) {
+    return Utils.eventSubtitle(this, context);
   }
 
   String getShortLocation() {

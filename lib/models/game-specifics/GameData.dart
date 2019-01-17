@@ -22,16 +22,16 @@ class GameData {
     }
   }
   
-  static List<Widget> getBreakdown(Match match) {
+  static List<Widget> getBreakdown(Match match, BuildContext context) {
     List<Widget> noData = [NoDataWidget(MdiIcons.ballotOutline, 'No Breakdown found')];
     if (match.gameData == null) {
       return noData;
     }
     switch (match.getSessonKey()) {
       case '1718':
-        return MatchBreakdown1718.getRows(match);
+        return MatchBreakdown1718.getRows(match, context);
       case '1819':
-        return MatchBreakdown1819.getRows(match);
+        return MatchBreakdown1819.getRows(match, context);
       default:
         return noData;
     }

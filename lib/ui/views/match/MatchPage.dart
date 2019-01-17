@@ -8,6 +8,7 @@ import 'package:toa_flutter/providers/ApiV3.dart';
 import 'package:toa_flutter/models/Event.dart';
 import 'package:toa_flutter/models/Match.dart';
 import 'package:toa_flutter/models/game-specifics/GameData.dart';
+import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class MatchPage extends StatefulWidget {
   MatchPage({this.matchKey, this.match, this.event});
@@ -26,6 +27,7 @@ class MatchPageState extends State<MatchPage> {
   Match match;
   Event event;
   bool loadingBreakdown = true;
+  TOALocalizations local;
 
   @override
   void initState() {
@@ -70,6 +72,8 @@ class MatchPageState extends State<MatchPage> {
 
   @override
   Widget build(BuildContext context) {
+    local = TOALocalizations.of(context);
+
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     TextTheme textTheme = Theme.of(context).textTheme;
     TextStyle titleStyle = textTheme.subhead.copyWith(fontWeight: FontWeight.w600);
@@ -85,7 +89,7 @@ class MatchPageState extends State<MatchPage> {
             Text(match.matchName, style: titleStyle),
             Text(event.getFullName(), style: subtitleStyle)
           ]
-        ) : Text('Loading Match...'),
+        ) : Text(local.get('pages.match.loading')),
 
         actions: event != null ? <Widget>[
           PopupMenuButton(
@@ -104,7 +108,7 @@ class MatchPageState extends State<MatchPage> {
               return [
                 PopupMenuItem(
                   value: 'view_event',
-                  child: Text('View Full Event'),
+                  child: Text(local.get('pages.match.full_event')),
                 )
               ];
             }
@@ -129,7 +133,7 @@ class MatchPageState extends State<MatchPage> {
     card.add(Padding(
       padding: EdgeInsets.only(left: 16, top: 20, bottom: 8, right: 16),
         child: Text(
-          'Match Information',
+          local.get('pages.match.match_info'),
           textAlign: TextAlign.start,
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black),
         )
@@ -146,14 +150,15 @@ class MatchPageState extends State<MatchPage> {
     if (match.scheduledTime != null && match.scheduledTime != '0000-00-00 00:00:00') {
       card.add(ListTile(
         leading: Icon(MdiIcons.calendarClock, color: Theme.of(context).primaryColor),
-        title: Text('Scheduled Time: ${DateFormat('MMM d, h:mm a').format(DateTime.parse(match.scheduledTime))}')
+        title: Text(DateFormat('MMM d, h:mm a').format(DateTime.parse(match.scheduledTime))),
+        subtitle: Text(local.get('pages.match.scheduled_time'))
       ));
     }
 
     // Match video
     card.add(ListTile(
       leading: Icon(MdiIcons.playCircleOutline, color: Theme.of(context).primaryColor),
-      title: Text(match.videoURL != null ? 'Watch Match' : 'No video available. Add one'),
+      title: Text(local.get('pages.match.${match.videoURL != null ? 'watch_match' : 'no_video'}')),
       onTap: () async {
         final url = match.videoURL != null ? match.videoURL :
           'https://docs.google.com/forms/d/e/1FAIpQLSdpcIpr0uXe0SP5wzdMeVsQ6t3e5ebS5v_C-SDmtOyY2Gu8sw/viewform?entry.944495313=$matchKey';
@@ -161,7 +166,7 @@ class MatchPageState extends State<MatchPage> {
           await launch(url);
         } else {
           Scaffold.of(context).showSnackBar(SnackBar(
-            content: Text("An error has occurred"),
+            content: Text(local.get('general.error_occurred')),
           ));
         }
       }
@@ -189,7 +194,7 @@ class MatchPageState extends State<MatchPage> {
     column.add(Padding(
       padding: EdgeInsets.all(16),
       child: Text(
-        'Match Breakdown',
+        local.get('pages.match.match_breakdown'),
         textAlign: TextAlign.start,
         style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: Colors.black),
       )
@@ -197,7 +202,7 @@ class MatchPageState extends State<MatchPage> {
 
     // Match breakdown
     column.add(!loadingBreakdown ? Column(
-      children: GameData.getBreakdown(match)
+      children: GameData.getBreakdown(match, context)
     ) : Container(
       margin: EdgeInsets.only(top: 36, bottom: 24),
       child: Center(

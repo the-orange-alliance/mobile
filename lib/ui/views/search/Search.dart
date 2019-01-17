@@ -7,6 +7,7 @@ import 'package:toa_flutter/ui/widgets/TeamListItem.dart';
 import 'package:toa_flutter/models/Event.dart';
 import 'package:toa_flutter/models/Team.dart';
 import 'package:toa_flutter/Sort.dart';
+import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class SearchPage extends StatefulWidget {
 
@@ -23,6 +24,8 @@ class SearchPageState extends State<SearchPage> {
   List<Team> allTeams = [];
 
   List<Widget> results = [];
+
+  TOALocalizations local;
 
   @override
   void initState() {
@@ -62,6 +65,7 @@ class SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     Widget content;
+    local = TOALocalizations.of(context);
 
     if (allEvents.isEmpty || allTeams.isEmpty) {
       content = Center(
@@ -81,7 +85,7 @@ class SearchPageState extends State<SearchPage> {
     List<Widget> actions = [];
     if (query.isNotEmpty) {
       actions.add(IconButton(
-        tooltip: 'Clear',
+        tooltip: local.get('general.clear'),
         icon: const Icon(Icons.clear),
         onPressed: () {
           queryTextController.text = '';
@@ -91,13 +95,6 @@ class SearchPageState extends State<SearchPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          tooltip: 'Back',
-          icon: Icon(MdiIcons.arrowLeft),
-          onPressed: () {
-            Navigator.of(context).pop();
-          }
-        ),
         title: TextField(
           autofocus: true,
           controller: queryTextController,
@@ -121,7 +118,7 @@ class SearchPageState extends State<SearchPage> {
       List<Widget> events = [];
       List<Widget> teams = [];
 
-      results.add(TextListItem('Teams'));
+      results.add(TextListItem(local.get('general.teams')));
       for (int i = 0; i < allTeams.length; i++) {
         Team team = allTeams[i];
         if (team.teamNumber.toString().startsWith(query)
@@ -132,10 +129,10 @@ class SearchPageState extends State<SearchPage> {
       if (teams.length > 0) {
         results.addAll(teams);
       } else {
-        results.add(TextListItem('No teams found', mini: true));
+        results.add(TextListItem(local.get('no_data.teams'), mini: true));
       }
 
-      results.add(TextListItem('Events'));
+      results.add(TextListItem(local.get('general.events')));
       for (int i = 0; i < allEvents.length; i++) {
         Event event = allEvents[i];
         if (event.getFullName().toLowerCase().contains(query.toLowerCase())
@@ -146,7 +143,7 @@ class SearchPageState extends State<SearchPage> {
       if (events.length > 0) {
         results.addAll(events);
       } else {
-        results.add(TextListItem('No events found', mini: true));
+        results.add(TextListItem(local.get('no_data.events'), mini: true));
       }
     }
   }

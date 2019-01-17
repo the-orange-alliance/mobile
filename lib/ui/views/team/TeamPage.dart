@@ -7,6 +7,7 @@ import 'package:toa_flutter/models/Team.dart';
 import 'package:toa_flutter/models/TeamSeasonRecord.dart';
 import 'package:toa_flutter/ui/views/team/subpages/TeamResults.dart';
 import 'package:toa_flutter/ui/views/team/subpages/TeamRobot.dart';
+import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class TeamPage extends StatefulWidget {
   TeamPage({this.teamKey, this.team});
@@ -22,6 +23,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
 
   String teamKey;
   Team team;
+  TOALocalizations local;
 
   @override
   void initState() {
@@ -50,6 +52,8 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    local = TOALocalizations.of(context);
+
     TeamResults teamResults = TeamResults(teamKey);
     TeamRobot teamRobot = TeamRobot(teamKey);
 
@@ -93,8 +97,8 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
                         padding: const EdgeInsets.only(top: 8),
                         child: TabBar(
                           tabs: [
-                            Tab(text: 'Results'),
-                            Tab(text: 'Robot')
+                            Tab(text: local.get('pages.team.results.title')),
+                            Tab(text: local.get('pages.team.robot_profile.title'))
                           ],
                           indicatorColor: Colors.black,
                         )
@@ -139,7 +143,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
         List<Widget> details = [
           buildTeamDetail(MdiIcons.mapMarkerOutline, team.getFullLocation()),
           buildTeamDetail(MdiIcons.compassOutline, '${team.regionKey} Region'),
-          buildTeamDetail(MdiIcons.airballoon, 'Rookie Year: ${team.rookieYear}')
+          buildTeamDetail(MdiIcons.airballoon, '${local.get('pages.team.rookie_year')}: ${team.rookieYear}')
         ];
 
         if (wlt.data != null) {
@@ -163,17 +167,10 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Icon(
-            icon,
-            color: black,
-            size: 16.0
-          ),
+          Icon(icon, color: black, size: 16),
           Padding(
             padding: const EdgeInsets.only(left: 8),
-            child: Text(
-              text,
-              style: Theme.of(context).textTheme.subhead.copyWith(color: black)
-            )
+            child: Text(text, style: Theme.of(context).textTheme.subhead.copyWith(color: black))
           )
         ]
       )

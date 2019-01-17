@@ -1,0 +1,198 @@
+{
+  "config": {
+    "name": "עברית",
+    "englishName": "Hebrew",
+    "direction": "rtl"
+  },
+
+  "general": {
+    "team": "קבוצה",
+    "teams": "קבוצות",
+    "event": "אירוע",
+    "events": "אירועים",
+    "refresh": "טעינה מחדש",
+    "search": "חיפוש",
+    "clear": "נקה",
+    "add_to_mytoa": "הוספה ל־myTOA",
+    "remove_from_mytoa": "הסרה מ־myTOA",
+    "error_occurred": "אירעה שגיאה"
+  },
+
+  "date": {
+    "date_format": "d בMMMM yyyy",
+    "date_to_date": " עד ה",
+    "location_on_date": " ב",
+    "location_from_date": " מה"
+  },
+
+  "pages": {
+    "account": {
+      "logout": "Logout",
+      "subpages": {
+        "login": {
+          "title": "Login",
+          "email": "Email",
+          "password": "Password",
+          "login": "Login"
+        },
+        "register": {
+          "title": "Register",
+          "full_name": "Full name",
+          "email": "Email",
+          "password": "Password",
+          "confirm_password": "Confirm password",
+          "your_team": "Your team #",
+          "sign_up": "Sign Up"
+        }
+      }
+    },
+
+    "event": {
+      "info": {
+        "title": "מידע",
+        "event_info": "פרטי האירוע",
+        "cal_description": "לפרטים נוספים ותוצאות בזמן אמת:",
+        "view_website": "הצג את אתר האירוע",
+        "stream_available": "שידור ישיר זמין",
+        "game_info": "פרטי המשחק",
+        "loading_sesson": "טוען את שם העונה...",
+        "alliances": "בריתות",
+        "fields": "מגרשים"
+      },
+      "teams": {
+        "title": "קבוצות"
+      },
+      "matches": {
+        "title": "מקצים"
+      },
+      "rankings": {
+        "title": "דירוגים",
+        "wlt_record": "Record (W-L-T)",
+        "with_record": "עם record של",
+        "qual_rank": "דירוג",
+        "qual_points": "נקודות Qualification",
+        "ranking_points": "נקודות Ranking",
+        "tie_beaker_points": "נקודות שובר שוויון",
+        "highest_score": "התוצאה הכי גבוהה",
+        "matches_played": "מקצים ששוחקו"
+      },
+      "awards": {
+        "title": "פרסים"
+      }
+    },
+
+    "match": {
+      "match_info": "פרטי מקצה",
+      "scheduled_time": "זמן מתוכנן",
+      "watch_match": "צפה במקצה",
+      "no_video": "אין סרטון זמין. הוסף אחד",
+      "match_breakdown": "ניתוח מקצה",
+      "loading": "טוען מקצה...",
+      "full_event": "הצגת האירוע המלא"
+    },
+
+    "team": {
+      "rookie_year": "שנת הקמה",
+      "results": {
+        "title": "תוצאות"
+      },
+      "robot_profile": {
+        "title": "רובוט",
+        "open_source": "קוד פתוח",
+        "engineering_notebook": "מחברת הנדסה",
+        "robot_reveal": "רובוט רוויל",
+        "photos": "תמונות"
+      }
+    }
+  },
+
+  "no_data": {
+    "awards": "לא נמצאו פרסים",
+    "teams": "לא נמצאו קבוצות",
+    "matches": "לא נמצאו מקצים",
+    "rankings": "לא נמצאו דירוגים",
+    "events": "לא נמצאו אירועים",
+    "robot_profile": "לא נמצא פרופיל רובוט"
+  },
+
+  "awards": {
+    "inspire": "פרס ההשראה",
+    "think": "פרס החשיבה",
+    "connect": "פרס החיבור",
+    "innovate": "פרס החדשנות",
+    "design": "פרס התכנון",
+    "motivate": "פרס המוטיבציה",
+    "control": "פרס הבקרה",
+    "promote": "פרס הקידום",
+    "compass": "פרס המצפן",
+    "judges": "פרס השופטים",
+    "winning_alliance": "פרס הברית המנצחת",
+    "finalist_alliance": "פרס הברית הסופית"
+  },
+
+  "weeks": {
+    "cmp": "אליפות FIRST",
+    "cmphou": "אליפות FIRST - יוסטון",
+    "cmpstl": "אליפות FIRST - סנט לואיס",
+    "cmpdet": "אליפות FIRST - דטרויט",
+    "esr": "אליפות מזרח סופר אזורית",
+    "nsr": "אליפות צפון סופר אזורית",
+    "ssr": "אליפות מזרח סופר אזורית",
+    "wsr": "אליפות מערב סופר אזורית",
+    "spr": "סופר אזוריות",
+    "foc": "פסטיבל אליפויות"
+  },
+
+  "months": {
+    "january": "ינואר",
+    "february": "פברואר",
+    "march": "מרץ",
+    "april": "אפריל",
+    "may": "מאי",
+    "june": "יוני",
+    "july": "יולי",
+    "august": "אגוסט",
+    "september": "ספטמבר",
+    "october": "אוקטובר",
+    "november": "נובמבר",
+    "december": "דצמבר"
+  },
+
+  "breakdowns": {
+    "autonomous": "אוטונומי",
+    "teleop": "שליטת  נהגים",
+    "end": "סיום משחק",
+    "penalty": "עונשין",
+    "minor_penalty": "עונשין קטן",
+    "major_penalty": "עונשין גדול",
+    "points": "נקודות",
+
+    "1718": {
+      "auto_jewels": "העפת Jewel בצבע היריב",
+      "glyphs": "קוביות",
+      "cryptobox_keys": "פענוח תמונה",
+      "parking": "חנייה באזור הבטוח",
+      "rows": "שורות בקריפטובוקס",
+      "columns": "עמודות בקריפטובוקס",
+      "ciphers": "Ciphers",
+      "relics_zone_1": "Relicים באזור 1",
+      "relics_zone_2": "Relicים באזור 2",
+      "relics_zone_3": "Relicים באזור 3",
+      "relics_upright": "Relicים עומדים",
+      "robots_balanced": "רובוטים מאוזנים"
+    },
+
+    "roverruckus": {
+      "landing": "נחיתה",
+      "sampling": "הזזת המינרל הזהוב מאיזור הדגימה",
+      "claiming": "סימן קבוצה בתוך המחסן",
+      "parking": "חנייה במכתש",
+      "gold": "מינרלים זהובים",
+      "silver": "מנרלים כסופים",
+      "depot": "כל מינרל במחסן",
+      "robots_latched": "טיפוס",
+      "parked_in": "רובוטים חונים במכתש",
+      "parked_completely": "רובוטים חונים במלואם במכתש"
+    }
+  }
+}

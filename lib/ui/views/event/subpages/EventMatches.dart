@@ -6,16 +6,20 @@ import 'package:toa_flutter/providers/ApiV3.dart';
 import 'package:toa_flutter/ui/widgets/MatchListItem.dart';
 import 'package:toa_flutter/ui/widgets/NoDataWidget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class EventMatches extends StatelessWidget {
 
   EventMatches(this.event);
-  final Event event;
 
+  final Event event;
   List<Match> data;
+  TOALocalizations local;
 
   @override
   Widget build(BuildContext context) {
+    local = TOALocalizations.of(context);
+
     if (data == null) {
       return FutureBuilder<List<Match>>(
         future: ApiV3().getEventMatches(event.eventKey),
@@ -44,7 +48,7 @@ class EventMatches extends StatelessWidget {
           }
         );
       } else {
-        return NoDataWidget(MdiIcons.gamepadVariant, "No matches found");
+        return NoDataWidget(MdiIcons.gamepadVariant, local.get('no_data.matches'));
       }
     } else {
       return Center(

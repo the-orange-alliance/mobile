@@ -6,16 +6,20 @@ import 'package:toa_flutter/providers/ApiV3.dart';
 import 'package:toa_flutter/ui/widgets/NoDataWidget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class TeamRobot extends StatelessWidget {
 
   TeamRobot(this.teamKey);
-  final String teamKey;
 
+  final String teamKey;
   List<Media> data;
+  TOALocalizations local;
 
   @override
   Widget build(BuildContext context) {
+    local = TOALocalizations.of(context);
+
     if (data == null) {
       return FutureBuilder<List<Media>>(
         future: ApiV3().getTeamMedia(teamKey, StaticData().sessonKey),
@@ -39,12 +43,14 @@ class TeamRobot extends StatelessWidget {
         List<Widget> buttons = [];
         List<Widget> images = [];
         List<Widget> widgets = [];
+        bool openSource = false;
 
         for (int i = 0; i < data.length; i++) {
           Media media = data[i];
 
           switch(media.mediaType) {
             case MediaType.GITHUB: {
+              openSource = true;
               buttons.add(OutlineButton.icon(
                 icon: Icon(MdiIcons.githubCircle, size: 18),
                 label: Text('GitHub'),
@@ -56,6 +62,7 @@ class TeamRobot extends StatelessWidget {
             }
 
             case MediaType.CAD: {
+              openSource = true;
               buttons.add(OutlineButton.icon(
                 icon: Icon(MdiIcons.drawing, size: 18),
                 label: Text('CAD Design'),
@@ -69,7 +76,7 @@ class TeamRobot extends StatelessWidget {
             case MediaType.NOTEBOOK: {
               buttons.add(OutlineButton.icon(
                 icon: Icon(MdiIcons.book, size: 18),
-                label: Text('Engineering Notebook'),
+                label: Text(local.get('pages.team.robot_profile.engineering_notebook')),
                 onPressed: () {
                   openLink(media.mediaLink, context);
                 }
@@ -80,7 +87,7 @@ class TeamRobot extends StatelessWidget {
             case MediaType.ROBOT_REVEAL: {
               buttons.add(OutlineButton.icon(
                 icon: Icon(MdiIcons.youtube, size: 18),
-                label: Text('Robot Reveal'),
+                label: Text(local.get('pages.team.robot_profile.robot_reveal')),
                 onPressed: () {
                   openLink(media.mediaLink, context);
                 }
@@ -93,9 +100,9 @@ class TeamRobot extends StatelessWidget {
                 padding: EdgeInsets.all(4),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: FadeInImage.memoryNetwork(
+                  child: FadeInImage.assetNetwork(
                     image: media.mediaLink,
-                    placeholder: Utils().kTransparentImage
+                    placeholder: 'assets/images/loading.gif'
                   )
                 )
               ));
@@ -105,8 +112,11 @@ class TeamRobot extends StatelessWidget {
         }
 
         if (buttons.length > 0) {
+          if (openSource) {
+            widgets.add(buildTitle(local.get('pages.team.robot_profile.open_source')));
+          }
           widgets.add(Padding(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: Wrap(
               spacing: 8,
               runSpacing: 4,
@@ -116,6 +126,7 @@ class TeamRobot extends StatelessWidget {
         }
 
         if (images.length > 0) {
+          widgets.add(buildTitle(local.get('pages.team.robot_profile.photos')));
           widgets.add(Expanded(
             child: GridView.count(
               crossAxisCount: 2,
@@ -131,7 +142,7 @@ class TeamRobot extends StatelessWidget {
         );
 
       } else {
-        return NoDataWidget(MdiIcons.googlePhotos, "No media found");
+        return NoDataWidget(MdiIcons.robot, local.get('no_data.robot_profile'));
       }
     } else {
       return Center(
@@ -145,8 +156,19 @@ class TeamRobot extends StatelessWidget {
       await launch(url);
     } else {
       Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text("An error has occurred")
+        content: Text('general.error_occurred')
       ));
     }
+  }
+
+  Widget buildTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, top: 35, bottom: 8, right: 16),
+      child: Text(
+        title,
+        textAlign: TextAlign.start,
+        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: Colors.black),
+      ),
+    );
   }
 }
