@@ -33,8 +33,12 @@ dependencies:
   add_2_calendar: ^1.0.2
 
   # Firebase
-#  firebase_core: ^0.2.5
-#  firebase_analytics: ^1.0.4
+  firebase_core: ^0.2.5
+  firebase_auth: ^0.6.6
+  firebase_database: ^1.0.5
+  firebase_storage: ^1.0.4
+  firebase_analytics: ^1.1.0
+  google_sign_in: ^3.2.4
 
   flutter:
     sdk: flutter
