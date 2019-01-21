@@ -19,7 +19,8 @@ import 'package:toa_flutter/models/game-specifics/GameData.dart';
 class ApiV3 {
 
   Future<String> get(String endpoint) async {
-    const baseURL = "https://theorangealliance.org/api";
+//    const baseURL = "https://theorangealliance.org/api";
+    const baseURL = "http://35.202.99.121/api";
     const headers = {
       'X-Application-Origin': 'TOA-WebApp-1819',
       'Content-Type': 'application/json'
