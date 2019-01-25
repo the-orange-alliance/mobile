@@ -16,21 +16,13 @@ dependencies:
   http: '>=0.11.3+12'
   shared_preferences: ^0.4.3
   flutter_sticky_header: ^0.3.4
-
-  # Date Format
   intl: ^0.15.7
-
-  # Cupertino(iOS) Icons
   cupertino_icons: ^0.1.2
-
-  # The Best Material Icons
   material_design_icons_flutter: ^3.0.3392
-
-  # Launching a URL
   url_launcher: ^4.0.2
-
-  # Add Event To Calendar
   add_2_calendar: ^1.0.2
+  dynamic_theme: ^1.0.0
+  rounded_modal: ^1.0.0
 
   # Firebase
 #  firebase_core: ^0.2.5
@@ -56,6 +48,10 @@ flutter:
     - assets/lang/en.json
     - assets/lang/he.json
   fonts:
+    - family: TOA Icons
+      fonts:
+        - asset: assets/fonts/TOAIcons.ttf
+
     - family: GoogleSans
       fonts:
         - asset: assets/fonts/GoogleSans-BoldItalic.ttf

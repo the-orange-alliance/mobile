@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:toa_flutter/models/Event.dart';
 
 class NoDataWidget extends StatelessWidget {
 
@@ -10,13 +9,15 @@ class NoDataWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color color = Theme.of(context).primaryColorBrightness == Brightness.light ? Colors.black : Colors.white;
+
     return new Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Icon(iconData, size: (mini ? 48 : 64), color: Colors.black), // Theme.of(context).primaryColor
-          Text(text, textScaleFactor: (mini ? 1 : 1.2), style: TextStyle(fontWeight: FontWeight.w700),
+          Icon(iconData, size: (mini ? 48 : 64), color: color),
+          Text(text, textScaleFactor: (mini ? 1 : 1.2), style: TextStyle(fontWeight: FontWeight.w700, color: color),
           )
         ],
       ),

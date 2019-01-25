@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:toa_flutter/models/Team.dart';
 
 class Ranking {
   Ranking({
@@ -15,7 +16,8 @@ class Ranking {
     this.qualifyingPoints,
     this.tieBreakerPoints,
     this.disqualified,
-    this.played
+    this.played,
+    this.team
   });
 
   final String rankKey;
@@ -32,6 +34,7 @@ class Ranking {
   final int tieBreakerPoints;
   final int disqualified;
   final int played;
+  final Team team;
 
   static List<Ranking> allFromResponse(String response) {
     return jsonDecode(response)
@@ -55,7 +58,8 @@ class Ranking {
       qualifyingPoints: map['qualifying_points'],
       tieBreakerPoints: map['tie_breaker_points'],
       disqualified: map['disqualified'],
-      played: map['played']
+      played: map['played'],
+      team: map.containsKey('team') && map['team'] != null ? Team.fromMap(map['team']) : null
     );
   }
 }

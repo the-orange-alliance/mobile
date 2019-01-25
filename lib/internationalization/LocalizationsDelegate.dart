@@ -13,11 +13,11 @@ class TOALocalizationsDelegate extends LocalizationsDelegate<TOALocalizations> {
     TOALocalizations localizations = TOALocalizations(locale);
     await localizations.load();
 
-    print("Load ${locale.languageCode}");
-
     return localizations;
   }
 
   @override
-  bool shouldReload(TOALocalizationsDelegate old) => false;
+  bool shouldReload(TOALocalizationsDelegate old) {
+    return true;
+  }
 }

@@ -39,7 +39,7 @@ class Media {
   }
 }
 
-class MediaType {
+class TeamMediaType {
 /*
     Team:
     0 - GitHub Repo/Profile

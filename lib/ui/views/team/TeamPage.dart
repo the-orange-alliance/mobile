@@ -24,6 +24,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
   String teamKey;
   Team team;
   TOALocalizations local;
+  ThemeData theme;
 
   @override
   void initState() {
@@ -53,6 +54,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     local = TOALocalizations.of(context);
+    theme = Theme.of(context);
 
     TeamResults teamResults = TeamResults(teamKey);
     TeamRobot teamRobot = TeamRobot(teamKey);
@@ -67,6 +69,10 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
         ],
       ),
     );
+
+    if (theme.brightness == Brightness.dark) {
+      linearGradient = BoxDecoration(color: theme.primaryColor);
+    }
 
     return DefaultTabController(
       length: 2,
@@ -100,7 +106,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
                             Tab(text: local.get('pages.team.results.title')),
                             Tab(text: local.get('pages.team.robot_profile.title'))
                           ],
-                          indicatorColor: Colors.black,
+                          indicatorColor: theme.brightness == Brightness.light ? Colors.black : Colors.white,
                         )
                       )
                     ]
@@ -108,7 +114,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
                 ),
                 Expanded(
                   child: Container(
-                    color: Color(0xFFF9F9F9),
+                    color: theme.scaffoldBackgroundColor,
                     child: TabBarView(
                       children: [
                         teamResults,
@@ -130,7 +136,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
       return buildInfo(team, context);
     } else {
       return Center(
-        child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.black))
+        child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(theme.brightness == Brightness.light ? Colors.black : Colors.white))
       );
     }
   }
@@ -161,16 +167,16 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
   }
 
   Widget buildTeamDetail(IconData icon, String text) {
-    Color black = Color(0xBB000000);
+    Color color = theme.brightness == Brightness.light ? Color(0xBB000000) : Color(0xD9FFFFFF);
     return Padding(
       padding: const EdgeInsets.only(top: 4),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Icon(icon, color: black, size: 16),
+          Icon(icon, color: color, size: 16),
           Padding(
             padding: const EdgeInsets.only(left: 8),
-            child: Text(text, style: Theme.of(context).textTheme.subhead.copyWith(color: black))
+            child: Text(text, style: Theme.of(context).textTheme.subhead.copyWith(color: color))
           )
         ]
       )

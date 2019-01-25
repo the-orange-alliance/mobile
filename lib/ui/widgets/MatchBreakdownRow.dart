@@ -16,10 +16,12 @@ class MatchBreakdownRow extends StatelessWidget {
   final bool title;
 
   TOALocalizations local;
+  ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
     local = TOALocalizations.of(context);
+    theme = Theme.of(context);
     List<Widget> row = [];
 
     row.add(bulidPoints(red, points, Alliance.RED));
@@ -75,7 +77,7 @@ class MatchBreakdownRow extends StatelessWidget {
       child:
       Container(
         decoration: BoxDecoration(
-          color: title ? Colors.black12 : Colors.white,
+          color: Colors.black.withOpacity(title ? 0.12 : 0),
           border: getBorder()
         ),
         child: Padding(

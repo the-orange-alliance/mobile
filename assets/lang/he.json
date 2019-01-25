@@ -15,7 +15,8 @@
     "clear": "נקה",
     "add_to_mytoa": "הוספה ל־myTOA",
     "remove_from_mytoa": "הסרה מ־myTOA",
-    "error_occurred": "אירעה שגיאה"
+    "error_occurred": "אירעה שגיאה",
+    "about_toa_short": "The Orange Alliance הוא פרויקט שמסייע להפוך את המקצים, האירועים ומידע על קבוצות FTC לנגישים יותר."
   },
 
   "date": {
@@ -23,6 +24,12 @@
     "date_to_date": " עד ה",
     "location_on_date": " ב",
     "location_from_date": " מה"
+  },
+
+  "menu": {
+    "switch_light_mode": "עבור למצב בהיר",
+    "switch_dark_mode": "עבור למצב כהה",
+    "privacy_terms": "פרטיות ותנאי שימוש"
   },
 
   "pages": {

@@ -18,7 +18,7 @@ class AwardListItem extends StatelessWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (c) {
-                  return TeamPage(teamKey: award.teamKey);
+                  return TeamPage(teamKey: award.teamKey, team: award.team);
                 }
               )
             );

@@ -26,7 +26,7 @@ class RankingListItem extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (c) {
-                return TeamPage(teamKey: ranking.teamKey);
+                return TeamPage(teamKey: ranking.teamKey, team: ranking.team);
               }
             )
           );
@@ -45,7 +45,7 @@ class RankingListItem extends StatelessWidget {
                 )
               ],
             ),
-            title: Text('${local.get('general.team')} #${ranking.teamKey}'),
+            title: Text(ranking.team != null ? ranking.team.getNameWithNumber() : '${local.get('general.team')} #${ranking.teamKey}'),
             subtitle: Text(subtitle),
           )
         )

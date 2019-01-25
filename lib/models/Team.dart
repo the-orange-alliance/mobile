@@ -88,8 +88,11 @@ class Team {
     return teamNameShort != null ? teamNameShort : 'Team #$teamNumber';
   }
 
+  String getNameWithNumber() {
+    return teamNameShort != null ? '$teamNameShort #$teamNumber' : 'Team #$teamNumber';
+  }
+
   String getFullLocation() {
     return city + ", " + (state != null && state.isNotEmpty ? state + ", " : "") + country;
   }
-
 }

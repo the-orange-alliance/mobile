@@ -81,6 +81,11 @@ class ApiV3 {
     return AwardRecipient.allFromResponse(res);
   }
 
+  Future<List<Media>> getEventMedia(String eventKey) async {
+    String res = await get("/event/$eventKey/media");
+    return Media.allFromResponse(res);
+  }
+
   Future<Team> getTeam(String teamKey) async {
     String res = await get("/team/$teamKey");
     return Team.allFromResponse(res)[0];

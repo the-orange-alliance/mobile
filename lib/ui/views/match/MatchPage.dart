@@ -28,6 +28,7 @@ class MatchPageState extends State<MatchPage> {
   Event event;
   bool loadingBreakdown = true;
   TOALocalizations local;
+  ThemeData theme;
 
   @override
   void initState() {
@@ -73,9 +74,10 @@ class MatchPageState extends State<MatchPage> {
   @override
   Widget build(BuildContext context) {
     local = TOALocalizations.of(context);
+    theme = Theme.of(context);
 
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
-    TextTheme textTheme = Theme.of(context).textTheme;
+    TextTheme textTheme = theme.textTheme;
     TextStyle titleStyle = textTheme.subhead.copyWith(fontWeight: FontWeight.w600);
     TextStyle subtitleStyle = textTheme.body1.copyWith(fontWeight: FontWeight.w500, color: textTheme.caption.color);
 
@@ -135,7 +137,7 @@ class MatchPageState extends State<MatchPage> {
         child: Text(
           local.get('pages.match.match_info'),
           textAlign: TextAlign.start,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: theme.primaryTextTheme.title.color),
         )
       )
     );
@@ -196,7 +198,7 @@ class MatchPageState extends State<MatchPage> {
       child: Text(
         local.get('pages.match.match_breakdown'),
         textAlign: TextAlign.start,
-        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: Colors.black),
+        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: theme.primaryTextTheme.title.color),
       )
     ));
 

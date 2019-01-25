@@ -15,10 +15,12 @@ class TeamRobot extends StatelessWidget {
   final String teamKey;
   List<Media> data;
   TOALocalizations local;
+  ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
     local = TOALocalizations.of(context);
+    theme = Theme.of(context);
 
     if (data == null) {
       return FutureBuilder<List<Media>>(
@@ -49,7 +51,7 @@ class TeamRobot extends StatelessWidget {
           Media media = data[i];
 
           switch(media.mediaType) {
-            case MediaType.GITHUB: {
+            case TeamMediaType.GITHUB: {
               openSource = true;
               buttons.add(OutlineButton.icon(
                 icon: Icon(MdiIcons.githubCircle, size: 18),
@@ -61,7 +63,7 @@ class TeamRobot extends StatelessWidget {
               break;
             }
 
-            case MediaType.CAD: {
+            case TeamMediaType.CAD: {
               openSource = true;
               buttons.add(OutlineButton.icon(
                 icon: Icon(MdiIcons.drawing, size: 18),
@@ -73,7 +75,7 @@ class TeamRobot extends StatelessWidget {
               break;
             }
 
-            case MediaType.NOTEBOOK: {
+            case TeamMediaType.NOTEBOOK: {
               buttons.add(OutlineButton.icon(
                 icon: Icon(MdiIcons.book, size: 18),
                 label: Text(local.get('pages.team.robot_profile.engineering_notebook')),
@@ -84,7 +86,7 @@ class TeamRobot extends StatelessWidget {
               break;
             }
 
-            case MediaType.ROBOT_REVEAL: {
+            case TeamMediaType.ROBOT_REVEAL: {
               buttons.add(OutlineButton.icon(
                 icon: Icon(MdiIcons.youtube, size: 18),
                 label: Text(local.get('pages.team.robot_profile.robot_reveal')),
@@ -95,14 +97,33 @@ class TeamRobot extends StatelessWidget {
               break;
             }
 
-            case MediaType.ROBOT_IMAGE: {
+            case TeamMediaType.ROBOT_IMAGE: {
               images.add(Padding(
                 padding: EdgeInsets.all(4),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: FadeInImage.assetNetwork(
-                    image: media.mediaLink,
-                    placeholder: 'assets/images/loading.gif'
+                  child: GestureDetector(
+                    child: FadeInImage.assetNetwork(
+                      image: media.mediaLink,
+                      placeholder: 'assets/images/loading.gif'
+                    ),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute<void>(builder: (BuildContext context) {
+                        return Scaffold(
+                          appBar: AppBar(title: Text('#$teamKey\'s Robot')),
+                          body: SizedBox.expand(
+                            child: Hero(
+                              tag: media.mediaKey,
+                              child: FadeInImage.assetNetwork(
+                                image: media.mediaLink,
+                                placeholder: 'assets/images/loading.gif',
+                                fit: BoxFit.fitWidth,
+                              ),
+                            ),
+                          ),
+                        );
+                      }));
+                    }
                   )
                 )
               ));
@@ -167,7 +188,7 @@ class TeamRobot extends StatelessWidget {
       child: Text(
         title,
         textAlign: TextAlign.start,
-        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: Colors.black),
+        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: theme.primaryTextTheme.title.color),
       ),
     );
   }

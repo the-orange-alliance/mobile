@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/material.dart';
+import 'package:toa_flutter/ui/Icons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:toa_flutter/ui/views/search/Search.dart';
-import 'package:toa_flutter/ui/widgets/EventListItem.dart';
 import 'package:toa_flutter/models/ContentTab.dart';
 import 'package:toa_flutter/models/Event.dart';
 import 'package:toa_flutter/providers/Cache.dart';
 import 'package:toa_flutter/Sort.dart';
 import 'package:toa_flutter/Utils.dart';
+import 'package:toa_flutter/ui/views/events/StickyHeader.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:rounded_modal/rounded_modal.dart';
 import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class EventsListPage extends StatefulWidget {
@@ -36,115 +37,6 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
     setState(() {
       events = response;
       events.sort(Sort().eventSorter);
-    });
-  }
-
-  // Fixes Flutter's bug - https://github.com/flutter/flutter/issues/20292#issuecomment-425601183
-  void makeNewTabController() {
-    tabController = TabController(
-      vsync: this,
-      length: tabs.length,
-      initialIndex: 0,
-    );
-  }
-
-  Widget buildSideHeader(BuildContext context, int index) {
-    var date = DateTime.parse(events[index].startDate);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: SizedBox(
-          width: 52.0,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(bottom: 0),
-                child: Text(DateFormat("EEE", local.locale.toString()).format(date).toUpperCase(), style: TextStyle(fontWeight: FontWeight.w500, color: Colors.grey, fontSize: 12), textAlign: TextAlign.center)
-              ),
-              Text(date.day.toString(), style: TextStyle(fontSize: 22), textAlign: TextAlign.center)
-            ]
-          )
-        )
-      )
-    );
-  }
-
-  buildTabs(BuildContext context) {
-    List<Widget> slivers = List<Widget>();
-    var firstIndex = 0, count = 0, itemsPerTab = 0, firstIndexInTab = 0;
-    for(var i = 0; i < events.length; i++) {
-
-        /////////////////////
-       //  DO NOT TOUCH!  //
-      /////////////////////
-
-      if (i > 0 && events[i - 1].startDate != events[i].startDate) {
-        slivers.addAll(buildSideHeaderGrids(context, firstIndex, count));
-        firstIndex = i;
-        count = i + 1 == events.length ? 1 : 0;
-      }
-
-      if (i > 0 && getWeekName(events[i - 1].weekKey) != getWeekName(events[i].weekKey)) {
-        ScrollController scrollController = ScrollController(initialScrollOffset: findScrollOffset(firstIndexInTab, itemsPerTab));
-        CustomScrollView scrollView = CustomScrollView(slivers: slivers, controller: scrollController);
-        tabs.add(ContentTab(key: events[i - 1].weekKey, title: getWeekName(events[i - 1].weekKey), content: scrollView));
-        makeNewTabController();
-        slivers = List<Widget>();
-        slivers.addAll(buildSideHeaderGrids(context, firstIndex, count));
-        firstIndex = i;
-        firstIndexInTab = i;
-        count = 0;
-        itemsPerTab = 0;
-      }
-
-      if (i + 1 == events.length) {
-        ScrollController scrollController = ScrollController(initialScrollOffset: findScrollOffset(firstIndexInTab, itemsPerTab));
-        CustomScrollView scrollView = CustomScrollView(slivers: slivers, controller: scrollController);
-        tabs.add(ContentTab(key: events[i].weekKey, title: getWeekName(events[i].weekKey), content: scrollView));
-        makeNewTabController();
-        slivers = List<Widget>();
-        firstIndex = i;
-        firstIndexInTab = i;
-        count = 0;
-        itemsPerTab = 0;
-      }
-
-      count++;
-      itemsPerTab++;
-    }
-  }
-
-  String getWeekName(String weekKey) {
-    String weekName = local.get('weeks.${weekKey.toLowerCase()}', defaultValue: '');
-    if (weekName.isNotEmpty) {
-      return weekName;
-    } else if (double.parse(weekKey, (e) => null) != null) { // match a number include decimal, '+' and '-'
-      return "Week" + weekKey;
-    } else {
-      return local.get('months.${weekKey.toLowerCase()}', defaultValue: weekKey);
-    }
-  }
-
-  List<Widget> buildSideHeaderGrids(BuildContext context, int firstIndex, int count) {
-    return List.generate(1, (sliverIndex) {
-      sliverIndex += firstIndex;
-      return SliverStickyHeader(
-        overlapsContent: true,
-        header: buildSideHeader(context, sliverIndex),
-        sliver: SliverPadding(
-          padding: EdgeInsets.only(left: 60.0),
-          sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, i) => GestureDetector(
-                child: EventListItem(events[firstIndex+i], showDate: false),
-              ),
-              childCount: count,
-            )
-          )
-        )
-      );
     });
   }
 
@@ -191,6 +83,10 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
             );
           }).toList(),
         ),
+        leading: IconButton(
+          icon: Icon(MdiIcons.accountCircleOutline),
+          onPressed: showProfileBottomSheet
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(MdiIcons.magnify),
@@ -211,6 +107,119 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
     );
   }
 
+  VoidCallback showProfileBottomSheet() {
+    final ThemeData theme = Theme.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    showRoundedModalBottomSheet(
+      context: context,
+      radius: 20,
+      color: Theme.of(context).scaffoldBackgroundColor,
+      builder: (BuildContext context) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: CircleAvatar(
+                  child: Text('O'),
+                  radius: 16,
+                ),
+                title: Text('Ofek Ashery'),
+                subtitle: Text('ofek.ashery@gmail.com'),
+                onTap: () {},
+              ),
+              Divider(height: 0),
+              ListTile(
+                leading: Icon(MdiIcons.themeLightDark),
+                title: Text(local.get(isDark ? 'menu.switch_light_mode' : 'menu.switch_dark_mode')),
+                onTap: () {
+                  Navigator.pop(context);
+                  DynamicTheme.of(context).setBrightness(isDark ? Brightness.light : Brightness.dark);
+                }
+              ),
+              Divider(height: 0),
+              AboutListTile(
+                icon: Icon(TOAIcons.TOA),
+                applicationVersion: 'Beta 1',
+                aboutBoxChildren: <Widget>[
+                  Text(local.get('general.about_toa_short'))
+                ]
+              )
+            ]
+          )
+        );
+      }
+    );
+  }
+
+
+  // Fixes Flutter's bug - https://github.com/flutter/flutter/issues/20292#issuecomment-425601183
+  void makeNewTabController() {
+    tabController = TabController(
+      vsync: this,
+      length: tabs.length,
+      initialIndex: 0,
+    );
+  }
+
+
+  buildTabs(BuildContext context) {
+    List<Widget> slivers = List<Widget>();
+    var firstIndex = 0, count = 0, itemsPerTab = 0, firstIndexInTab = 0;
+    for(var i = 0; i < events.length; i++) {
+
+      /////////////////////
+      //  DO NOT TOUCH!  //
+      /////////////////////
+
+      if (i > 0 && events[i - 1].startDate != events[i].startDate) {
+        slivers.addAll(StickyHeader().buildSideHeaderGrids(context, firstIndex, count, events));
+        firstIndex = i;
+        count = i + 1 == events.length ? 1 : 0;
+      }
+
+      if (i > 0 && getWeekName(events[i - 1].weekKey) != getWeekName(events[i].weekKey)) {
+        ScrollController scrollController = ScrollController(initialScrollOffset: findScrollOffset(firstIndexInTab, itemsPerTab));
+        CustomScrollView scrollView = CustomScrollView(slivers: slivers, controller: scrollController);
+        tabs.add(ContentTab(key: events[i - 1].weekKey, title: getWeekName(events[i - 1].weekKey), content: scrollView));
+        makeNewTabController();
+        slivers = List<Widget>();
+        slivers.addAll(StickyHeader().buildSideHeaderGrids(context, firstIndex, count, events));
+        firstIndex = i;
+        firstIndexInTab = i;
+        count = 0;
+        itemsPerTab = 0;
+      }
+
+      if (i + 1 == events.length) {
+        ScrollController scrollController = ScrollController(initialScrollOffset: findScrollOffset(firstIndexInTab, itemsPerTab));
+        CustomScrollView scrollView = CustomScrollView(slivers: slivers, controller: scrollController);
+        tabs.add(ContentTab(key: events[i].weekKey, title: getWeekName(events[i].weekKey), content: scrollView));
+        makeNewTabController();
+        slivers = List<Widget>();
+        firstIndex = i;
+        firstIndexInTab = i;
+        count = 0;
+        itemsPerTab = 0;
+      }
+
+      count++;
+      itemsPerTab++;
+    }
+  }
+
+  String getWeekName(String weekKey) {
+    String weekName = local.get('weeks.${weekKey.toLowerCase()}', defaultValue: '');
+    if (weekName.isNotEmpty) {
+      return weekName;
+    } else if (double.parse(weekKey, (e) => null) != null) { // match a number include decimal, '+' and '-'
+      return "Week" + weekKey;
+    } else {
+      return local.get('months.${weekKey.toLowerCase()}', defaultValue: weekKey);
+    }
+  }
+
   int findCurrentWeekTab() {
     if (tabs != null && tabs.length > 0) {
       String month = DateFormat("MMMM", 'en_US').format(DateTime.now());
@@ -225,7 +234,6 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
     } else {
       return -1;
     }
-
     return 0;
   }
 

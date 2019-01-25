@@ -23,8 +23,9 @@ class EventPageState extends State<EventPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('EventPageState built now');
     TOALocalizations local = TOALocalizations.of(context);
+    ThemeData theme = Theme.of(context);
+    Color appBarColor = theme.brightness == Brightness.light ? Color(0xE6FF9800) : theme.primaryColor;
 
     EventInfo eventInfo = EventInfo(widget.event);
     EventTeams eventTeams = new EventTeams(widget.event);
@@ -38,7 +39,7 @@ class EventPageState extends State<EventPage> {
         children: <Widget>[
           DecoratedBox(
             position: DecorationPosition.foreground,
-            decoration: BoxDecoration(color: const Color(0xE6FF9800)),
+            decoration: BoxDecoration(color: appBarColor),
             child: Image.asset(
               "assets/images/event.jpg",
               width: MediaQuery.of(context).size.width,
@@ -63,7 +64,7 @@ class EventPageState extends State<EventPage> {
                 )
               ],
               bottom: TabBar(
-                indicatorColor: Colors.black,
+                indicatorColor: theme.brightness == Brightness.light ? Colors.black : Colors.white,
                 isScrollable: true,
                 tabs: [
                   Tab(text: local.get('pages.event.info.title')),
@@ -76,7 +77,7 @@ class EventPageState extends State<EventPage> {
             ),
             backgroundColor: Colors.transparent,
             body: Container(
-              color: Color(0xFFF9F9F9),
+              color: theme.scaffoldBackgroundColor,
               child: TabBarView(
                 children: [
                   eventInfo,

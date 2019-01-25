@@ -10,12 +10,14 @@ import 'package:toa_flutter/internationalization/Localizations.dart';
 class EventInfo extends StatelessWidget {
 
   EventInfo(this.event);
-
   final Event event;
+
+  ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
     TOALocalizations local = TOALocalizations.of(context);
+    theme = Theme.of(context);
 
     // Event Info Card
     List<Widget> eventInfoCard = [
@@ -122,7 +124,7 @@ class EventInfo extends StatelessWidget {
       child: Text(
         title,
         textAlign: TextAlign.start,
-        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: Colors.black),
+        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: theme.primaryTextTheme.title.color),
       ),
     );
   }
