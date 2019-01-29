@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:toa_flutter/ui/views/event/EventPage.dart';
 import 'package:toa_flutter/ui/widgets/MatchListItem.dart';
+import 'package:toa_flutter/ui/widgets/Title.dart';
 import 'package:toa_flutter/providers/ApiV3.dart';
 import 'package:toa_flutter/models/Event.dart';
 import 'package:toa_flutter/models/Match.dart';
@@ -132,15 +133,7 @@ class MatchPageState extends State<MatchPage> {
     }
     
     // Card title
-    card.add(Padding(
-      padding: EdgeInsets.only(left: 16, top: 20, bottom: 8, right: 16),
-        child: Text(
-          local.get('pages.match.match_info'),
-          textAlign: TextAlign.start,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: theme.primaryTextTheme.title.color),
-        )
-      )
-    );
+    card.add(TOATitle(local.get('pages.match.match_info'), context));
 
     // Match name
     card.add(ListTile(

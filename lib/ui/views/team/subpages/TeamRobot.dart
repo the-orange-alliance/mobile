@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:toa_flutter/providers/StaticData.dart';
-import 'package:toa_flutter/Utils.dart';
 import 'package:toa_flutter/models/Media.dart';
 import 'package:toa_flutter/providers/ApiV3.dart';
 import 'package:toa_flutter/ui/widgets/NoDataWidget.dart';
@@ -41,71 +40,73 @@ class TeamRobot extends StatelessWidget {
 
   Widget bulidPage(BuildContext context) {
     if (data != null) {
-      if (data.length > 0) {
-        List<Widget> buttons = [];
-        List<Widget> images = [];
-        List<Widget> widgets = [];
-        bool openSource = false;
+      List<Widget> buttons = [];
+      List<Widget> images = [];
+      List<Widget> widgets = [];
+      bool openSource = false;
 
-        for (int i = 0; i < data.length; i++) {
-          Media media = data[i];
+      for (int i = 0; i < data.length; i++) {
+        Media media = data[i];
 
-          switch(media.mediaType) {
-            case TeamMediaType.GITHUB: {
-              openSource = true;
-              buttons.add(OutlineButton.icon(
+        switch(media.mediaType) {
+          case TeamMediaType.GITHUB: {
+            openSource = true;
+            buttons.add(OutlineButton.icon(
                 icon: Icon(MdiIcons.githubCircle, size: 18),
                 label: Text('GitHub'),
                 onPressed: () {
                   openLink(media.mediaLink, context);
                 }
-              ));
-              break;
-            }
+            ));
+            break;
+          }
 
-            case TeamMediaType.CAD: {
-              openSource = true;
-              buttons.add(OutlineButton.icon(
+          case TeamMediaType.CAD: {
+            openSource = true;
+            buttons.add(OutlineButton.icon(
                 icon: Icon(MdiIcons.drawing, size: 18),
                 label: Text('CAD Design'),
                 onPressed: () {
                   openLink(media.mediaLink, context);
                 }
-              ));
-              break;
-            }
+            ));
+            break;
+          }
 
-            case TeamMediaType.NOTEBOOK: {
-              buttons.add(OutlineButton.icon(
+          case TeamMediaType.NOTEBOOK: {
+            buttons.add(OutlineButton.icon(
                 icon: Icon(MdiIcons.book, size: 18),
                 label: Text(local.get('pages.team.robot_profile.engineering_notebook')),
                 onPressed: () {
                   openLink(media.mediaLink, context);
                 }
-              ));
-              break;
-            }
+            ));
+            break;
+          }
 
-            case TeamMediaType.ROBOT_REVEAL: {
-              buttons.add(OutlineButton.icon(
+          case TeamMediaType.ROBOT_REVEAL: {
+            buttons.add(OutlineButton.icon(
                 icon: Icon(MdiIcons.youtube, size: 18),
                 label: Text(local.get('pages.team.robot_profile.robot_reveal')),
                 onPressed: () {
                   openLink(media.mediaLink, context);
                 }
-              ));
-              break;
-            }
+            ));
+            break;
+          }
 
-            case TeamMediaType.ROBOT_IMAGE: {
-              images.add(Padding(
-                padding: EdgeInsets.all(4),
-                child: ClipRRect(
+          case TeamMediaType.ROBOT_IMAGE: {
+            images.add(Padding(
+              padding: EdgeInsets.all(4),
+              child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: GestureDetector(
-                    child: FadeInImage.assetNetwork(
-                      image: media.mediaLink,
-                      placeholder: 'assets/images/loading.gif'
+                    child: Hero(
+                      tag: media.mediaKey,
+                      child: FadeInImage.assetNetwork(
+                        image: media.mediaLink,
+                        placeholder: 'assets/images/loading.gif'
+                      )
                     ),
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute<void>(builder: (BuildContext context) {
@@ -126,12 +127,13 @@ class TeamRobot extends StatelessWidget {
                     }
                   )
                 )
-              ));
-              break;
-            }
+            ));
+            break;
           }
         }
+      }
 
+      if (buttons.length > 0 || images.length > 0) {
         if (buttons.length > 0) {
           if (openSource) {
             widgets.add(buildTitle(local.get('pages.team.robot_profile.open_source')));

@@ -3,6 +3,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:toa_flutter/ui/Colors.dart' as TOAColors;
 import 'package:toa_flutter/providers/StaticData.dart';
 import 'package:toa_flutter/providers/ApiV3.dart';
+import 'package:toa_flutter/providers/Firebase.dart';
 import 'package:toa_flutter/models/Team.dart';
 import 'package:toa_flutter/models/TeamSeasonRecord.dart';
 import 'package:toa_flutter/ui/views/team/subpages/TeamResults.dart';
@@ -26,6 +27,13 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
   TOALocalizations local;
   ThemeData theme;
 
+  bool firebaseConnected = false;
+  bool isFav = false;
+
+  TeamResults teamResults;
+  TeamRobot teamRobot;
+  TeamSeasonRecord record;
+
   @override
   void initState() {
     super.initState();
@@ -36,7 +44,11 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
       teamKey = widget.team.teamKey;
     }
 
+    teamResults = TeamResults(teamKey);
+    teamRobot = TeamRobot(teamKey);
+
     loadData();
+    loadUser();
   }
 
   Future<void> loadData() async {
@@ -46,8 +58,20 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
       team = await ApiV3().getTeam(teamKey);
     }
 
+    TeamSeasonRecord record = await ApiV3().getTeamWLT(teamKey, StaticData().sessonKey);
+
     setState(() {
+      this.record = record;
       this.team = team;
+    });
+  }
+
+  Future<void> loadUser() async {
+    String uid = await Firebase().getUID();
+    bool isFav = await Firebase().isFavTeam(teamKey);
+    setState(() {
+      this.isFav = isFav;
+      this.firebaseConnected = uid != null;
     });
   }
 
@@ -55,9 +79,6 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     local = TOALocalizations.of(context);
     theme = Theme.of(context);
-
-    TeamResults teamResults = TeamResults(teamKey);
-    TeamRobot teamRobot = TeamRobot(teamKey);
 
     var linearGradient = BoxDecoration(
       gradient: LinearGradient(
@@ -84,9 +105,27 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
           ),
           Scaffold(
             appBar: AppBar(
-              title: Text('${team != null && team.teamNameShort != null ? team.teamNameShort : 'Team'} #${team?.teamNumber ?? teamKey}'),
+              title: Text('${team != null && team.teamNameShort != null ? team.teamNameShort : 'Team'} #${team?.teamNumber ?? teamKey}', overflow: TextOverflow.fade),
               backgroundColor: Colors.transparent,
-              elevation: 0
+              elevation: 0,
+              actions: <Widget>[
+                firebaseConnected && isFav ? IconButton(
+                  icon: Icon(MdiIcons.star),
+                  tooltip: local.get('general.remove_from_mytoa'),
+                  onPressed: () {
+                    Firebase().setFavTeam(teamKey, false);
+                    setState(() {});
+                  }
+                ) : null,
+                firebaseConnected && !isFav ? IconButton(
+                  icon: Icon(MdiIcons.starOutline),
+                  tooltip: local.get('general.add_to_mytoa'),
+                  onPressed: () {
+                    Firebase().setFavTeam(teamKey, true);
+                    setState(() {});
+                  }
+                ) : null
+              ].where((o) => o != null).toList(),
             ),
             backgroundColor: Colors.transparent,
             body: Column(
@@ -142,27 +181,20 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
   }
 
   Widget buildInfo(Team team, BuildContext context) {
-    return FutureBuilder<TeamSeasonRecord>(
-      future: ApiV3().getTeamWLT(teamKey, StaticData().sessonKey),
-      initialData: null,
-      builder: (BuildContext context, AsyncSnapshot<TeamSeasonRecord> wlt) {
-        List<Widget> details = [
-          buildTeamDetail(MdiIcons.mapMarkerOutline, team.getFullLocation()),
-          buildTeamDetail(MdiIcons.compassOutline, '${team.regionKey} Region'),
-          buildTeamDetail(MdiIcons.airballoon, '${local.get('pages.team.rookie_year')}: ${team.rookieYear}')
-        ];
+    List<Widget> details = [
+      buildTeamDetail(MdiIcons.mapMarkerOutline, team.getFullLocation()),
+      buildTeamDetail(MdiIcons.compassOutline, '${team.regionKey} Region'),
+      buildTeamDetail(MdiIcons.airballoon, '${local.get('pages.team.rookie_year')}: ${team.rookieYear}')
+    ];
 
-        if (wlt.data != null) {
-          TeamSeasonRecord record = wlt.data;
-          details.add(buildTeamDetail(MdiIcons.flagOutline, '${record.wins}-${record.losses}-${record.ties} WLT'));
-        }
+    if (record != null) {
+      details.add(buildTeamDetail(MdiIcons.flagOutline, '${record.wins}-${record.losses}-${record.ties} WLT'));
+    }
 
-        return Wrap(
-          spacing: 20,
-          runSpacing: 4,
-          children: details
-        );
-      }
+    return Wrap(
+      spacing: 20,
+      runSpacing: 4,
+      children: details
     );
   }
 

@@ -17,25 +17,28 @@ class MatchListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     Match match = this.match;
     List<MatchParticipant> participants = match.participants;
+    bool points = match.redScore != null && match.redScore != -1
+        && match.blueScore != null && match.blueScore != -1;
+
     List<Widget> row = [];
     List<Widget> redRow = [];
     List<Widget> blueRow = [];
 
     if (participants.length == 4) {
-      redRow.add(bulidTeam(justTable ? 2 : 0, participants, context));
-      redRow.add(bulidTeam(justTable ? 3 : 1, participants, context));
+      redRow.add(bulidTeam(0, participants, context));
+      redRow.add(bulidTeam(1, participants, context));
 
-      blueRow.add(bulidTeam(justTable ? 0 : 2, participants, context));
-      blueRow.add(bulidTeam(justTable ? 1 : 3, participants, context));
+      blueRow.add(bulidTeam(2, participants, context));
+      blueRow.add(bulidTeam(3, participants, context));
 
     } else if (participants.length == 6) {
-      redRow.add(bulidTeam(justTable ? 3 : 0, participants, context));
-      redRow.add(bulidTeam(justTable ? 4 : 1, participants, context));
-      redRow.add(bulidTeam(justTable ? 5 : 2, participants, context));
+      redRow.add(bulidTeam(0, participants, context));
+      redRow.add(bulidTeam(1, participants, context));
+      redRow.add(bulidTeam(2, participants, context));
 
-      blueRow.add(bulidTeam(justTable ? 0 : 3, participants, context));
-      blueRow.add(bulidTeam(justTable ? 1 : 4, participants, context));
-      blueRow.add(bulidTeam(justTable ? 2 : 5, participants, context));
+      blueRow.add(bulidTeam(3, participants, context));
+      blueRow.add(bulidTeam(4, participants, context));
+      blueRow.add(bulidTeam(5, participants, context));
     }
 
     redRow.add(bulidPoints(match.redScore.toString()));
@@ -66,7 +69,7 @@ class MatchListItem extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               color: TOAColors.Colors().lighterRed,
-              border: match.redScore > match.blueScore ? Border.all(color: TOAColors.Colors().red, width: 2) : null
+              border: points && match.redScore > match.blueScore ? Border.all(color: TOAColors.Colors().red, width: 2) : null
             ),
             child: Row(
               mainAxisSize: MainAxisSize.max,
@@ -76,7 +79,7 @@ class MatchListItem extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               color: TOAColors.Colors().lighterBlue,
-              border: match.blueScore > match.redScore ? Border.all(color: TOAColors.Colors().blue, width: 2) : null
+              border: points && match.blueScore > match.redScore ? Border.all(color: TOAColors.Colors().blue, width: 2) : null
             ),
             child: Row(
               mainAxisSize: MainAxisSize.max,
@@ -138,7 +141,7 @@ class MatchListItem extends StatelessWidget {
   }
 
   Widget bulidPoints(String points) {
-    if (points == '-1') {
+    if (points.toString() == 'null' || points == '-1') {
       points = '?';
     }
     return Expanded(

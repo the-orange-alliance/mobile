@@ -12,13 +12,16 @@ import 'package:toa_flutter/ui/views/match/years/MatchBreakdown1819.dart';
 class GameData {
 
   static MatchDetails fromResponse(String seasonKey, String json) {
+    if (json.toString() == 'null' || json.toString() == '[]') {
+      return null;
+    }
     switch (seasonKey) {
       case '1718':
-        return RelicRecoveryMatchDetails.allFromResponse(json)[0];
+        return RelicRecoveryMatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
       case '1819':
-        return RoverRuckusMatchDetails.allFromResponse(json)[0];
+        return RoverRuckusMatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
       default:
-        return MatchDetails();
+        return null;
     }
   }
   

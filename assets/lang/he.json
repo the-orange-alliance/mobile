@@ -13,6 +13,7 @@
     "refresh": "טעינה מחדש",
     "search": "חיפוש",
     "clear": "נקה",
+    "loading": "טוען...",
     "add_to_mytoa": "הוספה ל־myTOA",
     "remove_from_mytoa": "הסרה מ־myTOA",
     "error_occurred": "אירעה שגיאה",
@@ -27,6 +28,8 @@
   },
 
   "menu": {
+    "login": "התחברות",
+    "register": "הרשמה",
     "switch_light_mode": "עבור למצב בהיר",
     "switch_dark_mode": "עבור למצב כהה",
     "privacy_terms": "פרטיות ותנאי שימוש"
@@ -34,23 +37,24 @@
 
   "pages": {
     "account": {
-      "logout": "Logout",
-      "subpages": {
-        "login": {
-          "title": "Login",
-          "email": "Email",
-          "password": "Password",
-          "login": "Login"
-        },
-        "register": {
-          "title": "Register",
-          "full_name": "Full name",
-          "email": "Email",
-          "password": "Password",
-          "confirm_password": "Confirm password",
-          "your_team": "Your team #",
-          "sign_up": "Sign Up"
-        }
+      "title": "חשבון myTOA",
+      "logout": "התנתקות",
+      "login": {
+        "title": "התחברות",
+        "subtitle": "התחברות לחשבון ה־myTOA שלך",
+        "email": "כתובת מייל",
+        "password": "סיסמה",
+        "login": "התחברות"
+      },
+      "register": {
+        "title": "הרשמה",
+        "full_name": "שם מלא",
+        "error_name": "בבקשה הקלד את השם המלא שלך",
+        "email": "כתובת מייל",
+        "password": "סיסמה",
+        "confirm_password": "אישור סיסמה",
+        "your_team": "מספר הקבוצה שלך",
+        "sign_up": "הרשמה"
       }
     },
 

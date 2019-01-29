@@ -11,6 +11,7 @@ import 'package:toa_flutter/models/EventParticipant.dart';
 import 'package:toa_flutter/models/Ranking.dart';
 import 'package:toa_flutter/models/Match.dart';
 import 'package:toa_flutter/models/Media.dart';
+import 'package:toa_flutter/models/LiveStream.dart';
 import 'package:toa_flutter/models/AwardRecipient.dart';
 import 'package:toa_flutter/models/MatchParticipant.dart';
 import 'package:toa_flutter/models/MatchDetails.dart';
@@ -58,7 +59,7 @@ class ApiV3 {
 
   Future<Event> getEvent(String eventKey) async {
     String res = await get("/event/$eventKey");
-    return Event.allFromResponse(res)[0];
+    return Event.allFromResponse(res)?.elementAt(0) ?? null;
   }
 
   Future<List<EventParticipant>> getEventTeams(String eventKey) async {
@@ -86,9 +87,14 @@ class ApiV3 {
     return Media.allFromResponse(res);
   }
 
+  Future<List<LiveStream>> getEventStreams(String eventKey) async {
+    String res = await get("/event/$eventKey/streams");
+    return LiveStream.allFromResponse(res);
+  }
+
   Future<Team> getTeam(String teamKey) async {
     String res = await get("/team/$teamKey");
-    return Team.allFromResponse(res)[0];
+    return Team.allFromResponse(res)?.elementAt(0) ?? null;
   }
 
   Future<List<Ranking>> getTeamResults(String teamKey, String seasonKey) async {
@@ -118,12 +124,12 @@ class ApiV3 {
 
   Future<TeamSeasonRecord> getTeamWLT(String teamKey, String seasonKey) async {
     String res = await get("/team/$teamKey/wlt?season_key=$seasonKey");
-    return TeamSeasonRecord.allFromResponse(res)[0];
+    return TeamSeasonRecord.allFromResponse(res)?.elementAt(0) ?? null;
   }
 
   Future<Match> getMatch(String matchKey) async {
     String res = await get("/match/$matchKey");
-    return Match.allFromResponse(res)[0];
+    return Match.allFromResponse(res)?.elementAt(0) ?? null;
   }
 
   Future<List<MatchParticipant>> getMatchParticipants(String matchKey) async {
@@ -133,17 +139,17 @@ class ApiV3 {
 
   Future<Match> getHighScoreQual() async {
     String res = await get("/match/high-scores?type=quals");
-    return Match.allFromResponse(res)[0];
+    return Match.allFromResponse(res)?.elementAt(0) ?? null;
   }
 
   Future<Match> getHighScoreElim() async {
     String res = await get("/match/high-scores?type=elims");
-    return Match.allFromResponse(res)[0];
+    return Match.allFromResponse(res)?.elementAt(0) ?? null;
   }
 
   Future<Match> getHighScoreWithPenalty() async {
     String res = await get("/match/high-scores?type=all");
-    return Match.allFromResponse(res)[0];
+    return Match.allFromResponse(res)?.elementAt(0) ?? null;
   }
 
   Future<int> getMatchesSize() async {
@@ -153,6 +159,6 @@ class ApiV3 {
 
   Future<MatchDetails> getMatchGameData(String matchKey) async {
     String res = await get("/match/$matchKey/details");
-    return GameData.fromResponse(matchKey.split('-')[0], res);
+    return GameData.fromResponse(matchKey?.split('-')?.elementAt(0) ?? '', res);
   }
 }

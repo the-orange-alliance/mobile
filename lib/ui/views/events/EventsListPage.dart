@@ -1,17 +1,15 @@
 import 'dart:async';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:toa_flutter/ui/Icons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:toa_flutter/ui/views/search/Search.dart';
+import 'package:toa_flutter/ui/widgets/ProfileBottomSheet.dart';
 import 'package:toa_flutter/models/ContentTab.dart';
 import 'package:toa_flutter/models/Event.dart';
 import 'package:toa_flutter/providers/Cache.dart';
 import 'package:toa_flutter/Sort.dart';
 import 'package:toa_flutter/Utils.dart';
 import 'package:toa_flutter/ui/views/events/StickyHeader.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:rounded_modal/rounded_modal.dart';
 import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class EventsListPage extends StatefulWidget {
@@ -21,6 +19,7 @@ class EventsListPage extends StatefulWidget {
 }
 
 class EventsListPageState extends State<EventsListPage> with TickerProviderStateMixin {
+
   TabController tabController;
   List<Event> events = [];
   List<ContentTab> tabs = [];
@@ -85,7 +84,7 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
         ),
         leading: IconButton(
           icon: Icon(MdiIcons.accountCircleOutline),
-          onPressed: showProfileBottomSheet
+          onPressed: () => ProfileBottomSheet().showProfileBottomSheet(context)
         ),
         actions: <Widget>[
           IconButton(
@@ -106,53 +105,6 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
       body: content,
     );
   }
-
-  VoidCallback showProfileBottomSheet() {
-    final ThemeData theme = Theme.of(context);
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    showRoundedModalBottomSheet(
-      context: context,
-      radius: 20,
-      color: Theme.of(context).scaffoldBackgroundColor,
-      builder: (BuildContext context) {
-        return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ListTile(
-                leading: CircleAvatar(
-                  child: Text('O'),
-                  radius: 16,
-                ),
-                title: Text('Ofek Ashery'),
-                subtitle: Text('ofek.ashery@gmail.com'),
-                onTap: () {},
-              ),
-              Divider(height: 0),
-              ListTile(
-                leading: Icon(MdiIcons.themeLightDark),
-                title: Text(local.get(isDark ? 'menu.switch_light_mode' : 'menu.switch_dark_mode')),
-                onTap: () {
-                  Navigator.pop(context);
-                  DynamicTheme.of(context).setBrightness(isDark ? Brightness.light : Brightness.dark);
-                }
-              ),
-              Divider(height: 0),
-              AboutListTile(
-                icon: Icon(TOAIcons.TOA),
-                applicationVersion: 'Beta 1',
-                aboutBoxChildren: <Widget>[
-                  Text(local.get('general.about_toa_short'))
-                ]
-              )
-            ]
-          )
-        );
-      }
-    );
-  }
-
 
   // Fixes Flutter's bug - https://github.com/flutter/flutter/issues/20292#issuecomment-425601183
   void makeNewTabController() {

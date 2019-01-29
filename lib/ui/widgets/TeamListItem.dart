@@ -36,8 +36,8 @@ class TeamListItem extends StatelessWidget {
             Expanded(
               flex: 8,
               child: ListTile(
-                title: Text(team.getName(), overflow: TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.w700)),
-                subtitle: Text(team.getFullLocation(), style: TextStyle(fontWeight: FontWeight.w500)),
+                title: Text(team.getName(), overflow: TextOverflow.fade, softWrap: false, maxLines: 1, style: TextStyle(fontWeight: FontWeight.w700)),
+                subtitle: Text(team.getFullLocation(), overflow: TextOverflow.fade, softWrap: false, maxLines: 1, style: TextStyle(fontWeight: FontWeight.w500)),
               )
             ),
           ])

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:toa_flutter/models/Event.dart';
 import 'package:toa_flutter/providers/ApiV3.dart';
 import 'package:toa_flutter/models/Season.dart';
+import 'package:toa_flutter/models/LiveStream.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:add_2_calendar/add_2_calendar.dart' as Cal;
+import 'package:toa_flutter/ui/widgets/Title.dart';
 import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class EventInfo extends StatelessWidget {
@@ -21,7 +23,7 @@ class EventInfo extends StatelessWidget {
 
     // Event Info Card
     List<Widget> eventInfoCard = [
-      buildCardTitle(local.get('pages.event.info.event_info')),
+      TOATitle(local.get('pages.event.info.event_info'), context),
       buildCardItem(
         context,
         MdiIcons.informationOutline,
@@ -57,75 +59,93 @@ class EventInfo extends StatelessWidget {
             ));
           }
         }
-      )
-    ];
+      ),
 
-    if (event.website != null) {
-      eventInfoCard.add(
-        buildCardItem(
-          context,
-          MdiIcons.earth,
-          local.get('pages.event.info.view_website'),
-          onTap: () async {
-            final url = event.website;
-            if (await canLaunch(url)) {
-              await launch(url);
-            } else {
-              Scaffold.of(context).showSnackBar(SnackBar(
-                content: Text(local.get('general.error_occurred')),
-              ));
-            }
+      event.website != null ? buildCardItem(
+        context,
+        MdiIcons.earth,
+        local.get('pages.event.info.view_website'),
+        onTap: () async {
+          final url = event.website;
+          if (await canLaunch(url)) {
+            await launch(url);
+          } else {
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text(local.get('general.error_occurred')),
+            ));
           }
-        )
-      );
-    }
+        }
+      ) : null,
+      FutureBuilder(
+        future: getLiveStream(event.eventKey),
+        initialData: null,
+        builder: (BuildContext context, AsyncSnapshot<LiveStream> data) {
+          LiveStream stream = data.data;
+          if (stream != null) {
+            return Padding(
+              padding: EdgeInsets.all(16),
+              child: Center(
+                child: FloatingActionButton.extended(
+                  elevation: 1,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+
+                    icon: Icon(MdiIcons.videoOutline),
+                  label:  Text(local.get('pages.event.info.stream_available')),
+                  onPressed: () async {
+                    final url = stream.streamType == '1' ? stream.channelURL : stream.streamURL;
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text(local.get('general.error_occurred')),
+                      ));
+                    }
+                  }
+                )
+              )
+            );
+          } else {
+            return SizedBox();  // Empty
+          }
+        }
+      )
+    ].where((o) => o != null).toList();
 
     // Event Game Card
     List<Widget> gameInfoCard = [
-      buildCardTitle(local.get('pages.event.info.game_info')),
+      TOATitle(local.get('pages.event.info.game_info'), context),
       FutureBuilder(
         future: getSeasonName(event.seasonKey),
         initialData: local.get('pages.event.info.loading_sesson'),
         builder: (BuildContext context, AsyncSnapshot<String> seasonName) {
-          return buildCardItem(context, MdiIcons.gamepadVariant, seasonName.data);
+          return buildCardItem(context, MdiIcons.gamepadVariant, seasonName.data ?? "${event.seasonKey} Season");
         }
       ),
       buildCardItem(context, MdiIcons.humanHandsup, "${event.allianceCount} ${local.get('pages.event.info.alliances')}"),
-      buildCardItem(context, MdiIcons.soccerField, "${event.fieldCount} ${local.get('pages.event.info.fields')}")
+      buildCardItem(context, MdiIcons.soccerField, "${event.fieldCount} ${local.get('pages.event.info.fields')}"),
     ];
 
     return ListView(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: eventInfoCard
-              )
-            )
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: gameInfoCard
-              )
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.all(8),
+          child: Card(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: eventInfoCard
             )
           )
-        ]
-    );
-  }
-
-  Widget buildCardTitle(String title) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16, top: 20, bottom: 8, right: 16),
-      child: Text(
-        title,
-        textAlign: TextAlign.start,
-        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: theme.primaryTextTheme.title.color),
-      ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(8),
+          child: Card(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: gameInfoCard
+            )
+          )
+        )
+      ]
     );
   }
 
@@ -151,5 +171,13 @@ class EventInfo extends StatelessWidget {
       }
     }
     return seasonName;
+  }
+  
+  Future<LiveStream> getLiveStream(String eventKey) async {
+    List<LiveStream> streams = await ApiV3().getEventStreams(eventKey);
+    if (streams.length > 0) {
+      return streams[0];
+    }
+    return null;
   }
 }

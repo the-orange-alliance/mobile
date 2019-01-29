@@ -24,20 +24,16 @@ class TeamResults extends StatelessWidget {
   Widget build(BuildContext context) {
     local = TOALocalizations.of(context);
 
-    if (data == null) {
-      return FutureBuilder<List<TeamParticipant>>(
-        future: getTeamParticipants(teamKey),
-        initialData: null,
-        builder: (BuildContext context, AsyncSnapshot<List<TeamParticipant>> teamParticipants) {
-          if (teamParticipants.data != null) {
-            data = teamParticipants.data;
-          }
-          return bulidPage();
+    return FutureBuilder<List<TeamParticipant>>(
+      future: getTeamParticipants(teamKey),
+      initialData: null,
+      builder: (BuildContext context, AsyncSnapshot<List<TeamParticipant>> teamParticipants) {
+        if (teamParticipants.data != null) {
+          data = teamParticipants.data;
         }
-      );
-    } else {
-      return bulidPage();
-    }
+        return bulidPage();
+      }
+    );
   }
 
   Widget bulidPage() {

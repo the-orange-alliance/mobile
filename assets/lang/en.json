@@ -13,6 +13,7 @@
     "refresh": "Refresh",
     "search": "Search",
     "clear": "Clear",
+    "loading": "Loading...",
     "add_to_mytoa": "Add to myTOA",
     "remove_from_mytoa": "Remove from myTOA",
     "error_occurred": "An error has occurred",
@@ -27,6 +28,8 @@
   },
 
   "menu": {
+    "login": "Login",
+    "register": "Register",
     "switch_light_mode": "Switch to light mode",
     "switch_dark_mode": "Switch to dark mode",
     "privacy_terms": "Privacy & Terms"
@@ -34,23 +37,24 @@
 
   "pages": {
     "account": {
+      "title": "myTOA Account",
       "logout": "Logout",
-      "subpages": {
-        "login": {
-          "title": "Login",
-          "email": "Email",
-          "password": "Password",
-          "login": "Login"
-        },
-        "register": {
-          "title": "Register",
-          "full_name": "Full name",
-          "email": "Email",
-          "password": "Password",
-          "confirm_password": "Confirm password",
-          "your_team": "Your team #",
-          "sign_up": "Sign Up"
-        }
+      "login": {
+        "title": "Login",
+        "subtitle": "Login to your myTOA account",
+        "email": "Email",
+        "password": "Password",
+        "login": "Login"
+      },
+      "register": {
+        "title": "Register",
+        "full_name": "Full name",
+        "error_name": "Please type your full name",
+        "email": "Email",
+        "password": "Password",
+        "confirm_password": "Confirm password",
+        "your_team": "Your team #",
+        "sign_up": "Sign Up"
       }
     },
 

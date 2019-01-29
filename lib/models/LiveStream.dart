@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-class EventLiveStream {
-  EventLiveStream({
+class LiveStream {
+  LiveStream({
     this.streamKey,
     this.eventKey,
     this.streamType,
@@ -16,7 +16,7 @@ class EventLiveStream {
 
   final String streamKey;
   final String eventKey;
-  final int streamType;
+  final String streamType;
   final bool isActive;
   final String streamURL;
   final String channelName;
@@ -25,15 +25,15 @@ class EventLiveStream {
   final String endDateTime;
   final String channelURL;
 
-  static List<EventLiveStream> allFromResponse(String response) {
+  static List<LiveStream> allFromResponse(String response) {
     return jsonDecode(response)
-        .map((obj) => EventLiveStream.fromMap(obj))
+        .map((obj) => LiveStream.fromMap(obj))
         .toList()
-        .cast<EventLiveStream>();
+        .cast<LiveStream>();
   }
 
-  static EventLiveStream fromMap(Map map) {
-    return EventLiveStream(
+  static LiveStream fromMap(Map map) {
+    return LiveStream(
       streamKey: map['stream_key'],
       eventKey: map['event_key'],
       streamType: map['stream_type'],
