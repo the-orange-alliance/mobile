@@ -11,6 +11,7 @@ import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class ProfileBottomSheet {
 
+  String appVersion = "2.0.0";
   double radius = 20;
 
   showProfileBottomSheet(BuildContext context) {
@@ -69,7 +70,7 @@ class ProfileBottomSheet {
                   ),
                   AboutListTile(
                     icon: Icon(TOAIcons.TOA),
-                    applicationVersion: 'Beta 1',
+                    applicationVersion: appVersion,
                     aboutBoxChildren: <Widget>[
                       Text(local.get('general.about_toa_short'))
                     ]
