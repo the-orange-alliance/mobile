@@ -92,3 +92,4 @@ unlinked_spec.ds
 # Secret keys
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
+android/key.properties
