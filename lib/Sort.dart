@@ -1,4 +1,5 @@
 import 'package:toa_flutter/models/EventParticipant.dart';
+import 'package:toa_flutter/models/TeamParticipant.dart';
 import 'package:toa_flutter/models/Event.dart';
 import 'package:toa_flutter/models/Team.dart';
 import 'package:toa_flutter/models/Ranking.dart';
@@ -15,6 +16,10 @@ class Sort {
     } else {
       return  0;
     }
+  }
+
+  int teamParticipantSorter(TeamParticipant a, TeamParticipant b) {
+    return eventSorter(a.event, b.event) * -1;
   }
 
   int eventSorter(Event a, Event b) {
