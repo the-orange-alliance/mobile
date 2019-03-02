@@ -8,6 +8,7 @@ class Ranking {
     this.teamKey,
     this.rank,
     this.rankChange,
+    this.opr,
     this.wins,
     this.losses,
     this.ties,
@@ -25,6 +26,7 @@ class Ranking {
   final String teamKey;
   final int rank;
   final int rankChange;
+  final int opr;
   final int wins;
   final int losses;
   final int ties;
@@ -50,6 +52,7 @@ class Ranking {
       teamKey: map['team_key'].toString(),
       rank: map['rank'],
       rankChange: map['rank_change'],
+      opr: map['opr'],
       wins: map['wins'],
       losses: map['losses'],
       ties: map['ties'],
