@@ -26,7 +26,7 @@ class MatchBreakdown1819 {
       MatchBreakdownRow(name: local.get('breakdowns.roverruckus.parked_in'), red: details.redEndIn, blue: details.blueEndIn, points: 15),
       MatchBreakdownRow(name: local.get('breakdowns.roverruckus.parked_completely'), red: details.redEndComp, blue: details.blueEndComp, points: 25),
 
-      MatchBreakdownRow(name: local.get('breakdowns.penalty'), red: match.bluePenalty, blue: match.redEndScore, title: true),
+      MatchBreakdownRow(name: local.get('breakdowns.penalty'), red: match.bluePenalty, blue: match.redPenalty, title: true),
       MatchBreakdownRow(name: local.get('breakdowns.minor_penalty'), red: details.blueMinPen, blue: details.redMinPen, points: 10),
       MatchBreakdownRow(name: local.get('breakdowns.major_penalty'), red: details.blueMajPen, blue: details.redMajPen, points: 40),
     ];
