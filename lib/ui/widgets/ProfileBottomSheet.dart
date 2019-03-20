@@ -11,7 +11,7 @@ import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class ProfileBottomSheet {
 
-  String appVersion = "2.0.0";
+  String appVersion = "2.0.1";
   double radius = 20;
 
   showProfileBottomSheet(BuildContext context) {
