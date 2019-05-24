@@ -3,7 +3,9 @@ matrix:
     - os: linux
       language: android
       script: flutter build apk
-      build-tools: 28.0.3
+      android:
+        components:
+          - build-tools-28.0.3
 
     - os: osx
       language: objective-c
