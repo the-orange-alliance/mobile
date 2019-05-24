@@ -1,5 +1,7 @@
 language: dart
 dart: stable
 
+install: flutter packages get
+
 dart_task: 
   - test
