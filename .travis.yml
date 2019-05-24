@@ -1,5 +1,5 @@
 matrix:
-  jobs:
+  include:
     - os: linux
       language: android
       script: flutter build apk
