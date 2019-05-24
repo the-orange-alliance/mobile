@@ -1,7 +1,11 @@
 language: dart
 dart: stable
 
-install: flutter packages get
+install:
+  - git clone https://github.com/flutter/flutter
+  - export PATH="$PATH:`pwd`/flutter/bin"
+  - flutter doctor
+  - flutter packages git
 
 dart_task: 
   - test
