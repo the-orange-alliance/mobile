@@ -3,9 +3,11 @@ matrix:
     - os: linux
       language: android
       script: flutter build apk
+      after_script: ls lib
     - os: osx
       language: objective-c
       script: flutter build ios
+
 install:
   - git clone https://github.com/flutter/flutter
   - export PATH="$PATH:`pwd`/flutter/bin"
