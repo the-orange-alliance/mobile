@@ -1,11 +1,14 @@
-language: dart
-dart: stable
-
+jobs:
+  - os: linux
+    language: android
+    script: flutter build apk
+  - os: osx
+    language: objective-c
+    script: flutter build ios
 install:
   - git clone https://github.com/flutter/flutter
   - export PATH="$PATH:`pwd`/flutter/bin"
   - flutter doctor
-  - flutter packages git
+  - flutter packages get
 
-dart_task: 
-  - test
+after_script: ls
