@@ -2,12 +2,13 @@ matrix:
   include:
     - os: linux
       language: android
-      script: flutter build apk --debug --no-codesign
+      script: flutter build apk --debug
       on_success: bundle exec fastlane deploy
       android:
         components:
           - build-tools-28.0.3
     - os: osx
+      osx_image: xcode10.2
       language: objective-c
       script: flutter build ios --debug --no-codesign
       on_success: bundle exec fastlane deploy
