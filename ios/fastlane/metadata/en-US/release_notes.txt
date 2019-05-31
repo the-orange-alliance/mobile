@@ -1,0 +1,5 @@
+- Added ability to sort team events
+- Fix TBP
+- Added OPR rankings
+
+We regularly release updates for ​this app in order to add new features, fix any bugs that may appear, and give you the best TOA experience possible.
