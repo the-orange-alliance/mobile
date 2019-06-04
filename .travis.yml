@@ -10,8 +10,8 @@ matrix:
     - os: osx
       osx_image: xcode10.2
       language: objective-c
-      script: flutter build ios --debug --no-codesign
-      on_success: bundle exec fastlane deploy
+      script: flutter build ios
+      on_success: bundle exec fastlane release
 
 install:
   - git clone https://github.com/flutter/flutter
