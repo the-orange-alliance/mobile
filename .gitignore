@@ -93,3 +93,4 @@ unlinked_spec.ds
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
 android/key.properties
+ios/fastlane/Preview.html
