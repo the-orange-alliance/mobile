@@ -11,7 +11,8 @@ matrix:
     - os: osx
       osx_image: xcode10.2
       language: objective-c
-      script: flutter build ios --release
+      #script: flutter build ios --release
+      script: echo "Temporary placeholder"
       on_success: bundle exec fastlane release
       env:
         secure: "Jp/3rmHmZ+HE6s7Wmrm6dNHdBeAnm6V1I1+kcKvtU8NEN/YBRmRP0TGJSQmwyRben3ogePkRBqAXDnz7/Ocg5v8Jh8qk9VB70J5oBFI2iCCtfxuuq0gTtbj5S117ngfysTY2q8grG1SjwHUoFmy96/kSXSp+KbiBXwUMpemF0ZkwOJKRWPHJ5OeNBnCow4r0IxQnSCxfrPkQ0QuFpr9XAKdEoDB50ICKkl9jZng7oOMbgi1NLd+8q8yNU3O3iicTRwR6Y6mhFDjdy8uto7icPZdVCRBiE0GpqYdbkKSCcvrO/hYRy2wd3pKeE0PvpBdFGu/BLfl2Rl5xil/Y5Gsn7MvWAy03y+PL0hh676fa0ZoOvZplUIBYgarIqCm6PmS/ZujozvjU1q0fu70RG2FBHVzfpc9RbitYyHoDk9EpG5EEdN8tcEjl9BoQb96s/5JVqGrKu+8J1GdRXvC+FawWVgvuHCUQcIaOK+jw6R3ZYTZBh02RrsZluQ/Emxi/HfWiPjwe4UAdhMCRgmh+Rr4FoBfulp7v6Yl+GLHFvv+qVifvHlUqeFPQ0CAnUtYbXi9TSfF/63G+DGkmjw3lhtQjndHSS6CU4H2i4be84Wb+tAFw2dwyrlwXb/VCYSScOUxbr7vzfT6FBk7FJoq/I4XtMphPW5YyvN03KoK+uhsQ+Ds="
