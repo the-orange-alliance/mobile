@@ -19,9 +19,6 @@ platform :ios do
   desc "Push a new release build to the App Store"
   lane :release do
     build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
-	  rescue => ex
-		  UI.error("An error occurred: #{ex}")
-	  end
     upload_to_app_store
   end
 end
