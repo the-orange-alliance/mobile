@@ -11,6 +11,7 @@ matrix:
   - os: osx
     osx_image: xcode10.2
     language: objective-c
+    ruby: 2.5
     before_script: cd ios && pod install
     script: fastlane release
     before_install:
