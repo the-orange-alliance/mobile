@@ -94,3 +94,4 @@ android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
 android/key.properties
 ios/fastlane/Preview.html
+android/android-keystore.jks
