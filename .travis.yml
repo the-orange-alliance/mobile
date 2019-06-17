@@ -5,7 +5,7 @@ matrix:
     script: flutter build apk --release
     after_success:
       - cd android && fastlane supply init
-      - cd android && fastlane deploy
+      - fastlane deploy
       # - fastlane supply --apk build/app/outputs/apk/release/app-release.apk
     android:
       components:
