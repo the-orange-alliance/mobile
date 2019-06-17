@@ -2,7 +2,7 @@ matrix:
   include:
   - os: linux
     language: android
-    script: flutter build appbundle --release
+    script: flutter build apk --release
     on_success: fastlane supply --apk toa.apk
     android:
       components:
