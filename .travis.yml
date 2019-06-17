@@ -3,7 +3,10 @@ matrix:
   - os: linux
     language: android
     script: flutter build apk --release
-    after_success: fastlane supply --apk build/app/outputs/apk/release/app-release.apk
+    after_success:
+      - cd android && fastlane supply init
+      - cd android && fastlane deploy
+      # - fastlane supply --apk build/app/outputs/apk/release/app-release.apk
     android:
       components:
       - build-tools-28.0.3
