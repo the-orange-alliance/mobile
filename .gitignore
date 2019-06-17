@@ -95,3 +95,4 @@ ios/Runner/GoogleService-Info.plist
 android/key.properties
 ios/fastlane/Preview.html
 android/app/android-keystore.jks
+credentials.tar.xz
