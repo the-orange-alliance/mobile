@@ -8,6 +8,7 @@ matrix:
       components:
       - build-tools-28.0.3
       - android-27
+      - android-28
   - os: osx
     osx_image: xcode10.2
     language: objective-c
