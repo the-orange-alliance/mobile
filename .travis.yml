@@ -32,4 +32,4 @@ before_install:
 - mv key.properties android
 - mv google-services.json android/app
 - mv GoogleService-Info.plist ios/Runner
-- ls android
+- ls android/app
