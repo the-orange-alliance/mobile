@@ -25,11 +25,11 @@ dependencies:
   rounded_modal: ^1.0.0
 
   # Firebase
-  firebase_core: ^0.2.5
-  firebase_auth: ^0.6.6
-  firebase_database: ^1.0.5
-  firebase_storage: ^1.0.4
-  firebase_analytics: ^1.1.0
+  firebase_core: ^0.4.0+6
+  firebase_auth: ^0.11.1+7
+  firebase_database: ^3.0.3
+  firebase_storage: ^3.0.2
+  firebase_analytics: ^3.0.3
   google_sign_in: ^3.2.4
 
   flutter:
