@@ -1,0 +1,8 @@
+app_identifier("org.theorangealliance.app") # The bundle identifier of your app
+apple_id("toaftcdev@gmail.com") # Your Apple email address
+
+itc_team_id("119650547") # App Store Connect Team ID
+team_id("H47B22P9MV") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile

@@ -1,0 +1,39 @@
+matrix:
+  include:
+  - os: linux
+    language: android
+    script: flutter build apk --release
+    after_success:
+      - cd android && fastlane supply init
+      - fastlane deploy
+      # - fastlane supply --apk build/app/outputs/apk/release/app-release.apk
+    android:
+      components:
+      - build-tools-28.0.3
+      - android-27
+      - android-28
+  - os: osx
+    osx_image: xcode10.2
+    language: objective-c
+    before_script: gem install cocoapods && pod repo update
+    script: flutter build ios --no-codesign && cd ios && fastlane release
+install:
+- git clone https://github.com/flutter/flutter
+- export PATH="$PATH:`pwd`/flutter/bin"
+- flutter doctor
+- flutter packages get
+- gem install bundler fastlane
+after_script: ls
+notifications:
+  email: false
+before_install:
+- openssl aes-256-cbc -K $encrypted_29727b427600_key -iv $encrypted_29727b427600_iv
+  -in credentials.tar.xz.enc -out credentials.tar.xz -d
+- tar -xf credentials.tar.xz
+- mv android-keystore.jks android/app
+- mv key.properties android
+- mv google-services.json android/app
+- mv GoogleService-Info.plist ios/Runner
+- mv api-9048300026487180911-124804-e70b22003165.json android
+
+if: branch = master AND type = push AND fork = false
