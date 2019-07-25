@@ -26,7 +26,7 @@ class Ranking {
   final String teamKey;
   final num rank;
   final num rankChange;
-  final double opr;
+  final num opr;
   final num wins;
   final num losses;
   final num ties;
