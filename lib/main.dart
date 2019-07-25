@@ -2,9 +2,9 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import './internationalization/LocalizationsDelegate.dart';
-import './ui/Colors.dart' as TOAColors;
-import './ui/views/events/EventsListPage.dart';
+import './internationalization/localizations-delegate.dart';
+import './ui/colors.dart' as TOAColors;
+import './ui/views/events/events-list-page.dart';
 
 void main() => runApp(MyApp());
 

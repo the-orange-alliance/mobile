@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/EventSettings.dart';
+import '../../models/event-settings.dart';
 
 class EventSettingsDialog extends StatefulWidget {
   EventSettingsDialog(this.eventSettings, {Key key}) : super(key: key);
