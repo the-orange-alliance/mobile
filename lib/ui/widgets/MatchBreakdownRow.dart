@@ -77,7 +77,7 @@ class MatchBreakdownRow extends StatelessWidget {
       child:
       Container(
         decoration: BoxDecoration(
-          color: Colors.black.withOpacity(title ? 0.12 : 0),
+          color: Colors.black.withOpacity(title ? 0.08 : 0),
           border: getBorder()
         ),
         child: Padding(
