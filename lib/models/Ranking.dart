@@ -24,18 +24,18 @@ class Ranking {
   final String rankKey;
   final String eventKey;
   final String teamKey;
-  final int rank;
-  final int rankChange;
-  final int opr;
-  final int wins;
-  final int losses;
-  final int ties;
-  final int highestQualScore;
-  final int rankingPoints;
-  final int qualifyingPoints;
-  final int tieBreakerPoints;
-  final int disqualified;
-  final int played;
+  final num rank;
+  final num rankChange;
+  final double opr;
+  final num wins;
+  final num losses;
+  final num ties;
+  final num highestQualScore;
+  final num rankingPoints;
+  final num qualifyingPoints;
+  final num tieBreakerPoints;
+  final num disqualified;
+  final num played;
   final Team team;
 
   static List<Ranking> allFromResponse(String response) {
