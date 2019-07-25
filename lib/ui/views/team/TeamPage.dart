@@ -68,7 +68,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
 
   Future<void> loadUser() async {
     String uid = await Firebase().getUID();
-    bool isFav = await Firebase().isFavTeam(teamKey);
+    bool isFav = false; // TODO: Get the real state
     setState(() {
       this.isFav = isFav;
       this.firebaseConnected = uid != null;
@@ -113,7 +113,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
                   icon: Icon(MdiIcons.star),
                   tooltip: local.get('general.remove_from_mytoa'),
                   onPressed: () {
-                    Firebase().setFavTeam(teamKey, false);
+                    // TODO: Remove from myTOA
                     setState(() {});
                   }
                 ) : null,
@@ -121,7 +121,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
                   icon: Icon(MdiIcons.starOutline),
                   tooltip: local.get('general.add_to_mytoa'),
                   onPressed: () {
-                    Firebase().setFavTeam(teamKey, true);
+                    // TODO: Add from myTOA
                     setState(() {});
                   }
                 ) : null

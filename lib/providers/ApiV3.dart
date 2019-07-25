@@ -20,8 +20,8 @@ import 'package:toa_flutter/models/game-specifics/GameData.dart';
 class ApiV3 {
 
   Future<String> get(String endpoint) async {
-//    const baseURL = "https://theorangealliance.org/api";
-    const baseURL = "http://35.202.99.121/api";
+    print('GET $endpoint');
+    const baseURL = "https://theorangealliance.org/api";
     const headers = {
       'X-Application-Origin': 'TOA-WebApp-1819',
       'Content-Type': 'application/json'
@@ -30,7 +30,6 @@ class ApiV3 {
     var request = await http.get(baseURL + endpoint, headers: headers);
     return request.body;
   }
-
 
   Future<List<EventType>> getEventTypes() async {
     String res = await get("/event-types");

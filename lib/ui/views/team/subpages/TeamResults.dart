@@ -26,7 +26,6 @@ class TeamResults extends StatelessWidget {
 
     return FutureBuilder<List<TeamParticipant>>(
       future: getTeamParticipants(teamKey),
-      initialData: null,
       builder: (BuildContext context, AsyncSnapshot<List<TeamParticipant>> teamParticipants) {
         if (teamParticipants.data != null) {
           data = teamParticipants.data;
@@ -91,7 +90,7 @@ class TeamResults extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      padding: EdgeInsets.symmetric(horizontal: 8),
       child: Card(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,7 +144,7 @@ class TeamResults extends StatelessWidget {
         teamParticipants.add(teamParticipant);
       }
     });
-    teamParticipants.sort(new Sort().teamParticipantSorter);
+    teamParticipants.sort(Sort().teamParticipantSorter);
     return teamParticipants;
   }
 }

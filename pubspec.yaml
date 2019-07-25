@@ -23,6 +23,7 @@ dependencies:
   add_2_calendar: ^1.0.2
   dynamic_theme: ^1.0.0
   rounded_modal: ^1.0.0
+  rect_getter: ^0.0.1
 
   # Firebase
   firebase_core: ^0.4.0+6
@@ -72,4 +73,3 @@ flutter:
           weight: 500
         - asset: assets/fonts/GoogleSans-Regular.ttf
           weight: 400
-

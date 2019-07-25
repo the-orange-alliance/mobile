@@ -5,10 +5,9 @@ import 'package:toa_flutter/ui/widgets/EventListItem.dart';
 import 'package:toa_flutter/ui/widgets/Title.dart';
 import 'package:toa_flutter/providers/ApiV3.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:toa_flutter/models/User.dart';
 import 'package:toa_flutter/models/Team.dart';
-import 'package:toa_flutter/models/Event.dart' as EventModel;
+import 'package:toa_flutter/models/Event.dart';
 import 'package:toa_flutter/internationalization/Localizations.dart';
 
 class AccountPage extends StatefulWidget {
@@ -23,7 +22,7 @@ class AccountPageState extends State<AccountPage> {
   FirebaseUser user;
   User userData;
   List<Team> teams;
-  List<EventModel.Event> events;
+  List<Event> events;
 
   TOALocalizations local;
   ThemeData theme;
@@ -36,20 +35,22 @@ class AccountPageState extends State<AccountPage> {
 
   Future<void> loadUser() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    User userData = User.fromDataSnapshot(await FirebaseDatabase.instance.reference().child('Users').child(user.uid).once());
-    setState(() {
-      this.user = user;
-      this.userData = userData;
+//    User userData = User.fromDataSnapshot(await FirebaseDatabase.instance.reference().child('Users').child(user.uid).once());
+//    setState(() {
+//      this.user = user;
+//      this.userData = userData;
+//    });
+
+    getTeams().then((List<Team> teams) {
+      setState(() {
+        this.teams = teams;
+      });
     });
 
-    List<Team> teams = await getTeams();
-    setState(() {
-      this.teams = teams;
-    });
-
-    List<EventModel.Event> events = await getEvents();
-    setState(() {
-      this.events = events;
+    getEvents().then((List<Event> events) {
+      setState(() {
+        this.events = events;
+      });
     });
   }
 
@@ -126,15 +127,15 @@ class AccountPageState extends State<AccountPage> {
 
   Future<List<Team>> getTeams() async {
     List<Team> teams = List();
-    for (String teamKey in userData.getTeams()) {
+    for (String teamKey in userData.favoriteTeams) {
       teams.add(await ApiV3().getTeam(teamKey));
     }
     return teams;
   }
 
-  Future<List<EventModel.Event>> getEvents() async {
-    List<EventModel.Event> events = List();
-    for (String eventKey in userData.getEvents()) {
+  Future<List<Event>> getEvents() async {
+    List<Event> events = List();
+    for (String eventKey in userData.favoriteEvents) {
       events.add(await ApiV3().getEvent(eventKey));
     }
     return events;
