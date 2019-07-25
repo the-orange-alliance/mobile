@@ -1,14 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:toa_flutter/ui/Colors.dart' as TOAColors;
-import 'package:toa_flutter/ui/views/events/EventsListPage.dart';
-import 'package:toa_flutter/internationalization/LocalizationsDelegate.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import './internationalization/LocalizationsDelegate.dart';
+import './ui/Colors.dart' as TOAColors;
+import './ui/views/events/EventsListPage.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
   // Root widget
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,9 @@ class MyApp extends StatelessWidget {
       defaultBrightness: Brightness.light,
       data: (brightness) => ThemeData(
         primarySwatch: TOAColors.Colors().toaColors,
-        accentColor: brightness == Brightness.dark ? TOAColors.Colors().toaColors.shade600 : null,
+        accentColor: brightness == Brightness.dark
+          ? TOAColors.Colors().toaColors.shade600
+          : null,
         fontFamily: 'GoogleSans',
         cardTheme: CardTheme(
           clipBehavior: Clip.antiAlias,
@@ -44,7 +46,8 @@ class MyApp extends StatelessWidget {
 //            return supportedLocales.elementAt(1); // Debug Hebrew
             if (locale != null) {
               for (Locale supportedLocale in supportedLocales) {
-                if (supportedLocale.languageCode == locale.languageCode || supportedLocale.countryCode == locale.countryCode) {
+                if (supportedLocale.languageCode == locale.languageCode ||
+                  supportedLocale.countryCode == locale.countryCode) {
                   return supportedLocale;
                 }
               }

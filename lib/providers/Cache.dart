@@ -1,7 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:toa_flutter/providers/ApiV3.dart';
-import 'package:toa_flutter/models/Event.dart';
-import 'package:toa_flutter/models/Team.dart';
+
+import './ApiV3.dart';
+import '../models/Event.dart';
+import '../models/Team.dart';
 
 class Cache {
 

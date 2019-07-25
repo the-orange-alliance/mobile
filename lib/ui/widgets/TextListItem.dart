@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TextListItem extends StatelessWidget {
-
   TextListItem(this.title, {this.mini = false});
+
   final String title;
   final bool mini;
 

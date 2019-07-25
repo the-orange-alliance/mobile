@@ -1,6 +1,8 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:toa_flutter/internationalization/Localizations.dart';
+
+import './Localizations.dart';
 
 class TOALocalizationsDelegate extends LocalizationsDelegate<TOALocalizations> {
   const TOALocalizationsDelegate();
@@ -12,7 +14,6 @@ class TOALocalizationsDelegate extends LocalizationsDelegate<TOALocalizations> {
   Future<TOALocalizations> load(Locale locale) async {
     TOALocalizations localizations = TOALocalizations(locale);
     await localizations.load();
-
     return localizations;
   }
 

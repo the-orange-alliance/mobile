@@ -1,20 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:toa_flutter/ui/widgets/TeamListItem.dart';
-import 'package:toa_flutter/ui/widgets/EventListItem.dart';
-import 'package:toa_flutter/ui/widgets/Title.dart';
-import 'package:toa_flutter/providers/ApiV3.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:toa_flutter/models/User.dart';
-import 'package:toa_flutter/models/Team.dart';
-import 'package:toa_flutter/models/Event.dart';
-import 'package:toa_flutter/internationalization/Localizations.dart';
+
+import '../../../internationalization/Localizations.dart';
+import '../../../models/Event.dart';
+import '../../../models/Team.dart';
+import '../../../models/User.dart';
+import '../../../providers/ApiV3.dart';
+import '../../widgets/EventListItem.dart';
+import '../../widgets/TeamListItem.dart';
+import '../../widgets/Title.dart';
 
 class AccountPage extends StatefulWidget {
   AccountPage();
 
   @override
-  AccountPageState createState() => new AccountPageState();
+  AccountPageState createState() => AccountPageState();
 }
 
 class AccountPageState extends State<AccountPage> {
@@ -82,7 +83,7 @@ class AccountPageState extends State<AccountPage> {
               FirebaseAuth.instance.signOut();
               Navigator.of(context).pop();
             }
-          ),
+          )
         )
       ));
     }

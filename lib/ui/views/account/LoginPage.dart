@@ -1,18 +1,17 @@
-import 'package:flutter/services.dart';
-import 'package:flutter/material.dart';
-import 'package:toa_flutter/ui/Icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:toa_flutter/internationalization/Localizations.dart';
+import 'package:toa_flutter/ui/Icons.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage();
 
   @override
-  LoginPageState createState() => new LoginPageState();
+  LoginPageState createState() => LoginPageState();
 }
 
 class LoginPageState extends State<LoginPage> {
-
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   String email = '';
@@ -26,9 +25,7 @@ class LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        title: Text(local.get('pages.account.login.title'))
-      ),
+      appBar: AppBar(title: Text(local.get('pages.account.login.title'))),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -41,17 +38,26 @@ class LoginPageState extends State<LoginPage> {
                 SizedBox(height: 64),
                 CircleAvatar(
                   backgroundColor: Colors.transparent,
-                  child: Icon(TOAIcons.TOA, size: 52, color: isDark ? Colors.white : Colors.black)
+                  child: Icon(TOAIcons.TOA,
+                    size: 52,
+                    color: isDark ? Colors.white : Colors.black
+                  )
                 ),
                 SizedBox(height: 24),
-                Text(local.get('pages.account.login.subtitle'), textAlign: TextAlign.center, style: theme.textTheme.subtitle),
+                Text(
+                  local.get('pages.account.login.subtitle'),
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.subtitle
+                ),
                 SizedBox(height: 48),
                 TextField(
                   autofocus: true,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     labelText: local.get('pages.account.login.email'),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8)
+                    )
                   ),
                   onChanged: (String value) {
                     this.email = value;
@@ -62,7 +68,9 @@ class LoginPageState extends State<LoginPage> {
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: local.get('pages.account.login.password'),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8)
+                    )
                   ),
                   onChanged: (String value) {
                     this.password = value;
@@ -77,7 +85,12 @@ class LoginPageState extends State<LoginPage> {
                     ),
                     onPressed: () async {
                       try {
-                        FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: this.email ?? '', password: this.password ?? '');
+                        FirebaseUser user = await FirebaseAuth
+                          .instance
+                          .signInWithEmailAndPassword(
+                            email: this.email ?? '',
+                            password: this.password ?? ''
+                        );
                         Navigator.of(context).pop();
                       } on PlatformException catch (e) {
                         showSnackbar(e.message);
@@ -85,17 +98,14 @@ class LoginPageState extends State<LoginPage> {
                     },
                     padding: EdgeInsets.all(12),
                     color: theme.primaryColor,
-                    child: Text(local.get('pages.account.login.login'), style: TextStyle(color: theme.primaryTextTheme.title.color))
+                    child: Text(
+                      local.get('pages.account.login.login'),
+                      style: TextStyle(
+                        color: theme.primaryTextTheme.title.color
+                      )
+                    )
                   )
                 )
-/*
-                ,FlatButton(
-                  child: Text('Forgot password?', style: TextStyle(color: isDark ? Colors.white54 : Colors.black54)),
-                  onPressed: () {
-
-                  }
-                )
-*/
               ]
             )
           )
@@ -105,8 +115,6 @@ class LoginPageState extends State<LoginPage> {
   }
 
   showSnackbar(String value) {
-    scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text(value)
-    ));
+    scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(value)));
   }
 }

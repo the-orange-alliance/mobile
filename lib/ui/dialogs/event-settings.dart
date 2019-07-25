@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../models/EventSettings.dart';
 
 class EventSettingsDialog extends StatefulWidget {

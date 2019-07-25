@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:toa_flutter/providers/StaticData.dart';
-import 'package:toa_flutter/models/Media.dart';
-import 'package:toa_flutter/providers/ApiV3.dart';
-import 'package:toa_flutter/ui/widgets/NoDataWidget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:toa_flutter/internationalization/Localizations.dart';
+
+import '../../../../internationalization/Localizations.dart';
+import '../../../../models/Media.dart';
+import '../../../../providers/ApiV3.dart';
+import '../../../../providers/StaticData.dart';
+import '../../../widgets/NoDataWidget.dart';
 
 class TeamRobot extends StatelessWidget {
 

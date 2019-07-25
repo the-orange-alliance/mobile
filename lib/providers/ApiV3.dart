@@ -1,28 +1,28 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
-import 'package:toa_flutter/models/EventType.dart';
-import 'package:toa_flutter/models/Event.dart';
-import 'package:toa_flutter/models/Season.dart';
-import 'package:toa_flutter/models/Team.dart';
-import 'package:toa_flutter/models/TeamSeasonRecord.dart';
-import 'package:toa_flutter/models/EventParticipant.dart';
-import 'package:toa_flutter/models/Ranking.dart';
-import 'package:toa_flutter/models/Match.dart';
-import 'package:toa_flutter/models/Media.dart';
-import 'package:toa_flutter/models/LiveStream.dart';
-import 'package:toa_flutter/models/AwardRecipient.dart';
-import 'package:toa_flutter/models/MatchParticipant.dart';
-import 'package:toa_flutter/models/MatchDetails.dart';
-import 'package:toa_flutter/models/game-specifics/GameData.dart';
+import '../models/AwardRecipient.dart';
+import '../models/Event.dart';
+import '../models/EventParticipant.dart';
+import '../models/EventType.dart';
+import '../models/LiveStream.dart';
+import '../models/Match.dart';
+import '../models/MatchDetails.dart';
+import '../models/MatchParticipant.dart';
+import '../models/Media.dart';
+import '../models/Ranking.dart';
+import '../models/Season.dart';
+import '../models/Team.dart';
+import '../models/TeamSeasonRecord.dart';
+import '../models/game-specifics/GameData.dart';
 
 class ApiV3 {
-
   Future<String> get(String endpoint) async {
     print('GET $endpoint');
-    const baseURL = "https://theorangealliance.org/api";
-    const headers = {
+    String baseURL = "https://theorangealliance.org/api";
+    Map<String, String> headers = {
       'X-Application-Origin': 'TOA-WebApp-1819',
       'Content-Type': 'application/json'
     };
@@ -101,17 +101,20 @@ class ApiV3 {
     return Ranking.allFromResponse(res);
   }
 
-  Future<List<EventParticipant>> getTeamEvents(String teamKey, String seasonKey) async {
+  Future<List<EventParticipant>> getTeamEvents(
+      String teamKey, String seasonKey) async {
     String res = await get("/team/$teamKey/events/$seasonKey");
     return EventParticipant.allFromResponse(res);
   }
 
-  Future<List<AwardRecipient>> getTeamAwards(String teamKey, String seasonKey) async {
+  Future<List<AwardRecipient>> getTeamAwards(
+      String teamKey, String seasonKey) async {
     String res = await get("/team/$teamKey/awards/$seasonKey");
     return AwardRecipient.allFromResponse(res);
   }
 
-  Future<List<MatchParticipant>> getTeamMatches(String teamKey, String seasonKey) async {
+  Future<List<MatchParticipant>> getTeamMatches(
+      String teamKey, String seasonKey) async {
     String res = await get("/team/$teamKey/matches/$seasonKey");
     return MatchParticipant.allFromResponse(res);
   }

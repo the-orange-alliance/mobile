@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:toa_flutter/providers/StaticData.dart';
-import 'package:toa_flutter/Sort.dart';
-import 'package:toa_flutter/models/EventParticipant.dart';
-import 'package:toa_flutter/models/TeamParticipant.dart';
-import 'package:toa_flutter/models/Ranking.dart';
-import 'package:toa_flutter/models/Match.dart';
-import 'package:toa_flutter/providers/ApiV3.dart';
-import 'package:toa_flutter/ui/widgets/EventListItem.dart';
-import 'package:toa_flutter/ui/widgets/MatchListItem.dart';
-import 'package:toa_flutter/ui/widgets/NoDataWidget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:toa_flutter/internationalization/Localizations.dart';
+
+import '../../../../Sort.dart';
+import '../../../../internationalization/Localizations.dart';
+import '../../../../models/EventParticipant.dart';
+import '../../../../models/Match.dart';
+import '../../../../models/Ranking.dart';
+import '../../../../models/TeamParticipant.dart';
+import '../../../../providers/ApiV3.dart';
+import '../../../../providers/StaticData.dart';
+import '../../../widgets/EventListItem.dart';
+import '../../../widgets/MatchListItem.dart';
+import '../../../widgets/NoDataWidget.dart';
 
 class TeamResults extends StatelessWidget {
 

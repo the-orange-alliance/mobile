@@ -17,10 +17,12 @@ class NoDataWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Icon(iconData, size: (mini ? 48 : 64), color: color),
-          Text(text, textScaleFactor: (mini ? 1 : 1.2), style: TextStyle(fontWeight: FontWeight.w700, color: color),
-          )
-        ],
-      ),
+          Text(text, textScaleFactor: (mini ? 1 : 1.2), style: TextStyle(
+            fontWeight: FontWeight.w700,
+            color: color
+          ))
+        ]
+      )
     );
   }
 }

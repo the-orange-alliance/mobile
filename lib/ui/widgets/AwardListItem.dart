@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:toa_flutter/ui/views/team/TeamPage.dart';
-import 'package:toa_flutter/models/AwardRecipient.dart';
+
+import '../../models/AwardRecipient.dart';
+import '../views/team/TeamPage.dart';
 
 class AwardListItem extends StatelessWidget {
 

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:toa_flutter/providers/Cache.dart';
-import 'package:toa_flutter/ui/widgets/TextListItem.dart';
-import 'package:toa_flutter/ui/widgets/EventListItem.dart';
-import 'package:toa_flutter/ui/widgets/TeamListItem.dart';
-import 'package:toa_flutter/models/Event.dart';
-import 'package:toa_flutter/models/Team.dart';
-import 'package:toa_flutter/Sort.dart';
-import 'package:toa_flutter/internationalization/Localizations.dart';
+
+import '../../../Sort.dart';
+import '../../../internationalization/Localizations.dart';
+import '../../../models/Event.dart';
+import '../../../models/Team.dart';
+import '../../../providers/Cache.dart';
+import '../../../ui/widgets/EventListItem.dart';
+import '../../../ui/widgets/TeamListItem.dart';
+import '../../../ui/widgets/TextListItem.dart';
 
 class SearchPage extends StatefulWidget {
 

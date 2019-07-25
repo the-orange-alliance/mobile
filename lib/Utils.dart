@@ -1,8 +1,10 @@
-import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
-import 'package:toa_flutter/models/Event.dart';
-import 'package:toa_flutter/internationalization/Localizations.dart';
 import 'dart:typed_data';
+
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import './internationalization/Localizations.dart';
+import './models/Event.dart';
 
 class Utils {
 

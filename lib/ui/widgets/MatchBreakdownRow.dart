@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:toa_flutter/ui/Colors.dart' as TOAColors;
-import 'package:toa_flutter/internationalization/Localizations.dart';
+
+import '../../internationalization/Localizations.dart';
+import '../Colors.dart' as TOAColors;
 
 enum Alliance {
   RED, BLUE

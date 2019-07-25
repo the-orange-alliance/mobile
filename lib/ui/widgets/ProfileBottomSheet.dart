@@ -1,13 +1,14 @@
+import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:toa_flutter/ui/Icons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:rounded_modal/rounded_modal.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:toa_flutter/ui/views/account/AccountPage.dart';
-import 'package:toa_flutter/ui/views/account/LoginPage.dart';
-import 'package:toa_flutter/ui/views/account/RegisterPage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:toa_flutter/internationalization/Localizations.dart';
+
+import '../../internationalization/Localizations.dart';
+import '../Icons.dart';
+import '../views/account/AccountPage.dart';
+import '../views/account/LoginPage.dart';
+import '../views/account/RegisterPage.dart';
 
 class ProfileBottomSheet {
 

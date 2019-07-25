@@ -1,9 +1,11 @@
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:toa_flutter/models/User.dart';
-import 'package:toa_flutter/models/EventSettings.dart';
-import 'dart:convert';
+
+import '../models/EventSettings.dart';
+import '../models/User.dart';
 
 class Cloud {
 
@@ -50,8 +52,9 @@ class Cloud {
         'data': eventKey
       };
       Response res = await http.post(baseURL + '/user/updateEventSettings', headers: headers, body: jsonEncode(eventSettings.toJson()));
+      return res.statusCode == 200;
     } else {
-      return null;
+      return false;
     }
   }
 

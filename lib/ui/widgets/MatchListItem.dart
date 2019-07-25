@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:toa_flutter/ui/Colors.dart' as TOAColors;
-import 'package:toa_flutter/ui/views/match/MatchPage.dart';
-import 'package:toa_flutter/ui/views/team/TeamPage.dart';
-import 'package:toa_flutter/models/Match.dart';
-import 'package:toa_flutter/models/MatchParticipant.dart';
-import 'package:toa_flutter/models/Event.dart';
+
+import '../../models/Event.dart';
+import '../../models/Match.dart';
+import '../../models/MatchParticipant.dart';
+import '../Colors.dart' as TOAColors;
+import '../views/match/MatchPage.dart';
+import '../views/team/TeamPage.dart';
 
 class MatchListItem extends StatelessWidget {
 

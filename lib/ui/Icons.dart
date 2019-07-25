@@ -7,8 +7,5 @@ class TOAIcons {
 }
 
 class TOAIconData extends IconData {
-  const TOAIconData(int codePoint): super(
-      codePoint,
-      fontFamily: 'TOA Icons'
-  );
+  const TOAIconData(int codePoint) : super(codePoint, fontFamily: 'TOA Icons');
 }

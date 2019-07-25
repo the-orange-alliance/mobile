@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:toa_flutter/ui/views/team/TeamPage.dart';
-import 'package:toa_flutter/models/Ranking.dart';
-import 'package:toa_flutter/internationalization/Localizations.dart';
+
+import '../../internationalization/Localizations.dart';
+import '../../models/Ranking.dart';
+import '../views/team/TeamPage.dart';
 
 class RankingListItem extends StatelessWidget {
 

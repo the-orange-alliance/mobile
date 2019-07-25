@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:toa_flutter/models/Event.dart';
-import 'package:toa_flutter/ui/views/event/EventPage.dart';
+
+import '../../models/Event.dart';
+import '../views/event/EventPage.dart';
 
 class EventListItem extends StatelessWidget {
 

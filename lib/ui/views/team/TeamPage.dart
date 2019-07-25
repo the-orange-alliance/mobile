@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:toa_flutter/ui/Colors.dart' as TOAColors;
-import 'package:toa_flutter/providers/StaticData.dart';
-import 'package:toa_flutter/providers/ApiV3.dart';
-import 'package:toa_flutter/providers/Firebase.dart';
-import 'package:toa_flutter/models/Team.dart';
-import 'package:toa_flutter/models/TeamSeasonRecord.dart';
-import 'package:toa_flutter/ui/views/team/subpages/TeamResults.dart';
-import 'package:toa_flutter/ui/views/team/subpages/TeamRobot.dart';
-import 'package:toa_flutter/internationalization/Localizations.dart';
+
+import './subpages/TeamResults.dart';
+import './subpages/TeamRobot.dart';
+import '../../../internationalization/Localizations.dart';
+import '../../../models/Team.dart';
+import '../../../models/TeamSeasonRecord.dart';
+import '../../../providers/ApiV3.dart';
+import '../../../providers/Firebase.dart';
+import '../../../providers/StaticData.dart';
+import '../../Colors.dart' as TOAColors;
 
 class TeamPage extends StatefulWidget {
   TeamPage({this.teamKey, this.team});
