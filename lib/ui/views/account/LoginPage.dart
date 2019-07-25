@@ -51,18 +51,18 @@ class LoginPageState extends State<LoginPage> {
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     labelText: local.get('pages.account.login.email'),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))
                   ),
                   onChanged: (String value) {
                     this.email = value;
                   }
                 ),
-                SizedBox(height: 8),
+                SizedBox(height: 12),
                 TextField(
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: local.get('pages.account.login.password'),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))
                   ),
                   onChanged: (String value) {
                     this.password = value;

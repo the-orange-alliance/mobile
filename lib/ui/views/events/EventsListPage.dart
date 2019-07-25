@@ -24,18 +24,16 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
   List<Event> events = [];
   List<ContentTab> tabs = [];
   TOALocalizations local;
+  bool tabChanged = false;
 
   @override
   void initState() {
     super.initState();
-    loadEvents();
-  }
-
-  Future<void> loadEvents() async {
-    var response = await Cache().getEvents();
-    setState(() {
-      events = response;
-      events.sort(Sort().eventSorter);
+    Cache().getEvents().then((List<Event> cacheEvents) {
+      setState(() {
+        events = cacheEvents;
+        events.sort(Sort().eventSorter);
+      });
     });
   }
 
@@ -54,7 +52,9 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
         child: CircularProgressIndicator(),
       );
     } else {
-      buildTabs(context);
+      if (tabController.length != tabs.length || tabs.length == 0) {
+        buildTabs(context);
+      }
       content = TabBarView(
         controller: tabController,
         children: tabs.map((ContentTab tab) {
@@ -64,7 +64,7 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
     }
 
     int tab = findCurrentWeekTab();
-    if (tab > -1 && tabController.length > tab) {
+    if (tab > -1 && tabController.length > tab && !tabChanged) {
       tabController.animateTo(tab);
     }
 
@@ -113,13 +113,16 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
       length: tabs.length,
       initialIndex: 0,
     );
+    tabController.addListener(() {
+      tabChanged = true;
+    });
   }
 
 
   buildTabs(BuildContext context) {
     List<Widget> slivers = List<Widget>();
-    var firstIndex = 0, count = 0, itemsPerTab = 0, firstIndexInTab = 0;
-    for(var i = 0; i < events.length; i++) {
+    int firstIndex = 0, count = 0, itemsPerTab = 0, firstIndexInTab = 0;
+    for (int i = 0; i < events.length; i++) {
 
       /////////////////////
       //  DO NOT TOUCH!  //
@@ -183,10 +186,10 @@ class EventsListPageState extends State<EventsListPage> with TickerProviderState
           return i + 1;
         }
       }
+      return tabs.length - 1;
     } else {
       return -1;
     }
-    return 0;
   }
 
   double findScrollOffset(int i, int count) {
