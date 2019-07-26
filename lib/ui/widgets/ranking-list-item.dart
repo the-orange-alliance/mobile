@@ -36,14 +36,20 @@ class RankingListItem extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           child: ListTile(
+            isThreeLine: true,
             leading: Column(
               children: <Widget>[
-                CircleAvatar(
-                  child: Text(ranking.rank.toString()),
+                Expanded(
+                  child: CircleAvatar(
+                    child: Text(ranking.rank.toString()),
+                  )
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: Text('(${ranking.wins}-${ranking.losses}-${ranking.ties})')
+                  margin: EdgeInsets.only(top: 5),
+                  child: Text(
+                    '(${ranking.wins}-${ranking.losses}-${ranking.ties})',
+                    style: TextStyle(fontSize: 12),
+                  )
                 )
               ],
             ),
