@@ -118,7 +118,7 @@ class EventPageState extends State<EventPage>
             setState(() => rect = RectGetter.getRectFromKey(fabKey));
             WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) {
               setState(() {
-                rect = rect.inflate(1.3 * MediaQuery.of(context).size.longestSide)
+                rect = rect.inflate(1.3 * MediaQuery.of(context).size.longestSide);
               });
               Future.delayed(animationDuration + delay, () {
                 Navigator.of(context).push(FadeRouteBuilder(
