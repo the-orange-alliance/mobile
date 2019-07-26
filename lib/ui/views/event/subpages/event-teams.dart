@@ -23,7 +23,6 @@ class EventTeams extends StatelessWidget {
     if (data == null) {
       return FutureBuilder<List<EventParticipant>>(
         future: ApiV3().getEventTeams(event.eventKey),
-        initialData: null,
         builder: (BuildContext context, AsyncSnapshot<List<EventParticipant>> teams) {
           if (teams.data != null) {
             data = teams.data;

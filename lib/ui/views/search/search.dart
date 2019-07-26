@@ -32,7 +32,20 @@ class SearchPageState extends State<SearchPage> {
     super.initState();
 
     // Load events and teams
-    loadData();
+    Cache().getEvents().then((List<Event> events) {
+      setState(() {
+        allEvents = events;
+        allEvents.sort(Sort().eventSorter);
+        search();
+      });
+    });
+    Cache().getTeams().then((List<Team> teams) {
+      setState(() {
+        allTeams = teams;
+        allTeams.sort(Sort().teamSorter);
+        search();
+      });
+    });
 
     // Start listening to changes
     queryTextController.addListener(() {
@@ -42,25 +55,6 @@ class SearchPageState extends State<SearchPage> {
       });
     });
   }
-
-  Future<void> loadData() async {
-    // Load events
-    var events = await Cache().getEvents();
-    setState(() {
-      allEvents = events;
-      allEvents.sort(Sort().eventSorter);
-      search();
-    });
-
-    // Load teams
-    var teams = await Cache().getTeams();
-    setState(() {
-      allTeams = teams;
-      allTeams.sort(Sort().teamSorter);
-      search();
-    });
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +74,6 @@ class SearchPageState extends State<SearchPage> {
         }
       );
     }
-
 
     List<Widget> actions = [];
     if (query.isNotEmpty) {

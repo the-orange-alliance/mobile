@@ -23,7 +23,6 @@ class EventMatches extends StatelessWidget {
     if (data == null) {
       return FutureBuilder<List<Match>>(
         future: ApiV3().getEventMatches(event.eventKey),
-        initialData: null,
         builder: (BuildContext context, AsyncSnapshot<List<Match>> matches) {
           if (matches.data != null) {
             data = matches.data;

@@ -23,7 +23,6 @@ class EventRankings extends StatelessWidget {
     if (data == null) {
       return FutureBuilder<List<Ranking>>(
         future: ApiV3().getEventRankings(event.eventKey),
-        initialData: null,
         builder: (BuildContext context, AsyncSnapshot<List<Ranking>> rankings) {
           if (rankings.data != null) {
             data = rankings.data;

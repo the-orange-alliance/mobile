@@ -23,7 +23,6 @@ class EventAwards extends StatelessWidget {
     if (data == null) {
       return FutureBuilder<List<AwardRecipient>>(
         future: ApiV3().getEventAwards(event.eventKey),
-        initialData: null,
         builder: (BuildContext context, AsyncSnapshot<List<AwardRecipient>> awards) {
           if (awards.data != null) {
             data = awards.data;
