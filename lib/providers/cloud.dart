@@ -9,10 +9,9 @@ import '../models/user.dart';
 
 class Cloud {
 
-  final String baseURL = "https://functions.theorangealliance.org";
+  static final String baseURL = "https://functions.theorangealliance.org";
 
-
-  Future<User> getUser() async {
+  static Future<User> getUser() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     if (user != null) {
       String token = await user.getIdToken();
@@ -21,13 +20,13 @@ class Cloud {
         'data': 'basic'
       };
       Response res = await http.get(baseURL + '/user', headers: headers);
-      return User.fromJson(res.body);
+      return User.fromJson(jsonDecode(res.body));
     } else {
       return null;
     }
   }
 
-  Future<EventSettings> getEventSettings(String eventKey) async {
+  static Future<EventSettings> getEventSettings(String eventKey) async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     if (user != null) {
       String token = await user.getIdToken();
@@ -42,7 +41,7 @@ class Cloud {
     }
   }
 
-  Future<bool> updateEventSettings(String eventKey, EventSettings eventSettings) async {
+  static Future<bool> updateEventSettings(String eventKey, EventSettings eventSettings) async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     if (user != null) {
       String token = await user.getIdToken();
@@ -58,7 +57,7 @@ class Cloud {
     }
   }
 
-  Future<String> getUID() async {
+  static Future<String> getUID() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     if (user != null) {
       return user.uid;
@@ -67,7 +66,7 @@ class Cloud {
     }
   }
 
-  Future<bool> isFavTeam(String teamKey) async {
+  static Future<bool> isFavTeam(String teamKey) async {
     String uid = await getUID();
     if (uid == null) {
       return false;
@@ -75,7 +74,7 @@ class Cloud {
     return false; // TODO
   }
 
-  setFavTeam(String teamKey, bool fav) async {
+  static setFavTeam(String teamKey, bool fav) async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     if (user != null) {
       // TODO: save in myTOA

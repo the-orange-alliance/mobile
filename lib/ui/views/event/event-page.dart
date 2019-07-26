@@ -50,7 +50,7 @@ class EventPageState extends State<EventPage>
       });
     });
 
-    Cloud().getEventSettings(widget.event.eventKey).then((EventSettings eventSettings) {
+    Cloud.getEventSettings(widget.event.eventKey).then((EventSettings eventSettings) {
       setState(() {
         this.eventSettings = eventSettings;
       });
@@ -148,7 +148,7 @@ class EventPageState extends State<EventPage>
                   setState(() => rect = null);
                   if (eventSettings != null) {
                     this.eventSettings = eventSettings;
-                    Cloud().updateEventSettings(eventKey, eventSettings);
+                    Cloud.updateEventSettings(eventKey, eventSettings);
                   }
                 });
               });

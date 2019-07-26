@@ -7,6 +7,7 @@ import '../../../models/event.dart';
 import '../../../models/team.dart';
 import '../../../models/user.dart';
 import '../../../providers/api.dart';
+import '../../../providers/cloud.dart';
 import '../../widgets/event-list-item.dart';
 import '../../widgets/team-list-item.dart';
 import '../../widgets/title.dart';
@@ -20,8 +21,7 @@ class AccountPage extends StatefulWidget {
 
 class AccountPageState extends State<AccountPage> {
 
-  FirebaseUser user;
-  User userData;
+  User user;
   List<Team> teams;
   List<Event> events;
 
@@ -31,26 +31,20 @@ class AccountPageState extends State<AccountPage> {
   @override
   void initState() {
     super.initState();
-    loadUser();
-  }
-
-  Future<void> loadUser() async {
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
-//    User userData = User.fromDataSnapshot(await FirebaseDatabase.instance.reference().child('Users').child(user.uid).once());
-//    setState(() {
-//      this.user = user;
-//      this.userData = userData;
-//    });
-
-    getTeams().then((List<Team> teams) {
+    Cloud.getUser().then((User user) {
       setState(() {
-        this.teams = teams;
+        this.user = user;
       });
-    });
+      getTeams().then((List<Team> teams) {
+        setState(() {
+          this.teams = teams;
+        });
+      });
 
-    getEvents().then((List<Event> events) {
-      setState(() {
-        this.events = events;
+      getEvents().then((List<Event> events) {
+        setState(() {
+          this.events = events;
+        });
       });
     });
   }
@@ -61,17 +55,18 @@ class AccountPageState extends State<AccountPage> {
     theme = Theme.of(context);
 
     List<Widget> body = List();
+    List<Widget> favorites = List();
 
     if (user != null) {
       body.add(Container(
-        padding:EdgeInsets.symmetric(vertical: 8),
+        padding: EdgeInsets.symmetric(vertical: 8),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.05)
         ),
         child: ListTile(
-          leading: (user.displayName?.length ?? -1) > 0 || user.photoUrl != null ? CircleAvatar(
-            backgroundImage: NetworkImage(user.photoUrl ?? ''),
-            child: user.photoUrl == null ? Text(user.displayName.substring(0, 1)) : null,
+          leading: user.photoURL != null || (user.displayName != null && user.displayName.length > 1) ? CircleAvatar(
+            backgroundImage: user.photoURL != null ? NetworkImage(user.photoURL) : null,
+            child: user.photoURL == null ? Text(user.displayName.substring(0, 1)) : null,
             radius: 16,
           ) : null,
           title: Text(user.displayName ?? 'TOA User'),
@@ -93,7 +88,7 @@ class AccountPageState extends State<AccountPage> {
         TOATitle(local.get('general.teams'), context)
       ];
       widgets.addAll(teams.map((team) => TeamListItem(team)).toList());
-      body.add(Card(
+      favorites.add(Card(
         margin: EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,7 +102,7 @@ class AccountPageState extends State<AccountPage> {
         TOATitle(local.get('general.events'), context)
       ];
       widgets.addAll(events.map((event) => EventListItem(event)).toList());
-      body.add(Card(
+      favorites.add(Card(
         margin: EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,10 +111,24 @@ class AccountPageState extends State<AccountPage> {
       ));
     }
 
+    if (favorites.length == 0) {
+      body.add(Expanded(
+        child: Center(
+          child: CircularProgressIndicator(),
+        )
+      ));
+    } else {
+      body.add(Expanded(
+        child: ListView(
+          children: favorites
+        )
+      ));
+    }
+
     return Scaffold(
       appBar: AppBar(title: Text(local.get('pages.account.title'))),
-      body: body.length > 0 ? ListView(
-        children: body,
+      body: body.length > 0 ? Column(
+        children: body
       ) : Center(
         child: CircularProgressIndicator()
       )
@@ -128,7 +137,7 @@ class AccountPageState extends State<AccountPage> {
 
   Future<List<Team>> getTeams() async {
     List<Team> teams = List();
-    for (String teamKey in userData.favoriteTeams) {
+    for (String teamKey in user.favoriteTeams) {
       teams.add(await ApiV3().getTeam(teamKey));
     }
     return teams;
@@ -136,7 +145,7 @@ class AccountPageState extends State<AccountPage> {
 
   Future<List<Event>> getEvents() async {
     List<Event> events = List();
-    for (String eventKey in userData.favoriteEvents) {
+    for (String eventKey in user.favoriteEvents) {
       events.add(await ApiV3().getEvent(eventKey));
     }
     return events;
