@@ -23,14 +23,22 @@ class EventPage extends StatefulWidget {
 
 class EventPageState extends State<EventPage>
   with TickerProviderStateMixin, RouteAware {
+
   EventSettings eventSettings;
   TabController tabController;
   int currentIndex = 0;
+  bool shouldRefresh = false;
 
   final Duration animationDuration = Duration(milliseconds: 300);
   final Duration delay = Duration(milliseconds: 150);
   GlobalKey fabKey = RectGetter.createGlobalKey();
   Rect rect;
+
+  EventInfo eventInfo;
+  EventTeams eventTeams;
+  Widget eventMatches;
+  Widget eventRanking;
+  Widget eventAwards;
 
   @override
   void initState() {
@@ -47,6 +55,16 @@ class EventPageState extends State<EventPage>
         this.eventSettings = eventSettings;
       });
     });
+
+    eventInfo = EventInfo(widget.event);
+    loadData();
+  }
+
+  loadData() {
+    eventTeams = EventTeams(widget.event);
+    eventMatches = EventMatches(widget.event);
+    eventRanking = EventRankings(widget.event);
+    eventAwards = EventAwards(widget.event);
   }
 
   @override
@@ -64,11 +82,12 @@ class EventPageState extends State<EventPage>
       : theme.primaryColor;
     String eventKey = widget.event.eventKey;
 
-    EventInfo eventInfo = EventInfo(widget.event);
-    EventTeams eventTeams = EventTeams(widget.event);
-    Widget eventMatches = EventMatches(widget.event);
-    Widget eventRanking = EventRankings(widget.event);
-    Widget eventAwards = EventAwards(widget.event);
+
+    if (shouldRefresh) {
+      loadData();
+      shouldRefresh = false;
+    }
+
 
     return Stack(children: <Widget>[
       DecoratedBox(
@@ -92,7 +111,9 @@ class EventPageState extends State<EventPage>
               tooltip: local.get('general.refresh'),
               icon: Icon(Icons.refresh),
               onPressed: () {
-                setState(() {});
+                setState(() {
+                  shouldRefresh = true;
+                });
               }
             )
           ],
