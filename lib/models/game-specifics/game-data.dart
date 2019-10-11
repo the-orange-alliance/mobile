@@ -3,6 +3,7 @@ import 'package:toa_flutter/models/match.dart';
 import 'package:toa_flutter/models/match-details.dart';
 import 'package:toa_flutter/models/game-specifics/relicrecovery-match-details.dart';
 import 'package:toa_flutter/models/game-specifics/roverruckus-match-details.dart';
+import 'package:toa_flutter/models/game-specifics/skystone-match-details.dart';
 
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:toa_flutter/ui/widgets/no-data-widget.dart';
@@ -20,6 +21,8 @@ class GameData {
         return RelicRecoveryMatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
       case '1819':
         return RoverRuckusMatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
+      case '1920':
+        return SkyStoneMatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
       default:
         return null;
     }
