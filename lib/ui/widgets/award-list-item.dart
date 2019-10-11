@@ -36,7 +36,7 @@ class AwardListItem extends StatelessWidget {
 
   IconData getIcon() {
     String s = this.award.awardKey.replaceAll(RegExp('\\D+'),''); // Strip all non-numeric characters (get the award number)
-    if (s != null  &&  double.parse(s, (e) => null) != null) {
+    if (s != null  &&  double.parse(s) != null) {
       int awardNum = int.parse(s);
       switch (awardNum) {
         case 0:

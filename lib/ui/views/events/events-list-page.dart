@@ -175,8 +175,8 @@ class EventsListPageState extends State<EventsListPage>
         local.get('weeks.${weekKey.toLowerCase()}', defaultValue: '');
     if (weekName.isNotEmpty) {
       return weekName;
-    } else if (double.parse(weekKey, (e) => null) != null) {
-      // match a number include decimal, '+' and '-'
+    } else if (double.parse(weekKey) != null) {
+      // weekKey is a number
       return "Week" + weekKey;
     } else {
       return local.get('months.${weekKey.toLowerCase()}',

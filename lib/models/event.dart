@@ -155,7 +155,7 @@ class Event {
   }
 
   String getFullLocation() {
-    return (venue != null && venue.isNotEmpty ? venue + ", " : "") + city + ", " + (state != null && !state.isEmpty ? state + ", " : "") + country;
+    return (venue != null && venue.isNotEmpty ? venue + ", " : "") + city + ", " + (state != null && state.isNotEmpty ? state + ", " : "") + country;
   }
 
   String getFullName() {
