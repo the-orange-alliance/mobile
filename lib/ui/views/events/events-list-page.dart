@@ -173,9 +173,11 @@ class EventsListPageState extends State<EventsListPage>
   String getWeekName(String weekKey) {
     String weekName =
         local.get('weeks.${weekKey.toLowerCase()}', defaultValue: '');
-    if (weekName.isNotEmpty) {
+    if (weekName == null) {
+      return 'Unknown week';
+    } else if (weekName.isNotEmpty) {
       return weekName;
-    } else if (double.parse(weekKey) != null) {
+    } else if (double.tryParse(weekKey) != null) {
       // weekKey is a number
       return "Week" + weekKey;
     } else {
