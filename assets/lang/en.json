@@ -204,6 +204,23 @@
       "robots_latched": "Robots Latched",
       "parked_in": "Robots Parked In Crater",
       "parked_completely": "Robots Parked Completely In Crater"
+    },
+
+    "skystone": {
+      "repositioning_foundation": "Repositioning Foundation",
+      "delivering_skystones": "Delivering Skystones",
+      "stones_under_skybridge": "Delivering Stones under Alliance Skybridge",
+      "stones_on_foundation": "Stones on Foundation",
+      "navigate_skybridge": "Navigating under Skybridge",
+      "returned_stones": "Returned Stones",
+      "first_skystone": "First returned Skystone",
+      "delivering_stones_skybridge": "Delivering Stones under Alliance Skybridge",
+      "stones_on_foundation": "Stones on Foundation",
+      "skyscraper_bonus": "Skyscraper Bonus",
+      "returned_stones": "Returned Stones",
+      "capping_bonus": "Capping Bonus",
+      "level_bonus": "Level Bonus",
+      "robots_parked": "Robots Parked"
     }
   }
 }

@@ -9,6 +9,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:toa_flutter/ui/widgets/no-data-widget.dart';
 import 'package:toa_flutter/ui/views/match/years/match-breakdown-1718.dart';
 import 'package:toa_flutter/ui/views/match/years/match-breakdown-1819.dart';
+import 'package:toa_flutter/ui/views/match/years/match-breakdown-1920.dart';
 
 class GameData {
 
@@ -38,6 +39,8 @@ class GameData {
         return MatchBreakdown1718.getRows(match, context);
       case '1819':
         return MatchBreakdown1819.getRows(match, context);
+      case '1920':
+        return MatchBreakdown1920.getRows(match, context);
       default:
         return noData;
     }

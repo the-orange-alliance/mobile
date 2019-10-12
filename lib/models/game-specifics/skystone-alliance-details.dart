@@ -75,10 +75,10 @@ class SkyStoneAllianceDetails {
 
   bool robot1Nav;
   bool robot1Parked;
-  bool robot1CapLevel;
+  int robot1CapLevel;
   bool robot2Nav;
   bool robot2Parked;
-  bool robot2CapLevel;
+  int robot2CapLevel;
 
   static SkyStoneAllianceDetails fromMap(Map map) {
     return SkyStoneAllianceDetails(
