@@ -114,12 +114,12 @@ class SkyStoneAllianceDetails {
       endTotal: map['end_total'],
       penaltyTotal: map['penalty_total'],
 
-      robot1Nav: map['robot1']['nav'],
-      robot1Parked: map['robot1']['parked'],
-      robot1CapLevel: map['robot1']['cap_level'],
-      robot2Nav: map['robot2']['nav'],
-      robot2Parked: map['robot2']['parked'],
-      robot2CapLevel: map['robot2']['cap_level']
+      robot1Nav: map['robot_1']['nav'],
+      robot1Parked: map['robot_1']['parked'],
+      robot1CapLevel: map['robot_1']['cap_level'],
+      robot2Nav: map['robot_2']['nav'],
+      robot2Parked: map['robot_2']['parked'],
+      robot2CapLevel: map['robot_2']['cap_level']
     );
   }
 }

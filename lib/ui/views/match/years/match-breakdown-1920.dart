@@ -18,8 +18,8 @@ class MatchBreakdown1920 {
           title: true),
       MatchBreakdownRow(
           name: local.get('breakdowns.skystone.repositioning_foundation'),
-          red: details.red.repositionPoints,
-          blue: details.blue.repositionPoints,
+          red: details.red.foundationRepositioned,
+          blue: details.blue.foundationRepositioned,
           points: 10),
       MatchBreakdownRow(
           name: local.get('breakdowns.skystone.delivering_skystones'),

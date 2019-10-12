@@ -80,7 +80,7 @@ class MatchPageState extends State<MatchPage> {
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     TextTheme textTheme = theme.textTheme;
     TextStyle titleStyle =
-        textTheme.subhead.copyWith(fontWeight: FontWeight.w600);
+    textTheme.subhead.copyWith(fontWeight: FontWeight.w600);
     TextStyle subtitleStyle = textTheme.body1
         .copyWith(fontWeight: FontWeight.w500, color: textTheme.caption.color);
 
@@ -88,34 +88,34 @@ class MatchPageState extends State<MatchPage> {
         appBar: AppBar(
             title: match != null && event != null
                 ? Column(
-                    crossAxisAlignment: isIOS
-                        ? CrossAxisAlignment.center
-                        : CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                        Text(match.matchName, style: titleStyle),
-                        Text(event.getFullName(), style: subtitleStyle)
-                      ])
+                crossAxisAlignment: isIOS
+                    ? CrossAxisAlignment.center
+                    : CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Text(match.matchName, style: titleStyle),
+                  Text(event.getFullName(), style: subtitleStyle)
+                ])
                 : Text(local.get('pages.match.loading')),
             actions: event != null
                 ? <Widget>[
-                    PopupMenuButton(onSelected: (String value) {
-                      if (value == 'view_event') {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (c) {
-                          return EventPage(event);
-                        }));
-                      }
-                    }, itemBuilder: (BuildContext c) {
-                      return [
-                        PopupMenuItem(
-                          value: 'view_event',
-                          child: Text(local.get('pages.match.full_event')),
-                        )
-                      ];
-                    })
-                  ]
+              PopupMenuButton(onSelected: (String value) {
+                if (value == 'view_event') {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (c) {
+                    return EventPage(event);
+                  }));
+                }
+              }, itemBuilder: (BuildContext c) {
+                return [
+                  PopupMenuItem(
+                    value: 'view_event',
+                    child: Text(local.get('pages.match.full_event')),
+                  )
+                ];
+              })
+            ]
                 : null),
         body: buildInfo());
   }
@@ -178,7 +178,9 @@ class MatchPageState extends State<MatchPage> {
         child: Card(
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: card))));
+                children: card)
+        )
+    ));
 
     // Match breakdown title
     column.add(Padding(
@@ -196,8 +198,8 @@ class MatchPageState extends State<MatchPage> {
     column.add(!loadingBreakdown
         ? Column(children: GameData.getBreakdown(match, context))
         : Container(
-            margin: EdgeInsets.only(top: 36, bottom: 24),
-            child: Center(child: CircularProgressIndicator())));
+        margin: EdgeInsets.only(top: 36, bottom: 24),
+        child: Center(child: CircularProgressIndicator())));
 
     return SingleChildScrollView(
         child: Column(

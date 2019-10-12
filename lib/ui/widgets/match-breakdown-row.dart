@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../internationalization/localizations.dart';
 import '../colors.dart' as TOAColors;
@@ -6,12 +7,27 @@ import '../colors.dart' as TOAColors;
 enum Alliance {
   RED, BLUE
 }
+int TRUE_VALUE = -1000;
+int FALSE_VALUE = -2000;
 
 class MatchBreakdownRow extends StatelessWidget {
 
-  MatchBreakdownRow({this.blue, this.red, this.points, this.name, this.title=false});
-  final int blue;
-  final int red;
+  MatchBreakdownRow({dynamic red, dynamic blue, this.points, this.name, this.title=false}) {
+    if (red is bool) {
+      this.red = red ? TRUE_VALUE : FALSE_VALUE;
+    } else {
+      this.red = red;
+    }
+
+    if (blue is bool) {
+      this.blue = blue ? TRUE_VALUE : FALSE_VALUE;
+    } else {
+      this.blue = blue;
+    }
+  }
+
+  int red;
+  int blue;
   final int points;
   final String name;
   final bool title;
@@ -29,6 +45,7 @@ class MatchBreakdownRow extends StatelessWidget {
     row.add(bulidName(name));
     row.add(bulidPoints(blue, points, Alliance.BLUE));
 
+
     return IntrinsicHeight(
       child: Row(
         mainAxisSize: MainAxisSize.max,
@@ -41,11 +58,19 @@ class MatchBreakdownRow extends StatelessWidget {
 
   Widget bulidPoints(int missions, int points, Alliance alliance) {
     String text = '0';
-    if (missions  > 0 && !title) {
-      text = '$missions (+${missions * points})';
-    }
-    if (title) {
+    bool isTure = missions == TRUE_VALUE;
+    bool isFalse = missions == FALSE_VALUE;
+    bool isTrueFalse = isTure || isFalse;
+
+    if (isFalse) {
+      text = '';
+    } else if (isTure) {
+      text = ' (+${missions * points})';
+    } else if (title) {
       text = '$missions ${local.get('breakdowns.points')}';
+    } else if (missions != 0) {
+      int total = missions * points;
+      text = '$missions (${total > 0 ? '+' : ''}$total)';
     }
 
     return Expanded(
@@ -56,11 +81,15 @@ class MatchBreakdownRow extends StatelessWidget {
           color: getColor(alliance),
           border: getBorder()
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
+        child: Row(
+//          mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            if (isTrueFalse)
+            Icon(
+              isTure ? Icons.check : Icons.close
+            ),
             Text(
               text,
               textAlign: TextAlign.center,
