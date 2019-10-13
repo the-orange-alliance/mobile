@@ -124,27 +124,23 @@ class MatchPageState extends State<MatchPage> {
     List<Widget> column = [];
     List<Widget> card = [];
 
-    if (match == null) {
+    if (this.match == null) {
       return Center(child: CircularProgressIndicator());
     }
 
     // Card title
     card.add(TOATitle(local.get('pages.match.match_info'), context));
 
-    // Match name
-    card.add(ListTile(
-        leading: Icon(MdiIcons.informationOutline,
-            color: Theme.of(context).primaryColor),
-        title: Text(match.matchName)));
-
     // Scheduled time
-    if (match.scheduledTime != null &&
-        match.scheduledTime != '0000-00-00 00:00:00') {
+    if (this.match.scheduledTime != null &&
+        this.match.scheduledTime != '0000-00-00 00:00:00' &&
+        this.match.redScore <= 0 && this.match.blueScore <= 0
+    ) {
       card.add(ListTile(
           leading: Icon(MdiIcons.calendarClock,
               color: Theme.of(context).primaryColor),
           title: Text(DateFormat('MMM d, h:mm a')
-              .format(DateTime.parse(match.scheduledTime))),
+              .format(DateTime.parse(match.scheduledTime).toLocal())),
           subtitle: Text(local.get('pages.match.scheduled_time'))));
     }
 
