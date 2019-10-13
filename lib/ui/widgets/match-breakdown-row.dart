@@ -65,7 +65,7 @@ class MatchBreakdownRow extends StatelessWidget {
     if (isFalse) {
       text = '';
     } else if (isTure) {
-      text = ' (+${missions * points})';
+      text = ' (${points > 0 ? '+' : ''}$points)';
     } else if (title) {
       text = '$missions ${local.get('breakdowns.points')}';
     } else if (missions != 0) {

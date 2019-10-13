@@ -53,7 +53,7 @@ class MatchPageState extends State<MatchPage> {
     if (match == null) {
       match = await ApiV3().getMatch(matchKey);
     }
-    if (match.participants == null) {
+    if (match.participants == null || match.participants.length == 0) {
       match.participants = await ApiV3().getMatchParticipants(matchKey);
     }
     if (match.gameData == null) {
