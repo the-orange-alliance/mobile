@@ -144,7 +144,7 @@ class TeamResults extends StatelessWidget {
 
         teamParticipants.add(teamParticipant);
       }
-    });
+    }).catchError(print);
     teamParticipants.sort(Sort().teamParticipantSorter);
     return teamParticipants;
   }

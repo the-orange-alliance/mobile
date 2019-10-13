@@ -28,6 +28,9 @@ class ApiV3 {
     };
 
     var request = await http.get(baseURL + endpoint, headers: headers);
+    if (request.statusCode != 200) {
+      throw request.body;
+    }
     return request.body;
   }
 
