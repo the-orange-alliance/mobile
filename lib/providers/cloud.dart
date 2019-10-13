@@ -67,17 +67,22 @@ class Cloud {
   }
 
   static Future<bool> isFavTeam(String teamKey) async {
-    String uid = await getUID();
-    if (uid == null) {
-      return false;
-    }
-    return false; // TODO
+    User user = await getUser();
+    return user.favoriteTeams.contains(teamKey);
   }
 
   static setFavTeam(String teamKey, bool fav) async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     if (user != null) {
-      // TODO: save in myTOA
+      String token = await user.getIdToken();
+      Map<String, String> headers = {
+        'authorization': 'Bearer $token',
+        'data': 'team',
+      };
+      Response res = await http.post(baseURL + '/user/${fav ? 'addFavorite' : 'removeFavorite'}', headers: headers, body: teamKey);
+      return res.statusCode == 200;
+    } else {
+      return false;
     }
   }
 }

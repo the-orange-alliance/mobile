@@ -7,6 +7,7 @@ import '../../../internationalization/localizations.dart';
 import '../../../models/team.dart';
 import '../../../models/team-season-record.dart';
 import '../../../providers/api.dart';
+import '../../../providers/cloud.dart';
 import '../../../providers/firebase.dart';
 import '../../../providers/static-data.dart';
 import '../../colors.dart' as TOAColors;
@@ -69,7 +70,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
 
   Future<void> loadUser() async {
     String uid = await Firebase().getUID();
-    bool isFav = false; // TODO: Get the real state
+    bool isFav = await Cloud.isFavTeam(teamKey);
     setState(() {
       this.isFav = isFav;
       this.firebaseConnected = uid != null;
@@ -114,16 +115,22 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
                   icon: Icon(MdiIcons.star),
                   tooltip: local.get('general.remove_from_mytoa'),
                   onPressed: () {
-                    // TODO: Remove from myTOA
-                    setState(() {});
+                    Cloud.setFavTeam(teamKey, false).then((ok) {
+                      setState(() {
+                        this.isFav = ok ? false : this.isFav;
+                      });
+                    });
                   }
                 ) : null,
                 firebaseConnected && !isFav ? IconButton(
                   icon: Icon(MdiIcons.starOutline),
                   tooltip: local.get('general.add_to_mytoa'),
                   onPressed: () {
-                    // TODO: Add from myTOA
-                    setState(() {});
+                    Cloud.setFavTeam(teamKey, true).then((ok) {
+                      setState(() {
+                        this.isFav = ok ? true : this.isFav;
+                      });
+                    });
                   }
                 ) : null
               ].where((o) => o != null).toList(),
