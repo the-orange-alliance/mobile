@@ -135,19 +135,11 @@ class AccountPageState extends State<AccountPage> {
     );
   }
 
-  Future<List<Team>> getTeams() async {
-    List<Team> teams = List();
-    for (String teamKey in user.favoriteTeams) {
-      teams.add(await ApiV3().getTeam(teamKey));
-    }
-    return teams;
+  Future<List<Team>> getTeams() {
+    return Future.wait(user.favoriteTeams.map((teamKey) => ApiV3().getTeam(teamKey)));
   }
 
-  Future<List<Event>> getEvents() async {
-    List<Event> events = List();
-    for (String eventKey in user.favoriteEvents) {
-      events.add(await ApiV3().getEvent(eventKey));
-    }
-    return events;
+  Future<List<Event>> getEvents() {
+    return Future.wait(user.favoriteEvents.map((eventKey) => ApiV3().getEvent(eventKey)));
   }
 }
