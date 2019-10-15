@@ -61,7 +61,7 @@ class SearchPageState extends State<SearchPage> {
     Widget content;
     local = TOALocalizations.of(context);
 
-    if (allEvents.isEmpty || allTeams.isEmpty) {
+    if (results.length <= 4 && (allEvents.isEmpty || allTeams.isEmpty)) {
       content = Center(
         child: CircularProgressIndicator(),
       );

@@ -9,8 +9,8 @@ class Cache {
   final String cacheVersion = '0.52';
 
   final int now = DateTime.now().millisecondsSinceEpoch;
-  final int maxAgeShort = Duration(hours: 16).inMilliseconds;
-  final int maxAgeLong = Duration(hours: 36).inMilliseconds;
+  final int maxAgeShort = Duration(days: 1).inMilliseconds;
+  final int maxAgeLong = Duration(days: 4).inMilliseconds;
 
   Future<bool> shouldReDownload(String key, int maxAge) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
