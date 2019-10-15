@@ -2,7 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:toa_flutter/internationalization/localizations.dart';
-import 'package:toa_flutter/ui/icon.dart';
+import '../../../providers/cloud.dart';
+import '../../icon.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage();
@@ -91,6 +92,7 @@ class LoginPageState extends State<LoginPage> {
                             email: this.email ?? '',
                             password: this.password ?? ''
                         );
+                        Cloud.initFirebaseMessaging();
                         Navigator.of(context).pop();
                       } on PlatformException catch (e) {
                         showSnackbar(e.message);

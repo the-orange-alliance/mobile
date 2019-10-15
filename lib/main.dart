@@ -9,7 +9,7 @@ import './ui/views/events/events-list-page.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // Root widget
+
   @override
   Widget build(BuildContext context) {
     return DynamicTheme(

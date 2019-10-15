@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../internationalization/localizations.dart';
+import '../../../providers/cloud.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage();
@@ -97,10 +97,7 @@ class RegisterPageState extends State<RegisterPage> {
                           UserUpdateInfo info = UserUpdateInfo();
                           info.displayName = this.name;
                           user.updateProfile(info);
-                          FirebaseDatabase.instance
-                            .reference()
-                            .child('Users/${user.uid}/fullName')
-                            .set(name);
+                          Cloud.initFirebaseMessaging();
                           Navigator.of(context).pop();
                         } on PlatformException catch (e) {
                           showSnackbar(e.message);

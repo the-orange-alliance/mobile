@@ -8,6 +8,7 @@ import '../../../utils.dart';
 import '../../../internationalization/localizations.dart';
 import '../../../models/content-tab.dart';
 import '../../../models/event.dart';
+import '../../../providers/cloud.dart';
 import '../../../providers/cache.dart';
 import '../../widgets/profile-bottom-sheet.dart';
 import '../search/search.dart';
@@ -34,6 +35,7 @@ class EventsListPageState extends State<EventsListPage>
         events.sort(Sort().eventSorter);
       });
     });
+    Cloud.initFirebaseMessaging();
   }
 
   @override
@@ -114,10 +116,6 @@ class EventsListPageState extends State<EventsListPage>
     List<Widget> slivers = List<Widget>();
     int firstIndex = 0, count = 0, itemsPerTab = 0, firstIndexInTab = 0;
     for (int i = 0; i < events.length; i++) {
-      /////////////////////
-      //  DO NOT TOUCH!  //
-      /////////////////////
-
       if (i > 0 && events[i - 1].startDate != events[i].startDate) {
         slivers.addAll(StickyHeader()
             .buildSideHeaderGrids(context, firstIndex, count, events));
@@ -125,22 +123,23 @@ class EventsListPageState extends State<EventsListPage>
         count = i + 1 == events.length ? 1 : 0;
       }
 
-      if (i > 0 &&
-          getWeekName(events[i - 1].weekKey) !=
-              getWeekName(events[i].weekKey)) {
+      if (i > 0 && getWeekName(events[i - 1].weekKey) != getWeekName(events[i].weekKey)) {
         ScrollController scrollController = ScrollController(
-            initialScrollOffset:
-                findScrollOffset(firstIndexInTab, itemsPerTab));
-        CustomScrollView scrollView =
-            CustomScrollView(slivers: slivers, controller: scrollController);
+          initialScrollOffset: findScrollOffset(firstIndexInTab, itemsPerTab)
+        );
+        CustomScrollView scrollView = CustomScrollView(
+          slivers: slivers,
+          controller: scrollController
+        );
+
         tabs.add(ContentTab(
-            key: events[i - 1].weekKey,
-            title: getWeekName(events[i - 1].weekKey),
-            content: scrollView));
+          key: events[i - 1].weekKey,
+          title: getWeekName(events[i - 1].weekKey),
+          content: scrollView
+        ));
         makeNewTabController();
         slivers = List<Widget>();
-        slivers.addAll(StickyHeader()
-            .buildSideHeaderGrids(context, firstIndex, count, events));
+        slivers.addAll(StickyHeader().buildSideHeaderGrids(context, firstIndex, count, events));
         firstIndex = i;
         firstIndexInTab = i;
         count = 0;
@@ -149,14 +148,14 @@ class EventsListPageState extends State<EventsListPage>
 
       if (i + 1 == events.length) {
         ScrollController scrollController = ScrollController(
-            initialScrollOffset:
-                findScrollOffset(firstIndexInTab, itemsPerTab));
-        CustomScrollView scrollView =
-            CustomScrollView(slivers: slivers, controller: scrollController);
+          initialScrollOffset: findScrollOffset(firstIndexInTab, itemsPerTab)
+        );
+        CustomScrollView scrollView = CustomScrollView(slivers: slivers, controller: scrollController);
         tabs.add(ContentTab(
-            key: events[i].weekKey,
-            title: getWeekName(events[i].weekKey),
-            content: scrollView));
+          key: events[i].weekKey,
+          title: getWeekName(events[i].weekKey),
+          content: scrollView
+        ));
         makeNewTabController();
         slivers = List<Widget>();
         firstIndex = i;
@@ -171,8 +170,7 @@ class EventsListPageState extends State<EventsListPage>
   }
 
   String getWeekName(String weekKey) {
-    String weekName =
-        local.get('weeks.${weekKey.toLowerCase()}', defaultValue: '');
+    String weekName = local.get('weeks.${weekKey.toLowerCase()}', defaultValue: '');
     if (weekName == null) {
       return 'Unknown week';
     } else if (weekName.isNotEmpty) {
@@ -181,8 +179,7 @@ class EventsListPageState extends State<EventsListPage>
       // weekKey is a number
       return "Week" + weekKey;
     } else {
-      return local.get('months.${weekKey.toLowerCase()}',
-          defaultValue: weekKey);
+      return local.get('months.${weekKey.toLowerCase()}', defaultValue: weekKey);
     }
   }
 
