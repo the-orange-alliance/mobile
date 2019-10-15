@@ -41,7 +41,6 @@ class MatchBreakdown1920 {
           red: (details.red.robot1Nav ? 1 : 0) + (details.red.robot2Nav ? 1 : 0),
           blue: (details.blue.robot1Nav ? 1 : 0) + (details.blue.robot2Nav ? 1 : 0),
           points: 5),
-
       if (details.red.autoReturned > 0 || details.blue.autoReturned > 0)
         MatchBreakdownRow(
             name: local.get('breakdowns.skystone.returned_stones'),
@@ -80,6 +79,7 @@ class MatchBreakdown1920 {
           red: details.red.teleReturned,
           blue: details.blue.teleReturned,
           points: -1),
+
       MatchBreakdownRow(
           name: local.get('breakdowns.end'),
           red: match.redEndScore,
@@ -96,15 +96,16 @@ class MatchBreakdown1920 {
           blue: getCapLevel(details.blue),
           points: 1),
       MatchBreakdownRow(
-          name: local.get('breakdowns.skystone.robots_parked'),
-          red: details.red.endRobotsParked,
-          blue: details.blue.endRobotsParked,
-          points: 5),
-      MatchBreakdownRow(
           name: local.get('breakdowns.skystone.moving_foundation'),
           red: details.red.foundationMoved,
           blue: details.blue.foundationMoved,
           points: 15),
+      MatchBreakdownRow(
+          name: local.get('breakdowns.skystone.robots_parked'),
+          red: details.red.endRobotsParked,
+          blue: details.blue.endRobotsParked,
+          points: 5),
+
       MatchBreakdownRow(
           name: local.get('breakdowns.penalty'),
           red: match.redPenalty,
