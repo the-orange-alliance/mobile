@@ -16,6 +16,12 @@ class Cloud {
 
   static final String baseURL = "https://functions.theorangealliance.org";
 
+  static Future<bool> getNotificationsState() async {
+    if (Platform.isAndroid) return true;
+    User user = await getUser();
+    return user != null && user.level >= 6; // Beta, Admins only.
+  }
+
   static Future<User> getUser() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     if (user != null) {
@@ -108,6 +114,8 @@ class Cloud {
   }
 
   static initFirebaseMessaging() async {
+    if (await getNotificationsState() == false) return;
+
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     FirebaseMessaging firebaseMessaging = FirebaseMessaging();
     firebaseMessaging.requestNotificationPermissions(IosNotificationSettings(

@@ -24,11 +24,12 @@ class EventPage extends StatefulWidget {
 class EventPageState extends State<EventPage>
   with TickerProviderStateMixin, RouteAware {
 
-  EventSettings eventSettings;
   TabController tabController;
   int currentIndex = 0;
   bool shouldRefresh = false;
 
+  EventSettings eventSettings;
+  bool areNotificationsDisabled;
   final Duration animationDuration = Duration(milliseconds: 300);
   final Duration delay = Duration(milliseconds: 150);
   GlobalKey fabKey = RectGetter.createGlobalKey();
@@ -50,9 +51,13 @@ class EventPageState extends State<EventPage>
       });
     });
 
-    Cloud.getEventSettings(widget.event.eventKey).then((EventSettings eventSettings) {
-      setState(() {
-        this.eventSettings = eventSettings;
+    Cloud.getNotificationsState().then((bool state) {
+      Cloud.getEventSettings(widget.event.eventKey).then((
+        EventSettings eventSettings) {
+        setState(() {
+          this.areNotificationsDisabled = state;
+          this.eventSettings = eventSettings;
+        });
       });
     });
 
@@ -87,7 +92,6 @@ class EventPageState extends State<EventPage>
       loadData();
       shouldRefresh = false;
     }
-
 
     return Stack(children: <Widget>[
       DecoratedBox(
@@ -136,6 +140,12 @@ class EventPageState extends State<EventPage>
         floatingActionButton: currentIndex == 0 && eventSettings != null ? FloatingActionButton(
           key: fabKey,
           onPressed: () {
+            if (areNotificationsDisabled) {
+              eventSettings.isFavorite = !eventSettings.isFavorite;
+              Cloud.updateEventSettings(eventKey, eventSettings);
+              setState(() => {});
+              return;
+            }
             setState(() => rect = RectGetter.getRectFromKey(fabKey));
             WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) {
               setState(() {
@@ -154,9 +164,8 @@ class EventPageState extends State<EventPage>
               });
             });
           },
-          child: Icon(Icons.star),
-        )
-          : null,
+          child: Icon(!areNotificationsDisabled || eventSettings.isFavorite ? Icons.star : Icons.star_border),
+        ) : null,
         body: Container(
           color: theme.scaffoldBackgroundColor,
           child: TabBarView(
