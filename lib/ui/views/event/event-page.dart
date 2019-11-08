@@ -55,7 +55,7 @@ class EventPageState extends State<EventPage>
       Cloud.getEventSettings(widget.event.eventKey).then((
         EventSettings eventSettings) {
         setState(() {
-          this.areNotificationsDisabled = state;
+          this.areNotificationsDisabled = !state;
           this.eventSettings = eventSettings;
         });
       });
