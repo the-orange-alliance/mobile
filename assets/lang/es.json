@@ -14,19 +14,18 @@
       "search": "Busca",
       "clear": "Claro",
       "loading": "Carga...",
-      "add_to_mytoa": "Add to myTOA",
-      "remove_from_mytoa": "Remove from myTOA",
-      "error_occurred": "An error has occurred",
-      "about_toa_short": "The Orange Alliance is a project to help make FTC match, event, and team information more accessible."
+      "add_to_mytoa": "Aumentar a myTOA",
+      "remove_from_mytoa": "Quitar a myTOA",
+      "error_occurred": "Un error a pasado",
+      "about_toa_short": "The Orange Alliance es un proyecto para ayudar a partidos de FTC , eventos, e equipos para tener información más accessible."
     },
   
     "date": {
       "date_format": "MMM d, yyyy",
-      "date_to_date": " to ",
-      "location_on_date": " on ",
-      "location_from_date": " from "
+      "date_to_date": " a ",
+      "location_on_date": " el ",
+      "location_from_date": "desde"
     },
-  
     "menu": {
       "login": "Login",
       "register": "Register",
