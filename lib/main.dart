@@ -9,16 +9,15 @@ import './ui/views/events/events-list-page.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
+  
   @override
   Widget build(BuildContext context) {
-    return DynamicTheme(
-      defaultBrightness: Brightness.light,
-      data: (brightness) => ThemeData(
+    return MaterialApp(
+      title: 'The Orange Alliance',
+      themeMode: ThemeMode.system,
+      theme: ThemeData(
         primarySwatch: TOAColors.Colors().toaColors,
-        accentColor: brightness == Brightness.dark
-          ? TOAColors.Colors().toaColors.shade600
-          : null,
+        accentColor: null,
         fontFamily: 'GoogleSans',
         cardTheme: CardTheme(
           clipBehavior: Clip.antiAlias,
@@ -26,36 +25,41 @@ class MyApp extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(6))
           )
         ),
-        brightness: brightness
+        brightness: Brightness.light
       ),
-      themedWidgetBuilder: (context, theme) {
-        return MaterialApp(
-          title: 'The Orange Alliance',
-          theme: theme,
-          home: EventsListPage(),
-          supportedLocales: [
-            const Locale('en', 'US'), // English, must be first
-            const Locale('he', 'IL'), // Hebrew
-          ],
-          localizationsDelegates: [
-            const TOALocalizationsDelegate(),
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate
-          ],
-          localeResolutionCallback: (Locale locale, Iterable<Locale> supportedLocales) {
-//            return supportedLocales.elementAt(1); // Debug Hebrew
-            if (locale != null) {
-              for (Locale supportedLocale in supportedLocales) {
-                if (supportedLocale.languageCode == locale.languageCode ||
-                  supportedLocale.countryCode == locale.countryCode) {
-                  return supportedLocale;
-                }
-              }
+      darkTheme: ThemeData(
+        primarySwatch: TOAColors.Colors().toaColors,
+        accentColor: TOAColors.Colors().toaColors.shade600,
+        fontFamily: 'GoogleSans',
+        cardTheme: CardTheme(
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(6))
+          )
+        ),
+        brightness: Brightness.dark
+      ),
+      home: EventsListPage(),
+      supportedLocales: [
+        const Locale('en', 'US'), // English, must be first
+        const Locale('he', 'IL'), // Hebrew
+      ],
+      localizationsDelegates: [
+        const TOALocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      localeResolutionCallback: (Locale locale, Iterable<Locale> supportedLocales) {
+        if (locale != null) {
+          for (Locale supportedLocale in supportedLocales) {
+            if (supportedLocale.languageCode == locale.languageCode ||
+              supportedLocale.countryCode == locale.countryCode) {
+              return supportedLocale;
             }
-            return supportedLocales.first; // Default: English
-          },
-        );
-      }
+          }
+        }
+        return supportedLocales.first; // Default: English
+      },
     );
   }
 }
