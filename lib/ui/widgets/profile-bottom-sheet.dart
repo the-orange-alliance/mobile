@@ -61,14 +61,7 @@ class ProfileBottomSheet {
                       return SizedBox(); // Empty
                     }
                   ),
-                  ListTile(
-                    leading: Icon(MdiIcons.themeLightDark),
-                    title: Text(local.get(isDark ? 'menu.switch_light_mode' : 'menu.switch_dark_mode')),
-                    onTap: () {
-                      Navigator.pop(context);
-                      DynamicTheme.of(context).setBrightness(isDark ? Brightness.light : Brightness.dark);
-                    }
-                  ),
+                  
                   AboutListTile(
                     icon: Icon(TOAIcons.TOA),
                     applicationVersion: appVersion,

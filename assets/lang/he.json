@@ -30,8 +30,6 @@
   "menu": {
     "login": "התחברות",
     "register": "הרשמה",
-    "switch_light_mode": "עבור למצב בהיר",
-    "switch_dark_mode": "עבור למצב כהה",
     "privacy_terms": "פרטיות ותנאי שימוש"
   },
 

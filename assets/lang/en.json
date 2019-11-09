@@ -30,8 +30,6 @@
   "menu": {
     "login": "Login",
     "register": "Register",
-    "switch_light_mode": "Switch to light mode",
-    "switch_dark_mode": "Switch to dark mode",
     "privacy_terms": "Privacy & Terms"
   },
 
