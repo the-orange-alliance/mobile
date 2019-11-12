@@ -78,6 +78,43 @@ class LoginPageState extends State<LoginPage> {
                   }
                 ),
                 SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    SelectableText(
+                      "Forgot your password?",
+                      style: TextStyle(fontSize: 17),
+                      onTap: (){
+                        if(this.email.isEmpty){
+                          scaffoldKey.currentState.showSnackBar(
+                            SnackBar(
+                              content: Text("Please enter your email address"),
+                            )
+                          );
+                        }else{
+                          bool hasError = false;
+                          Future<void> resetResult = FirebaseAuth.instance.sendPasswordResetEmail(
+                            email: this.email
+                          );
+                          resetResult.catchError((onError){
+                            PlatformException theError = onError;
+                            hasError = true;
+                            print(onError);
+                            scaffoldKey.currentState.showSnackBar(
+                              SnackBar(content: Text(theError.message))
+                            );
+                          });
+                          if(!hasError){
+                            scaffoldKey.currentState.showSnackBar(
+                              SnackBar(content:Text("Email has been sent."))
+                            );
+                          }
+                        }
+                      },
+                    )
+                  ],
+                ),
+                SizedBox(height: 24),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16),
                   child: RaisedButton(
