@@ -27,19 +27,19 @@
       "location_from_date": "desde"
     },
     "menu": {
-      "login": "Login",
-      "register": "Register",
-      "switch_light_mode": "Switch to light mode",
-      "switch_dark_mode": "Switch to dark mode",
-      "privacy_terms": "Privacy & Terms"
+      "login": "Iniciar sesión",
+      "register": "Registrar",
+      "switch_light_mode": "Cambiar al modo de luz",
+      "switch_dark_mode": "Cambiar al modo oscuro",
+      "privacy_terms": "Privacidad y Condiciones"
     },
   
     "pages": {
       "account": {
-        "title": "myTOA Account",
-        "logout": "Logout",
+        "title": "myTOA Cuenta",
+        "logout": "Terminar Sesión",
         "login": {
-          "title": "Login",
+          "title": "Iniciar sesión",
           "subtitle": "Login to your myTOA account",
           "email": "Email",
           "password": "Password",
