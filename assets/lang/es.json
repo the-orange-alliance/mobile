@@ -31,13 +31,13 @@
       "register": "Registrar",
       "switch_light_mode": "Cambiar al modo de luz",
       "switch_dark_mode": "Cambiar al modo oscuro",
-      "privacy_terms": "Privacidad y Condiciones"
+      "privacy_terms": "Privacidad y condiciones"
     },
   
     "pages": {
       "account": {
-        "title": "myTOA Cuenta",
-        "logout": "Terminar Sesión",
+        "title": "myTOA cuenta",
+        "logout": "Terminar sesión",
         "login": {
           "title": "Iniciar sesión",
           "subtitle": "Iniciar tu cuenta de myTOA ",
@@ -47,7 +47,7 @@
         },
         "register": {
           "title": "Registrar",
-          "full_name": "Nombre Completo",
+          "full_name": "Nombre completo",
           "error_name": "Por favot tecla su completo",
           "email": "Correo electrónico",
           "password": "Contrasena",
@@ -59,43 +59,43 @@
   
       "event": {
         "info": {
-          "title": "Info",
-          "event_info": "Event Information",
-          "cal_description": "For more details and results in real time:",
-          "view_website": "View event's website",
-          "stream_available": "Live Stream Available!",
-          "game_info": "Game Information",
-          "loading_sesson": "Loading sesson name...",
-          "alliances": "Alliances",
-          "fields": "Fields"
+          "title": "Información",
+          "event_info": "Información del evento",
+          "cal_description": "Para más detalles y resultados en tiempo real:",
+          "view_website": "Ver al sitio web del evento",
+          "stream_available": "Transmisión en vivo disponible!",
+          "game_info": "Información del juego",
+          "loading_sesson": "Cargando al nobre del session...",
+          "alliances": "Alianzas",
+          "fields": "Campos de juego"
         },
         "teams": {
-          "title": "Teams"
+          "title": "Equipos"
         },
         "matches": {
-          "title": "Matches"
+          "title": "Partidos"
         },
         "rankings": {
-          "title": "Rankings",
-          "wlt_record": "Record (W-L-T)",
-          "with_record": "with a record of",
-          "qual_rank": "Qual Rank",
-          "qual_points": "Qualification Points",
-          "ranking_points": "Ranking Points",
-          "tie_beaker_points": "Tie Breaker Points",
-          "highest_score": "Highest Score",
-          "matches_played": "Matches Played"
+          "title": "Clasificaciones",
+          "wlt_record": "Marca (G-P-E)",
+          "with_record": "Con un marca de",
+          "qual_rank": "Classificaion de qual",
+          "qual_points": "Puntos de qualificacion",
+          "ranking_points": "Puntos de marca",
+          "tie_beaker_points": "TODO: TRANSLATE -- Tie Breaker Points",
+          "highest_score": "Puntuación mas alto",
+          "matches_played": "Juegos jugado"
         },
         "awards": {
-          "title": "Awards"
+          "title": "Premios"
         }
       },
   
       "match": {
-        "match_info": "Match Information",
-        "scheduled_time": "Scheduled Time",
-        "watch_match": "Watch Match",
-        "no_video": "No video available. Add one",
+        "match_info": "Información del partido",
+        "scheduled_time": "TODO: TRANSLATE -- Scheduled Time",
+        "watch_match": "Mira al partido",
+        "no_video": "No hay video desposible. Agrega a uno",
         "match_breakdown": "Match Breakdown",
         "loading": "Loading Match...",
         "full_event": "View Full Event"
