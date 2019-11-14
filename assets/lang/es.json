@@ -40,20 +40,20 @@
         "logout": "Terminar Sesión",
         "login": {
           "title": "Iniciar sesión",
-          "subtitle": "Login to your myTOA account",
-          "email": "Email",
-          "password": "Password",
-          "login": "Login"
+          "subtitle": "Iniciar tu cuenta de myTOA ",
+          "email": "Correo electrónico",
+          "password": "Contrasena",
+          "login": "Iniciar sesión"
         },
         "register": {
-          "title": "Register",
-          "full_name": "Full name",
-          "error_name": "Please type your full name",
-          "email": "Email",
-          "password": "Password",
-          "confirm_password": "Confirm password",
-          "your_team": "Your team #",
-          "sign_up": "Sign Up"
+          "title": "Registrar",
+          "full_name": "Nombre Completo",
+          "error_name": "Por favot tecla su completo",
+          "email": "Correo electrónico",
+          "password": "Contrasena",
+          "confirm_password": "Confirmar contrasena",
+          "your_team": "Equipo #",
+          "sign_up": "Registrar"
         }
       },
   
