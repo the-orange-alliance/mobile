@@ -148,9 +148,9 @@
       "esr": "Campeonato superregional del este",
       "nsr": "Campeonato superregional del norte",
       "ssr": "Campeonato superregional del sur",
-      "wsr": "West Super Regional Championship",
-      "spr": "Super Regionals",
-      "foc": "Festival of Champions"
+      "wsr": "Campeonato superregional del oeste",
+      "spr": "Superregional",
+      "foc": "Festival de campeonatos"
     },
   
     "months": {
@@ -169,27 +169,27 @@
     },
   
     "breakdowns": {
-      "autonomous": "Autonomous",
-      "teleop": "Teleop",
-      "end": "End Game",
-      "penalty": "Penalty",
-      "minor_penalty": "Minor Penalty",
-      "major_penalty": "Major Penalty",
-      "points": "Points",
+      "autonomous": "Autónomo",
+      "teleop": "Control del conductor",
+      "end": "Partido final",
+      "penalty": "Penalización",
+      "minor_penalty": "Penalización menor",
+      "major_penalty": "Penalización mayor",
+      "points": "Puntos",
   
       "1718": {
-        "auto_jewels": "Single Jewel Remaining",
-        "glyphs": "Glyphs",
-        "cryptobox_keys": "Cryptobox Keys",
-        "parking": "Parking",
-        "rows": "Rows in Cryptoboxes",
-        "columns": "Columns in Cryptoboxes",
-        "ciphers": "Ciphers",
-        "relics_zone_1": "Relics in Zone 1",
-        "relics_zone_2": "Relics in Zone 2",
-        "relics_zone_3": "Relics in Zone 3",
-        "relics_upright": "Relics Upright",
-        "robots_balanced": "Robots Balanced"
+        "auto_jewels": "Joya única que falta",
+        "glyphs": "Glifo",
+        "cryptobox_keys": "Llaves del crypto-caja",
+        "parking": "Estacionamiento",
+        "rows": "Filas en los Crypto-cajas",
+        "columns": "Columnas en los Crypto-cajas",
+        "ciphers": "Cifra",
+        "relics_zone_1": "Relics en Zona 1",
+        "relics_zone_2": "Relics en Zona 2",
+        "relics_zone_3": "Relics en Zona 3",
+        "relics_upright": "Relics Rectoam",
+        "robots_balanced": "Robots Equilibrado"
       },
   
       "roverruckus": {
