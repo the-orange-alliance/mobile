@@ -62,10 +62,10 @@
           "title": "Información",
           "event_info": "Información del evento",
           "cal_description": "Para más detalles y resultados en tiempo real:",
-          "view_website": "Ver al sitio web del evento",
-          "stream_available": "Transmisión en vivo disponible!",
-          "game_info": "Información del juego",
-          "loading_sesson": "Cargando al nobre del session...",
+          "view_website": "Ver el Sitio Web del Evento",
+          "stream_available": "Transmisión en Vivo Disponible!",
+          "game_info": "Información del Juego",
+          "loading_sesson": "Cargando Sesión",
           "alliances": "Alianzas",
           "fields": "Campos de juego"
         },
@@ -79,12 +79,12 @@
           "title": "Clasificaciones",
           "wlt_record": "Marca (G-P-E)",
           "with_record": "Con un marca de",
-          "qual_rank": "Classificaion de qual",
-          "qual_points": "Puntos de qualificacion",
-          "ranking_points": "Puntos de marca",
-          "tie_beaker_points": "TODO: TRANSLATE -- Tie Breaker Points",
-          "highest_score": "Puntuación mas alto",
-          "matches_played": "Juegos jugado"
+          "qual_rank": "Clasificación de la calificación",
+          "qual_points": "Puntos de Calificación",
+          "ranking_points": "Puntos de Clasificación",
+          "tie_beaker_points": "Puntos de Desempate",
+          "highest_score": "Puntuación más alta",
+          "matches_played": "Partidos Jugados"
         },
         "awards": {
           "title": "Premios"
@@ -93,24 +93,24 @@
   
       "match": {
         "match_info": "Información del partido",
-        "scheduled_time": "TODO: TRANSLATE -- Scheduled Time",
-        "watch_match": "Mira al partido",
-        "no_video": "No hay video desposible. Agrega a uno",
+        "scheduled_time": "Horario Programado",
+        "watch_match": "Ver al partido",
+        "no_video": "No hay video desposible. Agrega uno",
         "match_breakdown": "Explicación del partido",
         "loading": "Iniciando el partido",
-        "full_event": "Mira el evento completa"
+        "full_event": "Ver el evento completo"
       },
   
       "team": {
-        "rookie_year": "Rookie Year",
+        "rookie_year": "Novato del Curso",
         "results": {
-          "title": "Resultos"
+          "title": "Resultados"
         },
         "robot_profile": {
           "title": "Robot",
-          "open_source": "Fuente abre",
+          "open_source": "Código Abierto",
           "engineering_notebook": "Cuaderno de Ingeniería",
-          "robot_reveal": "Revelo de Robot",
+          "robot_reveal": "Revelación del Robot",
           "photos": "Fotos"
         }
       }
@@ -120,24 +120,24 @@
       "awards": "Premios no encontrados",
       "teams": "Equipos no encontrados",
       "matches": "Partidos no encontrados",
-      "rankings": "Paradas no encontrados",
+      "rankings": "Clasificaciones no encontradas",
       "events": "Eventos no encontrados",
       "robot_profile": "Retrato de robot no encontrado"
     },
   
     "awards": {
-      "inspire": "Premio de Inspirar",
-      "think": "Premio de Pensar",
-      "connect": "Premio de Conectar",
-      "innovate": "Premio de Collins Aerospace Innovate",
-      "design": "Premio de Diseñar",
-      "motivate": "Premio de Motivar",
-      "control": "Premio de Controlar",
-      "promote": "Premio de Promover",
-      "compass": "Premio de Brújula",
+      "inspire": "Premio de Inspiración",
+      "think": "Premio de Pensamiento",
+      "connect": "Premio de Conexión",
+      "innovate": "Premio de Collins Aerospace a la Innovación",
+      "design": "Premio de Diseño",
+      "motivate": "Premio de Motivación",
+      "control": "Premio de Conduccion",
+      "promote": "Premio de Promoción",
+      "compass": "Premio de Orientación",
       "judges": "Premio de Jueces",
-      "winning_alliance": "Premio de alianza ganadora",
-      "finalist_alliance": "Premio de alianza finalista"
+      "winning_alliance": "Premio de Alianza Ganadora",
+      "finalist_alliance": "Premio de Alianza Finalista"
     },
   
     "weeks": {
@@ -145,12 +145,12 @@
       "cmphou": "FIRST Campeonato - Houston",
       "cmpstl": "FIRST Campeonato - St. Louis",
       "cmpdet": "FIRST Campeonato - Detroit",
-      "esr": "Campeonato superregional del este",
-      "nsr": "Campeonato superregional del norte",
-      "ssr": "Campeonato superregional del sur",
-      "wsr": "Campeonato superregional del oeste",
+      "esr": "Campeonato Superregional del Este",
+      "nsr": "Campeonato Superregional del Norte",
+      "ssr": "Campeonato Superregional del Sur",
+      "wsr": "Campeonato Superregional del Oeste",
       "spr": "Superregional",
-      "foc": "Festival de campeonatos"
+      "foc": "Festival de Campeonatos"
     },
   
     "months": {
@@ -163,62 +163,62 @@
       "july": "Julio",
       "august": "Agosto",
       "september": "Septiembre",
-      "october": "Octuber",
+      "october": "Octubre",
       "november": "Noviembre",
       "december": "Diciembre"
     },
   
     "breakdowns": {
       "autonomous": "Autónomo",
-      "teleop": "Control del conductor",
-      "end": "Partido final",
+      "teleop": "Control del Conductor",
+      "end": "Partido Final",
       "penalty": "Penalización",
-      "minor_penalty": "Penalización menor",
-      "major_penalty": "Penalización mayor",
+      "minor_penalty": "Penalización Menor",
+      "major_penalty": "Penalización Mayor",
       "points": "Puntos",
   
       "1718": {
-        "auto_jewels": "Joya única que falta",
+        "auto_jewels": "Joya Única que Falta",
         "glyphs": "Glifo",
-        "cryptobox_keys": "Llaves del crypto-caja",
+        "cryptobox_keys": "Códigos de la Crypto-caja",
         "parking": "Estacionamiento",
-        "rows": "Filas en los Crypto-cajas",
-        "columns": "Columnas en los Crypto-cajas",
-        "ciphers": "Cifra",
+        "rows": "Filas en las Crypto-cajas",
+        "columns": "Columnas en las Crypto-cajas",
+        "ciphers": "Códigos",
         "relics_zone_1": "Relics en Zona 1",
         "relics_zone_2": "Relics en Zona 2",
         "relics_zone_3": "Relics en Zona 3",
-        "relics_upright": "Relics Rectoam",
-        "robots_balanced": "Robots Equilibrado"
+        "relics_upright": "Relics Rectos",
+        "robots_balanced": "Robots Equilibrados"
       },
   
       "roverruckus": {
-        "landing": "Landing",
-        "sampling": "Sampling",
-        "claiming": "Claiming",
-        "parking": "Parking",
-        "gold": "Gold Mineral",
-        "silver": "Silver Mineral",
-        "depot": "Any Mineral in Depot",
-        "robots_latched": "Robots Latched",
-        "parked_in": "Robots Parked In Crater",
-        "parked_completely": "Robots Parked Completely In Crater"
+        "landing": "Aterrizar",
+        "sampling": "Muestrear",
+        "claiming": "Tomar Posesión",
+        "parking": "Estacionamiento",
+        "gold": "Mineral Dorado",
+        "silver": "Mineral Plateado",
+        "depot": "Cualquier Mineral en el Almacén",
+        "robots_latched": "Robots Enganchados",
+        "parked_in": "Robots Estacionados en el Cráter",
+        "parked_completely": "Robots Completamente Estacionados en el Cráter"
       },
   
       "skystone": {
-        "repositioning_foundation": "Repositioning Foundation",
-        "delivering_skystones": "Delivering Skystones",
-        "stones_under_skybridge": "Delivering Stones under Alliance Skybridge",
-        "stones_on_foundation": "Stones on Foundation",
-        "navigate_skybridge": "Navigating under Skybridge",
-        "returned_stones": "Returned Stones",
-        "first_skystone": "First returned Skystone",
-        "delivering_stones_skybridge": "Delivering Stones under Alliance Skybridge",
-        "skyscraper_bonus": "Skyscraper Bonus",
-        "capping_bonus": "Capping Bonus",
-        "level_bonus": "Level Bonus",
-        "moving_foundation": "Moving Foundation",
-        "robots_parked": "Robots Parked"
+        "repositioning_foundation": "Recolocar la Base",
+        "delivering_skystones": "Entregar Ladrillos",
+        "stones_under_skybridge": "Entregar Ladrillos a través del Arco de la Alianza",
+        "stones_on_foundation": "Ladrillos en la Base",
+        "navigate_skybridge": "Conducir a Través del Arco",
+        "returned_stones": "Devolver Ladrillos",
+        "first_skystone": "Primer Ladrillo Devuelto",
+        "delivering_stones_skybridge": "Entregar Ladrillos a Través del Arco de la Alianza",
+        "skyscraper_bonus": "Bonus de Rascacielos",
+        "capping_bonus": "Bonus de Coronación",
+        "level_bonus": "Bonus de Altura",
+        "moving_foundation": "Mover Base",
+        "robots_parked": "Robots Estacionados"
       }
     }
   }
