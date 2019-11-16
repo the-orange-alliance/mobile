@@ -96,76 +96,76 @@
         "scheduled_time": "TODO: TRANSLATE -- Scheduled Time",
         "watch_match": "Mira al partido",
         "no_video": "No hay video desposible. Agrega a uno",
-        "match_breakdown": "Match Breakdown",
-        "loading": "Loading Match...",
-        "full_event": "View Full Event"
+        "match_breakdown": "Explicación del partido",
+        "loading": "Iniciando el partido",
+        "full_event": "Mira el evento completa"
       },
   
       "team": {
         "rookie_year": "Rookie Year",
         "results": {
-          "title": "Results"
+          "title": "Resultos"
         },
         "robot_profile": {
           "title": "Robot",
-          "open_source": "Open Source",
-          "engineering_notebook": "Engineering Notebook",
-          "robot_reveal": "Robot Reveal",
-          "photos": "Photos"
+          "open_source": "Fuente abre",
+          "engineering_notebook": "Cuaderno de Ingeniería",
+          "robot_reveal": "Revelo de Robot",
+          "photos": "Fotos"
         }
       }
     },
   
     "no_data": {
-      "awards": "No awards found",
-      "teams": "No teams found",
-      "matches": "No matches found",
-      "rankings": "No rankings found",
-      "events": "No events found",
-      "robot_profile": "No robot profile found"
+      "awards": "Premios no encontrados",
+      "teams": "Equipos no encontrados",
+      "matches": "Partidos no encontrados",
+      "rankings": "Paradas no encontrados",
+      "events": "Eventos no encontrados",
+      "robot_profile": "Retrato de robot no encontrado"
     },
   
     "awards": {
-      "inspire": "Inspire Award",
-      "think": "Think Award",
-      "connect": "Connect Award",
-      "innovate": "Collins Aerospace Innovate Award",
-      "design": "Design Award",
-      "motivate": "Motivate Award",
-      "control": "Control Award",
-      "promote": "Promote Award",
-      "compass": "Compass Award",
-      "judges": "Judges Award",
-      "winning_alliance": "Winning Alliance Award",
-      "finalist_alliance": "Finalist Alliance Award"
+      "inspire": "Premio de Inspirar",
+      "think": "Premio de Pensar",
+      "connect": "Premio de Conectar",
+      "innovate": "Premio de Collins Aerospace Innovate",
+      "design": "Premio de Diseñar",
+      "motivate": "Premio de Motivar",
+      "control": "Premio de Controlar",
+      "promote": "Premio de Promover",
+      "compass": "Premio de Brújula",
+      "judges": "Premio de Jueces",
+      "winning_alliance": "Premio de alianza ganadora",
+      "finalist_alliance": "Premio de alianza finalista"
     },
   
     "weeks": {
-      "cmp": "FIRST Championship",
-      "cmphou": "FIRST Championship - Houston",
-      "cmpstl": "FIRST Championship - St. Louis",
-      "cmpdet": "FIRST Championship - Detroit",
-      "esr": "East Super Regional Championship",
-      "nsr": "North Super Regional Championship",
-      "ssr": "South Super Regional Championship",
+      "cmp": "FIRST Campeonato",
+      "cmphou": "FIRST Campeonato - Houston",
+      "cmpstl": "FIRST Campeonato - St. Louis",
+      "cmpdet": "FIRST Campeonato - Detroit",
+      "esr": "Campeonato superregional del este",
+      "nsr": "Campeonato superregional del norte",
+      "ssr": "Campeonato superregional del sur",
       "wsr": "West Super Regional Championship",
       "spr": "Super Regionals",
       "foc": "Festival of Champions"
     },
   
     "months": {
-      "january": "January",
-      "february": "February",
-      "march": "March",
-      "april": "April",
-      "may": "May",
-      "june": "June",
-      "july": "July",
-      "august": "August",
-      "september": "September",
-      "october": "October",
-      "november": "November",
-      "december": "December"
+      "january": "Enero",
+      "february": "Febrero",
+      "march": "Marzo",
+      "april": "Abril",
+      "may": "Mayo",
+      "june": "Junio",
+      "july": "Julio",
+      "august": "Agosto",
+      "september": "Septiembre",
+      "october": "Octuber",
+      "november": "Noviembre",
+      "december": "Diciembre"
     },
   
     "breakdowns": {
