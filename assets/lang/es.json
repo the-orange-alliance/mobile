@@ -11,13 +11,13 @@
       "event": "Evento",
       "events": "Eventos",
       "refresh": "Actualizar",
-      "search": "Busca",
-      "clear": "Claro",
-      "loading": "Carga...",
-      "add_to_mytoa": "Aumentar a myTOA",
-      "remove_from_mytoa": "Quitar a myTOA",
-      "error_occurred": "Un error a pasado",
-      "about_toa_short": "The Orange Alliance es un proyecto para ayudar a partidos de FTC , eventos, e equipos para tener información más accessible."
+      "search": "Buscar",
+      "clear": "Borrar",
+      "loading": "Cargando...",
+      "add_to_mytoa": "Agregar a myTOA",
+      "remove_from_mytoa": "Quitar de myTOA",
+      "error_occurred": "Un error ha occurido",
+      "about_toa_short": "The Orange Alliance es un proyecto para hacer más accesible la información sobre los partidos, eventos, e equipos de FTC."
     },
   
     "date": {
@@ -29,31 +29,31 @@
     "menu": {
       "login": "Iniciar sesión",
       "register": "Registrar",
-      "switch_light_mode": "Cambiar al modo de luz",
+      "switch_light_mode": "Cambiar al modo claro",
       "switch_dark_mode": "Cambiar al modo oscuro",
       "privacy_terms": "Privacidad y condiciones"
     },
   
     "pages": {
       "account": {
-        "title": "myTOA cuenta",
+        "title": "La cuenta myTOA",
         "logout": "Terminar sesión",
         "login": {
           "title": "Iniciar sesión",
-          "subtitle": "Iniciar tu cuenta de myTOA ",
+          "subtitle": "Entrar en la cuenta myTOA ",
           "email": "Correo electrónico",
-          "password": "Contrasena",
+          "password": "Contraseña",
           "login": "Iniciar sesión"
         },
         "register": {
           "title": "Registrar",
           "full_name": "Nombre completo",
-          "error_name": "Por favot tecla su completo",
+          "error_name": "Favor de teclear su nombre completo",
           "email": "Correo electrónico",
-          "password": "Contrasena",
-          "confirm_password": "Confirmar contrasena",
-          "your_team": "Equipo #",
-          "sign_up": "Registrar"
+          "password": "Contraseña",
+          "confirm_password": "Confirmar contraseña",
+          "your_team": "número de tu equipo",
+          "sign_up": "Registrarse"
         }
       },
   
@@ -62,10 +62,10 @@
           "title": "Información",
           "event_info": "Información del evento",
           "cal_description": "Para más detalles y resultados en tiempo real:",
-          "view_website": "Ver el Sitio Web del Evento",
-          "stream_available": "Transmisión en Vivo Disponible!",
-          "game_info": "Información del Juego",
-          "loading_sesson": "Cargando Sesión",
+          "view_website": "Ver el sitio web del evento",
+          "stream_available": "¡Transmisión en vivo disponible!",
+          "game_info": "Información del juego",
+          "loading_sesson": "Cargando sesión",
           "alliances": "Alianzas",
           "fields": "Campos de juego"
         },
@@ -78,13 +78,13 @@
         "rankings": {
           "title": "Clasificaciones",
           "wlt_record": "Marca (G-P-E)",
-          "with_record": "Con un marca de",
-          "qual_rank": "Clasificación de la calificación",
-          "qual_points": "Puntos de Calificación",
-          "ranking_points": "Puntos de Clasificación",
-          "tie_beaker_points": "Puntos de Desempate",
+          "with_record": "Con una marca de",
+          "qual_rank": "Clasificación de calificación",
+          "qual_points": "Puntos de calificación",
+          "ranking_points": "Puntos de clasificación",
+          "tie_beaker_points": "Puntos de desempate",
           "highest_score": "Puntuación más alta",
-          "matches_played": "Partidos Jugados"
+          "matches_played": "Partidos jugados"
         },
         "awards": {
           "title": "Premios"
@@ -94,15 +94,15 @@
       "match": {
         "match_info": "Información del partido",
         "scheduled_time": "Horario Programado",
-        "watch_match": "Ver al partido",
-        "no_video": "No hay video desposible. Agrega uno",
+        "watch_match": "Ver el partido",
+        "no_video": "No hay video desposible. Agregar uno",
         "match_breakdown": "Explicación del partido",
         "loading": "Iniciando el partido",
         "full_event": "Ver el evento completo"
       },
   
       "team": {
-        "rookie_year": "Novato del Curso",
+        "rookie_year": "Año de Novato",
         "results": {
           "title": "Resultados"
         },
@@ -122,35 +122,35 @@
       "matches": "Partidos no encontrados",
       "rankings": "Clasificaciones no encontradas",
       "events": "Eventos no encontrados",
-      "robot_profile": "Retrato de robot no encontrado"
+      "robot_profile": "Perfil de robot no encontrado"
     },
-  
-    "awards": {
-      "inspire": "Premio de Inspiración",
-      "think": "Premio de Pensamiento",
-      "connect": "Premio de Conexión",
-      "innovate": "Premio de Collins Aerospace a la Innovación",
-      "design": "Premio de Diseño",
-      "motivate": "Premio de Motivación",
-      "control": "Premio de Conduccion",
-      "promote": "Premio de Promoción",
-      "compass": "Premio de Orientación",
-      "judges": "Premio de Jueces",
-      "winning_alliance": "Premio de Alianza Ganadora",
-      "finalist_alliance": "Premio de Alianza Finalista"
-    },
+
+  "awards": {
+    "inspire": "Inspire Award",
+    "think": "Think Award",
+    "connect": "Connect Award",
+    "innovate": "Collins Aerospace Innovate Award",
+    "design": "Design Award",
+    "motivate": "Motivate Award",
+    "control": "Control Award",
+    "promote": "Promote Award",
+    "compass": "Compass Award",
+    "judges": "Judges Award",
+    "winning_alliance": "Winning Alliance Award",
+    "finalist_alliance": "Finalist Alliance Award"
+  },
   
     "weeks": {
       "cmp": "FIRST Campeonato",
-      "cmphou": "FIRST Campeonato - Houston",
-      "cmpstl": "FIRST Campeonato - St. Louis",
-      "cmpdet": "FIRST Campeonato - Detroit",
-      "esr": "Campeonato Superregional del Este",
-      "nsr": "Campeonato Superregional del Norte",
-      "ssr": "Campeonato Superregional del Sur",
-      "wsr": "Campeonato Superregional del Oeste",
-      "spr": "Superregional",
-      "foc": "Festival de Campeonatos"
+      "cmphou": "Campeonato FIRST - Houston",
+      "cmpstl": "Campeonato FIRST - St. Louis",
+      "cmpdet": "Campeonato FIRST - Detroit",
+      "esr": "Campeonato Super Regional del Este",
+      "nsr": "Campeonato Super Regional del Norte",
+      "ssr": "Campeonato Super Regional del Sur",
+      "wsr": "Campeonato Super Regional del Oeste",
+      "spr": "Super Regional",
+      "foc": "Festival de Campeones"
     },
   
     "months": {
@@ -178,27 +178,25 @@
       "points": "Puntos",
   
       "1718": {
-        "auto_jewels": "Joya Única que Falta",
-        "glyphs": "Glifo",
+        "auto_jewels": "Solo falta una joya",
+        "glyphs": "Glifos",
         "cryptobox_keys": "Códigos de la Crypto-caja",
         "parking": "Estacionamiento",
         "rows": "Filas en las Crypto-cajas",
         "columns": "Columnas en las Crypto-cajas",
         "ciphers": "Códigos",
-        "relics_zone_1": "Relics en Zona 1",
-        "relics_zone_2": "Relics en Zona 2",
-        "relics_zone_3": "Relics en Zona 3",
-        "relics_upright": "Relics Rectos",
+        "relics_zone_1": "Reliquias en Zona 1",
+        "relics_zone_2": "Reliquias en Zona 2",
+        "relics_zone_3": "Reliquias en Zona 3",
+        "relics_upright": "Reliquias verticales",
         "robots_balanced": "Robots Equilibrados"
       },
   
       "roverruckus": {
         "landing": "Aterrizar",
-        "sampling": "Muestrear",
-        "claiming": "Tomar Posesión",
-        "parking": "Estacionamiento",
-        "gold": "Mineral Dorado",
-        "silver": "Mineral Plateado",
+        "sampling": "Toma de muestras",
+        "gold": "Mineral dorado",
+        "silver": "Mineral plateado",
         "depot": "Cualquier Mineral en el Almacén",
         "robots_latched": "Robots Enganchados",
         "parked_in": "Robots Estacionados en el Cráter",
@@ -211,15 +209,14 @@
         "stones_under_skybridge": "Entregar Ladrillos a través del Arco de la Alianza",
         "stones_on_foundation": "Ladrillos en la Base",
         "navigate_skybridge": "Conducir a Través del Arco",
-        "returned_stones": "Devolver Ladrillos",
+        "returned_stones": "Ladrillos Devueltos",
         "first_skystone": "Primer Ladrillo Devuelto",
         "delivering_stones_skybridge": "Entregar Ladrillos a Través del Arco de la Alianza",
-        "skyscraper_bonus": "Bonus de Rascacielos",
-        "capping_bonus": "Bonus de Coronación",
-        "level_bonus": "Bonus de Altura",
+        "skyscraper_bonus": "Bono de Rascacielos",
+        "capping_bonus": "Bono de Coronación",
+        "level_bonus": "Bono de Altura",
         "moving_foundation": "Mover Base",
         "robots_parked": "Robots Estacionados"
       }
     }
   }
-  
