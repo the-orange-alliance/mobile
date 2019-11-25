@@ -1,0 +1,7 @@
+Version 0.1:
+  - First version!
+
+This is a beta version. If you find bugs, please let us know in #support in our Discord server.
+
+View the full changelog for this and previous releases on the GitHub page:
+https://github.com/orange-alliance/TOA-Android/releases

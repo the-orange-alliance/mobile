@@ -1,0 +1,12 @@
+<b>The Orange Alliance</b> הוא פרוייקט שהופך את נתוני FIRST Tech Challenge(FTC) לנגישים יותר.
+
+אפליקציה זו היא הדרך הקלה ביותר לגשת לכל התוכן הנפלא של http://theorangealliance.org במכשיר Android שלך.
+
+אתה מפתח? בדוק את קוד המקור שלנו באתר GitHub:
+ https://github.com/orange-alliance
+
+תרגישו חופשי לפנות אלינו דרך שרת ה Discord שלנו או דרך המייל:
+contact@theorangealliance.org
+
+
+<b>הידעתם? האפליקציה פותחה במלואה כאן, בישראל</b>
