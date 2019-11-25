@@ -2,7 +2,7 @@ matrix:
   include:
   - os: linux
     language: android
-    script: flutter build apk --release
+    script: flutter build appbundle --target-platform android-arm,android-arm64 --release
     after_success:
       - cd android && fastlane supply init
       - fastlane deploy
