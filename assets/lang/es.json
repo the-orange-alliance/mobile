@@ -1,0 +1,222 @@
+{
+    "config": {
+      "name": "Español",
+      "englishName": "Spanish",
+      "direction": "ltr"
+    },
+  
+    "general": {
+      "team": "Equipo",
+      "teams": "Equipos",
+      "event": "Evento",
+      "events": "Eventos",
+      "refresh": "Actualizar",
+      "search": "Buscar",
+      "clear": "Borrar",
+      "loading": "Cargando...",
+      "add_to_mytoa": "Agregar a myTOA",
+      "remove_from_mytoa": "Quitar de myTOA",
+      "error_occurred": "Un error ha occurido",
+      "about_toa_short": "The Orange Alliance es un proyecto para hacer más accesible la información sobre los partidos, eventos, e equipos de FTC."
+    },
+  
+    "date": {
+      "date_format": "MMM d, yyyy",
+      "date_to_date": " a ",
+      "location_on_date": " el ",
+      "location_from_date": "desde"
+    },
+    "menu": {
+      "login": "Iniciar sesión",
+      "register": "Registrar",
+      "switch_light_mode": "Cambiar al modo claro",
+      "switch_dark_mode": "Cambiar al modo oscuro",
+      "privacy_terms": "Privacidad y condiciones"
+    },
+  
+    "pages": {
+      "account": {
+        "title": "La cuenta myTOA",
+        "logout": "Terminar sesión",
+        "login": {
+          "title": "Iniciar sesión",
+          "subtitle": "Entrar en la cuenta myTOA ",
+          "email": "Correo electrónico",
+          "password": "Contraseña",
+          "login": "Iniciar sesión"
+        },
+        "register": {
+          "title": "Registrar",
+          "full_name": "Nombre completo",
+          "error_name": "Favor de teclear su nombre completo",
+          "email": "Correo electrónico",
+          "password": "Contraseña",
+          "confirm_password": "Confirmar contraseña",
+          "your_team": "número de tu equipo",
+          "sign_up": "Registrarse"
+        }
+      },
+  
+      "event": {
+        "info": {
+          "title": "Información",
+          "event_info": "Información del evento",
+          "cal_description": "Para más detalles y resultados en tiempo real:",
+          "view_website": "Ver el sitio web del evento",
+          "stream_available": "¡Transmisión en vivo disponible!",
+          "game_info": "Información del juego",
+          "loading_sesson": "Cargando sesión",
+          "alliances": "Alianzas",
+          "fields": "Campos de juego"
+        },
+        "teams": {
+          "title": "Equipos"
+        },
+        "matches": {
+          "title": "Partidos"
+        },
+        "rankings": {
+          "title": "Clasificaciones",
+          "wlt_record": "Marca (G-P-E)",
+          "with_record": "Con una marca de",
+          "qual_rank": "Clasificación de calificación",
+          "qual_points": "Puntos de calificación",
+          "ranking_points": "Puntos de clasificación",
+          "tie_beaker_points": "Puntos de desempate",
+          "highest_score": "Puntuación más alta",
+          "matches_played": "Partidos jugados"
+        },
+        "awards": {
+          "title": "Premios"
+        }
+      },
+  
+      "match": {
+        "match_info": "Información del partido",
+        "scheduled_time": "Horario Programado",
+        "watch_match": "Ver el partido",
+        "no_video": "No hay video desposible. Agregar uno",
+        "match_breakdown": "Explicación del partido",
+        "loading": "Iniciando el partido",
+        "full_event": "Ver el evento completo"
+      },
+  
+      "team": {
+        "rookie_year": "Año de Novato",
+        "results": {
+          "title": "Resultados"
+        },
+        "robot_profile": {
+          "title": "Robot",
+          "open_source": "Código Abierto",
+          "engineering_notebook": "Cuaderno de Ingeniería",
+          "robot_reveal": "Revelación del Robot",
+          "photos": "Fotos"
+        }
+      }
+    },
+  
+    "no_data": {
+      "awards": "Premios no encontrados",
+      "teams": "Equipos no encontrados",
+      "matches": "Partidos no encontrados",
+      "rankings": "Clasificaciones no encontradas",
+      "events": "Eventos no encontrados",
+      "robot_profile": "Perfil de robot no encontrado"
+    },
+
+  "awards": {
+    "inspire": "Inspire Award",
+    "think": "Think Award",
+    "connect": "Connect Award",
+    "innovate": "Collins Aerospace Innovate Award",
+    "design": "Design Award",
+    "motivate": "Motivate Award",
+    "control": "Control Award",
+    "promote": "Promote Award",
+    "compass": "Compass Award",
+    "judges": "Judges Award",
+    "winning_alliance": "Winning Alliance Award",
+    "finalist_alliance": "Finalist Alliance Award"
+  },
+  
+    "weeks": {
+      "cmp": "FIRST Campeonato",
+      "cmphou": "Campeonato FIRST - Houston",
+      "cmpstl": "Campeonato FIRST - St. Louis",
+      "cmpdet": "Campeonato FIRST - Detroit",
+      "esr": "Campeonato Super Regional del Este",
+      "nsr": "Campeonato Super Regional del Norte",
+      "ssr": "Campeonato Super Regional del Sur",
+      "wsr": "Campeonato Super Regional del Oeste",
+      "spr": "Super Regional",
+      "foc": "Festival de Campeones"
+    },
+  
+    "months": {
+      "january": "Enero",
+      "february": "Febrero",
+      "march": "Marzo",
+      "april": "Abril",
+      "may": "Mayo",
+      "june": "Junio",
+      "july": "Julio",
+      "august": "Agosto",
+      "september": "Septiembre",
+      "october": "Octubre",
+      "november": "Noviembre",
+      "december": "Diciembre"
+    },
+  
+    "breakdowns": {
+      "autonomous": "Autónomo",
+      "teleop": "Control del Conductor",
+      "end": "Partido Final",
+      "penalty": "Penalización",
+      "minor_penalty": "Penalización Menor",
+      "major_penalty": "Penalización Mayor",
+      "points": "Puntos",
+  
+      "1718": {
+        "auto_jewels": "Solo falta una joya",
+        "glyphs": "Glifos",
+        "cryptobox_keys": "Códigos de la Crypto-caja",
+        "parking": "Estacionamiento",
+        "rows": "Filas en las Crypto-cajas",
+        "columns": "Columnas en las Crypto-cajas",
+        "ciphers": "Códigos",
+        "relics_zone_1": "Reliquias en Zona 1",
+        "relics_zone_2": "Reliquias en Zona 2",
+        "relics_zone_3": "Reliquias en Zona 3",
+        "relics_upright": "Reliquias verticales",
+        "robots_balanced": "Robots Equilibrados"
+      },
+  
+      "roverruckus": {
+        "landing": "Aterrizar",
+        "sampling": "Toma de muestras",
+        "gold": "Mineral dorado",
+        "silver": "Mineral plateado",
+        "depot": "Cualquier Mineral en el Almacén",
+        "robots_latched": "Robots Enganchados",
+        "parked_in": "Robots Estacionados en el Cráter",
+        "parked_completely": "Robots Completamente Estacionados en el Cráter"
+      },
+  
+      "skystone": {
+        "repositioning_foundation": "Recolocar la Base",
+        "delivering_skystones": "Entregar Ladrillos",
+        "stones_under_skybridge": "Entregar Ladrillos a través del Arco de la Alianza",
+        "stones_on_foundation": "Ladrillos en la Base",
+        "navigate_skybridge": "Conducir a Través del Arco",
+        "returned_stones": "Ladrillos Devueltos",
+        "first_skystone": "Primer Ladrillo Devuelto",
+        "delivering_stones_skybridge": "Entregar Ladrillos a Través del Arco de la Alianza",
+        "skyscraper_bonus": "Bono de Rascacielos",
+        "capping_bonus": "Bono de Coronación",
+        "level_bonus": "Bono de Altura",
+        "moving_foundation": "Mover Base",
+        "robots_parked": "Robots Estacionados"
+      }
+    }
+  }
