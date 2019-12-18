@@ -97,3 +97,4 @@ ios/fastlane/Preview.html
 android/app/android-keystore.jks
 credentials.tar.xz
 ios/Flutter/flutter_export_environment.sh
+android-keystore.jks
