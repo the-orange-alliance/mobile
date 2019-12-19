@@ -16,7 +16,7 @@ dependencies:
   http: '>=0.11.3+12'
   shared_preferences: ^0.4.3
   flutter_sticky_header: ^0.4.0
-  intl: ^0.15.7
+  intl: ^0.16.0
   cupertino_icons: ^0.1.2
   material_design_icons_flutter: ^3.0.3392
   url_launcher: ^4.0.2

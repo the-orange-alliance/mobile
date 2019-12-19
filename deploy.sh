@@ -8,7 +8,7 @@ mv GoogleService-Info.plist ios/Runner
 mv api-9048300026487180911-124804-e70b22003165.json android
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]
 then
-  cd ios && fastlane release # If OS is Mac
+  cd ios && fastlane release
 elif [[ "$TRAVIS_OS_NAME" == "linux" ]]
 then
       cd android && fastlane supply init
