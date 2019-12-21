@@ -3,10 +3,6 @@ matrix:
   - os: linux
     language: android
     script: flutter build appbundle --target-platform android-arm,android-arm64 --release
-    after_success:
-      - cd android && fastlane supply init
-      - fastlane deploy
-      # - fastlane supply --apk build/app/outputs/apk/release/app-release.apk
     android:
       components:
       - build-tools-28.0.3
@@ -16,20 +12,15 @@ matrix:
     osx_image: xcode10.2
     language: objective-c
     before_script: gem install cocoapods && pod repo update
-    script: flutter build ios --no-codesign && cd ios && fastlane release
+    script: flutter build ios --no-codesign
+
 install:
 - git clone https://github.com/flutter/flutter
 - export PATH="$PATH:`pwd`/flutter/bin"
-- flutter version 1.9.1+hotfix.4
 - flutter doctor
 - flutter packages get
 - gem install bundler fastlane
-after_script: ls
-notifications:
-  email: false
-before_install:
-- openssl aes-256-cbc -K $encrypted_29727b427600_key -iv $encrypted_29727b427600_iv
-  -in credentials.tar.xz.enc -out credentials.tar.xz -d
+- openssl aes-256-cbc -K $encrypted_29727b427600_key -iv $encrypted_29727b427600_iv -in credentials.tar.xz.enc -out credentials.tar.xz -d
 - tar -xf credentials.tar.xz
 - mv android-keystore.jks android/app
 - mv key.properties android
@@ -37,4 +28,14 @@ before_install:
 - mv GoogleService-Info.plist ios/Runner
 - mv api-9048300026487180911-124804-e70b22003165.json android
 
-if: branch = master AND type = push AND fork = false
+notifications:
+  email: false
+
+deploy:
+  provider: script
+  script: deploy.sh
+  skip_cleanup: true
+  on:
+    branch: master
+    type: push
+
