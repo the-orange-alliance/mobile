@@ -16,7 +16,7 @@ class RankingListItem extends StatelessWidget {
     String subtitle = '';
     subtitle += ranking.qualifyingPoints > 0 ? '${local.get('pages.event.rankings.qual_points')}: ${ranking.qualifyingPoints}\n' : '';
     subtitle += ranking.rankingPoints    > 0 ? '${local.get('pages.event.rankings.ranking_points')}: ${ranking.rankingPoints}\n' : '';
-    subtitle += ranking.tieBreakerPoints > 0 ? '${local.get('pages.event.rankings.tie_beaker_points')}: ${ranking.highestQualScore}\n' : '';
+    subtitle += ranking.tieBreakerPoints > 0 ? '${local.get('pages.event.rankings.tie_beaker_points')}: ${ranking.tieBreakerPoints}\n' : '';
     subtitle += ranking.highestQualScore > 0 ? '${local.get('pages.event.rankings.highest_score')}: ${ranking.highestQualScore}\n' : '';
     subtitle += ranking.opr              > 0 ? 'OPR: ${ranking.opr}\n' : '';
     subtitle += '${local.get('pages.event.rankings.matches_played')}: ${ranking.played}';
