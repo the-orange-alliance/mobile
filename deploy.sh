@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+echo "Running on $TRAVIS_OS_NAME"
+
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]
 then
   cd ios && fastlane release
