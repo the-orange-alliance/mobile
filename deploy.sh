@@ -6,7 +6,7 @@ then
   cd ios && fastlane release
 elif [[ "$TRAVIS_OS_NAME" == "linux" ]]
 then
-      export SUPPLY_VERSION_CODE=211
+      # export SUPPLY_VERSION_CODE=211
       cd android && fastlane supply init
       fastlane deploy
 fi
