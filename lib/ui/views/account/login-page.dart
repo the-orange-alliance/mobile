@@ -86,29 +86,15 @@ class LoginPageState extends State<LoginPage> {
                       style: TextStyle(fontSize: 17),
                       onTap: (){
                         if(this.email.isEmpty){
-                          scaffoldKey.currentState.showSnackBar(
-                            SnackBar(
-                              content: Text("Please enter your email address"),
-                            )
-                          );
+                          showSnackbar("Please enter your email address");
                         }else{
-                          bool hasError = false;
-                          Future<void> resetResult = FirebaseAuth.instance.sendPasswordResetEmail(
-                            email: this.email
-                          );
-                          resetResult.catchError((onError){
-                            PlatformException theError = onError;
-                            hasError = true;
-                            print(onError);
-                            scaffoldKey.currentState.showSnackBar(
-                              SnackBar(content: Text(theError.message))
-                            );
+                          FirebaseAuth.instance.sendPasswordResetEmail(email: this.email).then(() {
+                            showSnackbar("Email has been sent");
+                          }).catchError((error) {
+                            showSnackbar(error.message);
+
                           });
-                          if(!hasError){
-                            scaffoldKey.currentState.showSnackBar(
-                              SnackBar(content:Text("Email has been sent."))
-                            );
-                          }
+
                         }
                       },
                     )
