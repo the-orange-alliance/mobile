@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "495169296462",
+    "firebase_url": "https://the-orange-alliance.firebaseio.com",
+    "project_id": "the-orange-alliance",
+    "storage_bucket": "the-orange-alliance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495169296462:android:d027b513f40903e7",
+        "android_client_info": {
+          "package_name": "com.theorangealliance.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495169296462-o3vki7hr170oa0ogd6rv6lfg98vofnj3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1Du90t-4RSu5KIjmR14HAJGGouhjftFw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

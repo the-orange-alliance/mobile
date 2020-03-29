@@ -90,8 +90,6 @@ unlinked_spec.ds
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
 # Secret keys
-android/app/google-services.json
-ios/Runner/GoogleService-Info.plist
 android/key.properties
 ios/fastlane/Preview.html
 android/app/android-keystore.jks
