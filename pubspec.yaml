@@ -7,7 +7,7 @@ description: An app for accessing data about the FIRST Tech Challenge.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 2.1.2
+version: 2.1.3
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
