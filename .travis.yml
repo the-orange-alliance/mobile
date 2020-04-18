@@ -10,7 +10,7 @@ matrix:
       - android-28
   - os: osx
     osx_image: xcode11.2
-    language: objective-c
+    language: swift
     before_script: gem install cocoapods && pod repo update
     script: flutter build ios --no-codesign
 
