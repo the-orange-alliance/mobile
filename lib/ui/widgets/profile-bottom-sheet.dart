@@ -12,7 +12,7 @@ import '../views/account/register-page.dart';
 
 class ProfileBottomSheet {
 
-  String appVersion = "2.0.1";
+  String appVersion = "2.1.2";
   double radius = 20;
 
   showProfileBottomSheet(BuildContext context) {
