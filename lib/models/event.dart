@@ -95,7 +95,7 @@ class Event {
       timezone: map['time_zone'],
       isActive: map['is_active'],
       isfinal: map['is_final'],
-      activeTournamentLevel: map['active_tournament_level'],
+      activeTournamentLevel: map['active_tournament_level'] != '' ? map['active_tournament_level'] : null,
       allianceCount: map['alliance_count'],
       fieldCount: map['field_count'],
       advanceSpots: map['advance_spots'],
