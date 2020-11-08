@@ -60,7 +60,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
       team = await ApiV3().getTeam(teamKey);
     }
 
-    TeamSeasonRecord record = await ApiV3().getTeamWLT(teamKey, StaticData().sessonKey);
+    TeamSeasonRecord record = await ApiV3().getTeamWLT(teamKey, StaticData().seasonKey);
 
     setState(() {
       this.record = record;

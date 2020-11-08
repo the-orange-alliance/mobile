@@ -34,7 +34,7 @@ class GameData {
     if (match.gameData == null) {
       return noData;
     }
-    switch (match.getSessonKey()) {
+    switch (match.getseasonKey()) {
       case '1718':
         return MatchBreakdown1718.getRows(match, context);
       case '1819':

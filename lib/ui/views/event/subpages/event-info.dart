@@ -116,7 +116,7 @@ class EventInfo extends StatelessWidget {
       TOATitle(local.get('pages.event.info.game_info'), context),
       FutureBuilder(
         future: getSeasonName(event.seasonKey),
-        initialData: local.get('pages.event.info.loading_sesson'),
+        initialData: local.get('pages.event.info.loading_season'),
         builder: (BuildContext context, AsyncSnapshot<String> seasonName) {
           return buildCardItem(context, MdiIcons.gamepadVariant, seasonName.data ?? "${event.seasonKey} Season");
         }
