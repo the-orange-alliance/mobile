@@ -24,7 +24,7 @@ class TeamRobot extends StatelessWidget {
 
     if (data == null) {
       return FutureBuilder<List<Media>>(
-        future: ApiV3().getTeamMedia(teamKey, StaticData().sessonKey),
+        future: ApiV3().getTeamMedia(teamKey, StaticData().seasonKey),
         
         initialData: null,
         builder: (BuildContext context, AsyncSnapshot<List<Media>> media) {
