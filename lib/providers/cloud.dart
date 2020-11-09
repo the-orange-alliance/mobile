@@ -23,7 +23,7 @@ class Cloud {
   }
 
   static Future<TOAUser> getUser() async {
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    User user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       String token = await user.getIdToken();
       Map<String, String> headers = {
@@ -38,7 +38,7 @@ class Cloud {
   }
 
   static Future<EventSettings> getEventSettings(String eventKey) async {
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    User user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       String token = await user.getIdToken();
       Map<String, String> headers = {
@@ -53,7 +53,7 @@ class Cloud {
   }
 
   static Future<bool> updateEventSettings(String eventKey, EventSettings eventSettings) async {
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    User user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       String token = await user.getIdToken();
       Map<String, String> headers = {
@@ -69,7 +69,7 @@ class Cloud {
   }
 
   static Future<String> getUID() async {
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    User user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       return user.uid;
     } else {
@@ -83,7 +83,7 @@ class Cloud {
   }
 
   static setFavTeam(String teamKey, bool fav) async {
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    User user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       String token = await user.getIdToken();
       Map<String, String> headers = {
@@ -98,7 +98,7 @@ class Cloud {
   }
 
   static saveMessagingToken(String fcmToken, String deviceName) async {
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    User user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       String token = await user.getIdToken();
       Map<String, String> headers = {
