@@ -18,11 +18,11 @@ class Cloud {
 
   static Future<bool> getNotificationsState() async {
     if (Platform.isAndroid) return true;
-    User user = await getUser();
+    TOAUser user = await getUser();
     return user != null && user.level >= 6; // Beta, Admins only.
   }
 
-  static Future<User> getUser() async {
+  static Future<TOAUser> getUser() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     if (user != null) {
       String token = await user.getIdToken();
@@ -31,7 +31,7 @@ class Cloud {
         'data': 'basic'
       };
       Response res = await http.get(baseURL + '/user', headers: headers);
-      return User.fromJson(jsonDecode(res.body));
+      return TOAUser.fromJson(jsonDecode(res.body));
     } else {
       return null;
     }
@@ -78,7 +78,7 @@ class Cloud {
   }
 
   static Future<bool> isFavTeam(String teamKey) async {
-    User user = await getUser();
+    TOAUser user = await getUser();
     return user.favoriteTeams.contains(teamKey);
   }
 

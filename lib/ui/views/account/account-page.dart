@@ -21,7 +21,7 @@ class AccountPage extends StatefulWidget {
 
 class AccountPageState extends State<AccountPage> {
 
-  User user;
+  TOAUser user;
   List<Team> teams;
   List<Event> events;
 
@@ -31,7 +31,7 @@ class AccountPageState extends State<AccountPage> {
   @override
   void initState() {
     super.initState();
-    Cloud.getUser().then((User user) {
+    Cloud.getUser().then((TOAUser user) {
       setState(() {
         this.user = user;
       });

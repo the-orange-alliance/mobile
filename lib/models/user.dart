@@ -1,4 +1,4 @@
-class User extends Object {
+class TOAUser extends Object {
 
   String uid;
   String email;
@@ -13,7 +13,7 @@ class User extends Object {
   List favoriteEvents;
 
 
-  User({
+  TOAUser({
     this.uid,
     this.email,
     this.isEmailVerified,
@@ -27,7 +27,7 @@ class User extends Object {
     this.favoriteEvents
   });
 
-  User.fromJson(json) {
+  TOAUser.fromJson(json) {
     uid = json['uid'];
     email = json['email'];
     isEmailVerified = json['emailVerified'];
