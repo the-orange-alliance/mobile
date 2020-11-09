@@ -86,9 +86,8 @@ class LoginPageState extends State<LoginPage> {
                     ),
                     onPressed: () async {
                       try {
-                        FirebaseUser user = await FirebaseAuth
-                          .instance
-                          .signInWithEmailAndPassword(
+                        await FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
                             email: this.email ?? '',
                             password: this.password ?? ''
                         );
