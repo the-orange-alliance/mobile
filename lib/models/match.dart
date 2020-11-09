@@ -86,7 +86,7 @@ class Match {
     );
   }
 
-  String getSessonKey() {
+  String getSeasonKey() {
     return matchKey.split('-')[0];
   }
 }

@@ -30,10 +30,10 @@ android {
 
     defaultConfig {
         applicationId "com.theorangealliance.android"
-        minSdkVersion 24
+        minSdkVersion 21
         targetSdkVersion 28
-        versionCode 20
-        versionName "2.1.1"
+        versionCode 212
+        versionName "2.1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 

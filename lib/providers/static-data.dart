@@ -1,4 +1,4 @@
 class StaticData {
-  String sessonKey = '1920';
-  String sessonName = 'SKYSTONE';
+  String seasonKey = '1920';
+  String seasonName = 'SKYSTONE';
 }

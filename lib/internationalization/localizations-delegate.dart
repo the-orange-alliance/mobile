@@ -8,7 +8,7 @@ class TOALocalizationsDelegate extends LocalizationsDelegate<TOALocalizations> {
   const TOALocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => ['en', 'he'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => ['en', 'he', 'es'].contains(locale.languageCode);
 
   @override
   Future<TOALocalizations> load(Locale locale) async {

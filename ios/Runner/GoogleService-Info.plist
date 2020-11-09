@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>495169296462-p2s6flf6ah2t3l1lhjc5pin7cl9aprli.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.495169296462-p2s6flf6ah2t3l1lhjc5pin7cl9aprli</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAyo89Sfp2O9ECuZJbEZPMPaZFKJ8g8rUk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>495169296462</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>The-Orange-Alliance.TOA</string>
+	<key>PROJECT_ID</key>
+	<string>the-orange-alliance</string>
+	<key>STORAGE_BUCKET</key>
+	<string>the-orange-alliance.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:495169296462:ios:eebeafe77b89bbcd</string>
+	<key>DATABASE_URL</key>
+	<string>https://the-orange-alliance.firebaseio.com</string>
+</dict>
+</plist>
