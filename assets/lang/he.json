@@ -204,6 +204,24 @@
       "robots_latched": "טיפוס",
       "parked_in": "רובוטים חונים במכתש",
       "parked_completely": "רובוטים חונים במלואם במכתש"
+    },
+
+    "ultimategoal": {
+      "rings_high": "טבעות במטרה הגבוהה",
+      "rings_middle": "טבעות במטרה הבינונית",
+      "rings_low": "טבעות במטרה הנמוכה",
+      "power_shots": "מטרות Power Shot משוגרות בחזרה",
+      "wobble_goal_1_delivered": "שינוע המטרה המתנדנדת 1",
+      "wobble_goal_2_delivered": "שינוע המטרה המתנדנדת 2",
+      "robot_1_navigated": "רובוט 1 חונה",
+      "robot_2_navigated": "רובוט 2 חונה",
+      "wobble_goal_1_rings": "טבעות במטרה המתנדנדת 1",
+      "wobble_goal_2_rings": "טבעות במטרה המתנדנדת 2",
+      "wobble_goal_1_end_position": "מיקום המטרה המתנדנדת 1",
+      "wobble_goal_2_end_position": "מיקום המטרה המתנדנדת 2",
+      "start_line": "קו ההתחלה",
+      "drop_zone": "אזור ההפלה",
+      "not_scored": "לא נוקד"
     }
   }
 }
