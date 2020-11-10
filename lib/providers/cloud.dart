@@ -14,7 +14,7 @@ import '../models/user.dart';
 
 class Cloud {
 
-  static final String baseURL = "https://functions.theorangealliance.org";
+  static final String baseURL = 'https://functions.theorangealliance.org';
 
   static Future<bool> getNotificationsState() async {
     if (Platform.isAndroid) return true;
@@ -123,7 +123,7 @@ class Cloud {
     ));
     firebaseMessaging.onIosSettingsRegistered
         .listen((IosNotificationSettings settings) {
-      print("Settings registered: $settings");
+      print('Settings registered: $settings');
     });
 
     String cacheKey = 'fcm-token';
@@ -133,7 +133,7 @@ class Cloud {
     // Generate token
     String token = await firebaseMessaging.getToken();
     assert(token != null);
-    print("Push Messaging token: $token");
+    print('Push Messaging token: $token');
 
     // Find the device name
     String deviceName = 'Unknown device - Mobile App';
