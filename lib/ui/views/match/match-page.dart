@@ -196,6 +196,7 @@ class MatchPageState extends State<MatchPage> {
         : Container(
         margin: EdgeInsets.only(top: 36, bottom: 24),
         child: Center(child: CircularProgressIndicator())));
+    column.add(Padding(padding: EdgeInsets.only(top: 25)));
 
     return SingleChildScrollView(
         child: Column(
