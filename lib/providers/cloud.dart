@@ -79,7 +79,7 @@ class Cloud {
 
   static Future<bool> isFavTeam(String teamKey) async {
     TOAUser user = await getUser();
-    return user.favoriteTeams.contains(teamKey);
+    return user != null ? user.favoriteTeams.contains(teamKey) : false;
   }
 
   static setFavTeam(String teamKey, bool fav) async {
