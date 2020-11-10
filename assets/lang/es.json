@@ -230,7 +230,11 @@
         "robot_2_navigated": "Robot 2 Navegado",
         "wobble_goal_1_rings": "Anillos en el Gol del Tambaleante 1",
         "wobble_goal_2_rings": "Anillos en el Gol del Tambaleante 2",
-        "wobble_goal_end_position": "Posición Final del Gol del Tambaleante"
+        "wobble_goal_1_end_position": "Posición Final del Gol del Tambaleante 1",
+        "wobble_goal_2_end_position": "Posición Final del Gol del Tambaleante 2",
+        "start_line": "Línea de Salida",
+        "drop_zone": "Zona de Lanzamiento",
+        "not_scored": "No Anotó"
       }
     }
   }

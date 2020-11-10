@@ -233,7 +233,11 @@
       "robot_2_navigated": "Robot 2 Navigated",
       "wobble_goal_1_rings": "Rings on Wobble Goal 1",
       "wobble_goal_2_rings": "Rings on Wobble Goal 2",
-      "wobble_goal_end_position": "Wobble Goal End Position"
+      "wobble_goal_1_end_position": "Wobble Goal 1 End Position",
+      "wobble_goal_2_end_position": "Wobble Goal 2 End Position",
+      "start_line": "Start Line",
+      "drop_zone": "Drop Zone",
+      "not_scored": "Not Scored"
     }
   }
 }
