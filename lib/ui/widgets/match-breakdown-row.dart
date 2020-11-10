@@ -11,25 +11,32 @@ int FALSE_VALUE = -2000;
 
 class MatchBreakdownRow extends StatelessWidget {
 
-  MatchBreakdownRow({dynamic red, dynamic blue, this.points, this.name, this.title=false}) {
-    if (red is bool) {
+  MatchBreakdownRow({dynamic red, dynamic blue, this.points, this.name, this.title=false, this.text=false}) {
+    if (red is bool && !text) {
       this.red = red ? TRUE_VALUE : FALSE_VALUE;
+    } else if (red is String && text) {
+      this.redText = red;
     } else {
       this.red = red;
     }
 
-    if (blue is bool) {
+    if (blue is bool && !text) {
       this.blue = blue ? TRUE_VALUE : FALSE_VALUE;
+    } else if (blue is String && text) {
+      this.blueText = blue;
     } else {
       this.blue = blue;
     }
   }
 
   int red;
+  String redText;
   int blue;
+  String blueText;
   final int points;
   final String name;
   final bool title;
+  final bool text;
 
   TOALocalizations local;
   ThemeData theme;
@@ -40,10 +47,12 @@ class MatchBreakdownRow extends StatelessWidget {
     theme = Theme.of(context);
     List<Widget> row = [];
 
-    row.add(bulidPoints(red, points, Alliance.RED));
-    row.add(bulidName(name));
-    row.add(bulidPoints(blue, points, Alliance.BLUE));
-
+    row.add(
+        this.text ? buildText(redText, Alliance.RED)
+            : buildPoints(red, points, Alliance.RED));
+    row.add(buildName(name));
+    row.add(this.text ? buildText(blueText, Alliance.BLUE)
+        : buildPoints(blue, points, Alliance.BLUE));
 
     return IntrinsicHeight(
       child: Row(
@@ -55,7 +64,7 @@ class MatchBreakdownRow extends StatelessWidget {
   }
 
 
-  Widget bulidPoints(int missions, int points, Alliance alliance) {
+  Widget buildPoints(int missions, int points, Alliance alliance) {
     String text = '0';
     bool isTure = missions == TRUE_VALUE;
     bool isFalse = missions == FALSE_VALUE;
@@ -100,7 +109,32 @@ class MatchBreakdownRow extends StatelessWidget {
     );
   }
 
-  Widget bulidName(String name) {
+  Widget buildText(String text, Alliance alliance) {
+    return Expanded(
+      flex: 3,
+      child: Container(
+        padding: EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: getColor(alliance),
+          border: getBorder()
+        ),
+        child: Row(
+          //mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: title ? FontWeight.w600 : FontWeight.normal)
+            )
+          ]
+        )
+      )
+    );
+  }
+
+  Widget buildName(String name) {
     return Expanded(
       flex: 4,
       child:
