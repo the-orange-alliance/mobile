@@ -25,6 +25,7 @@ dependencies:
   rounded_modal: ^1.0.0
   rect_getter: ^0.1.0
   device_info: ^1.0.0
+  package_info: ^0.4.3+2
 
   # Firebase
   firebase_core: ^0.5.2
