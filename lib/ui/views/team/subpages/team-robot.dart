@@ -25,7 +25,7 @@ class TeamRobot extends StatelessWidget {
     if (data == null) {
       return FutureBuilder<List<Media>>(
         future: ApiV3().getTeamMedia(teamKey, StaticData().seasonKey),
-        
+
         initialData: null,
         builder: (BuildContext context, AsyncSnapshot<List<Media>> media) {
           if (media.data != null) {
@@ -53,7 +53,7 @@ class TeamRobot extends StatelessWidget {
           case TeamMediaType.GITHUB: {
             openSource = true;
             buttons.add(OutlineButton.icon(
-                icon: Icon(MdiIcons.githubCircle, size: 18),
+                icon: Icon(MdiIcons.github, size: 18),
                 label: Text('GitHub'),
                 onPressed: () {
                   openLink(media.mediaLink, context);
@@ -191,7 +191,7 @@ class TeamRobot extends StatelessWidget {
       child: Text(
         title,
         textAlign: TextAlign.start,
-        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: theme.primaryTextTheme.title.color),
+        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: theme.primaryTextTheme.headline6.color),
       ),
     );
   }
