@@ -217,6 +217,20 @@
         "level_bonus": "Bono de Altura",
         "moving_foundation": "Mover Base",
         "robots_parked": "Robots Estacionados"
+      },
+
+      "ultimategoal": {
+        "rings_high": "Anillos Puntúan Alto",
+        "rings_middle": "Anillos Puntúan en el Medio",
+        "rings_low": "Anillos Puntúan Bajo",
+        "power_shots": "Tomas de Poder con Éxito Lanzado Hacia Atrás",
+        "wobble_goal_1_delivered": "Gol del Tambaleante 1 Entregado",
+        "wobble_goal_2_delivered": "Gol del Tambaleante 2 Entregado",
+        "robot_1_navigated": "Robot 1 Navegado",
+        "robot_2_navigated": "Robot 2 Navegado",
+        "wobble_goal_1_rings": "Anillos en el Gol del Tambaleante 1",
+        "wobble_goal_2_rings": "Anillos en el Gol del Tambaleante 2",
+        "wobble_goal_end_position": "Posición Final del Gol del Tambaleante"
       }
     }
   }

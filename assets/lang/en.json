@@ -220,6 +220,20 @@
       "level_bonus": "Level Bonus",
       "moving_foundation": "Moving Foundation",
       "robots_parked": "Robots Parked"
+    },
+
+    "ultimategoal": {
+      "rings_high": "Rings Scored High",
+      "rings_middle": "Rings Scored Middle",
+      "rings_low": "Rings Scored Low",
+      "power_shots": "PowerShots Successfully Launched Back",
+      "wobble_goal_1_delivered": "Wobble Goal 1 Delivered",
+      "wobble_goal_2_delivered": "Wobble Goal 2 Delivered",
+      "robot_1_navigated": "Robot 1 Navigated",
+      "robot_2_navigated": "Robot 2 Navigated",
+      "wobble_goal_1_rings": "Rings on Wobble Goal 1",
+      "wobble_goal_2_rings": "Rings on Wobble Goal 2",
+      "wobble_goal_end_position": "Wobble Goal End Position"
     }
   }
 }
