@@ -216,7 +216,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
           Icon(icon, color: color, size: 16),
           Padding(
             padding: const EdgeInsets.only(left: 8),
-            child: Text(text, style: Theme.of(context).textTheme.subhead.copyWith(color: color))
+            child: Text(text, style: Theme.of(context).textTheme.subtitle1.copyWith(color: color))
           )
         ]
       )

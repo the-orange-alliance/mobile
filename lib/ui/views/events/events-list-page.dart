@@ -209,17 +209,17 @@ class EventsListPageState extends State<EventsListPage>
   }
 
   double findScrollOffset(int i, int count) {
-    double ITEM_HEIGHT = 72;
+    double itemHeight = 72;
     for (int j = 0; j < count; j++) {
       DateTime eventDate = events[j + i].getStartDate();
       DateTime now = DateTime.now();
       if (eventDate.year == now.year && eventDate.month == now.month) {
         if (Utils.isSameDate(eventDate, now)) {
-          return j * ITEM_HEIGHT;
+          return j * itemHeight;
 
           // Find the next event
         } else if (eventDate.isAfter(now)) {
-          return j * ITEM_HEIGHT;
+          return j * itemHeight;
         }
       } else {
         return 0;
