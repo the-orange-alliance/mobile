@@ -11,7 +11,6 @@ class UltimateGoalMatchDetails extends MatchDetails {
     this.blueMinPen,
     this.redMajPen,
     this.blueMajPen,
-    this.randomization,
 
     this.red,
     this.blue
@@ -23,7 +22,6 @@ class UltimateGoalMatchDetails extends MatchDetails {
   int blueMinPen;
   int redMajPen;
   int blueMajPen;
-  int randomization;
 
   UltimateGoalAllianceDetails red;
   UltimateGoalAllianceDetails blue;
@@ -43,7 +41,6 @@ class UltimateGoalMatchDetails extends MatchDetails {
         blueMinPen: map['blue_min_pen'],
         redMajPen: map['red_maj_pen'],
         blueMajPen: map['blue_maj_pen'],
-        randomization: map['randomization'],
 
         red: map.containsKey('red') && map['red'] != null ? UltimateGoalAllianceDetails.fromMap(map['red']) : null,
         blue: map.containsKey('blue') && map['blue'] != null ? UltimateGoalAllianceDetails.fromMap(map['blue']) : null
