@@ -117,10 +117,10 @@ class MatchPageState extends State<MatchPage> {
               })
             ]
                 : null),
-        body: buildInfo());
+        body: buildInfo(event.eventName.contains('REMOTE')));
   }
 
-  buildInfo() {
+  buildInfo(bool isRemote) {
     List<Widget> column = [];
     List<Widget> card = [];
 
@@ -192,7 +192,7 @@ class MatchPageState extends State<MatchPage> {
 
     // Match breakdown
     column.add(!loadingBreakdown
-        ? Column(children: GameData.getBreakdown(match, context))
+        ? Column(children: GameData.getBreakdown(match, context, isRemote))
         : Container(
         margin: EdgeInsets.only(top: 36, bottom: 24),
         child: Center(child: CircularProgressIndicator())));

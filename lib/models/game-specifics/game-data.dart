@@ -33,7 +33,7 @@ class GameData {
     }
   }
   
-  static List<Widget> getBreakdown(Match match, BuildContext context) {
+  static List<Widget> getBreakdown(Match match, BuildContext context, bool isRemote) {
     List<Widget> noData = [NoDataWidget(MdiIcons.ballotOutline, 'No Breakdown found')];
     if (match.gameData == null) {
       return noData;
@@ -46,7 +46,7 @@ class GameData {
       case '1920':
         return MatchBreakdown1920.getRows(match, context);
       case '2021':
-        return MatchBreakdown2021.getRows(match, context);
+        return MatchBreakdown2021.getRows(match, context, isRemote); // remote events were only introduced in 2020/2021
       default:
         return noData;
     }

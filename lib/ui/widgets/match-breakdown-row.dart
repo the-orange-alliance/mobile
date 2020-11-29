@@ -11,7 +11,7 @@ int FALSE_VALUE = -2000;
 
 class MatchBreakdownRow extends StatelessWidget {
 
-  MatchBreakdownRow({dynamic red, dynamic blue, this.points, this.name, this.title=false, this.text=false}) {
+  MatchBreakdownRow({dynamic red, dynamic blue, this.points, this.name, this.title=false, this.text=false, this.half=false}) {
     if (red is bool && !text) {
       this.red = red ? TRUE_VALUE : FALSE_VALUE;
     } else if (red is String && text) {
@@ -37,6 +37,7 @@ class MatchBreakdownRow extends StatelessWidget {
   final String name;
   final bool title;
   final bool text;
+  final bool half;
 
   TOALocalizations local;
   ThemeData theme;
@@ -51,8 +52,10 @@ class MatchBreakdownRow extends StatelessWidget {
         this.text ? buildText(redText, Alliance.RED)
             : buildPoints(red, points, Alliance.RED));
     row.add(buildName(name));
-    row.add(this.text ? buildText(blueText, Alliance.BLUE)
-        : buildPoints(blue, points, Alliance.BLUE));
+    if (!half) {
+      row.add(this.text ? buildText(blueText, Alliance.BLUE)
+          : buildPoints(blue, points, Alliance.BLUE));
+    }
 
     return IntrinsicHeight(
       child: Row(
@@ -77,7 +80,7 @@ class MatchBreakdownRow extends StatelessWidget {
     } else if (title) {
       text = '$missions ${local.get('breakdowns.points')}';
     } else if (missions != 0) {
-      int total = missions * points;
+      int total = missions != null ? missions * points : 0;
       text = '$missions (${total > 0 ? '+' : ''}$total)';
     }
 
