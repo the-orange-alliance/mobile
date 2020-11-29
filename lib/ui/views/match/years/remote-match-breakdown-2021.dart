@@ -46,10 +46,6 @@ class RemoteMatchBreakdown2021 {
           team: details.red.navigated1,
           points: 5),
       RemoteMatchBreakdownRow(
-          name: local.get('breakdowns.ultimategoal.robot_2_navigated'),
-          team: details.red.navigated2,
-          points: 5),
-      RemoteMatchBreakdownRow(
           name: local.get('breakdowns.teleop'),
           team: match.redTeleScore,
           title: true),
@@ -79,11 +75,11 @@ class RemoteMatchBreakdown2021 {
           points: 5),
       RemoteMatchBreakdownRow(
           name: local.get('breakdowns.ultimategoal.wobble_goal_1_end_position'),
-          team: getUltimateGoalWobbleString(details.red.wobbleRings2, local),
+          team: getUltimateGoalWobbleString(details.red.wobbleEnd1, local),
           text: true),
       RemoteMatchBreakdownRow(
           name: local.get('breakdowns.ultimategoal.wobble_goal_2_end_position'),
-          team: getUltimateGoalWobbleString(details.red.wobbleRings2, local),
+          team: getUltimateGoalWobbleString(details.red.wobbleEnd2, local),
           text: true),
       RemoteMatchBreakdownRow(
           name: local.get('breakdowns.ultimategoal.power_shots'),

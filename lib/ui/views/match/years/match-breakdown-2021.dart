@@ -94,13 +94,13 @@ class MatchBreakdown2021 {
           points: 5),
       MatchBreakdownRow(
           name: local.get('breakdowns.ultimategoal.wobble_goal_1_end_position'),
-          red: getUltimateGoalWobbleString(details.red.wobbleRings1, local),
-          blue: getUltimateGoalWobbleString(details.blue.wobbleRings2, local),
+          red: getUltimateGoalWobbleString(details.red.wobbleEnd1, local),
+          blue: getUltimateGoalWobbleString(details.blue.wobbleEnd1, local),
           text: true),
       MatchBreakdownRow(
           name: local.get('breakdowns.ultimategoal.wobble_goal_2_end_position'),
-          red: getUltimateGoalWobbleString(details.red.wobbleRings2, local),
-          blue: getUltimateGoalWobbleString(details.blue.wobbleRings2, local),
+          red: getUltimateGoalWobbleString(details.red.wobbleEnd2, local),
+          blue: getUltimateGoalWobbleString(details.blue.wobbleEnd2, local),
           text: true),
       MatchBreakdownRow(
           name: local.get('breakdowns.ultimategoal.power_shots'),
