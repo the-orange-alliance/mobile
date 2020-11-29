@@ -12,6 +12,7 @@ import 'package:toa_flutter/ui/views/match/years/match-breakdown-1718.dart';
 import 'package:toa_flutter/ui/views/match/years/match-breakdown-1819.dart';
 import 'package:toa_flutter/ui/views/match/years/match-breakdown-1920.dart';
 import 'package:toa_flutter/ui/views/match/years/match-breakdown-2021.dart';
+import 'package:toa_flutter/ui/views/match/years/remote-match-breakdown-2021.dart';
 
 class GameData {
 
@@ -46,7 +47,7 @@ class GameData {
       case '1920':
         return MatchBreakdown1920.getRows(match, context);
       case '2021':
-        return MatchBreakdown2021.getRows(match, context, isRemote); // remote events were only introduced in 2020/2021
+        return isRemote ? RemoteMatchBreakdown2021.getRows(match, context) : MatchBreakdown2021.getRows(match, context); // remote events were only introduced in 2020/2021
       default:
         return noData;
     }

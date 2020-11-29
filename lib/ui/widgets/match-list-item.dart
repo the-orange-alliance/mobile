@@ -40,10 +40,16 @@ class MatchListItem extends StatelessWidget {
       blueRow.add(bulidTeam(3, participants, context));
       blueRow.add(bulidTeam(4, participants, context));
       blueRow.add(bulidTeam(5, participants, context));
+    } else if (participants.length == 1) {
+      blueRow.add(bulidTeam(0, participants, context));
     }
 
-    redRow.add(bulidPoints(match.redScore.toString()));
-    blueRow.add(bulidPoints(match.blueScore.toString()));
+    if (participants.length == 1) {
+      blueRow.add(bulidPoints(match.redScore.toString()));
+    } else {
+      redRow.add(bulidPoints(match.redScore.toString()));
+      blueRow.add(bulidPoints(match.blueScore.toString()));
+    }
 
     if (!justTable) {
       // Match name
