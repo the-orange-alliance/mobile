@@ -3,41 +3,27 @@ import 'package:flutter/material.dart';
 import '../../internationalization/localizations.dart';
 import '../colors.dart' as TOAColors;
 
-enum Alliance {
-  RED, BLUE
-}
 int TRUE_VALUE = -1000;
 int FALSE_VALUE = -2000;
 
-class MatchBreakdownRow extends StatelessWidget {
+class RemoteMatchBreakdownRow extends StatelessWidget {
 
-  MatchBreakdownRow({dynamic red, dynamic blue, this.points, this.name, this.title=false, this.text=false, this.half=false}) {
-    if (red is bool && !text) {
-      this.red = red ? TRUE_VALUE : FALSE_VALUE;
-    } else if (red is String && text) {
-      this.redText = red;
+  RemoteMatchBreakdownRow({dynamic team, this.points, this.name, this.title=false, this.text=false}) {
+    if (team is bool && !text) {
+      this.team = team ? TRUE_VALUE : FALSE_VALUE;
+    } else if (team is String && text) {
+      this.teamText = team;
     } else {
-      this.red = red;
-    }
-
-    if (blue is bool && !text) {
-      this.blue = blue ? TRUE_VALUE : FALSE_VALUE;
-    } else if (blue is String && text) {
-      this.blueText = blue;
-    } else {
-      this.blue = blue;
+      this.team = team;
     }
   }
 
-  int red;
-  String redText;
-  int blue;
-  String blueText;
+  int team;
+  String teamText;
   final int points;
   final String name;
   final bool title;
   final bool text;
-  final bool half;
 
   TOALocalizations local;
   ThemeData theme;
@@ -48,14 +34,9 @@ class MatchBreakdownRow extends StatelessWidget {
     theme = Theme.of(context);
     List<Widget> row = [];
 
-    row.add(
-        this.text ? buildText(redText, Alliance.RED)
-            : buildPoints(red, points, Alliance.RED));
     row.add(buildName(name));
-    if (!half) {
-      row.add(this.text ? buildText(blueText, Alliance.BLUE)
-          : buildPoints(blue, points, Alliance.BLUE));
-    }
+    row.add(this.text ? buildText(teamText)
+        : buildPoints(team, points));
 
     return IntrinsicHeight(
       child: Row(
@@ -67,7 +48,7 @@ class MatchBreakdownRow extends StatelessWidget {
   }
 
 
-  Widget buildPoints(int missions, int points, Alliance alliance) {
+  Widget buildPoints(int missions, int points) {
     String text = '0';
     bool isTure = missions == TRUE_VALUE;
     bool isFalse = missions == FALSE_VALUE;
@@ -89,7 +70,7 @@ class MatchBreakdownRow extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: getColor(alliance),
+          color: getColor(),
           border: getBorder()
         ),
         child: Row(
@@ -112,13 +93,13 @@ class MatchBreakdownRow extends StatelessWidget {
     );
   }
 
-  Widget buildText(String text, Alliance alliance) {
+  Widget buildText(String text) {
     return Expanded(
       flex: 3,
       child: Container(
         padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: getColor(alliance),
+          color: getColor(),
           border: getBorder()
         ),
         child: Row(
@@ -168,11 +149,13 @@ class MatchBreakdownRow extends StatelessWidget {
     return title ? null : Border(bottom: BorderSide(width: 0.4, color: Colors.black12));
   }
 
-  Color getColor(Alliance alliance) {
-    if (alliance == Alliance.RED) {
-      return this.title ? TOAColors.Colors().lightRed : TOAColors.Colors().lighterRed;
+  Color getColor() {
+    if (theme.brightness == Brightness.light) {
+      return this.title
+          ? TOAColors.Colors().toaColors.shade300
+          : TOAColors.Colors().toaColors.shade200;
     } else {
-      return this.title ? TOAColors.Colors().lightBlue : TOAColors.Colors().lighterBlue;
+      return Colors.black.withOpacity(this.title ? 0.16 : 0.08);
     }
   }
 }

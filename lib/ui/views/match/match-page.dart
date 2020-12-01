@@ -192,7 +192,7 @@ class MatchPageState extends State<MatchPage> {
 
     // Match breakdown
     column.add(!loadingBreakdown
-        ? Column(children: GameData.getBreakdown(match, context))
+        ? Column(children: GameData.getBreakdown(match, context, match.participants.length == 1))
         : Container(
         margin: EdgeInsets.only(top: 36, bottom: 24),
         child: Center(child: CircularProgressIndicator())));
