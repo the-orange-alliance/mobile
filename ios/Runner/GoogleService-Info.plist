@@ -17,21 +17,21 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>The-Orange-Alliance.TOA</string>
+	<string>org.theorangealliance.app</string>
 	<key>PROJECT_ID</key>
 	<string>the-orange-alliance</string>
 	<key>STORAGE_BUCKET</key>
 	<string>the-orange-alliance.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:495169296462:ios:eebeafe77b89bbcd</string>
 	<key>DATABASE_URL</key>

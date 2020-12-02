@@ -1,12 +1,17 @@
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import './internationalization/localizations-delegate.dart';
 import './ui/colors.dart' as TOAColors;
 import './ui/views/events/events-list-page.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
 
@@ -37,7 +42,6 @@ class MyApp extends StatelessWidget {
             const Locale('en', 'US'), // English, must be first
             const Locale('he', 'IL'), // Hebrew
             const Locale('es', 'MX'), // Hebrew
-
           ],
           localizationsDelegates: [
             const TOALocalizationsDelegate(),

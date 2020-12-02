@@ -91,7 +91,7 @@ class SearchPageState extends State<SearchPage> {
         title: TextField(
           autofocus: true,
           controller: queryTextController,
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
           textInputAction: TextInputAction.search,
           decoration: InputDecoration(
             border: InputBorder.none,

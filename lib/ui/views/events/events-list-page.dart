@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:package_info/package_info.dart';
 
 import './sticky-header.dart';
 import '../../../sort.dart';
@@ -26,10 +27,15 @@ class EventsListPageState extends State<EventsListPage>
   TOALocalizations local;
   bool tabChanged = false;
 
+  PackageInfo packageInfo;
+
   @override
   void initState() {
     super.initState();
-    Cache().getEvents().then((List<Event> cacheEvents) {
+    PackageInfo.fromPlatform().then((info) {
+      packageInfo = info;
+      return Cache().getEvents();
+    }).then((List<Event> cacheEvents) {
       setState(() {
         events = cacheEvents;
         events.sort(Sort().eventSorter);
@@ -85,7 +91,7 @@ class EventsListPageState extends State<EventsListPage>
           leading: IconButton(
               icon: Icon(MdiIcons.accountCircleOutline),
               onPressed: () =>
-                  ProfileBottomSheet().showProfileBottomSheet(context)),
+                  ProfileBottomSheet().showProfileBottomSheet(context, packageInfo)),
           actions: <Widget>[
             IconButton(
                 icon: Icon(MdiIcons.magnify),
@@ -177,7 +183,7 @@ class EventsListPageState extends State<EventsListPage>
       return weekName;
     } else if (double.tryParse(weekKey) != null) {
       // weekKey is a number
-      return "Week" + weekKey;
+      return 'Week' + weekKey;
     } else {
       return local.get('months.${weekKey.toLowerCase()}', defaultValue: weekKey);
     }
@@ -185,7 +191,7 @@ class EventsListPageState extends State<EventsListPage>
 
   int findCurrentWeekTab() {
     if (tabs != null && tabs.length > 0) {
-      String month = DateFormat("MMMM", 'en_US').format(DateTime.now());
+      String month = DateFormat('MMMM', 'en_US').format(DateTime.now());
       for (int i = 0; i < tabs.length; i++) {
         if (month.toLowerCase() == tabs[i].key.toLowerCase()) {
           return i;
@@ -203,17 +209,17 @@ class EventsListPageState extends State<EventsListPage>
   }
 
   double findScrollOffset(int i, int count) {
-    double ITEM_HEIGHT = 72;
+    double itemHeight = 72;
     for (int j = 0; j < count; j++) {
       DateTime eventDate = events[j + i].getStartDate();
       DateTime now = DateTime.now();
       if (eventDate.year == now.year && eventDate.month == now.month) {
         if (Utils.isSameDate(eventDate, now)) {
-          return j * ITEM_HEIGHT;
+          return j * itemHeight;
 
           // Find the next event
         } else if (eventDate.isAfter(now)) {
-          return j * ITEM_HEIGHT;
+          return j * itemHeight;
         }
       } else {
         return 0;

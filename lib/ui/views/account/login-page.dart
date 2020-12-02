@@ -48,7 +48,7 @@ class LoginPageState extends State<LoginPage> {
                 Text(
                   local.get('pages.account.login.subtitle'),
                   textAlign: TextAlign.center,
-                  style: theme.textTheme.subtitle
+                  style: theme.textTheme.subtitle2
                 ),
                 SizedBox(height: 48),
                 TextField(
@@ -86,9 +86,8 @@ class LoginPageState extends State<LoginPage> {
                     ),
                     onPressed: () async {
                       try {
-                        FirebaseUser user = await FirebaseAuth
-                          .instance
-                          .signInWithEmailAndPassword(
+                        await FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
                             email: this.email ?? '',
                             password: this.password ?? ''
                         );
@@ -103,7 +102,7 @@ class LoginPageState extends State<LoginPage> {
                     child: Text(
                       local.get('pages.account.login.login'),
                       style: TextStyle(
-                        color: theme.primaryTextTheme.title.color
+                        color: theme.primaryTextTheme.headline6.color
                       )
                     )
                   )

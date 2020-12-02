@@ -24,6 +24,7 @@ class MatchListItem extends StatelessWidget {
     List<Widget> row = [];
     List<Widget> redRow = [];
     List<Widget> blueRow = [];
+    List<Widget> orangeRow = [];
 
     if (participants.length == 4) {
       redRow.add(bulidTeam(0, participants, context));
@@ -40,10 +41,16 @@ class MatchListItem extends StatelessWidget {
       blueRow.add(bulidTeam(3, participants, context));
       blueRow.add(bulidTeam(4, participants, context));
       blueRow.add(bulidTeam(5, participants, context));
+    } else if (participants.length == 1) {
+      orangeRow.add(bulidTeam(0, participants, context));
     }
 
-    redRow.add(bulidPoints(match.redScore.toString()));
-    blueRow.add(bulidPoints(match.blueScore.toString()));
+    if (participants.length == 1) {
+      orangeRow.add(bulidPoints(match.redScore.toString()));
+    } else {
+      redRow.add(bulidPoints(match.redScore.toString()));
+      blueRow.add(bulidPoints(match.blueScore.toString()));
+    }
 
     if (!justTable) {
       // Match name
@@ -67,26 +74,17 @@ class MatchListItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              color: TOAColors.Colors().lighterRed,
-              border: points && match.redScore > match.blueScore ? Border.all(color: TOAColors.Colors().red, width: 2) : null
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: redRow
-            )
+          buildRow(
+            children: redRow,
+            color: TOAColors.Colors().lighterRed,
+            border: points && match.redScore > match.blueScore ? Border.all(color: TOAColors.Colors().red, width: 2) : null
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: TOAColors.Colors().lighterBlue,
-              border: points && match.blueScore > match.redScore ? Border.all(color: TOAColors.Colors().blue, width: 2) : null
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: blueRow
-            )
-          )
+          buildRow(
+            children: blueRow,
+            color: TOAColors.Colors().lighterBlue,
+            border: points && match.blueScore > match.redScore ? Border.all(color: TOAColors.Colors().blue, width: 2) : null
+          ),
+          buildRow(children: orangeRow, color: (Theme.of(context).brightness == Brightness.light) ? TOAColors.Colors().toaColors.shade100 : Colors.black.withOpacity(0.12))
         ]
       )
     ));
@@ -156,5 +154,22 @@ class MatchListItem extends StatelessWidget {
         )
       )
     );
+  }
+
+  Widget buildRow({@required List<Widget> children, @required Color color, BoxBorder border,}) {
+    if (children.isNotEmpty) {
+      return Container(
+        decoration: BoxDecoration(
+          color: color,
+          border: border
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: children
+        )
+      );
+    } else {
+      return Container();
+    }
   }
 }

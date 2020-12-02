@@ -41,12 +41,12 @@ class EventSettingsDialogState extends State<EventSettingsDialog> {
           Divider(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-            child: Text('Notification Settings', style: Theme.of(context).textTheme.subtitle),
+            child: Text('Notification Settings', style: Theme.of(context).textTheme.subtitle2),
           ),
           Padding(
             padding: EdgeInsets.only(left: 14, right: 14, bottom: 14),
             child: Text('Subscribing to something lets you get a push notification whenever there is an update.',
-              style: Theme.of(context).textTheme.body1.copyWith(fontSize: 12)),
+              style: Theme.of(context).textTheme.bodyText2.copyWith(fontSize: 12)),
           ),
           CheckboxListTile(
             value: widget.eventSettings.matchScored,

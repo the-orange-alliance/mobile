@@ -89,14 +89,12 @@ class RegisterPageState extends State<RegisterPage> {
                         showSnackbar(local.get('pages.account.register.error_name'));
                       } else {
                         try {
-                          FirebaseUser user = await FirebaseAuth
-                            .instance
-                            .createUserWithEmailAndPassword(
-                            email: this.email ?? '',
-                            password: this.password ?? '');
-                          UserUpdateInfo info = UserUpdateInfo();
-                          info.displayName = this.name;
-                          user.updateProfile(info);
+                          UserCredential user = await FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                              email: this.email ?? '',
+                              password: this.password ?? ''
+                          );
+                          user.user.updateProfile(displayName: this.name);
                           Cloud.initFirebaseMessaging();
                           Navigator.of(context).pop();
                         } on PlatformException catch (e) {
@@ -109,7 +107,7 @@ class RegisterPageState extends State<RegisterPage> {
                     child: Text(
                       local.get('pages.account.register.sign_up'),
                       style: TextStyle(
-                        color: theme.primaryTextTheme.title.color
+                        color: theme.primaryTextTheme.headline6.color
                       )
                     )
                   )
