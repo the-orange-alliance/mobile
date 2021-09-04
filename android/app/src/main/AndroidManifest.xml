@@ -1,23 +1,24 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.theorangealliance.android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.theorangealliance.android">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
-         calls FlutterMain.startInitialization(this); in its onCreate method.
-         In most cases you can leave this as-is, but you if you want to provide
-         additional functionality it is fine to subclass or reimplement
-         FlutterApplication and put your custom class here. -->
-    <application
-        android:name=".Application"
-        android:label="The Orange Alliance"
-        android:icon="@mipmap/ic_launcher">
+        calls FlutterMain.startInitialization(this); in its onCreate method.
+        In most cases you can leave this as-is, but you if you want to provide
+        additional functionality it is fine to subclass or reimplement
+        FlutterApplication and put your custom class here. -->
+    <application android:label="The Orange Alliance" android:icon="@mipmap/ic_launcher">
 
+        <meta-data android:name="flutterEmbedding" android:value="2" />
         <meta-data
-                android:name="com.google.firebase.messaging.default_notification_icon"
-                android:resource="@drawable/notification_icon" />
-        <meta-data android:name="com.google.firebase.messaging.default_notification_color"
-                   android:value="#F89808" />
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/notification_icon" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:value="#F89808" />
+        <meta-data
+            android:name="io.flutter.embedding.android.SplashScreenDrawable"
+            android:resource="@drawable/launch_background" />
 
         <activity
             android:name=".MainActivity"
@@ -28,15 +29,12 @@
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
             <!-- This keeps the window background of the activity showing
-                 until Flutter renders its first frame. It can be removed if
-                 there is no splash screen (such as the default splash screen
-                 defined in @style/LaunchTheme). -->
-            <meta-data
-                android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
-                android:value="true" />
+                until Flutter renders its first frame. It can be removed if
+                there is no splash screen (such as the default splash screen
+                defined in @style/LaunchTheme). -->
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="FLUTTER_NOTIFICATION_CLICK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
