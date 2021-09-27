@@ -1,4 +1,4 @@
 class StaticData {
-  String seasonKey = '2021';
-  String seasonName = 'ULTIMATE GOAL';
+  String seasonKey = '2122';
+  String seasonName = 'FREIGHT FRENZY';
 }

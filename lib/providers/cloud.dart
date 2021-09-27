@@ -13,7 +13,6 @@ import '../models/event-settings.dart';
 import '../models/user.dart';
 
 class Cloud {
-
   static final String baseURL = 'https://functions.theorangealliance.org';
 
   static Future<bool> getNotificationsState() async {
@@ -30,7 +29,7 @@ class Cloud {
         'authorization': 'Bearer $token',
         'data': 'basic'
       };
-      Response res = await http.get(baseURL + '/user', headers: headers);
+      Response res = await http.get(Uri.parse(baseURL + '/user'), headers: headers);
       return TOAUser.fromJson(jsonDecode(res.body));
     } else {
       return null;
@@ -45,14 +44,16 @@ class Cloud {
         'authorization': 'Bearer $token',
         'data': eventKey
       };
-      Response res = await http.get(baseURL + '/user/getEventSettings', headers: headers);
+      Response res =
+          await http.get(Uri.parse(baseURL + '/user/getEventSettings'), headers: headers);
       return EventSettings.fromResponse(res.body);
     } else {
       return null;
     }
   }
 
-  static Future<bool> updateEventSettings(String eventKey, EventSettings eventSettings) async {
+  static Future<bool> updateEventSettings(
+      String eventKey, EventSettings eventSettings) async {
     User user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       String token = await user.getIdToken();
@@ -61,7 +62,11 @@ class Cloud {
         'Content-Type': 'application/json',
         'data': eventKey
       };
-      Response res = await http.post(baseURL + '/user/updateEventSettings', headers: headers, body: jsonEncode(eventSettings.toJson()));
+      Response res = await http.post(
+        Uri.parse(baseURL + '/user/updateEventSettings'),
+        headers: headers,
+        body: jsonEncode(eventSettings.toJson()),
+      );
       return res.statusCode == 200;
     } else {
       return false;
@@ -90,7 +95,11 @@ class Cloud {
         'authorization': 'Bearer $token',
         'data': 'team',
       };
-      Response res = await http.post(baseURL + '/user/${fav ? 'addFavorite' : 'removeFavorite'}', headers: headers, body: teamKey);
+      Response res = await http.post(
+        Uri.parse(baseURL + '/user/${fav ? 'addFavorite' : 'removeFavorite'}'),
+        headers: headers,
+        body: teamKey,
+      );
       return res.statusCode == 200;
     } else {
       return false;
@@ -102,10 +111,14 @@ class Cloud {
     if (user != null) {
       String token = await user.getIdToken();
       Map<String, String> headers = {
-        'authorization': 'Bearer $token'
+        'authorization': 'Bearer $token',
       };
       // TODO: Save the device name
-      Response res = await http.post(baseURL + '/user/saveMessagingToken', headers: headers, body: fcmToken);
+      Response res = await http.post(
+        Uri.parse(baseURL + '/user/saveMessagingToken'),
+        headers: headers,
+        body: fcmToken,
+      );
       print(res.statusCode);
       return res.statusCode == 200;
     } else {
@@ -117,12 +130,10 @@ class Cloud {
     if (await getNotificationsState() == false) return;
 
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    FirebaseMessaging firebaseMessaging = FirebaseMessaging();
-    firebaseMessaging.requestNotificationPermissions(IosNotificationSettings(
-        sound: false, badge: true, alert: true
-    ));
-    firebaseMessaging.onIosSettingsRegistered
-        .listen((IosNotificationSettings settings) {
+    FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+    firebaseMessaging.requestPermission(
+      sound: false, badge: true, alert: true
+    ).then((NotificationSettings settings) {
       print('Settings registered: $settings');
     });
 
@@ -139,7 +150,7 @@ class Cloud {
     String deviceName = 'Unknown device - Mobile App';
     try {
       if (Platform.isAndroid) {
-        deviceName = (await deviceInfo.androidInfo).model + ' - Andorid App';
+        deviceName = (await deviceInfo.androidInfo).model + ' - Android App';
       } else if (Platform.isIOS) {
         deviceName = (await deviceInfo.iosInfo).utsname.machine + ' - iOS App';
       }

@@ -1,4 +1,4 @@
-import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -12,7 +12,6 @@ import '../views/account/login-page.dart';
 import '../views/account/register-page.dart';
 
 class ProfileBottomSheet {
-
   double radius = 20;
 
   showProfileBottomSheet(BuildContext context, PackageInfo packageInfo) {
@@ -41,25 +40,30 @@ class ProfileBottomSheet {
                   myTOATile(context),
                   ListTile(
                     leading: Icon(MdiIcons.themeLightDark),
-                    title: Text(local.get(isDark ? 'menu.switch_light_mode' : 'menu.switch_dark_mode')),
+                    title: Text(local.get(isDark
+                        ? 'menu.switch_light_mode'
+                        : 'menu.switch_dark_mode')),
                     onTap: () {
                       Navigator.pop(context);
-                      DynamicTheme.of(context).setBrightness(isDark ? Brightness.light : Brightness.dark);
-                    }
+                      EasyDynamicTheme.of(context).changeTheme(
+                        dark: isDark ? false : true,
+                        dynamic: false,
+                      );
+                    },
                   ),
                   AboutListTile(
                     icon: Icon(TOAIcons.TOA),
                     applicationVersion: packageInfo.version ?? '',
                     aboutBoxChildren: <Widget>[
                       Text(local.get('general.about_toa_short'))
-                    ]
-                  )
-                ]
-              )
-            )
-          )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
         );
-      }
+      },
     );
   }
 
@@ -74,10 +78,10 @@ class ProfileBottomSheet {
             MaterialPageRoute(
               builder: (c) {
                 return AccountPage();
-              }
-            )
+              },
+            ),
           );
-        }
+        },
       );
     } else {
       return SizedBox();
@@ -91,23 +95,23 @@ class ProfileBottomSheet {
     if (user != null) {
       return ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-        leading: (user.displayName?.length ?? -1) > 0 || user.photoURL != null ? CircleAvatar(
-          backgroundImage: NetworkImage(user.photoURL ?? ''),
-          child: user.photoURL == null ? Text(user.displayName.substring(0, 1)) : null,
-          radius: 16,
-        ) : null,
+        leading: (user.displayName?.length ?? -1) > 0 || user.photoURL != null
+            ? CircleAvatar(
+                backgroundImage: NetworkImage(user.photoURL ?? ''),
+                child: user.photoURL == null
+                    ? Text(user.displayName.substring(0, 1))
+                    : null,
+                radius: 16,
+              )
+            : null,
         title: Text(user.displayName ?? 'TOA User'),
         subtitle: Text(user.email),
         onTap: () {
           Navigator.pop(context);
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (c) {
-                return AccountPage();
-              }
-            )
-          );
-        }
+          Navigator.of(context).push(MaterialPageRoute(builder: (c) {
+            return AccountPage();
+          }));
+        },
       );
     } else {
       return Padding(
@@ -121,31 +125,23 @@ class ProfileBottomSheet {
               textColor: Color(0xFF0175c2),
               onPressed: () {
                 Navigator.pop(context);
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (c) {
-                      return LoginPage();
-                    }
-                  )
-                );
-              }
+                Navigator.of(context).push(MaterialPageRoute(builder: (c) {
+                  return LoginPage();
+                }));
+              },
             ),
             FlatButton(
               child: Text(local.get('menu.register')),
               textColor: Color(0xFF0175c2),
               onPressed: () {
                 Navigator.pop(context);
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (c) {
-                      return RegisterPage();
-                    }
-                  )
-                );
-              }
+                Navigator.of(context).push(MaterialPageRoute(builder: (c) {
+                  return RegisterPage();
+                }));
+              },
             )
-          ]
-        )
+          ],
+        ),
       );
     }
   }
