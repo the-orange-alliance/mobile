@@ -41,39 +41,46 @@ class RegisterPageState extends State<RegisterPage> {
                   autofocus: true,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    labelText: local.get('pages.account.register.full_name') + '*',
+                    labelText:
+                        local.get('pages.account.register.full_name') + '*',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)
-                    )
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   onChanged: (String value) {
                     this.name = value;
-                  }
+                  },
                 ),
                 SizedBox(height: 8),
                 TextField(
                   keyboardType: TextInputType.emailAddress,
+                  autofillHints: {email},
+                  autocorrect: false,
                   decoration: InputDecoration(
                     labelText: local.get('pages.account.register.email') + '*',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)
-                    )
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   onChanged: (String value) {
                     this.email = value;
-                  }),
+                  },
+                ),
                 SizedBox(height: 8),
                 TextField(
                   obscureText: true,
+                  autofillHints: {password},
+                  autocorrect: false,
                   decoration: InputDecoration(
-                    labelText: local.get('pages.account.register.password') + '*',
+                    labelText:
+                        local.get('pages.account.register.password') + '*',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)
-                    )
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   onChanged: (String value) {
                     this.password = value;
-                  }
+                  },
                 ),
                 SizedBox(height: 24),
                 Padding(
@@ -84,16 +91,16 @@ class RegisterPageState extends State<RegisterPage> {
                     ),
                     onPressed: () async {
                       if (this.name.trim().isEmpty ||
-                        this.name.trim().length < 3 ||
-                        !this.name.trim().contains(' ')) {
-                        showSnackbar(local.get('pages.account.register.error_name'));
+                          this.name.trim().length < 3 ||
+                          !this.name.trim().contains(' ')) {
+                        showSnackbar(
+                            local.get('pages.account.register.error_name'));
                       } else {
                         try {
                           UserCredential user = await FirebaseAuth.instance
                               .createUserWithEmailAndPassword(
-                              email: this.email ?? '',
-                              password: this.password ?? ''
-                          );
+                                  email: this.email ?? '',
+                                  password: this.password ?? '');
                           user.user.updateProfile(displayName: this.name);
                           Cloud.initFirebaseMessaging();
                           Navigator.of(context).pop();
@@ -107,16 +114,15 @@ class RegisterPageState extends State<RegisterPage> {
                     child: Text(
                       local.get('pages.account.register.sign_up'),
                       style: TextStyle(
-                        color: theme.primaryTextTheme.headline6.color
-                      )
-                    )
-                  )
-                )
-              ]
-            )
-          )
-        )
-      )
+                          color: theme.primaryTextTheme.headline6.color),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 
