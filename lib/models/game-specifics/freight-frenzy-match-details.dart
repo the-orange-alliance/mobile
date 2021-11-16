@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:toa_flutter/models/game-specifics/freight-frenzy-alliance-details.dart';
 import 'package:toa_flutter/models/match-details.dart';
-import 'package:toa_flutter/models/game-specifics/ultimategoal-alliance-details.dart';
 
 class FreightFrenzyMatchDetails extends MatchDetails {
   FreightFrenzyMatchDetails({

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'package:toa_flutter/models/match.dart';
-import 'package:toa_flutter/models/match-details.dart';
+import 'package:toa_flutter/models/game-specifics/freight-frenzy-match-details.dart';
 import 'package:toa_flutter/models/game-specifics/relicrecovery-match-details.dart';
 import 'package:toa_flutter/models/game-specifics/roverruckus-match-details.dart';
 import 'package:toa_flutter/models/game-specifics/skystone-match-details.dart';
 import 'package:toa_flutter/models/game-specifics/ultimategoal-match-details.dart';
+import 'package:toa_flutter/models/match.dart';
+import 'package:toa_flutter/models/match-details.dart';
+import 'package:toa_flutter/ui/views/match/years/match-breakdown-2122.dart';
+import 'package:toa_flutter/ui/views/match/years/remote-match-breakdown-2122.dart';
 import 'package:toa_flutter/ui/widgets/no-data-widget.dart';
 import 'package:toa_flutter/ui/views/match/years/match-breakdown-1718.dart';
 import 'package:toa_flutter/ui/views/match/years/match-breakdown-1819.dart';
@@ -29,6 +32,8 @@ class GameData {
         return SkyStoneMatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
       case '2021':
         return UltimateGoalMatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
+      case '2122':
+        return FreightFrenzyMatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
       default:
         return null;
     }
@@ -48,6 +53,8 @@ class GameData {
         return MatchBreakdown1920.getRows(match, context);
       case '2021':
         return isRemote ? RemoteMatchBreakdown2021.getRows(match, context) : MatchBreakdown2021.getRows(match, context); // remote events were only introduced in 2020/2021
+      case '2122':
+        return isRemote ? RemoteMatchBreakdown2122.getRows(match, context) : MatchBreakdown2122.getRows(match, context);
       default:
         return noData;
     }

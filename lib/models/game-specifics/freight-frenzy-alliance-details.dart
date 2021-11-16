@@ -121,7 +121,6 @@ enum NavLocation {
   IN_WAREHOUSE,
   COMPLETELY_IN_STORAGE,
   COMPLETELY_IN_WAREHOUSE,
-
 }
 
 NavLocation _navLocationfromString(String str) {
@@ -130,6 +129,7 @@ NavLocation _navLocationfromString(String str) {
       return element;
     }
   });
+  return null;
 }
 
 enum BarcodeElement { DUCK, TEAM_SHIPPING_ELEMENT }
@@ -140,4 +140,5 @@ BarcodeElement _barcodeElementfromString(String str) {
       return element;
     }
   });
+  return null;
 }
