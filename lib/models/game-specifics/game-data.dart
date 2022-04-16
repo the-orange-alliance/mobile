@@ -52,9 +52,15 @@ class GameData {
       case '1920':
         return MatchBreakdown1920.getRows(match, context);
       case '2021':
-        return isRemote ? RemoteMatchBreakdown2021.getRows(match, context) : MatchBreakdown2021.getRows(match, context); // remote events were only introduced in 2020/2021
+        return isRemote
+            ? RemoteMatchBreakdown2021.getRows(match, context)
+            : MatchBreakdown2021.getRows(match,
+                context); // remote events were only introduced in 2020/2021
       case '2122':
-        return isRemote ? RemoteMatchBreakdown2122.getRows(match, context) : MatchBreakdown2122.getRows(match, context);
+        return isRemote
+            ? noData
+            : MatchBreakdown2122.getRows(match,
+                context); // the 2122 remote match data has some anomalies
       default:
         return noData;
     }
