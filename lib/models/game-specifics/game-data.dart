@@ -18,29 +18,42 @@ import 'package:toa_flutter/ui/views/match/years/match-breakdown-2021.dart';
 import 'package:toa_flutter/ui/views/match/years/remote-match-breakdown-2021.dart';
 
 class GameData {
-
   static MatchDetails fromResponse(String seasonKey, String json) {
     if (json.toString() == 'null' || json.toString() == '[]') {
       return null;
     }
-    switch (seasonKey) {
-      case '1718':
-        return RelicRecoveryMatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
-      case '1819':
-        return RoverRuckusMatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
-      case '1920':
-        return SkyStoneMatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
-      case '2021':
-        return UltimateGoalMatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
-      case '2122':
-        return FreightFrenzyMatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
-      default:
-        return null;
+    try {
+      switch (seasonKey) {
+        case '1718':
+          return RelicRecoveryMatchDetails.allFromResponse(json)
+                  ?.elementAt(0) ??
+              null;
+        case '1819':
+          return RoverRuckusMatchDetails.allFromResponse(json)?.elementAt(0) ??
+              null;
+        case '1920':
+          return SkyStoneMatchDetails.allFromResponse(json)?.elementAt(0) ??
+              null;
+        case '2021':
+          return UltimateGoalMatchDetails.allFromResponse(json)?.elementAt(0) ??
+              null;
+        case '2122':
+          return FreightFrenzyMatchDetails.allFromResponse(json)
+                  ?.elementAt(0) ??
+              null;
+        default:
+          return null;
+      }
+    } catch (err) {
+      return null;
     }
   }
-  
-  static List<Widget> getBreakdown(Match match, BuildContext context, bool isRemote) {
-    List<Widget> noData = [NoDataWidget(MdiIcons.ballotOutline, 'No Breakdown found')];
+
+  static List<Widget> getBreakdown(
+      Match match, BuildContext context, bool isRemote) {
+    List<Widget> noData = [
+      NoDataWidget(MdiIcons.ballotOutline, 'Match Breakdown Unavailable')
+    ];
     if (match.gameData == null) {
       return noData;
     }
