@@ -222,6 +222,34 @@
       "start_line": "קו ההתחלה",
       "drop_zone": "אזור ההפלה",
       "not_scored": "לא נוקד"
+    },
+
+    "freightfrenzy": {
+      "robot_1_navigated": "חניית רובוט 1",
+      "robot_2_navigated": "חניית רובוט 2",
+      "none": "אין",
+      "in_storage": "חלקית ב-Storage",
+      "in_warehouse": "חלקית ב-Warehouse",
+      "completely_in_storage": "לגמרי ב-Storage",
+      "completely_in_warehouse": "לגמרי ב-Warehouse",
+      "delivered_duck": "ברווזים שנמסרו",
+      "storage_unit_freight": "הובלות יחידות אחסון",
+      "level_1_freight": "הובלות לרמה 1",
+      "level_2_freight": "הובלות לרמה 2",
+      "level_3_freight": "הובלות לרמה 3",
+      "barcode_element_1": "Barcode Element 1",
+      "barcode_element_2": "Barcode Element 2",
+      "duck": "ברווז",
+      "team_shipping_element": "אלמנט משלוח קבוצתי",
+      "robot_1_bonus": "בונוס רובוט 1",
+      "robot_2_bonus": "בונוס רובוט 2",
+      "shared_hub_freight": "הובלת Shared Hub",
+      "element_delivered": "ברווזים או אלמנטי משלוח שנמסרו",
+      "shipping_hub_capped": "Shipping Hub Capped",
+      "alliance_hub_balanced": "Alliance Hub מאוזן",
+      "shared_hub_unbalanced": "Shared Hub לא מאוזן",
+      "robot_1_parked": "חניית רובוט 1",
+      "robot_2_parked": "חניית רובוט 2"
     }
   }
 }
