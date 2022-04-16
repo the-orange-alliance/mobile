@@ -246,7 +246,7 @@
       "none": "None",
       "in_storage": "Partially in Storage",
       "in_warehouse": "Partially in Warehouse",
-      "completely_in_storage": "Partially in Storage",
+      "completely_in_storage": "Completely in Storage",
       "completely_in_warehouse": "Completely in Warehouse",
       "delivered_duck": "Delivered Duck",
       "storage_unit_freight": "Storage Unit Freight",
