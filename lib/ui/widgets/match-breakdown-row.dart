@@ -115,23 +115,25 @@ class MatchBreakdownRow extends StatelessWidget {
       flex: 3,
       child: Container(
         padding: EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: getColor(alliance),
-          border: getBorder()
-        ),
+        decoration:
+            BoxDecoration(color: getColor(alliance), border: getBorder()),
         child: Row(
           //mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: title ? FontWeight.w600 : FontWeight.normal)
-            )
-          ]
-        )
-      )
+            Flexible(
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: title ? FontWeight.w600 : FontWeight.normal,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

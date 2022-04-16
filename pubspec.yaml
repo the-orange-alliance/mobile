@@ -20,7 +20,7 @@ dependencies:
   flutter_sticky_header: ^0.6.0
   http: ^0.13.3
   intl: ^0.17.0
-  material_design_icons_flutter: ^4.0.5955
+  material_design_icons_flutter: ^5.0.6595
   package_info: ^2.0.2
   rect_getter: ^1.0.0
   rounded_modal: ^1.0.1
@@ -28,10 +28,10 @@ dependencies:
   url_launcher: ^6.0.9
 
   # Firebase
-  firebase_analytics: ^8.2.0
+  firebase_analytics: ^9.1.5
   firebase_auth: ^3.0.1
   firebase_core: ^1.4.0
-  firebase_messaging: ^10.0.4
+  firebase_messaging: ^11.2.13
   firebase_storage: ^10.0.1
   flutter:
     sdk: flutter

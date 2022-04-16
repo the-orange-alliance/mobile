@@ -238,6 +238,34 @@
       "start_line": "Start Line",
       "drop_zone": "Drop Zone",
       "not_scored": "Not Scored"
+    },
+
+    "freightfrenzy": {
+      "robot_1_navigated": "Robot 1 Navigated",
+      "robot_2_navigated": "Robot 2 Navigated",
+      "none": "None",
+      "in_storage": "Partially in Storage",
+      "in_warehouse": "Partially in Warehouse",
+      "completely_in_storage": "Partially in Storage",
+      "completely_in_warehouse": "Completely in Warehouse",
+      "delivered_duck": "Delivered Duck",
+      "storage_unit_freight": "Storage Unit Freight",
+      "level_1_freight": "Level 1 Freight",
+      "level_2_freight": "Level 2 Freight",
+      "level_3_freight": "Level 3 Freight",
+      "barcode_element_1": "Barcode Element 1",
+      "barcode_element_2": "Barcode Element 2",
+      "duck": "Duck",
+      "team_shipping_element": "Team Shipping Element",
+      "robot_1_bonus": "Robot 1 Bonus",
+      "robot_2_bonus": "Robot 2 Bonus",
+      "shared_hub_freight": "Shared Hub Freight",
+      "element_delivered": "Duck or Shipping Element Delivered",
+      "shipping_hub_capped": "Shipping Hub Capped",
+      "alliance_hub_balanced": "Alliance Hub Balanced",
+      "shared_hub_unbalanced": "Shared Hub Unbalanced",
+      "robot_1_parked": "Robot 1 Parked",
+      "robot_2_parked": "Robot 2 Parked"
     }
   }
 }
