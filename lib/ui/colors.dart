@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Colors {
-  MaterialColor toaColors = const MaterialColor(0xFFF89808,
+  static MaterialColor toaColors = const MaterialColor(0xFFF89808,
     const {
       50  : const Color(0xFFFEF3E0),
       100 : const Color(0xFFFDE0B2),
@@ -16,11 +16,11 @@ class Colors {
     }
   );
 
-  Color red = Color(0xFFFF5252);
-  Color lightRed = Color(0x22FF5252);
-  Color lighterRed = Color(0x11FF5252);
+  static Color red = Color(0xFFFF5252);
+  static Color lightRed = Color(0x22FF5252);
+  static Color lighterRed = Color(0x11FF5252);
 
-  Color blue = Color(0xFF448AFF);
-  Color lightBlue = Color(0x22448AFF);
-  Color lighterBlue = Color(0x11448AFF);
+  static Color blue = Color(0xFF448AFF);
+  static Color lightBlue = Color(0x22448AFF);
+  static Color lighterBlue = Color(0x11448AFF);
 }

@@ -58,7 +58,7 @@ class Team {
       lastActive: map['last_active'],
       city: map['city'],
       state: map['state_prov'],
-      zipCode: map['zip_code'],
+      zipCode: map['zip_code'].toString(),
       country: map['country'],
       rookieYear: map['rookie_year'],
       website: map['website']

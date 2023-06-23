@@ -20,7 +20,7 @@ dependencies:
   flutter_sticky_header: ^0.6.0
   http: ^0.13.3
   intl: ^0.17.0
-  material_design_icons_flutter: ^5.0.6595
+  material_design_icons_flutter: ^6.0.7096
   package_info: ^2.0.2
   rect_getter: ^1.0.0
   rounded_modal: ^1.0.1
@@ -28,11 +28,11 @@ dependencies:
   url_launcher: ^6.0.9
 
   # Firebase
-  firebase_analytics: ^9.1.5
-  firebase_auth: ^3.0.1
-  firebase_core: ^1.4.0
-  firebase_messaging: ^11.2.13
-  firebase_storage: ^10.0.1
+  firebase_analytics: ^10.1.0
+  firebase_auth: ^4.2.5
+  firebase_core: ^2.4.1
+  firebase_messaging: ^14.2.1
+  firebase_storage: ^11.0.10
   flutter:
     sdk: flutter
 
@@ -52,6 +52,8 @@ flutter:
     - assets/images/loading.gif
     - assets/lang/en.json
     - assets/lang/he.json
+    - assets/lang/es.json
+    - assets/seasons/2122.json
   fonts:
     - family: TOA Icons
       fonts:

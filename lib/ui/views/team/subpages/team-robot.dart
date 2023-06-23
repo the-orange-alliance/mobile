@@ -24,7 +24,7 @@ class TeamRobot extends StatelessWidget {
 
     if (data == null) {
       return FutureBuilder<List<Media>>(
-        future: ApiV3().getTeamMedia(teamKey, StaticData().seasonKey),
+        future: ApiV3().getTeamMedia(teamKey, StaticData.seasonKey),
 
         initialData: null,
         builder: (BuildContext context, AsyncSnapshot<List<Media>> media) {
@@ -52,7 +52,7 @@ class TeamRobot extends StatelessWidget {
         switch(media.mediaType) {
           case TeamMediaType.GITHUB: {
             openSource = true;
-            buttons.add(OutlineButton.icon(
+            buttons.add(OutlinedButton.icon(
                 icon: Icon(MdiIcons.github, size: 18),
                 label: Text('GitHub'),
                 onPressed: () {
@@ -64,7 +64,7 @@ class TeamRobot extends StatelessWidget {
 
           case TeamMediaType.CAD: {
             openSource = true;
-            buttons.add(OutlineButton.icon(
+            buttons.add(OutlinedButton.icon(
                 icon: Icon(MdiIcons.drawing, size: 18),
                 label: Text('CAD Design'),
                 onPressed: () {
@@ -75,7 +75,7 @@ class TeamRobot extends StatelessWidget {
           }
 
           case TeamMediaType.NOTEBOOK: {
-            buttons.add(OutlineButton.icon(
+            buttons.add(OutlinedButton.icon(
                 icon: Icon(MdiIcons.book, size: 18),
                 label: Text(local.get('pages.team.robot_profile.engineering_notebook')),
                 onPressed: () {
@@ -86,7 +86,7 @@ class TeamRobot extends StatelessWidget {
           }
 
           case TeamMediaType.ROBOT_REVEAL: {
-            buttons.add(OutlineButton.icon(
+            buttons.add(OutlinedButton.icon(
                 icon: Icon(MdiIcons.youtube, size: 18),
                 label: Text(local.get('pages.team.robot_profile.robot_reveal')),
                 onPressed: () {
@@ -176,10 +176,11 @@ class TeamRobot extends StatelessWidget {
   }
 
   void openLink(String url, BuildContext context) async {
-    if (await canLaunch (url)) {
-      await launch(url);
+    final uri = Uri.dataFromString(url);
+    if (await canLaunchUrl (uri)) {
+      await launchUrl(uri);
     } else {
-      Scaffold.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('general.error_occurred')
       ));
     }

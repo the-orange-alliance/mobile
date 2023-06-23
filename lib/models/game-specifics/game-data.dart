@@ -8,8 +8,8 @@ import 'package:toa_flutter/models/game-specifics/skystone-match-details.dart';
 import 'package:toa_flutter/models/game-specifics/ultimategoal-match-details.dart';
 import 'package:toa_flutter/models/match.dart';
 import 'package:toa_flutter/models/match-details.dart';
+import 'package:toa_flutter/ui/views/match/match-breakdown-builder.dart';
 import 'package:toa_flutter/ui/views/match/years/match-breakdown-2122.dart';
-import 'package:toa_flutter/ui/views/match/years/remote-match-breakdown-2122.dart';
 import 'package:toa_flutter/ui/widgets/no-data-widget.dart';
 import 'package:toa_flutter/ui/views/match/years/match-breakdown-1718.dart';
 import 'package:toa_flutter/ui/views/match/years/match-breakdown-1819.dart';
@@ -38,7 +38,7 @@ class GameData {
           return UltimateGoalMatchDetails.allFromResponse(json)?.elementAt(0) ??
               null;
         case '2122':
-          return FreightFrenzyMatchDetails.allFromResponse(json)
+          return MatchDetails.allFromResponse(json)
                   ?.elementAt(0) ??
               null;
         default:
@@ -71,9 +71,9 @@ class GameData {
                 context); // remote events were only introduced in 2020/2021
       case '2122':
         return isRemote
-            ? noData
-            : MatchBreakdown2122.getRows(match,
-                context); // the 2122 remote match data has some anomalies
+            ? noData // the 2122 remote match data has some anomalies
+            : MatchBreakdownBuilder.getRows(match,
+                context); 
       default:
         return noData;
     }

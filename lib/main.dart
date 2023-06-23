@@ -15,10 +15,14 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   ThemeData _theme(Brightness brightness) => ThemeData(
-        primarySwatch: TOAColors.Colors().toaColors,
-        accentColor: brightness == Brightness.dark
-            ? TOAColors.Colors().toaColors.shade600
-            : null,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: TOAColors.Colors.toaColors,
+          primary: TOAColors.Colors.toaColors,
+          secondary: brightness == Brightness.dark
+              ? TOAColors.Colors.toaColors.shade600
+              : null,
+          brightness: brightness,
+        ),
         fontFamily: 'GoogleSans',
         cardTheme: CardTheme(
           clipBehavior: Clip.antiAlias,
@@ -26,7 +30,15 @@ class MyApp extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(6)),
           ),
         ),
-        brightness: brightness,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+            ),
+            padding: EdgeInsets.all(12),
+            backgroundColor: TOAColors.Colors.toaColors,
+          ),
+        ),
       );
 
   @override

@@ -25,8 +25,8 @@ class SkyStoneMatchDetails extends MatchDetails {
   int blueMajPen;
   int randomization;
 
-  SkyStoneAllianceDetails red;
-  SkyStoneAllianceDetails blue;
+  dynamic red;
+  dynamic blue;
 
   static List<SkyStoneMatchDetails> allFromResponse(String response) {
     return json.decode(response)

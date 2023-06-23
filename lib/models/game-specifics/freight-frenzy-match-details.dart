@@ -21,8 +21,8 @@ class FreightFrenzyMatchDetails extends MatchDetails {
   int redMajPen;
   int blueMajPen;
 
-  FreightFrenzyAllianceDetails red;
-  FreightFrenzyAllianceDetails blue;
+  dynamic red;
+  dynamic blue;
 
   static List<FreightFrenzyMatchDetails> allFromResponse(String response) {
     return json

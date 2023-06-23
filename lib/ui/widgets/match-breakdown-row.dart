@@ -170,9 +170,9 @@ class MatchBreakdownRow extends StatelessWidget {
 
   Color getColor(Alliance alliance) {
     if (alliance == Alliance.RED) {
-      return this.title ? TOAColors.Colors().lightRed : TOAColors.Colors().lighterRed;
+      return this.title ? TOAColors.Colors.lightRed : TOAColors.Colors.lighterRed;
     } else {
-      return this.title ? TOAColors.Colors().lightBlue : TOAColors.Colors().lighterBlue;
+      return this.title ? TOAColors.Colors.lightBlue : TOAColors.Colors.lighterBlue;
     }
   }
 }

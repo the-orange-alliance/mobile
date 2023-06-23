@@ -152,8 +152,8 @@ class RemoteMatchBreakdownRow extends StatelessWidget {
   Color getColor() {
     if (theme.brightness == Brightness.light) {
       return this.title
-          ? TOAColors.Colors().toaColors.shade300
-          : TOAColors.Colors().toaColors.shade200;
+          ? TOAColors.Colors.toaColors.shade300
+          : TOAColors.Colors.toaColors.shade200;
     } else {
       return Colors.black.withOpacity(this.title ? 0.16 : 0.08);
     }

@@ -13,8 +13,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class RegisterPageState extends State<RegisterPage> {
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
   String name = '';
   String email = '';
   String password = '';
@@ -25,7 +23,6 @@ class RegisterPageState extends State<RegisterPage> {
     ThemeData theme = Theme.of(context);
 
     return Scaffold(
-      key: scaffoldKey,
       appBar: AppBar(title: Text(local.get('pages.account.register.title'))),
       body: SafeArea(
         top: false,
@@ -85,16 +82,16 @@ class RegisterPageState extends State<RegisterPage> {
                 SizedBox(height: 24),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16),
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                    ),
+                  child: ElevatedButton(
+                    style: ElevatedButtonTheme.of(context).style,
                     onPressed: () async {
                       if (this.name.trim().isEmpty ||
                           this.name.trim().length < 3 ||
                           !this.name.trim().contains(' ')) {
                         showSnackbar(
-                            local.get('pages.account.register.error_name'));
+                          context,
+                          local.get('pages.account.register.error_name'),
+                        );
                       } else {
                         try {
                           UserCredential user = await FirebaseAuth.instance
@@ -105,12 +102,10 @@ class RegisterPageState extends State<RegisterPage> {
                           Cloud.initFirebaseMessaging();
                           Navigator.of(context).pop();
                         } on PlatformException catch (e) {
-                          showSnackbar(e.message);
+                          showSnackbar(context, e.message);
                         }
                       }
                     },
-                    padding: EdgeInsets.all(12),
-                    color: theme.primaryColor,
                     child: Text(
                       local.get('pages.account.register.sign_up'),
                       style: TextStyle(
@@ -126,7 +121,7 @@ class RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  showSnackbar(String value) {
-    scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(value)));
+  showSnackbar(BuildContext context, String value) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value)));
   }
 }

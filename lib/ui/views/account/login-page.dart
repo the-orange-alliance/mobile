@@ -13,8 +13,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
   String email = '';
   String password = '';
 
@@ -25,7 +23,6 @@ class LoginPageState extends State<LoginPage> {
     bool isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
-      key: scaffoldKey,
       appBar: AppBar(title: Text(local.get('pages.account.login.title'))),
       body: SafeArea(
         top: false,
@@ -85,10 +82,8 @@ class LoginPageState extends State<LoginPage> {
                 SizedBox(height: 24),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16),
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                    ),
+                  child: ElevatedButton(
+                    style: ElevatedButtonTheme.of(context).style,
                     onPressed: () async {
                       try {
                         await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -98,11 +93,9 @@ class LoginPageState extends State<LoginPage> {
                         Cloud.initFirebaseMessaging();
                         Navigator.of(context).pop();
                       } on PlatformException catch (e) {
-                        showSnackbar(e.message);
+                        showSnackbar(context, e.message);
                       }
                     },
-                    padding: EdgeInsets.all(12),
-                    color: theme.primaryColor,
                     child: Text(
                       local.get('pages.account.login.login'),
                       style: TextStyle(
@@ -119,7 +112,7 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 
-  showSnackbar(String value) {
-    scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(value)));
+  showSnackbar(BuildContext context, String value) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value)));
   }
 }

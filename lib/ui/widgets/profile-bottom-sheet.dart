@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:package_info/package_info.dart';
 import 'package:rounded_modal/rounded_modal.dart';
+import 'package:toa_flutter/models/event.dart';
 
 import '../../internationalization/localizations.dart';
 import '../icon.dart';
@@ -18,6 +19,7 @@ class ProfileBottomSheet {
     TOALocalizations local = TOALocalizations.of(context);
     final ThemeData theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    var _tapPosition;
 
     showRoundedModalBottomSheet(
       context: context,
@@ -38,18 +40,72 @@ class ProfileBottomSheet {
                   buildProfileRow(context),
                   Divider(height: 0),
                   myTOATile(context),
-                  ListTile(
-                    leading: Icon(MdiIcons.themeLightDark),
-                    title: Text(local.get(isDark
-                        ? 'menu.switch_light_mode'
-                        : 'menu.switch_dark_mode')),
-                    onTap: () {
-                      Navigator.pop(context);
-                      EasyDynamicTheme.of(context).changeTheme(
-                        dark: isDark ? false : true,
-                        dynamic: false,
-                      );
-                    },
+                  GestureDetector(
+                    onTapDown: (details) =>
+                        _tapPosition = details.globalPosition,
+                    child: ListTile(
+                      leading: Icon(MdiIcons.themeLightDark),
+                      title: Text(local.get(isDark
+                          ? 'menu.switch_light_mode'
+                          : 'menu.switch_dark_mode')),
+                      onTap: () {
+                        Navigator.pop(context);
+                        EasyDynamicTheme.of(context).changeTheme(
+                          dark: isDark ? false : true,
+                          dynamic: false,
+                        );
+                      },
+                      onLongPress: () {
+                        final RenderBox overlay =
+                            Overlay.of(context).context.findRenderObject();
+                        showMenu(
+                          context: context,
+                          // its 2 am -k
+                          // https://stackoverflow.com/questions/54300081/flutter-popupmenu-on-long-press
+                          position: RelativeRect.fromRect(
+                              _tapPosition &
+                                  const Size(
+                                      40, 40), // smaller rect, the touch area
+                              Offset.zero &
+                                  overlay.size // Bigger rect, the entire screen
+                              ),
+                          items: [
+                            PopupMenuItem(
+                              value: 0,
+                              child: Text("Light Theme"),
+                            ),
+                            PopupMenuItem(
+                              value: 1,
+                              child: Text("Dark Theme"),
+                            ),
+                            PopupMenuItem(
+                              value: 2,
+                              child: Text("Auto"),
+                            ),
+                          ],
+                        ).then((value) {
+                          switch (value) {
+                            case 0:
+                              EasyDynamicTheme.of(context).changeTheme(
+                                dark: false,
+                                dynamic: false,
+                              );
+                              break;
+                            case 1:
+                              EasyDynamicTheme.of(context).changeTheme(
+                                dark: true,
+                                dynamic: false,
+                              );
+                              break;
+                            case 2:
+                              EasyDynamicTheme.of(context).changeTheme(
+                                dynamic: true,
+                              );
+                              break;
+                          }
+                        });
+                      },
+                    ),
                   ),
                   AboutListTile(
                     icon: Icon(TOAIcons.TOA),
@@ -120,9 +176,11 @@ class ProfileBottomSheet {
           spacing: 12,
           runSpacing: 4,
           children: <Widget>[
-            FlatButton(
-              child: Text(local.get('menu.login')),
-              textColor: Color(0xFF0175c2),
+            TextButton(
+              child: Text(
+                local.get('menu.login'),
+                style: TextStyle(color: Color(0xFF0175c2)),
+              ),
               onPressed: () {
                 Navigator.pop(context);
                 Navigator.of(context).push(MaterialPageRoute(builder: (c) {
@@ -130,9 +188,11 @@ class ProfileBottomSheet {
                 }));
               },
             ),
-            FlatButton(
-              child: Text(local.get('menu.register')),
-              textColor: Color(0xFF0175c2),
+            TextButton(
+              child: Text(
+                local.get('menu.register'),
+                style: TextStyle(color: Color(0xFF0175c2)),
+              ),
               onPressed: () {
                 Navigator.pop(context);
                 Navigator.of(context).push(MaterialPageRoute(builder: (c) {

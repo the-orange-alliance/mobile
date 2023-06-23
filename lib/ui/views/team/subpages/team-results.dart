@@ -105,9 +105,9 @@ class TeamResults extends StatelessWidget {
     List<TeamParticipant> teamParticipants = [];
 
     // Get all the team's rankings
-    List<Ranking> allRankings = await ApiV3().getTeamResults(teamKey, StaticData().seasonKey);
+    List<Ranking> allRankings = await ApiV3().getTeamResults(teamKey, StaticData.seasonKey);
 
-    await ApiV3().getTeamEvents(teamKey, StaticData().seasonKey).then((events) async {
+    await ApiV3().getTeamEvents(teamKey, StaticData.seasonKey).then((events) async {
       events.sort(Sort().eventParticipantSorter);
 
       for (int i = 0; i < events.length; i++) {

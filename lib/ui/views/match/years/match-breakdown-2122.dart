@@ -84,8 +84,8 @@ class MatchBreakdown2122 {
       ),
       MatchBreakdownRow(
         name: local.get('breakdowns.teleop'),
-        red: match.redAutoScore,
-        blue: match.blueAutoScore,
+        red: match.redScore,
+        blue: match.blueScore,
         title: true,
       ),
       MatchBreakdownRow(

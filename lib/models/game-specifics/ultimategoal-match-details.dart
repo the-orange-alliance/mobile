@@ -23,8 +23,8 @@ class UltimateGoalMatchDetails extends MatchDetails {
   int redMajPen;
   int blueMajPen;
 
-  UltimateGoalAllianceDetails red;
-  UltimateGoalAllianceDetails blue;
+  dynamic red;
+  dynamic blue;
 
   static List<UltimateGoalMatchDetails> allFromResponse(String response) {
     return json.decode(response)
