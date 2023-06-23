@@ -67,7 +67,7 @@ class Match {
       scheduledTime: map['scheduled_time'],
       matchName: map['match_name'],
       playNumber: map['play_number'],
-      fieldNumber: map['field_number'],
+      fieldNumber: map['field_number'] is int ? map['field_number'] : int.parse(map['field_number']),
       prestartTime: map['prestart_time'],
       prestartCount: map['prestart_count'],
       cycleTime: map['cycle_time'],

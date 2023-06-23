@@ -9,6 +9,7 @@ class MatchBreakdownLayouts {
 
   static Future _load(String seasonKey, {bool cache = true}) async {
     String data = await rootBundle
+    // TODO CATCH THIS ERROR
         .loadString('assets/seasons/${seasonKey}.json', cache: cache);
 
     return json
