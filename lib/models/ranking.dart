@@ -18,7 +18,7 @@ class Ranking {
     this.tieBreakerPoints,
     this.disqualified,
     this.played,
-    this.team
+    this.team,
   });
 
   final String rankKey;
@@ -39,30 +39,31 @@ class Ranking {
   final Team team;
 
   static List<Ranking> allFromResponse(String response) {
-    return jsonDecode(response)
-        .map((obj) => Ranking.fromMap(obj))
-        .toList()
-        .cast<Ranking>();
+    final list = List.from(json.decode(response));
+    list.removeWhere((e) => e == null); // WORKAROUND FOR SKYSTONE
+
+    return list.map((obj) => Ranking.fromMap(obj)).toList().cast<Ranking>();
   }
 
   static Ranking fromMap(Map map) {
     return Ranking(
-      rankKey: map['rank_key'],
-      eventKey: map['event_key'],
-      teamKey: map['team_key'].toString(),
-      rank: map['rank'],
-      rankChange: map['rank_change'],
-      opr: map['opr'],
-      wins: map['wins'],
-      losses: map['losses'],
-      ties: map['ties'],
-      highestQualScore: map['highest_qual_score'],
-      rankingPoints: map['ranking_points'],
-      qualifyingPoints: map['qualifying_points'],
-      tieBreakerPoints: map['tie_breaker_points'],
-      disqualified: map['disqualified'],
-      played: map['played'],
-      team: map.containsKey('team') && map['team'] != null ? Team.fromMap(map['team']) : null
-    );
+        rankKey: map['rank_key'],
+        eventKey: map['event_key'],
+        teamKey: map['team_key'].toString(),
+        rank: map['rank'],
+        rankChange: map['rank_change'],
+        opr: map['opr'],
+        wins: map['wins'],
+        losses: map['losses'],
+        ties: map['ties'],
+        highestQualScore: map['highest_qual_score'],
+        rankingPoints: map['ranking_points'],
+        qualifyingPoints: map['qualifying_points'],
+        tieBreakerPoints: map['tie_breaker_points'],
+        disqualified: map['disqualified'],
+        played: map['played'],
+        team: map.containsKey('team') && map['team'] != null
+            ? Team.fromMap(map['team'])
+            : null);
   }
 }

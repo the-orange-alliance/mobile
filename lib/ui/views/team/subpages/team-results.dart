@@ -14,7 +14,6 @@ import '../../../widgets/match-list-item.dart';
 import '../../../widgets/no-data-widget.dart';
 
 class TeamResults extends StatelessWidget {
-
   TeamResults(this.teamKey);
 
   final String teamKey;
@@ -32,7 +31,7 @@ class TeamResults extends StatelessWidget {
           data = teamParticipants.data;
         }
         return bulidPage();
-      }
+      },
     );
   }
 
@@ -43,15 +42,13 @@ class TeamResults extends StatelessWidget {
           itemCount: data.length,
           itemBuilder: (BuildContext context, int index) {
             return bulidItem(data[index]);
-          }
+          },
         );
       } else {
         return NoDataWidget(MdiIcons.calendarOutline, local.get('no_data.events'));
       }
     } else {
-      return Center(
-        child: CircularProgressIndicator()
-      );
+      return Center(child: CircularProgressIndicator());
     }
   }
 
@@ -70,12 +67,19 @@ class TeamResults extends StatelessWidget {
           TextSpan(
             children: <TextSpan>[
               TextSpan(text: '${local.get('pages.event.rankings.qual_rank')} '),
-              TextSpan(text: '#${teamParticipant.ranking.rank} ', style: TextStyle(fontWeight: FontWeight.bold)),
-              TextSpan(text: '${local.get('pages.event.rankings.with_record')} '),
-              TextSpan(text: '${teamParticipant.ranking.wins}-${teamParticipant.ranking.losses}-${teamParticipant.ranking.ties}', style: TextStyle(fontWeight: FontWeight.bold)),
-            ]
-          )
-        )
+              TextSpan(
+                text: '#${teamParticipant.ranking.rank} ',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              TextSpan(
+                  text: '${local.get('pages.event.rankings.with_record')} '),
+              TextSpan(
+                text: '${teamParticipant.ranking.wins}-${teamParticipant.ranking.losses}-${teamParticipant.ranking.ties}',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
       ));
     }
 
@@ -86,7 +90,11 @@ class TeamResults extends StatelessWidget {
     } else {
       card.add(Padding(
         padding: EdgeInsets.all(12),
-        child: NoDataWidget(MdiIcons.gamepadVariant, local.get('no_data.matches'), mini: true)
+        child: NoDataWidget(
+          MdiIcons.gamepadVariant,
+          local.get('no_data.matches'),
+          mini: true,
+        ),
       ));
     }
 
@@ -95,9 +103,9 @@ class TeamResults extends StatelessWidget {
       child: Card(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: card
-        )
-      )
+          children: card,
+        ),
+      ),
     );
   }
 
@@ -107,19 +115,24 @@ class TeamResults extends StatelessWidget {
     // Get all the team's rankings
     List<Ranking> allRankings = await ApiV3().getTeamResults(teamKey, StaticData.seasonKey);
 
-    await ApiV3().getTeamEvents(teamKey, StaticData.seasonKey).then((events) async {
-      events.sort(Sort().eventParticipantSorter);
+    final teamEvents = await ApiV3().getTeamEvents(teamKey, StaticData.seasonKey);
 
-      for (int i = 0; i < events.length; i++) {
-        EventParticipant eventParticipant = events[i];
+    try {
+      teamEvents.sort(Sort().eventParticipantSorter);
+
+      List<Future<void>> requests = [];
+
+      for (final event in teamEvents) {
+        EventParticipant eventParticipant = event;
         TeamParticipant teamParticipant = TeamParticipant();
 
         // Get event detail
-        teamParticipant.event = await ApiV3().getEvent(eventParticipant.eventKey);
+        teamParticipant.event =
+            await ApiV3().getEvent(eventParticipant.eventKey);
 
         // Get team matches
-        List<Match> teamMatches = [];
-        await ApiV3().getEventMatches(eventParticipant.eventKey).then((matches) {
+        requests.add(ApiV3().getEventMatches(eventParticipant.eventKey).then((matches) {
+          List<Match> teamMatches = [];
           for (int i = 0; i < matches.length; i++) {
             Match match = matches[i];
             for (int i = 0; i < match.participants.length; i++) {
@@ -129,9 +142,9 @@ class TeamResults extends StatelessWidget {
               }
             }
           }
-        });
-        teamMatches.sort(Sort().matchSorter);
-        teamParticipant.matches = teamMatches;
+          teamMatches.sort(Sort().matchSorter);
+          teamParticipant.matches = teamMatches;
+        }));
 
         // Find the ranking in the event
         for (int i = 0; i < allRankings.length; i++) {
@@ -144,7 +157,12 @@ class TeamResults extends StatelessWidget {
 
         teamParticipants.add(teamParticipant);
       }
-    }).catchError(print);
+
+      Future.wait(requests);
+    } catch (e) {
+      print(e);
+    }
+
     teamParticipants.sort(Sort().teamParticipantSorter);
     return teamParticipants;
   }

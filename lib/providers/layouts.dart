@@ -7,16 +7,21 @@ class MatchBreakdownLayouts {
   static List<MatchBreakdownLayoutElement> _loadedSeason;
   static String _loadedSeasonYear;
 
-  static Future _load(String seasonKey, {bool cache = true}) async {
-    String data = await rootBundle
-    // TODO CATCH THIS ERROR
-        .loadString('assets/seasons/${seasonKey}.json', cache: cache);
+  static Future<List<MatchBreakdownLayoutElement>> _load(String seasonKey, {bool cache = true}) async {
+    print('trying to open ${seasonKey}');
 
-    return json
-        .decode(data)
-        .map((m) => MatchBreakdownLayoutElement.fromMap(m))
-        .toList()
-        .cast<MatchBreakdownLayoutElement>();
+    try {
+      String data = await rootBundle
+          .loadString('assets/seasons/${seasonKey}.json', cache: cache);
+
+      return json
+          .decode(data)
+          .map((m) => MatchBreakdownLayoutElement.fromMap(m))
+          .toList()
+          .cast<MatchBreakdownLayoutElement>();
+    } catch (e) {
+      print(e);
+    }
   }
 
   static Future<void> cacheSeasonLayout(String seasonKey) async {
