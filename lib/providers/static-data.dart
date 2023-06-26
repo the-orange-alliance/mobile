@@ -1,3 +1,3 @@
 class StaticData {
-  static String seasonKey = '2122';
+  static String seasonKey = '2223';
 }

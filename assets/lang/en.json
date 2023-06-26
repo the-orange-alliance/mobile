@@ -266,6 +266,27 @@
       "shared_hub_unbalanced": "Shared Hub Unbalanced",
       "robot_1_parked": "Robot 1 Parked",
       "robot_2_parked": "Robot 2 Parked"
+    },
+
+    "powerplay": {
+      "robot_1_navigated": "Robot 1 Navigated",
+      "robot_2_navigated": "Robot 2 Navigated",
+      "none": "None",
+      "signal_zone": "Signal Zone (+10)",
+      "substation_terminal": "Substation Terminal (+2)",
+      "custom_signal_zone": "Custom Sleeve Signal Zone (+20)",
+      "cone_terminal": "Cones Placed in a Terminal",
+      "cone_ground": "Cones in Ground Junctions",
+      "cone_low": "Cones in Low Junctions",
+      "cone_mid": "Cones in Medium Junctions",
+      "cone_high": "Cones in High Junctions",
+      "cone_terminal_near": "Cones Placed in Near Terminal",
+      "cone_terminal_far": "Cones Placed in Far Terminal",
+      "robot_1_parked": "Robot 1 Parked",
+      "robot_2_parked": "Robot 2 Parked",
+      "junctions_owned_cone": "Junctions Owned by Cones",
+      "junctions_owned_beacon": "Junctions Owned by Beacons",
+      "completed_circuit": "Completed Circuit"
     }
   }
 }

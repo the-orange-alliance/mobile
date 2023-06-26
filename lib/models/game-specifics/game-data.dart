@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'package:toa_flutter/models/game-specifics/freight-frenzy-match-details.dart';
 import 'package:toa_flutter/models/game-specifics/relicrecovery-match-details.dart';
 import 'package:toa_flutter/models/game-specifics/roverruckus-match-details.dart';
 import 'package:toa_flutter/models/game-specifics/skystone-match-details.dart';
@@ -9,7 +8,6 @@ import 'package:toa_flutter/models/game-specifics/ultimategoal-match-details.dar
 import 'package:toa_flutter/models/match.dart';
 import 'package:toa_flutter/models/match-details.dart';
 import 'package:toa_flutter/ui/views/match/match-breakdown-builder.dart';
-import 'package:toa_flutter/ui/views/match/years/match-breakdown-2122.dart';
 import 'package:toa_flutter/ui/widgets/no-data-widget.dart';
 import 'package:toa_flutter/ui/views/match/years/match-breakdown-1718.dart';
 import 'package:toa_flutter/ui/views/match/years/match-breakdown-1819.dart';
@@ -38,11 +36,9 @@ class GameData {
           return UltimateGoalMatchDetails.allFromResponse(json)?.elementAt(0) ??
               null;
         case '2122':
-          return MatchDetails.allFromResponse(json)
-                  ?.elementAt(0) ??
-              null;
+          return MatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
         default:
-          return null;
+          return MatchDetails.allFromResponse(json)?.elementAt(0);
       }
     } catch (err) {
       return null;
@@ -72,8 +68,9 @@ class GameData {
       case '2122':
         return isRemote
             ? noData // the 2122 remote match data has some anomalies
-            : MatchBreakdownBuilder.getRows(match,
-                context); 
+            : MatchBreakdownBuilder.getRows(match, context);
+      case '2223':
+        return MatchBreakdownBuilder.getRows(match, context);
       default:
         return noData;
     }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toa_flutter/internationalization/localizations.dart';
+import 'package:toa_flutter/models/game-specifics/2122-helper.dart';
+import 'package:toa_flutter/models/game-specifics/2223-helper.dart';
 import 'package:toa_flutter/models/match-details.dart';
 import 'package:toa_flutter/models/match.dart';
 import 'package:toa_flutter/providers/layouts.dart';
@@ -29,7 +31,7 @@ class MatchBreakdownBuilder {
      * SCHEMA:
      * name: string; contains the i18n value of the row.
 
-     * type: 'title' | 'text' | 'points'
+     * type: 'title' | 'text' | 'points' | 'custom'
 
      * value: string; where the data is received from; 
      *            titles and match (gameData) are resolved via _getalliancevalue
@@ -41,7 +43,7 @@ class MatchBreakdownBuilder {
       switch (e.type) {
         case 'title':
           final name = local.get(e.name);
-          final scores = _getAllianceValue(e.value, match);
+          final scores = _getAllianceValue(e.value, match, season);
 
           rows.add(MatchBreakdownRow(
             name: name,
@@ -84,16 +86,16 @@ class MatchBreakdownBuilder {
           var outval = [];
 
           if (type == 'match') {
-            outval = _getAllianceValue(value, match);
+            outval = _getAllianceValue(value, match, season);
             // penalties can add to opponents
-            if (e.points > 0) outval = outval.reversed;
+            if (e.points > 0) outval = outval.reversed.toList();
+          } else if (value.contains("::")) {
+            // refer to something in a list
+            final v2 = value.split('::');
+            outval = [red[v2[0]][int.parse(v2[1])], blue[v2[0]][int.parse(v2[1])]];
           } else {
             outval = [red[value], blue[value]];
           }
-
-          // if (outval[0] is bool) {
-          //   outval = outval.map((e) => e ? 1 : 0).toList();
-          // }
 
           rows.add(MatchBreakdownRow(
             name: name,
@@ -101,13 +103,39 @@ class MatchBreakdownBuilder {
             blue: outval[1],
             points: e.points,
           ));
+          break;
+
+        case 'custom':
+          switch (e.name) {
+            case 'powerplay.auto_nav':
+              final redNav = PowerPlayHelper.getAutoNav(local, red);
+              final blueNav = PowerPlayHelper.getAutoNav(local, blue);
+              rows.addAll(List.generate(
+                2,
+                (i) => MatchBreakdownRow(
+                  name: local
+                      .get('breakdowns.powerplay.robot_${i + 1}_navigated'),
+                  red: redNav[i],
+                  blue: blueNav[i],
+                  text: true,
+                ),
+              ));
+              break;
+            case 'powerplay.junctions_owned':
+              rows.add(MatchBreakdownRow(
+                name: local.get('breakdowns.powerplay.junctions_owned'),
+                red: PowerPlayHelper.junctionsOwned(red),
+                blue: PowerPlayHelper.junctionsOwned(blue),
+                points: 3,
+              ));
+          }
       }
     }
 
     return rows;
   }
 
-  static List<int> _getAllianceValue(String val, Match m) {
+  static List<int> _getAllianceValue(String val, Match m, String season) {
     switch (val) {
       case 'auto_score':
         return [m.redAutoScore, m.blueAutoScore];
@@ -116,7 +144,13 @@ class MatchBreakdownBuilder {
       case 'end_score':
         return [m.redEndScore, m.blueEndScore];
       case 'penalty':
-        return [m.redPenalty, m.bluePenalty]; //TODO: investigate this
+        switch (season) {
+          case '2122':
+            return FreightFrenzyHelper.getPenaltyPoints(m);
+          case '2223':
+            return PowerPlayHelper.getPenaltyPoints(m);
+        }
+        break;
       case 'minor_penalty':
         return [m.gameData.redMinPen, m.gameData.blueMinPen];
       case 'major_penalty':
