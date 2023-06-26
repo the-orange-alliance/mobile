@@ -13,8 +13,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class RegisterPageState extends State<RegisterPage> {
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
   String name = '';
   String email = '';
   String password = '';
@@ -25,7 +23,6 @@ class RegisterPageState extends State<RegisterPage> {
     ThemeData theme = Theme.of(context);
 
     return Scaffold(
-      key: scaffoldKey,
       appBar: AppBar(title: Text(local.get('pages.account.register.title'))),
       body: SafeArea(
         top: false,
@@ -41,86 +38,90 @@ class RegisterPageState extends State<RegisterPage> {
                   autofocus: true,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    labelText: local.get('pages.account.register.full_name') + '*',
+                    labelText:
+                        local.get('pages.account.register.full_name') + '*',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)
-                    )
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   onChanged: (String value) {
                     this.name = value;
-                  }
+                  },
                 ),
                 SizedBox(height: 8),
                 TextField(
                   keyboardType: TextInputType.emailAddress,
+                  autofillHints: {email},
+                  autocorrect: false,
                   decoration: InputDecoration(
                     labelText: local.get('pages.account.register.email') + '*',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)
-                    )
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   onChanged: (String value) {
                     this.email = value;
-                  }),
+                  },
+                ),
                 SizedBox(height: 8),
                 TextField(
                   obscureText: true,
+                  autofillHints: {password},
+                  autocorrect: false,
                   decoration: InputDecoration(
-                    labelText: local.get('pages.account.register.password') + '*',
+                    labelText:
+                        local.get('pages.account.register.password') + '*',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)
-                    )
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   onChanged: (String value) {
                     this.password = value;
-                  }
+                  },
                 ),
                 SizedBox(height: 24),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16),
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                    ),
+                  child: ElevatedButton(
+                    style: ElevatedButtonTheme.of(context).style,
                     onPressed: () async {
                       if (this.name.trim().isEmpty ||
-                        this.name.trim().length < 3 ||
-                        !this.name.trim().contains(' ')) {
-                        showSnackbar(local.get('pages.account.register.error_name'));
+                          this.name.trim().length < 3 ||
+                          !this.name.trim().contains(' ')) {
+                        showSnackbar(
+                          context,
+                          local.get('pages.account.register.error_name'),
+                        );
                       } else {
                         try {
                           UserCredential user = await FirebaseAuth.instance
                               .createUserWithEmailAndPassword(
-                              email: this.email ?? '',
-                              password: this.password ?? ''
-                          );
+                                  email: this.email ?? '',
+                                  password: this.password ?? '');
                           user.user.updateProfile(displayName: this.name);
                           Cloud.initFirebaseMessaging();
                           Navigator.of(context).pop();
                         } on PlatformException catch (e) {
-                          showSnackbar(e.message);
+                          showSnackbar(context, e.message);
                         }
                       }
                     },
-                    padding: EdgeInsets.all(12),
-                    color: theme.primaryColor,
                     child: Text(
                       local.get('pages.account.register.sign_up'),
                       style: TextStyle(
-                        color: theme.primaryTextTheme.headline6.color
-                      )
-                    )
-                  )
-                )
-              ]
-            )
-          )
-        )
-      )
+                          color: theme.primaryTextTheme.headline6.color),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 
-  showSnackbar(String value) {
-    scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(value)));
+  showSnackbar(BuildContext context, String value) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value)));
   }
 }

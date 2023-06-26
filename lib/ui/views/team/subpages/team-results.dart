@@ -14,7 +14,6 @@ import '../../../widgets/match-list-item.dart';
 import '../../../widgets/no-data-widget.dart';
 
 class TeamResults extends StatelessWidget {
-
   TeamResults(this.teamKey);
 
   final String teamKey;
@@ -27,12 +26,13 @@ class TeamResults extends StatelessWidget {
 
     return FutureBuilder<List<TeamParticipant>>(
       future: getTeamParticipants(teamKey),
-      builder: (BuildContext context, AsyncSnapshot<List<TeamParticipant>> teamParticipants) {
+      builder: (BuildContext context,
+          AsyncSnapshot<List<TeamParticipant>> teamParticipants) {
         if (teamParticipants.data != null) {
           data = teamParticipants.data;
         }
         return bulidPage();
-      }
+      },
     );
   }
 
@@ -43,15 +43,14 @@ class TeamResults extends StatelessWidget {
           itemCount: data.length,
           itemBuilder: (BuildContext context, int index) {
             return bulidItem(data[index]);
-          }
+          },
         );
       } else {
-        return NoDataWidget(MdiIcons.calendarOutline, local.get('no_data.events'));
+        return NoDataWidget(
+            MdiIcons.calendarOutline, local.get('no_data.events'));
       }
     } else {
-      return Center(
-        child: CircularProgressIndicator()
-      );
+      return Center(child: CircularProgressIndicator());
     }
   }
 
@@ -64,18 +63,27 @@ class TeamResults extends StatelessWidget {
     card.add(Divider(height: 0));
 
     // Ranking
-    if (teamParticipant.ranking != null && !teamParticipant.ranking.rank.isNaN) {
+    if (teamParticipant.ranking != null &&
+        !teamParticipant.ranking.rank.isNaN) {
       card.add(ListTile(
         title: Text.rich(
           TextSpan(
             children: <TextSpan>[
               TextSpan(text: '${local.get('pages.event.rankings.qual_rank')} '),
-              TextSpan(text: '#${teamParticipant.ranking.rank} ', style: TextStyle(fontWeight: FontWeight.bold)),
-              TextSpan(text: '${local.get('pages.event.rankings.with_record')} '),
-              TextSpan(text: '${teamParticipant.ranking.wins}-${teamParticipant.ranking.losses}-${teamParticipant.ranking.ties}', style: TextStyle(fontWeight: FontWeight.bold)),
-            ]
-          )
-        )
+              TextSpan(
+                text: '#${teamParticipant.ranking.rank} ',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              TextSpan(
+                  text: '${local.get('pages.event.rankings.with_record')} '),
+              TextSpan(
+                text:
+                    '${teamParticipant.ranking.wins}-${teamParticipant.ranking.losses}-${teamParticipant.ranking.ties}',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
       ));
     }
 
@@ -86,7 +94,11 @@ class TeamResults extends StatelessWidget {
     } else {
       card.add(Padding(
         padding: EdgeInsets.all(12),
-        child: NoDataWidget(MdiIcons.gamepadVariant, local.get('no_data.matches'), mini: true)
+        child: NoDataWidget(
+          MdiIcons.gamepadVariant,
+          local.get('no_data.matches'),
+          mini: true,
+        ),
       ));
     }
 
@@ -95,9 +107,9 @@ class TeamResults extends StatelessWidget {
       child: Card(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: card
-        )
-      )
+          children: card,
+        ),
+      ),
     );
   }
 
@@ -105,46 +117,50 @@ class TeamResults extends StatelessWidget {
     List<TeamParticipant> teamParticipants = [];
 
     // Get all the team's rankings
-    List<Ranking> allRankings = await ApiV3().getTeamResults(teamKey, StaticData().seasonKey);
+    final Future<List<Ranking>> allRankings =
+        ApiV3().getTeamResults(teamKey, StaticData.seasonKey);
 
-    await ApiV3().getTeamEvents(teamKey, StaticData().seasonKey).then((events) async {
-      events.sort(Sort().eventParticipantSorter);
+    final teamEvents = await ApiV3().getTeamEvents(teamKey, StaticData.seasonKey);
 
-      for (int i = 0; i < events.length; i++) {
-        EventParticipant eventParticipant = events[i];
+    try {
+      teamEvents.sort(Sort().eventParticipantSorter);
+
+      List<Future<void>> requests = [];
+
+      for (final event in teamEvents) {
+        EventParticipant eventParticipant = event;
         TeamParticipant teamParticipant = TeamParticipant();
 
         // Get event detail
-        teamParticipant.event = await ApiV3().getEvent(eventParticipant.eventKey);
+        requests.add(ApiV3()
+            .getEvent(eventParticipant.eventKey)
+            .then((e) => teamParticipant.event = e));
 
         // Get team matches
-        List<Match> teamMatches = [];
-        await ApiV3().getEventMatches(eventParticipant.eventKey).then((matches) {
-          for (int i = 0; i < matches.length; i++) {
-            Match match = matches[i];
-            for (int i = 0; i < match.participants.length; i++) {
-              if (match.participants[i].teamKey == teamKey) {
-                teamMatches.add(match);
-                break;
-              }
-            }
-          }
-        });
-        teamMatches.sort(Sort().matchSorter);
-        teamParticipant.matches = teamMatches;
+        requests.add(
+            ApiV3().getEventMatches(eventParticipant.eventKey).then((matches) {
+          List<Match> teamMatches = matches
+              .where((match) => match.participants
+                  .any((participant) => participant.teamKey == teamKey))
+              .toList();
+
+          teamMatches.sort(Sort().matchSorter);
+          teamParticipant.matches = teamMatches;
+        }));
 
         // Find the ranking in the event
-        for (int i = 0; i < allRankings.length; i++) {
-          Ranking ranking = allRankings[i];
-          if (ranking.eventKey == eventParticipant.eventKey) {
-            teamParticipant.ranking = ranking;
-            break;
-          }
-        }
+        requests.add(allRankings.then((rankings) => teamParticipant.ranking =
+            rankings.firstWhere(
+                (ranking) => ranking.eventKey == eventParticipant.eventKey)));
 
         teamParticipants.add(teamParticipant);
       }
-    }).catchError(print);
+
+      await Future.wait(requests);
+    } catch (e) {
+      print(e);
+    }
+
     teamParticipants.sort(Sort().teamParticipantSorter);
     return teamParticipants;
   }

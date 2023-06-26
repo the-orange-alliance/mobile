@@ -11,7 +11,7 @@ int FALSE_VALUE = -2000;
 
 class MatchBreakdownRow extends StatelessWidget {
 
-  MatchBreakdownRow({dynamic red, dynamic blue, this.points, this.name, this.title=false, this.text=false, this.half=false}) {
+  MatchBreakdownRow({dynamic red, dynamic blue, this.points, this.name, this.title=false, this.text=false}) {
     if (red is bool && !text) {
       this.red = red ? TRUE_VALUE : FALSE_VALUE;
     } else if (red is String && text) {
@@ -37,7 +37,6 @@ class MatchBreakdownRow extends StatelessWidget {
   final String name;
   final bool title;
   final bool text;
-  final bool half;
 
   TOALocalizations local;
   ThemeData theme;
@@ -52,10 +51,9 @@ class MatchBreakdownRow extends StatelessWidget {
         this.text ? buildText(redText, Alliance.RED)
             : buildPoints(red, points, Alliance.RED));
     row.add(buildName(name));
-    if (!half) {
-      row.add(this.text ? buildText(blueText, Alliance.BLUE)
-          : buildPoints(blue, points, Alliance.BLUE));
-    }
+    row.add(this.text
+        ? buildText(blueText, Alliance.BLUE)
+        : buildPoints(blue, points, Alliance.BLUE));
 
     return IntrinsicHeight(
       child: Row(
@@ -117,23 +115,25 @@ class MatchBreakdownRow extends StatelessWidget {
       flex: 3,
       child: Container(
         padding: EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: getColor(alliance),
-          border: getBorder()
-        ),
+        decoration:
+            BoxDecoration(color: getColor(alliance), border: getBorder()),
         child: Row(
           //mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: title ? FontWeight.w600 : FontWeight.normal)
-            )
-          ]
-        )
-      )
+            Flexible(
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: title ? FontWeight.w600 : FontWeight.normal,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -170,9 +170,9 @@ class MatchBreakdownRow extends StatelessWidget {
 
   Color getColor(Alliance alliance) {
     if (alliance == Alliance.RED) {
-      return this.title ? TOAColors.Colors().lightRed : TOAColors.Colors().lighterRed;
+      return this.title ? TOAColors.Colors.lightRed : TOAColors.Colors.lighterRed;
     } else {
-      return this.title ? TOAColors.Colors().lightBlue : TOAColors.Colors().lighterBlue;
+      return this.title ? TOAColors.Colors.lightBlue : TOAColors.Colors.lighterBlue;
     }
   }
 }

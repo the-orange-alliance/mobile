@@ -76,15 +76,15 @@ class MatchListItem extends StatelessWidget {
         children: <Widget>[
           buildRow(
             children: redRow,
-            color: TOAColors.Colors().lighterRed,
-            border: points && match.redScore > match.blueScore ? Border.all(color: TOAColors.Colors().red, width: 2) : null
+            color: TOAColors.Colors.lighterRed,
+            border: points && match.redScore > match.blueScore ? Border.all(color: TOAColors.Colors.red, width: 2) : null
           ),
           buildRow(
             children: blueRow,
-            color: TOAColors.Colors().lighterBlue,
-            border: points && match.blueScore > match.redScore ? Border.all(color: TOAColors.Colors().blue, width: 2) : null
+            color: TOAColors.Colors.lighterBlue,
+            border: points && match.blueScore > match.redScore ? Border.all(color: TOAColors.Colors.blue, width: 2) : null
           ),
-          buildRow(children: orangeRow, color: (Theme.of(context).brightness == Brightness.light) ? TOAColors.Colors().toaColors.shade100 : Colors.black.withOpacity(0.12))
+          buildRow(children: orangeRow, color: (Theme.of(context).brightness == Brightness.light) ? TOAColors.Colors.toaColors.shade100 : Colors.black.withOpacity(0.12))
         ]
       )
     ));
@@ -125,7 +125,7 @@ class MatchListItem extends StatelessWidget {
               )
             );
           },
-          highlightColor: team.station > 20 ? TOAColors.Colors().lightBlue : TOAColors.Colors().lightRed,
+          highlightColor: team.station > 20 ? TOAColors.Colors.lightBlue : TOAColors.Colors.lightRed,
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 12),
             child: Column(

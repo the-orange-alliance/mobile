@@ -27,7 +27,7 @@ class ApiV3 {
       'Content-Type': 'application/json'
     };
 
-    var request = await http.get(baseURL + endpoint, headers: headers);
+    var request = await http.get(Uri.parse(baseURL + endpoint), headers: headers);
     if (request.statusCode != 200) {
       throw request.body;
     }

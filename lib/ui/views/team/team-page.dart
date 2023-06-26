@@ -60,7 +60,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
       team = await ApiV3().getTeam(teamKey);
     }
 
-    TeamSeasonRecord record = await ApiV3().getTeamWLT(teamKey, StaticData().seasonKey);
+    TeamSeasonRecord record = await ApiV3().getTeamWLT(teamKey, StaticData.seasonKey);
 
     setState(() {
       this.record = record;
@@ -87,8 +87,8 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
         begin: FractionalOffset.centerRight,
         end: FractionalOffset.bottomLeft,
         colors: <Color>[
-          TOAColors.Colors().toaColors.shade400,
-          TOAColors.Colors().toaColors.shade600
+          TOAColors.Colors.toaColors.shade400,
+          TOAColors.Colors.toaColors.shade600
         ],
       ),
     );

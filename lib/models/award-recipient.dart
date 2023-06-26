@@ -20,7 +20,7 @@ class AwardRecipient {
   final String teamKey;
   final String receiverName;
   final String awardName;
-  final Award award;
+  final Award award; // unused?
   final Team team;
 
   static List<AwardRecipient> allFromResponse(String response) {
@@ -38,7 +38,7 @@ class AwardRecipient {
       teamKey: map['team_key'],
       receiverName: map['receiver_name'],
       awardName: map['award_name'],
-      award: Award.fromMap(map['award']),
+      // award: Award.fromMap(map['award']),
       team: Team.fromMap(map['team'])
     );
   }

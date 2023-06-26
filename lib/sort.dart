@@ -54,19 +54,17 @@ class Sort {
     int matchParticipant2 = int.parse(b.participants[0].teamKey);
     bool isMatchRemote = a.participants.length == 1;
 
-/**
- * if a match is remote but has already been sorted by team number, it will skip to the next condition: match number.
- */
+    // if a match is remote but has already been sorted by team number, it will skip to the next condition: match number.
     if (tournamentLevel1 == tournamentLevel2 && isMatchRemote && matchParticipant1 != matchParticipant2) {
       return matchParticipant1 < matchParticipant2 ? -1 : 1;
     } else if (tournamentLevel1 == tournamentLevel2) {
       return matchNumber1 < matchNumber2 ? -1 : 1;
     } else if (tournamentLevel1 == MatchType.FINALS_MATCH) {
-      return 1;
-    } else if (tournamentLevel2 == MatchType.FINALS_MATCH) {
       return -1;
+    } else if (tournamentLevel2 == MatchType.FINALS_MATCH) {
+      return 1;
     } else {
-      return tournamentLevel1 < tournamentLevel2 ? -1 : 1;
+      return tournamentLevel1 > tournamentLevel2 ? -1 : 1;
     }
   }
 

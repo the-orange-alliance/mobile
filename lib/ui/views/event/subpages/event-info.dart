@@ -54,7 +54,7 @@ class EventInfo extends StatelessWidget {
           if (await canLaunch(url)) {
             await launch(url);
           } else {
-            Scaffold.of(context).showSnackBar(SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(local.get('general.error_occurred')),
             ));
           }
@@ -70,7 +70,7 @@ class EventInfo extends StatelessWidget {
           if (await canLaunch(url)) {
             await launch(url);
           } else {
-            Scaffold.of(context).showSnackBar(SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(local.get('general.error_occurred')),
             ));
           }
@@ -96,7 +96,7 @@ class EventInfo extends StatelessWidget {
                     if (await canLaunch(url)) {
                       await launch(url);
                     } else {
-                      Scaffold.of(context).showSnackBar(SnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(local.get('general.error_occurred')),
                       ));
                     }

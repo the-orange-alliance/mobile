@@ -1,0 +1,154 @@
+[
+  {
+    "name": "breakdowns.autonomous",
+    "type": "title",
+    "value": "auto_score"
+  },
+  {
+    "name": "breakdowns.freightfrenzy.robot_1_navigated",
+    "type": "text",
+    "value": "alliance_details.auto_navigated_1"
+  },
+  {
+    "name": "breakdowns.freightfrenzy.robot_2_navigated",
+    "type": "text",
+    "value": "alliance_details.auto_navigated_2"
+  },
+  {
+    "name": "breakdowns.freightfrenzy.delivered_duck",
+    "type": "points",
+    "value": "alliance_details.carousel",
+    "points": 10
+  },
+  {
+    "name": "breakdowns.freightfrenzy.storage_unit_freight",
+    "type": "points",
+    "value": "alliance_details.auto_storage_freight",
+    "points": 2
+  },
+  {
+    "name": "breakdowns.freightfrenzy.level_1_freight",
+    "type": "points",
+    "value": "alliance_details.auto_freight_1",
+    "points": 6
+  },
+  {
+    "name": "breakdowns.freightfrenzy.level_2_freight",
+    "type": "points",
+    "value": "alliance_details.auto_freight_2",
+    "points": 6
+  },
+  {
+    "name": "breakdowns.freightfrenzy.level_3_freight",
+    "type": "points",
+    "value": "alliance_details.auto_freight_3",
+    "points": 6
+  },
+  {
+    "name": "breakdowns.freightfrenzy.barcode_element_1",
+    "type": "text",
+    "value": "alliance_details.barcode_element_1"
+  },
+  {
+    "name": "breakdowns.freightfrenzy.barcode_element_2",
+    "type": "text",
+    "value": "alliance_details.barcode_element_2"
+  },
+  {
+    "name": "breakdowns.freightfrenzy.robot_1_bonus",
+    "type": "points",
+    "value": "alliance_details.auto_bonus_1",
+    "points": 20
+  },
+  {
+    "name": "breakdowns.freightfrenzy.robot_2_bonus",
+    "type": "points",
+    "value": "alliance_details.auto_bonus_2",
+    "points": 20
+  },
+  {
+    "name": "breakdowns.teleop",
+    "type": "title",
+    "value": "total_score"
+  },
+  {
+    "name": "breakdowns.freightfrenzy.storage_unit_freight",
+    "type": "points",
+    "value": "alliance_details.tele_storage_freight",
+    "points": 1
+  },
+  {
+    "name": "breakdowns.freightfrenzy.level_1_freight",
+    "type": "points",
+    "value": "alliance_details.tele_freight_1",
+    "points": 2
+  },
+  {
+    "name": "breakdowns.freightfrenzy.level_2_freight",
+    "type": "points",
+    "value": "alliance_details.tele_freight_2",
+    "points": 4
+  },
+  {
+    "name": "breakdowns.freightfrenzy.level_3_freight",
+    "type": "points",
+    "value": "alliance_details.tele_freight_3",
+    "points": 6
+  },
+  {
+    "name": "breakdowns.freightfrenzy.shared_hub_freight",
+    "type": "points",
+    "value": "alliance_details.shared_freight",
+    "points": 4
+  },
+  {
+    "name": "breakdowns.end",
+    "type": "title",
+    "value": "end_score"
+  },
+  {
+    "name": "breakdowns.freightfrenzy.element_delivered",
+    "type": "points",
+    "value": "alliance_details.end_delivered",
+    "points": 6
+  },
+  {
+    "name": "breakdowns.freightfrenzy.alliance_hub_balanced",
+    "type": "points",
+    "value": "alliance_details.alliance_balanced",
+    "points": 10
+  },
+  {
+    "name": "breakdowns.freightfrenzy.shared_hub_unbalanced",
+    "type": "points",
+    "value": "alliance_details.shared_unbalanced",
+    "points": 20
+  },
+  {
+    "name": "breakdowns.freightfrenzy.robot_1_parked",
+    "type": "text",
+    "value": "alliance_details.end_parked_1"
+  },
+  {
+    "name": "breakdowns.freightfrenzy.robot_2_parked",
+    "type": "text",
+    "value": "alliance_details.end_parked_2"
+  },
+  {
+    "name": "breakdowns.penalty",
+    "type": "title",
+    "value": "penalty"
+  },
+  {
+    "name": "breakdowns.minor_penalty",
+    "type": "points",
+    "value": "match.minor_penalty",
+    "points": -5
+  },
+  {
+    "name": "breakdowns.major_penalty",
+    "type": "points",
+    "value": "match.major_penalty",
+    "points": -20
+  }
+]

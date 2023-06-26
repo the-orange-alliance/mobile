@@ -26,6 +26,7 @@
       "location_on_date": " el ",
       "location_from_date": "desde"
     },
+
     "menu": {
       "login": "Iniciar sesión",
       "register": "Registrar",
@@ -195,6 +196,8 @@
       "roverruckus": {
         "landing": "Aterrizar",
         "sampling": "Toma de muestras",
+        "claiming": "Reclamando",
+        "parking": "Aparcando",
         "gold": "Mineral dorado",
         "silver": "Mineral plateado",
         "depot": "Cualquier Mineral en el Almacén",
@@ -235,6 +238,34 @@
         "start_line": "Línea de Salida",
         "drop_zone": "Zona de Lanzamiento",
         "not_scored": "No Anotó"
+      },
+
+      "freightfrenzy": {
+        "robot_1_navigated": "Robot 1 Navegado",
+        "robot_2_navigated": "Robot 2 Navegado",
+        "none": "Nada",
+        "in_storage": "Parcialmente en Almacenado",
+        "in_warehouse": "Parcialmente en Almacén",
+        "completely_in_storage": "Completamente en Almacenado",
+        "completely_in_warehouse": "Completamente en Almacén",
+        "delivered_duck": "Pato Entregado",
+        "storage_unit_freight": "Unidad de Almacenamiento de Carga",
+        "level_1_freight": "Nivel 1 Flete",
+        "level_2_freight": "Nivel 2 Flete",
+        "level_3_freight": "Nivel 3 Flete",
+        "barcode_element_1": "Elemento de Código de Barras 1",
+        "barcode_element_2": "Elemento de Código de Barras 2",
+        "duck": "Pato",
+        "team_shipping_element": "Elemento de Envío de Equipo",
+        "robot_1_bonus": "Bonificación del Robot 1",
+        "robot_2_bonus": "Bonificación del Robot 2",
+        "shared_hub_freight": "Carga de Hub Compartido",
+        "element_delivered": "Pato o Elemento de Envío Entregado",
+        "shipping_hub_capped": "Centro de Envío con Límite",
+        "alliance_hub_balanced": "Centro de Alianzas Equilibrado",
+        "shared_hub_unbalanced": "Centro Compartido Desequilibrado",
+        "robot_1_parked": "Robot 1 Estacionado",
+        "robot_2_parked": "Robot 2 Estacionado"
       }
     }
   }

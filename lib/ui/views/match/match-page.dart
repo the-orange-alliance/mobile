@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:toa_flutter/providers/layouts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../internationalization/localizations.dart';
@@ -61,6 +62,8 @@ class MatchPageState extends State<MatchPage> {
       match.gameData = await ApiV3().getMatchGameData(matchKey);
     }
 
+    await MatchBreakdownLayouts.cacheSeasonLayout(match.getSeasonKey());
+
     if (event == null) {
       event = await ApiV3().getEvent(match.eventKey);
     }
@@ -80,7 +83,7 @@ class MatchPageState extends State<MatchPage> {
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     TextTheme textTheme = theme.textTheme;
     TextStyle titleStyle =
-    textTheme.subtitle1.copyWith(fontWeight: FontWeight.w600);
+        textTheme.subtitle1.copyWith(fontWeight: FontWeight.w600);
     TextStyle subtitleStyle = textTheme.bodyText2
         .copyWith(fontWeight: FontWeight.w500, color: textTheme.caption.color);
 
@@ -88,34 +91,34 @@ class MatchPageState extends State<MatchPage> {
         appBar: AppBar(
             title: match != null && event != null
                 ? Column(
-                crossAxisAlignment: isIOS
-                    ? CrossAxisAlignment.center
-                    : CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Text(match.matchName, style: titleStyle),
-                  Text(event.getFullName(), style: subtitleStyle)
-                ])
+                    crossAxisAlignment: isIOS
+                        ? CrossAxisAlignment.center
+                        : CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                        Text(match.matchName, style: titleStyle),
+                        Text(event.getFullName(), style: subtitleStyle)
+                      ])
                 : Text(local.get('pages.match.loading')),
             actions: event != null
                 ? <Widget>[
-              PopupMenuButton(onSelected: (String value) {
-                if (value == 'view_event') {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (c) {
-                    return EventPage(event);
-                  }));
-                }
-              }, itemBuilder: (BuildContext c) {
-                return [
-                  PopupMenuItem(
-                    value: 'view_event',
-                    child: Text(local.get('pages.match.full_event')),
-                  )
-                ];
-              })
-            ]
+                    PopupMenuButton(onSelected: (String value) {
+                      if (value == 'view_event') {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (c) {
+                          return EventPage(event);
+                        }));
+                      }
+                    }, itemBuilder: (BuildContext c) {
+                      return [
+                        PopupMenuItem(
+                          value: 'view_event',
+                          child: Text(local.get('pages.match.full_event')),
+                        )
+                      ];
+                    })
+                  ]
                 : null),
         body: buildInfo());
   }
@@ -135,7 +138,7 @@ class MatchPageState extends State<MatchPage> {
     if (this.match.scheduledTime != null &&
         this.match.scheduledTime != '0000-00-00 00:00:00' &&
         this.match.redScore <= 0 && this.match.blueScore <= 0
-    ) {
+        ) {
       card.add(ListTile(
           leading: Icon(MdiIcons.calendarClock,
               color: Theme.of(context).primaryColor),
@@ -151,13 +154,13 @@ class MatchPageState extends State<MatchPage> {
         title: Text(local.get(
             'pages.match.${match.videoURL != null ? 'watch_match' : 'no_video'}')),
         onTap: () async {
-          final url = match.videoURL != null
+          final url = Uri.parse(match.videoURL != null
               ? match.videoURL
-              : 'https://docs.google.com/forms/d/e/1FAIpQLSdpcIpr0uXe0SP5wzdMeVsQ6t3e5ebS5v_C-SDmtOyY2Gu8sw/viewform?entry.944495313=$matchKey';
-          if (await canLaunch(url)) {
-            await launch(url);
+              : 'https://docs.google.com/forms/d/e/1FAIpQLSdpcIpr0uXe0SP5wzdMeVsQ6t3e5ebS5v_C-SDmtOyY2Gu8sw/viewform?entry.944495313=$matchKey');
+          if (await canLaunchUrl(url)) {
+            await launchUrl(url);
           } else {
-            Scaffold.of(context).showSnackBar(SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(local.get('general.error_occurred')),
             ));
           }
@@ -170,12 +173,13 @@ class MatchPageState extends State<MatchPage> {
 
     // Add the card to the column
     column.add(Padding(
-        padding: EdgeInsets.all(8),
-        child: Card(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: card)
-        )
+      padding: EdgeInsets.all(8),
+      child: Card(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: card,
+        ),
+      ),
     ));
 
     // Match breakdown title
@@ -192,10 +196,16 @@ class MatchPageState extends State<MatchPage> {
 
     // Match breakdown
     column.add(!loadingBreakdown
-        ? Column(children: GameData.getBreakdown(match, context, match.participants.length == 1))
+        ? Column(
+            children: GameData.getBreakdown(
+            match,
+            context,
+            match.participants.length == 1,
+          ))
         : Container(
-        margin: EdgeInsets.only(top: 36, bottom: 24),
-        child: Center(child: CircularProgressIndicator())));
+            margin: EdgeInsets.only(top: 36, bottom: 24),
+            child: Center(child: CircularProgressIndicator()),
+          ));
     column.add(Padding(padding: EdgeInsets.only(top: 25)));
 
     return SingleChildScrollView(

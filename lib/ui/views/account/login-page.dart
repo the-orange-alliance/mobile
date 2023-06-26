@@ -13,8 +13,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
   String email = '';
   String password = '';
 
@@ -25,7 +23,6 @@ class LoginPageState extends State<LoginPage> {
     bool isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
-      key: scaffoldKey,
       appBar: AppBar(title: Text(local.get('pages.account.login.title'))),
       body: SafeArea(
         top: false,
@@ -39,83 +36,83 @@ class LoginPageState extends State<LoginPage> {
                 SizedBox(height: 64),
                 CircleAvatar(
                   backgroundColor: Colors.transparent,
-                  child: Icon(TOAIcons.TOA,
+                  child: Icon(
+                    TOAIcons.TOA,
                     size: 52,
-                    color: isDark ? Colors.white : Colors.black
-                  )
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
                 ),
                 SizedBox(height: 24),
                 Text(
                   local.get('pages.account.login.subtitle'),
                   textAlign: TextAlign.center,
-                  style: theme.textTheme.subtitle2
+                  style: theme.textTheme.subtitle2,
                 ),
                 SizedBox(height: 48),
                 TextField(
                   autofocus: true,
                   keyboardType: TextInputType.emailAddress,
+                  autofillHints: {email},
+                  autocorrect: false,
                   decoration: InputDecoration(
                     labelText: local.get('pages.account.login.email'),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8)
-                    )
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                   onChanged: (String value) {
                     this.email = value;
-                  }
+                  },
                 ),
                 SizedBox(height: 12),
                 TextField(
                   obscureText: true,
+                  autofillHints: {password},
+                  autocorrect: false,
                   decoration: InputDecoration(
                     labelText: local.get('pages.account.login.password'),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8)
-                    )
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                   onChanged: (String value) {
                     this.password = value;
-                  }
+                  },
                 ),
                 SizedBox(height: 24),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16),
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                    ),
+                  child: ElevatedButton(
+                    style: ElevatedButtonTheme.of(context).style,
                     onPressed: () async {
                       try {
-                        await FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
-                            email: this.email ?? '',
-                            password: this.password ?? ''
+                        await FirebaseAuth.instance.signInWithEmailAndPassword(
+                          email: this.email ?? '',
+                          password: this.password ?? '',
                         );
                         Cloud.initFirebaseMessaging();
                         Navigator.of(context).pop();
                       } on PlatformException catch (e) {
-                        showSnackbar(e.message);
+                        showSnackbar(context, e.message);
                       }
                     },
-                    padding: EdgeInsets.all(12),
-                    color: theme.primaryColor,
                     child: Text(
                       local.get('pages.account.login.login'),
                       style: TextStyle(
-                        color: theme.primaryTextTheme.headline6.color
-                      )
-                    )
-                  )
-                )
-              ]
-            )
-          )
-        )
-      )
+                        color: theme.primaryTextTheme.headline6.color,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 
-  showSnackbar(String value) {
-    scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(value)));
+  showSnackbar(BuildContext context, String value) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value)));
   }
 }

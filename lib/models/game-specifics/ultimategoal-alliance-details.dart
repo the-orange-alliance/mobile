@@ -1,33 +1,32 @@
 class UltimateGoalAllianceDetails {
-
   UltimateGoalAllianceDetails({
     this.dcTowerLow,
     this.dcTowerMid,
     this.dcTowerHigh,
-    this. navigated1,
-    this. navigated2,
+    this.navigated1,
+    this.navigated2,
     this.autoTowerLow,
     this.autoTowerMid,
     this.autoTowerHigh,
     this.autoTowerPoints,
-    this. autoPowerShotLeft,
-    this. autoPowerShotCenter,
-    this. autoPowerShotRight,
+    this.autoPowerShotLeft,
+    this.autoPowerShotCenter,
+    this.autoPowerShotRight,
     this.autoPowerShotPoints,
     this.autoWobblePoints,
     this.wobbleRings1,
     this.wobbleRings2,
     this.wobbleEnd1,
     this.wobbleEnd2,
-    this. wobbleDelivered1,
-    this. wobbleDelivered2,
+    this.wobbleDelivered1,
+    this.wobbleDelivered2,
     this.wobbleEndPoints,
     this.wobbleRingPoints,
-    this. endPowerShotLeft,
-    this. endPowerShotCenter,
-    this. endPowerShotRight,
+    this.endPowerShotLeft,
+    this.endPowerShotCenter,
+    this.endPowerShotRight,
     this.endPowerShotPoints,
-    this.navPts
+    this.navPts,
   });
 
   int dcTowerLow;
@@ -57,7 +56,6 @@ class UltimateGoalAllianceDetails {
   bool endPowerShotRight;
   int endPowerShotPoints;
   int navPts;
-
 
   static UltimateGoalAllianceDetails fromMap(Map map) {
     return UltimateGoalAllianceDetails(
