@@ -92,7 +92,10 @@ class MatchBreakdownBuilder {
           } else if (value.contains("::")) {
             // refer to something in a list
             final v2 = value.split('::');
-            outval = [red[v2[0]][int.parse(v2[1])], blue[v2[0]][int.parse(v2[1])]];
+            outval = [
+              red[v2[0]][int.parse(v2[1])],
+              blue[v2[0]][int.parse(v2[1])]
+            ];
           } else {
             outval = [red[value], blue[value]];
           }
@@ -106,28 +109,9 @@ class MatchBreakdownBuilder {
           break;
 
         case 'custom':
-          switch (e.name) {
-            case 'powerplay.auto_nav':
-              final redNav = PowerPlayHelper.getAutoNav(local, red);
-              final blueNav = PowerPlayHelper.getAutoNav(local, blue);
-              rows.addAll(List.generate(
-                2,
-                (i) => MatchBreakdownRow(
-                  name: local
-                      .get('breakdowns.powerplay.robot_${i + 1}_navigated'),
-                  red: redNav[i],
-                  blue: blueNav[i],
-                  text: true,
-                ),
-              ));
-              break;
-            case 'powerplay.junctions_owned':
-              rows.add(MatchBreakdownRow(
-                name: local.get('breakdowns.powerplay.junctions_owned'),
-                red: PowerPlayHelper.junctionsOwned(red),
-                blue: PowerPlayHelper.junctionsOwned(blue),
-                points: 3,
-              ));
+          switch (season) {
+            case '2223':
+              rows.addAll(PowerPlayHelper.customBreakdownRow(e, details, local));
           }
       }
     }
