@@ -39,10 +39,11 @@ class Ranking {
   final Team team;
 
   static List<Ranking> allFromResponse(String response) {
-    final list = List.from(json.decode(response));
-    list.removeWhere((e) => e == null); // WORKAROUND FOR SKYSTONE
-
-    return list.map((obj) => Ranking.fromMap(obj)).toList().cast<Ranking>();
+    return json
+        .decode(response)
+        .map((obj) => Ranking.fromMap(obj))
+        .toList()
+        .cast<Ranking>();
   }
 
   static Ranking fromMap(Map map) {

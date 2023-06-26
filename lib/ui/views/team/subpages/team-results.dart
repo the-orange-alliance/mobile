@@ -26,7 +26,8 @@ class TeamResults extends StatelessWidget {
 
     return FutureBuilder<List<TeamParticipant>>(
       future: getTeamParticipants(teamKey),
-      builder: (BuildContext context, AsyncSnapshot<List<TeamParticipant>> teamParticipants) {
+      builder: (BuildContext context,
+          AsyncSnapshot<List<TeamParticipant>> teamParticipants) {
         if (teamParticipants.data != null) {
           data = teamParticipants.data;
         }
@@ -45,7 +46,8 @@ class TeamResults extends StatelessWidget {
           },
         );
       } else {
-        return NoDataWidget(MdiIcons.calendarOutline, local.get('no_data.events'));
+        return NoDataWidget(
+            MdiIcons.calendarOutline, local.get('no_data.events'));
       }
     } else {
       return Center(child: CircularProgressIndicator());
@@ -61,7 +63,8 @@ class TeamResults extends StatelessWidget {
     card.add(Divider(height: 0));
 
     // Ranking
-    if (teamParticipant.ranking != null && !teamParticipant.ranking.rank.isNaN) {
+    if (teamParticipant.ranking != null &&
+        !teamParticipant.ranking.rank.isNaN) {
       card.add(ListTile(
         title: Text.rich(
           TextSpan(
@@ -74,7 +77,8 @@ class TeamResults extends StatelessWidget {
               TextSpan(
                   text: '${local.get('pages.event.rankings.with_record')} '),
               TextSpan(
-                text: '${teamParticipant.ranking.wins}-${teamParticipant.ranking.losses}-${teamParticipant.ranking.ties}',
+                text:
+                    '${teamParticipant.ranking.wins}-${teamParticipant.ranking.losses}-${teamParticipant.ranking.ties}',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
@@ -113,7 +117,8 @@ class TeamResults extends StatelessWidget {
     List<TeamParticipant> teamParticipants = [];
 
     // Get all the team's rankings
-    List<Ranking> allRankings = await ApiV3().getTeamResults(teamKey, StaticData.seasonKey);
+    final Future<List<Ranking>> allRankings =
+        ApiV3().getTeamResults(teamKey, StaticData.seasonKey);
 
     final teamEvents = await ApiV3().getTeamEvents(teamKey, StaticData.seasonKey);
 
@@ -127,38 +132,31 @@ class TeamResults extends StatelessWidget {
         TeamParticipant teamParticipant = TeamParticipant();
 
         // Get event detail
-        teamParticipant.event =
-            await ApiV3().getEvent(eventParticipant.eventKey);
+        requests.add(ApiV3()
+            .getEvent(eventParticipant.eventKey)
+            .then((e) => teamParticipant.event = e));
 
         // Get team matches
-        requests.add(ApiV3().getEventMatches(eventParticipant.eventKey).then((matches) {
-          List<Match> teamMatches = [];
-          for (int i = 0; i < matches.length; i++) {
-            Match match = matches[i];
-            for (int i = 0; i < match.participants.length; i++) {
-              if (match.participants[i].teamKey == teamKey) {
-                teamMatches.add(match);
-                break;
-              }
-            }
-          }
+        requests.add(
+            ApiV3().getEventMatches(eventParticipant.eventKey).then((matches) {
+          List<Match> teamMatches = matches
+              .where((match) => match.participants
+                  .any((participant) => participant.teamKey == teamKey))
+              .toList();
+
           teamMatches.sort(Sort().matchSorter);
           teamParticipant.matches = teamMatches;
         }));
 
         // Find the ranking in the event
-        for (int i = 0; i < allRankings.length; i++) {
-          Ranking ranking = allRankings[i];
-          if (ranking.eventKey == eventParticipant.eventKey) {
-            teamParticipant.ranking = ranking;
-            break;
-          }
-        }
+        requests.add(allRankings.then((rankings) => teamParticipant.ranking =
+            rankings.firstWhere(
+                (ranking) => ranking.eventKey == eventParticipant.eventKey)));
 
         teamParticipants.add(teamParticipant);
       }
 
-      Future.wait(requests);
+      await Future.wait(requests);
     } catch (e) {
       print(e);
     }
