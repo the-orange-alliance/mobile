@@ -7,8 +7,8 @@ import 'package:toa_flutter/models/game-specifics/ultimategoal-match-details.dar
 
 class MatchBreakdown2021 {
   static List<Widget> getRows(Match match, BuildContext context) {
-    TOALocalizations local = TOALocalizations.of(context);
-    UltimateGoalMatchDetails details = match.gameData;
+    TOALocalizations local = TOALocalizations.of(context)!;
+    UltimateGoalMatchDetails details = match.gameData as UltimateGoalMatchDetails;
     return <Widget>[
       MatchBreakdownRow(
         name: local.get('breakdowns.autonomous'),
@@ -145,7 +145,7 @@ class MatchBreakdown2021 {
     ];
   }
 
-  static getUltimateGoalWobbleString(int key, TOALocalizations local) {
+  static getUltimateGoalWobbleString(int? key, TOALocalizations local) {
     switch (key) {
       case 1:
         return local.get('breakdowns.ultimategoal.start_line') + ' (+5)';

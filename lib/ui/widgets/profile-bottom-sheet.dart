@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:package_info/package_info.dart';
-import 'package:rounded_modal/rounded_modal.dart';
 import 'package:toa_flutter/models/event.dart';
 
 import '../../internationalization/localizations.dart';
@@ -13,18 +12,20 @@ import '../views/account/login-page.dart';
 import '../views/account/register-page.dart';
 
 class ProfileBottomSheet {
-  double radius = 20;
+  static final double radius = 20;
 
-  showProfileBottomSheet(BuildContext context, PackageInfo packageInfo) {
-    TOALocalizations local = TOALocalizations.of(context);
+  showProfileBottomSheet(BuildContext context, PackageInfo? packageInfo) {
+    TOALocalizations? local = TOALocalizations.of(context);
     final ThemeData theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    var _tapPosition;
+    late var _tapPosition;
 
-    showRoundedModalBottomSheet(
+    showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(radius),
+      ),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       context: context,
-      radius: radius,
-      color: Theme.of(context).scaffoldBackgroundColor,
       builder: (BuildContext context) {
         return SafeArea(
           child: ClipRRect(
@@ -45,7 +46,7 @@ class ProfileBottomSheet {
                         _tapPosition = details.globalPosition,
                     child: ListTile(
                       leading: Icon(MdiIcons.themeLightDark),
-                      title: Text(local.get(isDark
+                      title: Text(local!.get(isDark
                           ? 'menu.switch_light_mode'
                           : 'menu.switch_dark_mode')),
                       onTap: () {
@@ -57,7 +58,7 @@ class ProfileBottomSheet {
                       },
                       onLongPress: () {
                         final RenderBox overlay =
-                            Overlay.of(context).context.findRenderObject();
+                            Overlay.of(context)!.context.findRenderObject() as RenderBox;
                         showMenu(
                           context: context,
                           // its 2 am -k
@@ -109,7 +110,7 @@ class ProfileBottomSheet {
                   ),
                   AboutListTile(
                     icon: Icon(TOAIcons.TOA),
-                    applicationVersion: packageInfo.version ?? '',
+                    applicationVersion: packageInfo!.version,
                     aboutBoxChildren: <Widget>[
                       Text(local.get('general.about_toa_short'))
                     ],
@@ -145,8 +146,8 @@ class ProfileBottomSheet {
   }
 
   buildProfileRow(BuildContext context) {
-    TOALocalizations local = TOALocalizations.of(context);
-    User user = FirebaseAuth.instance.currentUser;
+    TOALocalizations? local = TOALocalizations.of(context);
+    User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
       return ListTile(
@@ -155,13 +156,13 @@ class ProfileBottomSheet {
             ? CircleAvatar(
                 backgroundImage: NetworkImage(user.photoURL ?? ''),
                 child: user.photoURL == null
-                    ? Text(user.displayName.substring(0, 1))
+                    ? Text(user.displayName!.substring(0, 1))
                     : null,
                 radius: 16,
               )
             : null,
         title: Text(user.displayName ?? 'TOA User'),
-        subtitle: Text(user.email),
+        subtitle: Text(user.email!),
         onTap: () {
           Navigator.pop(context);
           Navigator.of(context).push(MaterialPageRoute(builder: (c) {
@@ -178,7 +179,7 @@ class ProfileBottomSheet {
           children: <Widget>[
             TextButton(
               child: Text(
-                local.get('menu.login'),
+                local!.get('menu.login'),
                 style: TextStyle(color: Color(0xFF0175c2)),
               ),
               onPressed: () {

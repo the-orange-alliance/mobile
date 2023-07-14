@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ContentTab {
-  const ContentTab({this.key, this.title, this.content});
+  const ContentTab({required this.key, required this.title, required this.content});
 
   final String key;
   final String title;

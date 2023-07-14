@@ -16,17 +16,17 @@ class UltimateGoalMatchDetails extends MatchDetails {
     this.blue
   });
 
-  String matchDetailKey;
-  String matchKey;
-  int redMinPen;
-  int blueMinPen;
-  int redMajPen;
-  int blueMajPen;
+  String? matchDetailKey;
+  String? matchKey;
+  int? redMinPen;
+  int? blueMinPen;
+  int? redMajPen;
+  int? blueMajPen;
 
   dynamic red;
   dynamic blue;
 
-  static List<UltimateGoalMatchDetails> allFromResponse(String response) {
+  static List<UltimateGoalMatchDetails>? allFromResponse(String response) {
     return json.decode(response)
         .map((obj) => UltimateGoalMatchDetails.fromMap(obj))
         .toList()

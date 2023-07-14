@@ -12,12 +12,12 @@ class MatchDetails {
     this.blue,
   });
 
-  String matchDetailKey;
-  String matchKey;
-  int redMinPen;
-  int blueMinPen;
-  int redMajPen;
-  int blueMajPen;
+  String? matchDetailKey;
+  String? matchKey;
+  int? redMinPen;
+  int? blueMinPen;
+  int? redMajPen;
+  int? blueMajPen;
 
   // Map<String, dynamic> red;
   // Map<String, dynamic> blue;
@@ -25,7 +25,7 @@ class MatchDetails {
   dynamic red;
   dynamic blue;
 
-  static List<MatchDetails> allFromResponse(String response) {
+  static List<MatchDetails>? allFromResponse(String response) {
     return json
         .decode(response)
         .map((obj) => MatchDetails.fromMap(obj))

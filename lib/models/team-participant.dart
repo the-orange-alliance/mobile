@@ -12,9 +12,9 @@ class TeamParticipant {
     this.ranking,
   });
 
-  String teamKey;
-  Event event;
-  List<Match> matches;
-  List<AwardRecipient> awards;
-  Ranking ranking;
+  String? teamKey;
+  Event? event;
+  List<Match>? matches;
+  List<AwardRecipient>? awards;
+  Ranking? ranking;
 }

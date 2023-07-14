@@ -2,12 +2,12 @@ import 'dart:convert';
 
 class EventSettings {
 
-  String admin;
-  bool isFavorite;
-  bool matchScored;
-  bool scheduleUpdated;
-  bool awardsPosted;
-  bool alliancesPosted;
+  String? admin;
+  bool? isFavorite;
+  bool? matchScored;
+  bool? scheduleUpdated;
+  bool? awardsPosted;
+  bool? alliancesPosted;
 
   EventSettings({
     this.admin,

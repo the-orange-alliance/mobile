@@ -7,11 +7,11 @@ class Season {
     this.isActive
   });
 
-  final String seasonKey;
-  final String description;
-  final bool isActive;
+  final String? seasonKey;
+  final String? description;
+  final bool? isActive;
 
-  static List<Season> allFromResponse(String response) {
+  static List<Season>? allFromResponse(String response) {
     return jsonDecode(response)
         .map((obj) => Season.fromMap(obj))
         .toList()

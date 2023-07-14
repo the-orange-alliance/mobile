@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:collection/collection.dart' show IterableNullableExtension;
 import 'package:flutter/material.dart';
 import 'package:toa_flutter/models/event.dart';
 import 'package:toa_flutter/providers/api.dart';
@@ -12,45 +15,45 @@ import 'package:toa_flutter/internationalization/localizations.dart';
 class EventInfo extends StatelessWidget {
 
   EventInfo(this.event);
-  final Event event;
+  final Event? event;
 
-  ThemeData theme;
+  ThemeData? theme;
 
   @override
   Widget build(BuildContext context) {
-    TOALocalizations local = TOALocalizations.of(context);
+    TOALocalizations local = TOALocalizations.of(context)!;
     theme = Theme.of(context);
 
     // Event Info Card
-    List<Widget> eventInfoCard = [
+    List<Widget?> eventInfoCard = [
       TOATitle(local.get('pages.event.info.event_info'), context),
       buildCardItem(
         context,
         MdiIcons.informationOutline,
-        event.eventName,
-        subtitle: event.divisionName != null ? event.divisionName + ' Division' : null
+        event!.eventName!,
+        subtitle: event!.divisionName != null ? event!.divisionName! + ' Division' : null
       ),
       buildCardItem(
         context,
         MdiIcons.calendarOutline,
-        event.getDateString(context),
+        event!.getDateString(context),
         onTap: () {
           Cal.Add2Calendar.addEvent2Cal(Cal.Event(
-            title: event.getFullName(),
-            description: '${local.get('pages.event.info.cal_description')}: https://theorangealliance.org/events/${ event.eventKey }. Powered by The Orange Alliance',
-            location: event.getFullLocation(),
-            startDate: DateTime(event.getStartDate().year, event.getStartDate().month, event.getStartDate().day, 7, 30),
-            endDate: DateTime(event.getEndDate().year, event.getEndDate().month, event.getEndDate().day, 18, 30)
+            title: event!.getFullName(),
+            description: '${local.get('pages.event.info.cal_description')}: https://theorangealliance.org/events/${ event!.eventKey }. Powered by The Orange Alliance',
+            location: event!.getFullLocation(),
+            startDate: DateTime(event!.getStartDate().year, event!.getStartDate().month, event!.getStartDate().day, 7, 30),
+            endDate: DateTime(event!.getEndDate().year, event!.getEndDate().month, event!.getEndDate().day, 18, 30)
           ));
         }
       ),
       buildCardItem(
         context,
         MdiIcons.mapMarkerOutline,
-        event.venue != null ? event.venue : event.getShortLocation(),
-        subtitle: event.venue != null ? event.getShortLocation() : null,
+        event!.venue != null ? event!.venue! : event!.getShortLocation(),
+        subtitle: event!.venue != null ? event!.getShortLocation() : null,
         onTap: () async {
-          final url = "geo:0,0?q=${ event.getFullLocation() }";
+          final url = "geo:0,0?q=${ event!.getFullLocation() }";
           if (await canLaunch(url)) {
             await launch(url);
           } else {
@@ -61,12 +64,12 @@ class EventInfo extends StatelessWidget {
         }
       ),
 
-      event.website != null ? buildCardItem(
+      event!.website != null ? buildCardItem(
         context,
         MdiIcons.earth,
         local.get('pages.event.info.view_website'),
         onTap: () async {
-          final url = event.website;
+          final url = event!.website!;
           if (await canLaunch(url)) {
             await launch(url);
           } else {
@@ -77,10 +80,10 @@ class EventInfo extends StatelessWidget {
         }
       ) : null,
       FutureBuilder(
-        future: getLiveStream(event.eventKey),
+        future: getLiveStream(event!.eventKey),
         initialData: null,
-        builder: (BuildContext context, AsyncSnapshot<LiveStream> data) {
-          LiveStream stream = data.data;
+        builder: (BuildContext context, AsyncSnapshot<LiveStream?> data) {
+          LiveStream? stream = data.data;
           if (stream != null) {
             return Padding(
               padding: EdgeInsets.all(16),
@@ -92,7 +95,7 @@ class EventInfo extends StatelessWidget {
                     icon: Icon(MdiIcons.videoOutline),
                   label:  Text(local.get('pages.event.info.stream_available')),
                   onPressed: () async {
-                    final url = stream.streamType == '1' ? stream.channelURL : stream.streamURL;
+                    final url = stream.streamType == '1' ? stream.channelURL! : stream.streamURL!;
                     if (await canLaunch(url)) {
                       await launch(url);
                     } else {
@@ -109,20 +112,20 @@ class EventInfo extends StatelessWidget {
           }
         }
       )
-    ].where((o) => o != null).toList();
+    ].whereNotNull().toList();
 
     // Event Game Card
     List<Widget> gameInfoCard = [
       TOATitle(local.get('pages.event.info.game_info'), context),
       FutureBuilder(
-        future: getSeasonName(event.seasonKey),
+        future: getSeasonName(event!.seasonKey),
         initialData: local.get('pages.event.info.loading_season'),
-        builder: (BuildContext context, AsyncSnapshot<String> seasonName) {
-          return buildCardItem(context, MdiIcons.gamepadVariant, seasonName.data ?? "${event.seasonKey} Season");
+        builder: (BuildContext context, AsyncSnapshot<String?> seasonName) {
+          return buildCardItem(context, MdiIcons.gamepadVariant, seasonName.data ?? "${event!.seasonKey} Season");
         }
       ),
-      buildCardItem(context, MdiIcons.humanHandsup, "${event.allianceCount} ${local.get('pages.event.info.alliances')}"),
-      buildCardItem(context, MdiIcons.soccerField, "${event.fieldCount} ${local.get('pages.event.info.fields')}"),
+      buildCardItem(context, MdiIcons.humanHandsup, "${event!.allianceCount} ${local.get('pages.event.info.alliances')}"),
+      buildCardItem(context, MdiIcons.soccerField, "${event!.fieldCount} ${local.get('pages.event.info.fields')}"),
     ];
 
     return ListView(
@@ -132,7 +135,7 @@ class EventInfo extends StatelessWidget {
           child: Card(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: eventInfoCard
+              children: eventInfoCard as List<Widget>
             )
           )
         ),
@@ -149,7 +152,7 @@ class EventInfo extends StatelessWidget {
     );
   }
 
-  Widget buildCardItem(BuildContext context, IconData icon, String title, {String subtitle, GestureTapCallback onTap}) {
+  Widget buildCardItem(BuildContext context, IconData icon, String title, {String? subtitle, GestureTapCallback? onTap}) {
     return InkWell(
       onTap: onTap,
       child: ListTile(
@@ -160,9 +163,9 @@ class EventInfo extends StatelessWidget {
     );
   }
 
-  Future<String> getSeasonName(String seasonKey) async {
-    String seasonName = "$seasonKey Season";
-    List<Season> seasons = await ApiV3().getAllSeasons();
+  Future<String?> getSeasonName(String? seasonKey) async {
+    String? seasonName = "$seasonKey Season";
+    List<Season> seasons = await (ApiV3().getAllSeasons() as FutureOr<List<Season>>);
     for (int i = 0; i < seasons.length; i++) {
       Season season = seasons[i];
       if (season.seasonKey == seasonKey) {
@@ -173,8 +176,8 @@ class EventInfo extends StatelessWidget {
     return seasonName;
   }
   
-  Future<LiveStream> getLiveStream(String eventKey) async {
-    List<LiveStream> streams = await ApiV3().getEventStreams(eventKey);
+  Future<LiveStream?> getLiveStream(String? eventKey) async {
+    List<LiveStream> streams = await (ApiV3().getEventStreams(eventKey) as FutureOr<List<LiveStream>>);
     if (streams.length > 0) {
       return streams[0];
     }

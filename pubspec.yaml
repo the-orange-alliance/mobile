@@ -10,7 +10,7 @@ description: An app for accessing data about the FIRST Tech Challenge.
 version: 2.2.1+16
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   add_2_calendar: ^2.1.1
@@ -20,10 +20,9 @@ dependencies:
   flutter_sticky_header: ^0.6.0
   http: ^0.13.3
   intl: ^0.17.0
-  material_design_icons_flutter: ^6.0.7096
+  material_design_icons_flutter: ^7.0.7296
   package_info: ^2.0.2
   rect_getter: ^1.0.0
-  rounded_modal: ^1.0.1
   shared_preferences: ^2.0.6
   url_launcher: ^6.0.9
 
@@ -38,6 +37,7 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
+  collection: ^1.15.0-nullsafety.4
 
 dev_dependencies:
   flutter_test:

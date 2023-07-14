@@ -10,14 +10,14 @@ class MatchParticipant {
     this.refStatus,
   });
 
-  final String matchParticipantKey;
-  final String matchKey;
-  final String teamKey;
-  final int station;
-  final int stationStatus;
-  final int refStatus;
+  final String? matchParticipantKey;
+  final String? matchKey;
+  final String? teamKey;
+  final int? station;
+  final int? stationStatus;
+  final int? refStatus;
 
-  static List<MatchParticipant> allFromResponse(String response) {
+  static List<MatchParticipant>? allFromResponse(String response) {
     if (response == null) return [];
 
     return jsonDecode(response)

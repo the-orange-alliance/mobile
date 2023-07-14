@@ -18,7 +18,7 @@ class LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    TOALocalizations local = TOALocalizations.of(context);
+    TOALocalizations local = TOALocalizations.of(context)!;
     ThemeData theme = Theme.of(context);
     bool isDark = theme.brightness == Brightness.dark;
 
@@ -87,19 +87,19 @@ class LoginPageState extends State<LoginPage> {
                     onPressed: () async {
                       try {
                         await FirebaseAuth.instance.signInWithEmailAndPassword(
-                          email: this.email ?? '',
-                          password: this.password ?? '',
+                          email: this.email,
+                          password: this.password,
                         );
                         Cloud.initFirebaseMessaging();
                         Navigator.of(context).pop();
                       } on PlatformException catch (e) {
-                        showSnackbar(context, e.message);
+                        showSnackbar(context, e.message!);
                       }
                     },
                     child: Text(
                       local.get('pages.account.login.login'),
                       style: TextStyle(
-                        color: theme.primaryTextTheme.headline6.color,
+                        color: theme.primaryTextTheme.headline6!.color,
                       ),
                     ),
                   ),

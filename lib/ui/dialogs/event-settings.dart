@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../../models/event-settings.dart';
 
 class EventSettingsDialog extends StatefulWidget {
-  EventSettingsDialog(this.eventSettings, {Key key}) : super(key: key);
+  EventSettingsDialog(this.eventSettings, {Key? key}) : super(key: key);
 
-  final EventSettings eventSettings;
+  final EventSettings? eventSettings;
 
   @override
   State<StatefulWidget> createState() => EventSettingsDialogState();
@@ -30,12 +30,12 @@ class EventSettingsDialogState extends State<EventSettingsDialog> {
       body: ListView(
         children: <Widget>[
           CheckboxListTile(
-            value: widget.eventSettings.isFavorite,
+            value: widget.eventSettings!.isFavorite,
             title: Text('Favorite'),
             isThreeLine: true,
             subtitle: Text('You can save teams, events, and more for easy access by marking them as favorites.'),
             onChanged: (checked) => setState(() {
-              widget.eventSettings.isFavorite = checked;
+              widget.eventSettings!.isFavorite = checked;
             }),
           ),
           Divider(),
@@ -46,34 +46,34 @@ class EventSettingsDialogState extends State<EventSettingsDialog> {
           Padding(
             padding: EdgeInsets.only(left: 14, right: 14, bottom: 14),
             child: Text('Subscribing to something lets you get a push notification whenever there is an update.',
-              style: Theme.of(context).textTheme.bodyText2.copyWith(fontSize: 12)),
+              style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 12)),
           ),
           CheckboxListTile(
-            value: widget.eventSettings.matchScored,
+            value: widget.eventSettings!.matchScored,
             title: Text('Match Scores'),
             onChanged: (checked) => setState(() {
-              widget.eventSettings.matchScored = checked;
+              widget.eventSettings!.matchScored = checked;
             }),
           ),
           CheckboxListTile(
-            value: widget.eventSettings.scheduleUpdated,
+            value: widget.eventSettings!.scheduleUpdated,
             title: Text('Match Schedule Posted'),
             onChanged: (checked) => setState(() {
-              widget.eventSettings.scheduleUpdated = checked;
+              widget.eventSettings!.scheduleUpdated = checked;
             }),
           ),
           CheckboxListTile(
-            value: widget.eventSettings.alliancesPosted,
+            value: widget.eventSettings!.alliancesPosted,
             title: Text('Alliance Selections'),
             onChanged: (checked) => setState(() {
-              widget.eventSettings.alliancesPosted = checked;
+              widget.eventSettings!.alliancesPosted = checked;
             }),
           ),
           CheckboxListTile(
-            value: widget.eventSettings.awardsPosted,
+            value: widget.eventSettings!.awardsPosted,
             title: Text('Awards Posted'),
             onChanged: (checked) => setState(() {
-              widget.eventSettings.awardsPosted = checked;
+              widget.eventSettings!.awardsPosted = checked;
             })
           )
         ],
@@ -89,7 +89,7 @@ class EventSettingsDialogState extends State<EventSettingsDialog> {
 class FadeRouteBuilder<T> extends PageRouteBuilder<T> {
   final Widget page;
 
-  FadeRouteBuilder({@required this.page})
+  FadeRouteBuilder({required this.page})
     : super(
     pageBuilder: (context, animation1, animation2) => page,
     transitionsBuilder: (context, animation1, animation2, child) {

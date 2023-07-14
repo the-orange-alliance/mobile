@@ -29,33 +29,33 @@ class UltimateGoalAllianceDetails {
     this.navPts,
   });
 
-  int dcTowerLow;
-  int dcTowerMid;
-  int dcTowerHigh;
-  bool navigated1;
-  bool navigated2;
-  int autoTowerLow;
-  int autoTowerMid;
-  int autoTowerHigh;
-  int autoTowerPoints;
-  bool autoPowerShotLeft;
-  bool autoPowerShotCenter;
-  bool autoPowerShotRight;
-  int autoPowerShotPoints;
-  int autoWobblePoints;
-  int wobbleRings1;
-  int wobbleRings2;
-  int wobbleEnd1;
-  int wobbleEnd2;
-  bool wobbleDelivered1;
-  bool wobbleDelivered2;
-  int wobbleEndPoints;
-  int wobbleRingPoints;
-  bool endPowerShotLeft;
-  bool endPowerShotCenter;
-  bool endPowerShotRight;
-  int endPowerShotPoints;
-  int navPts;
+  int? dcTowerLow;
+  int? dcTowerMid;
+  int? dcTowerHigh;
+  bool? navigated1;
+  bool? navigated2;
+  int? autoTowerLow;
+  int? autoTowerMid;
+  int? autoTowerHigh;
+  int? autoTowerPoints;
+  bool? autoPowerShotLeft;
+  bool? autoPowerShotCenter;
+  bool? autoPowerShotRight;
+  int? autoPowerShotPoints;
+  int? autoWobblePoints;
+  int? wobbleRings1;
+  int? wobbleRings2;
+  int? wobbleEnd1;
+  int? wobbleEnd2;
+  bool? wobbleDelivered1;
+  bool? wobbleDelivered2;
+  int? wobbleEndPoints;
+  int? wobbleRingPoints;
+  bool? endPowerShotLeft;
+  bool? endPowerShotCenter;
+  bool? endPowerShotRight;
+  int? endPowerShotPoints;
+  int? navPts;
 
   static UltimateGoalAllianceDetails fromMap(Map map) {
     return UltimateGoalAllianceDetails(

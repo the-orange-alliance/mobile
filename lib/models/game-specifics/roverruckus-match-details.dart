@@ -33,36 +33,36 @@ class RoverRuckusMatchDetails extends MatchDetails {
     this.blueEndComp,
   });
   
-  String matchDetailKey;
-  String matchKey;
-  int redMinPen;
-  int blueMinPen;
-  int redMajPen;
-  int blueMajPen;
+  String? matchDetailKey;
+  String? matchKey;
+  int? redMinPen;
+  int? blueMinPen;
+  int? redMajPen;
+  int? blueMajPen;
   
-  int redAutoLand;
-  int redAutoSamp;
-  int redAutoClaim;
-  int redAutoPark;
-  int redDriverGold;
-  int redDriverSilver;
-  int redDriverDepot;
-  int redEndLatch;
-  int redEndIn;
-  int redEndComp;
+  int? redAutoLand;
+  int? redAutoSamp;
+  int? redAutoClaim;
+  int? redAutoPark;
+  int? redDriverGold;
+  int? redDriverSilver;
+  int? redDriverDepot;
+  int? redEndLatch;
+  int? redEndIn;
+  int? redEndComp;
   
-  int blueAutoLand;
-  int blueAutoSamp;
-  int blueAutoClaim;
-  int blueAutoPark;
-  int blueDriverGold;
-  int blueDriverSilver;
-  int blueDriverDepot;
-  int blueEndLatch;
-  int blueEndIn;
-  int blueEndComp;
+  int? blueAutoLand;
+  int? blueAutoSamp;
+  int? blueAutoClaim;
+  int? blueAutoPark;
+  int? blueDriverGold;
+  int? blueDriverSilver;
+  int? blueDriverDepot;
+  int? blueEndLatch;
+  int? blueEndIn;
+  int? blueEndComp;
 
-  static List<RoverRuckusMatchDetails> allFromResponse(String response) {
+  static List<RoverRuckusMatchDetails>? allFromResponse(String response) {
     return json.decode(response)
         .map((obj) => RoverRuckusMatchDetails.fromMap(obj))
         .toList()

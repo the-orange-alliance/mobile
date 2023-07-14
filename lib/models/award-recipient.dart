@@ -14,16 +14,16 @@ class AwardRecipient {
     this.team
   });
 
-  final String awardsKey;
-  final String eventKey;
-  final String awardKey;
-  final String teamKey;
-  final String receiverName;
-  final String awardName;
-  final Award award; // unused?
-  final Team team;
+  final String? awardsKey;
+  final String? eventKey;
+  final String? awardKey;
+  final String? teamKey;
+  final String? receiverName;
+  final String? awardName;
+  final Award? award; // unused?
+  final Team? team;
 
-  static List<AwardRecipient> allFromResponse(String response) {
+  static List<AwardRecipient>? allFromResponse(String response) {
     return jsonDecode(response)
         .map((obj) => AwardRecipient.fromMap(obj))
         .toList()

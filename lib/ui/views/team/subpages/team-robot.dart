@@ -12,10 +12,10 @@ class TeamRobot extends StatelessWidget {
 
   TeamRobot(this.teamKey);
 
-  final String teamKey;
-  List<Media> data;
-  TOALocalizations local;
-  ThemeData theme;
+  final String? teamKey;
+  List<Media>? data;
+  TOALocalizations? local;
+  late ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +23,11 @@ class TeamRobot extends StatelessWidget {
     theme = Theme.of(context);
 
     if (data == null) {
-      return FutureBuilder<List<Media>>(
+      return FutureBuilder<List<Media>?>(
         future: ApiV3().getTeamMedia(teamKey, StaticData.seasonKey),
 
         initialData: null,
-        builder: (BuildContext context, AsyncSnapshot<List<Media>> media) {
+        builder: (BuildContext context, AsyncSnapshot<List<Media>?> media) {
           if (media.data != null) {
             data = media.data;
           }
@@ -46,8 +46,8 @@ class TeamRobot extends StatelessWidget {
       List<Widget> widgets = [];
       bool openSource = false;
 
-      for (int i = 0; i < data.length; i++) {
-        Media media = data[i];
+      for (int i = 0; i < data!.length; i++) {
+        Media media = data![i];
 
         switch(media.mediaType) {
           case TeamMediaType.GITHUB: {
@@ -56,7 +56,7 @@ class TeamRobot extends StatelessWidget {
                 icon: Icon(MdiIcons.github, size: 18),
                 label: Text('GitHub'),
                 onPressed: () {
-                  openLink(media.mediaLink, context);
+                  openLink(media.mediaLink!, context);
                 }
             ));
             break;
@@ -68,7 +68,7 @@ class TeamRobot extends StatelessWidget {
                 icon: Icon(MdiIcons.drawing, size: 18),
                 label: Text('CAD Design'),
                 onPressed: () {
-                  openLink(media.mediaLink, context);
+                  openLink(media.mediaLink!, context);
                 }
             ));
             break;
@@ -77,9 +77,9 @@ class TeamRobot extends StatelessWidget {
           case TeamMediaType.NOTEBOOK: {
             buttons.add(OutlinedButton.icon(
                 icon: Icon(MdiIcons.book, size: 18),
-                label: Text(local.get('pages.team.robot_profile.engineering_notebook')),
+                label: Text(local!.get('pages.team.robot_profile.engineering_notebook')),
                 onPressed: () {
-                  openLink(media.mediaLink, context);
+                  openLink(media.mediaLink!, context);
                 }
             ));
             break;
@@ -88,9 +88,9 @@ class TeamRobot extends StatelessWidget {
           case TeamMediaType.ROBOT_REVEAL: {
             buttons.add(OutlinedButton.icon(
                 icon: Icon(MdiIcons.youtube, size: 18),
-                label: Text(local.get('pages.team.robot_profile.robot_reveal')),
+                label: Text(local!.get('pages.team.robot_profile.robot_reveal')),
                 onPressed: () {
-                  openLink(media.mediaLink, context);
+                  openLink(media.mediaLink!, context);
                 }
             ));
             break;
@@ -103,9 +103,9 @@ class TeamRobot extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                   child: GestureDetector(
                     child: Hero(
-                      tag: media.mediaKey,
+                      tag: media.mediaKey!,
                       child: FadeInImage.assetNetwork(
-                        image: media.mediaLink,
+                        image: media.mediaLink!,
                         placeholder: 'assets/images/loading.gif'
                       )
                     ),
@@ -115,9 +115,9 @@ class TeamRobot extends StatelessWidget {
                           appBar: AppBar(title: Text('#$teamKey\'s Robot')),
                           body: SizedBox.expand(
                             child: Hero(
-                              tag: media.mediaKey,
+                              tag: media.mediaKey!,
                               child: FadeInImage.assetNetwork(
-                                image: media.mediaLink,
+                                image: media.mediaLink!,
                                 placeholder: 'assets/images/loading.gif',
                                 fit: BoxFit.fitWidth,
                               ),
@@ -137,7 +137,7 @@ class TeamRobot extends StatelessWidget {
       if (buttons.length > 0 || images.length > 0) {
         if (buttons.length > 0) {
           if (openSource) {
-            widgets.add(buildTitle(local.get('pages.team.robot_profile.open_source')));
+            widgets.add(buildTitle(local!.get('pages.team.robot_profile.open_source')));
           }
           widgets.add(Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
@@ -150,7 +150,7 @@ class TeamRobot extends StatelessWidget {
         }
 
         if (images.length > 0) {
-          widgets.add(buildTitle(local.get('pages.team.robot_profile.photos')));
+          widgets.add(buildTitle(local!.get('pages.team.robot_profile.photos')));
           widgets.add(Expanded(
             child: GridView.count(
               crossAxisCount: 2,
@@ -166,7 +166,7 @@ class TeamRobot extends StatelessWidget {
         );
 
       } else {
-        return NoDataWidget(MdiIcons.robot, local.get('no_data.robot_profile'));
+        return NoDataWidget(MdiIcons.robot, local!.get('no_data.robot_profile'));
       }
     } else {
       return Center(
@@ -192,7 +192,7 @@ class TeamRobot extends StatelessWidget {
       child: Text(
         title,
         textAlign: TextAlign.start,
-        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: theme.primaryTextTheme.headline6.color),
+        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: theme.primaryTextTheme.headline6!.color),
       ),
     );
   }

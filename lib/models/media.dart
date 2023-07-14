@@ -11,15 +11,15 @@ class Media {
     this.mediaLink,
   });
 
-  final String mediaKey;
-  final String eventKey;
-  final String teamKey;
-  final int mediaType;
-  final bool isPrimary;
-  final String mediaTitle;
-  final String mediaLink;
+  final String? mediaKey;
+  final String? eventKey;
+  final String? teamKey;
+  final int? mediaType;
+  final bool? isPrimary;
+  final String? mediaTitle;
+  final String? mediaLink;
   
-  static List<Media> allFromResponse(String response) {
+  static List<Media>? allFromResponse(String response) {
     return jsonDecode(response)
         .map((obj) => Media.fromMap(obj))
         .toList()

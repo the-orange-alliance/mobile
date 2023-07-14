@@ -27,15 +27,15 @@ class AwardListItem extends StatelessWidget {
         },
         child: ListTile(
           leading: Icon(getIcon()),
-          title: Text(award.award != null ? award.award.awardDescription : award.awardName),
-          subtitle: Text(award.receiverName != null ? award.receiverName :'#${award.team.teamNumber} ${award.team.teamNameShort}')
+          title: Text(award.award != null ? award.award!.awardDescription! : award.awardName!),
+          subtitle: Text(award.receiverName != null ? award.receiverName! :'#${award.team!.teamNumber} ${award.team!.teamNameShort}')
         )
       )
     );
   }
 
   IconData getIcon() {
-    String s = this.award.awardKey.replaceAll(RegExp('\\D+'),''); // Strip all non-numeric characters (get the award number)
+    String s = this.award.awardKey!.replaceAll(RegExp('\\D+'),''); // Strip all non-numeric characters (get the award number)
     if (s != null  &&  double.parse(s) != null) {
       int awardNum = int.parse(s);
       switch (awardNum) {

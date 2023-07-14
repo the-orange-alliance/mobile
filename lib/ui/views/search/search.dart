@@ -20,29 +20,29 @@ class SearchPageState extends State<SearchPage> {
   String query = '';
   TextEditingController queryTextController = TextEditingController();
 
-  List<Event> allEvents = [];
-  List<Team> allTeams = [];
+  List<Event>? allEvents = [];
+  List<Team>? allTeams = [];
 
   List<Widget> results = [];
 
-  TOALocalizations local;
+  TOALocalizations? local;
 
   @override
   void initState() {
     super.initState();
 
     // Load events and teams
-    Cache().getEvents().then((List<Event> events) {
+    Cache().getEvents().then((List<Event>? events) {
       setState(() {
         allEvents = events;
-        allEvents.sort(Sort().eventSorter);
+        allEvents!.sort(Sort().eventSorter);
         search();
       });
     });
-    Cache().getTeams().then((List<Team> teams) {
+    Cache().getTeams().then((List<Team>? teams) {
       setState(() {
         allTeams = teams;
-        allTeams.sort(Sort().teamSorter);
+        allTeams!.sort(Sort().teamSorter);
         search();
       });
     });
@@ -61,7 +61,7 @@ class SearchPageState extends State<SearchPage> {
     Widget content;
     local = TOALocalizations.of(context);
 
-    if (results.length <= 4 && (allEvents.isEmpty || allTeams.isEmpty)) {
+    if (results.length <= 4 && (allEvents!.isEmpty || allTeams!.isEmpty)) {
       content = Center(
         child: CircularProgressIndicator(),
       );
@@ -78,7 +78,7 @@ class SearchPageState extends State<SearchPage> {
     List<Widget> actions = [];
     if (query.isNotEmpty) {
       actions.add(IconButton(
-        tooltip: local.get('general.clear'),
+        tooltip: local!.get('general.clear'),
         icon: const Icon(Icons.clear),
         onPressed: () {
           queryTextController.text = '';
@@ -111,32 +111,32 @@ class SearchPageState extends State<SearchPage> {
       List<Widget> events = [];
       List<Widget> teams = [];
 
-      results.add(TextListItem(local.get('general.teams')));
-      for (int i = 0; i < allTeams.length; i++) {
-        Team team = allTeams[i];
+      results.add(TextListItem(local!.get('general.teams')));
+      for (int i = 0; i < allTeams!.length; i++) {
+        Team team = allTeams![i];
         if (team.teamNumber.toString().startsWith(query)
-            || (team.teamNameShort != null && team.teamNameShort.toLowerCase().startsWith(query.toLowerCase()))) {
+            || (team.teamNameShort != null && team.teamNameShort!.toLowerCase().startsWith(query.toLowerCase()))) {
           teams.add(TeamListItem(team));
         }
       }
       if (teams.length > 0) {
         results.addAll(teams);
       } else {
-        results.add(TextListItem(local.get('no_data.teams'), mini: true));
+        results.add(TextListItem(local!.get('no_data.teams'), mini: true));
       }
 
-      results.add(TextListItem(local.get('general.events')));
-      for (int i = 0; i < allEvents.length; i++) {
-        Event event = allEvents[i];
+      results.add(TextListItem(local!.get('general.events')));
+      for (int i = 0; i < allEvents!.length; i++) {
+        Event event = allEvents![i];
         if (event.getFullName().toLowerCase().contains(query.toLowerCase())
-            || (event.eventKey.toLowerCase() == query.toLowerCase())) {
+            || (event.eventKey!.toLowerCase() == query.toLowerCase())) {
           events.add(EventListItem(event));
         }
       }
       if (events.length > 0) {
         results.addAll(events);
       } else {
-        results.add(TextListItem(local.get('no_data.events'), mini: true));
+        results.add(TextListItem(local!.get('no_data.events'), mini: true));
       }
     }
   }

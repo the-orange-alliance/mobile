@@ -21,24 +21,24 @@ class Ranking {
     this.team,
   });
 
-  final String rankKey;
-  final String eventKey;
-  final String teamKey;
-  final num rank;
-  final num rankChange;
-  final num opr;
-  final num wins;
-  final num losses;
-  final num ties;
-  final num highestQualScore;
-  final num rankingPoints;
-  final num qualifyingPoints;
-  final num tieBreakerPoints;
-  final num disqualified;
-  final num played;
-  final Team team;
+  final String? rankKey;
+  final String? eventKey;
+  final String? teamKey;
+  final num? rank;
+  final num? rankChange;
+  final num? opr;
+  final num? wins;
+  final num? losses;
+  final num? ties;
+  final num? highestQualScore;
+  final num? rankingPoints;
+  final num? qualifyingPoints;
+  final num? tieBreakerPoints;
+  final num? disqualified;
+  final num? played;
+  final Team? team;
 
-  static List<Ranking> allFromResponse(String response) {
+  static List<Ranking>? allFromResponse(String response) {
     return json
         .decode(response)
         .map((obj) => Ranking.fromMap(obj))

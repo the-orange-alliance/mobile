@@ -8,12 +8,12 @@ class Award {
     this.displayOrder
   });
 
-  final String awardKey;
-  final int awardType;
-  final String awardDescription;
-  final int displayOrder;
+  final String? awardKey;
+  final int? awardType;
+  final String? awardDescription;
+  final int? displayOrder;
 
-  static List<Award> allFromResponse(String response) {
+  static List<Award>? allFromResponse(String response) {
     return jsonDecode(response)
         .map((obj) => Award.fromMap(obj))
         .toList()

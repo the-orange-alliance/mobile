@@ -15,7 +15,7 @@ import '../../dialogs/event-settings.dart';
 class EventPage extends StatefulWidget {
   EventPage(this.event);
 
-  final Event event;
+  final Event? event;
 
   @override
   EventPageState createState() => new EventPageState();
@@ -24,36 +24,36 @@ class EventPage extends StatefulWidget {
 class EventPageState extends State<EventPage>
   with TickerProviderStateMixin, RouteAware {
 
-  TabController tabController;
+  TabController? tabController;
   int currentIndex = 0;
   bool shouldRefresh = false;
 
-  EventSettings eventSettings;
-  bool areNotificationsDisabled;
+  EventSettings? eventSettings;
+  late bool areNotificationsDisabled;
   final Duration animationDuration = Duration(milliseconds: 300);
   final Duration delay = Duration(milliseconds: 150);
   GlobalKey fabKey = RectGetter.createGlobalKey();
-  Rect rect;
+  Rect? rect;
 
-  EventInfo eventInfo;
-  EventTeams eventTeams;
-  Widget eventMatches;
-  Widget eventRanking;
-  Widget eventAwards;
+  late EventInfo eventInfo;
+  late EventTeams eventTeams;
+  late Widget eventMatches;
+  late Widget eventRanking;
+  late Widget eventAwards;
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(vsync: this, length: 5);
-    tabController.addListener(() {
+    tabController!.addListener(() {
       setState(() {
-        currentIndex = tabController.index;
+        currentIndex = tabController!.index;
       });
     });
 
     Cloud.getNotificationsState().then((bool state) {
-      Cloud.getEventSettings(widget.event.eventKey).then((
-        EventSettings eventSettings) {
+      Cloud.getEventSettings(widget.event!.eventKey).then((
+        EventSettings? eventSettings) {
         setState(() {
           this.areNotificationsDisabled = !state;
           this.eventSettings = eventSettings;
@@ -75,17 +75,17 @@ class EventPageState extends State<EventPage>
   @override
   dispose() {
     super.dispose();
-    tabController.dispose();
+    tabController!.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    TOALocalizations local = TOALocalizations.of(context);
+    TOALocalizations local = TOALocalizations.of(context)!;
     ThemeData theme = Theme.of(context);
     Color appBarColor = theme.brightness == Brightness.light
       ? Color(0xE6FF9800)
       : theme.primaryColor;
-    String eventKey = widget.event.eventKey;
+    String? eventKey = widget.event!.eventKey;
 
 
     if (shouldRefresh) {
@@ -107,7 +107,7 @@ class EventPageState extends State<EventPage>
       ),
       Scaffold(
         appBar: AppBar(
-          title: Text(widget.event.eventName, overflow: TextOverflow.fade),
+          title: Text(widget.event!.eventName!, overflow: TextOverflow.fade),
           backgroundColor: Colors.transparent,
           elevation: 0,
           actions: <Widget>[
@@ -141,15 +141,15 @@ class EventPageState extends State<EventPage>
           key: fabKey,
           onPressed: () {
             if (areNotificationsDisabled) {
-              eventSettings.isFavorite = !eventSettings.isFavorite;
+              eventSettings!.isFavorite = !eventSettings!.isFavorite!;
               Cloud.updateEventSettings(eventKey, eventSettings);
               setState(() => {});
               return;
             }
-            setState(() => rect = RectGetter.getRectFromKey(fabKey));
+            setState(() => rect = RectGetter.getRectFromKey(fabKey as GlobalKey<RectGetterState>));
             WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) {
               setState(() {
-                rect = rect.inflate(1.3 * MediaQuery.of(context).size.longestSide);
+                rect = rect!.inflate(1.3 * MediaQuery.of(context).size.longestSide);
               });
               Future.delayed(animationDuration + delay, () {
                 Navigator.of(context).push(FadeRouteBuilder(
@@ -164,7 +164,7 @@ class EventPageState extends State<EventPage>
               });
             });
           },
-          child: Icon(!areNotificationsDisabled || eventSettings.isFavorite ? Icons.star : Icons.star_border),
+          child: Icon(!areNotificationsDisabled || eventSettings!.isFavorite! ? Icons.star : Icons.star_border),
         ) : null,
         body: Container(
           color: theme.scaffoldBackgroundColor,
@@ -181,10 +181,10 @@ class EventPageState extends State<EventPage>
       ),
       rect == null ? Container() : AnimatedPositioned(
         duration: animationDuration,
-        left: rect.left,
-        right: MediaQuery.of(context).size.width - rect.right,
-        top: rect.top,
-        bottom: MediaQuery.of(context).size.height - rect.bottom,
+        left: rect!.left,
+        right: MediaQuery.of(context).size.width - rect!.right,
+        top: rect!.top,
+        bottom: MediaQuery.of(context).size.height - rect!.bottom,
         child: Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,

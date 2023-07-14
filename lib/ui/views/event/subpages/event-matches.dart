@@ -12,21 +12,21 @@ class EventMatches extends StatelessWidget {
 
   EventMatches(this.event);
 
-  final Event event;
-  List<Match> data;
-  TOALocalizations local;
+  final Event? event;
+  List<Match>? data;
+  TOALocalizations? local;
 
   @override
   Widget build(BuildContext context) {
     local = TOALocalizations.of(context);
 
     if (data == null) {
-      return FutureBuilder<List<Match>>(
-        future: ApiV3().getEventMatches(event.eventKey),
-        builder: (BuildContext context, AsyncSnapshot<List<Match>> matches) {
+      return FutureBuilder<List<Match>?>(
+        future: ApiV3().getEventMatches(event!.eventKey),
+        builder: (BuildContext context, AsyncSnapshot<List<Match>?> matches) {
           if (matches.data != null) {
             data = matches.data;
-            data.sort(Sort().matchSorter);
+            data!.sort(Sort().matchSorter);
           }
           return bulidPage();
         }
@@ -38,16 +38,16 @@ class EventMatches extends StatelessWidget {
 
   Widget bulidPage() {
     if (data != null) {
-      if (data.length > 0) {
+      if (data!.length > 0) {
         return ListView.separated(
-          itemCount: data.length,
+          itemCount: data!.length,
           separatorBuilder: (BuildContext context, int index) => Divider(height: 0),
           itemBuilder: (BuildContext context, int index) {
-            return MatchListItem(data[index], event: event);
+            return MatchListItem(data![index], event: event);
           }
         );
       } else {
-        return NoDataWidget(MdiIcons.gamepadVariant, local.get('no_data.matches'));
+        return NoDataWidget(MdiIcons.gamepadVariant, local!.get('no_data.matches'));
       }
     } else {
       return Center(

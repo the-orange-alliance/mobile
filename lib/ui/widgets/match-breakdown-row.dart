@@ -29,17 +29,17 @@ class MatchBreakdownRow extends StatelessWidget {
     }
   }
 
-  int red;
-  String redText;
-  int blue;
-  String blueText;
-  final int points;
-  final String name;
+  int? red;
+  late String redText;
+  int? blue;
+  late String blueText;
+  final int? points;
+  final String? name;
   final bool title;
   final bool text;
 
-  TOALocalizations local;
-  ThemeData theme;
+  TOALocalizations? local;
+  ThemeData? theme;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class MatchBreakdownRow extends StatelessWidget {
     row.add(
         this.text ? buildText(redText, Alliance.RED)
             : buildPoints(red, points, Alliance.RED));
-    row.add(buildName(name));
+    row.add(buildName(name!));
     row.add(this.text
         ? buildText(blueText, Alliance.BLUE)
         : buildPoints(blue, points, Alliance.BLUE));
@@ -65,7 +65,7 @@ class MatchBreakdownRow extends StatelessWidget {
   }
 
 
-  Widget buildPoints(int missions, int points, Alliance alliance) {
+  Widget buildPoints(int? missions, int? points, Alliance alliance) {
     String text = '0';
     bool isTure = missions == TRUE_VALUE;
     bool isFalse = missions == FALSE_VALUE;
@@ -74,11 +74,11 @@ class MatchBreakdownRow extends StatelessWidget {
     if (isFalse) {
       text = '';
     } else if (isTure) {
-      text = ' (${points > 0 ? '+' : ''}$points)';
+      text = ' (${points! > 0 ? '+' : ''}$points)';
     } else if (title) {
-      text = '$missions ${local.get('breakdowns.points')}';
+      text = '$missions ${local!.get('breakdowns.points')}';
     } else if (missions != 0) {
-      int total = missions != null ? missions * points : 0;
+      int total = missions != null ? missions * points! : 0;
       text = '$missions (${total > 0 ? '+' : ''}$total)';
     }
 
@@ -164,7 +164,7 @@ class MatchBreakdownRow extends StatelessWidget {
     );
   }
 
-  Border getBorder() {
+  Border? getBorder() {
     return title ? null : Border(bottom: BorderSide(width: 0.4, color: Colors.black12));
   }
 

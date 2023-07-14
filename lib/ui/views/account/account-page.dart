@@ -21,27 +21,27 @@ class AccountPage extends StatefulWidget {
 
 class AccountPageState extends State<AccountPage> {
 
-  TOAUser user;
-  List<Team> teams;
-  List<Event> events;
+  TOAUser? user;
+  List<Team?>? teams;
+  List<Event?>? events;
 
-  TOALocalizations local;
-  ThemeData theme;
+  TOALocalizations? local;
+  ThemeData? theme;
 
   @override
   void initState() {
     super.initState();
-    Cloud.getUser().then((TOAUser user) {
+    Cloud.getUser().then((TOAUser? user) {
       setState(() {
         this.user = user;
       });
-      getTeams().then((List<Team> teams) {
+      getTeams().then((List<Team?> teams) {
         setState(() {
           this.teams = teams;
         });
       });
 
-      getEvents().then((List<Event> events) {
+      getEvents().then((List<Event?> events) {
         setState(() {
           this.events = events;
         });
@@ -54,8 +54,8 @@ class AccountPageState extends State<AccountPage> {
     local = TOALocalizations.of(context);
     theme = Theme.of(context);
 
-    List<Widget> body = List();
-    List<Widget> favorites = List();
+    List<Widget> body = [];
+    List<Widget> favorites = [];
 
     if (user != null) {
       body.add(Container(
@@ -64,16 +64,16 @@ class AccountPageState extends State<AccountPage> {
           color: Colors.black.withOpacity(0.05)
         ),
         child: ListTile(
-          leading: user.photoURL != null || (user.displayName != null && user.displayName.length > 1) ? CircleAvatar(
-            backgroundImage: user.photoURL != null ? NetworkImage(user.photoURL) : null,
-            child: user.photoURL == null ? Text(user.displayName.substring(0, 1)) : null,
+          leading: user!.photoURL != null || (user!.displayName != null && user!.displayName!.length > 1) ? CircleAvatar(
+            backgroundImage: user!.photoURL != null ? NetworkImage(user!.photoURL!) : null,
+            child: user!.photoURL == null ? Text(user!.displayName!.substring(0, 1)) : null,
             radius: 16,
           ) : null,
-          title: Text(user.displayName ?? 'TOA User'),
-          subtitle: Text(user.email),
+          title: Text(user!.displayName ?? 'TOA User'),
+          subtitle: Text(user!.email!),
           trailing: IconButton(
             icon: Icon(MdiIcons.logout),
-            tooltip: local.get('pages.account.logout'),
+            tooltip: local!.get('pages.account.logout'),
             onPressed: () {
               FirebaseAuth.instance.signOut();
               Navigator.of(context).pop();
@@ -83,11 +83,11 @@ class AccountPageState extends State<AccountPage> {
       ));
     }
 
-    if (teams != null && teams.length > 0) {
+    if (teams != null && teams!.length > 0) {
       List<Widget> widgets = [
-        TOATitle(local.get('general.teams'), context)
+        TOATitle(local!.get('general.teams'), context)
       ];
-      widgets.addAll(teams.map((team) => TeamListItem(team)).toList());
+      widgets.addAll(teams!.map((team) => TeamListItem(team)).toList());
       favorites.add(Card(
         margin: EdgeInsets.all(8),
         child: Column(
@@ -97,11 +97,11 @@ class AccountPageState extends State<AccountPage> {
       ));
     }
 
-    if (events != null && events.length > 0) {
+    if (events != null && events!.length > 0) {
       List<Widget> widgets = [
-        TOATitle(local.get('general.events'), context)
+        TOATitle(local!.get('general.events'), context)
       ];
-      widgets.addAll(events.map((event) => EventListItem(event)).toList());
+      widgets.addAll(events!.map((event) => EventListItem(event)).toList());
       favorites.add(Card(
         margin: EdgeInsets.all(8),
         child: Column(
@@ -126,7 +126,7 @@ class AccountPageState extends State<AccountPage> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text(local.get('pages.account.title'))),
+      appBar: AppBar(title: Text(local!.get('pages.account.title'))),
       body: body.length > 0 ? Column(
         children: body
       ) : Center(
@@ -135,11 +135,11 @@ class AccountPageState extends State<AccountPage> {
     );
   }
 
-  Future<List<Team>> getTeams() {
-    return Future.wait(user.favoriteTeams.map((teamKey) => ApiV3().getTeam(teamKey)));
+  Future<List<Team?>> getTeams() {
+    return Future.wait(user!.favoriteTeams!.map((teamKey) => ApiV3().getTeam(teamKey)));
   }
 
-  Future<List<Event>> getEvents() {
-    return Future.wait(user.favoriteEvents.map((eventKey) => ApiV3().getEvent(eventKey)));
+  Future<List<Event?>> getEvents() {
+    return Future.wait(user!.favoriteEvents!.map((eventKey) => ApiV3().getEvent(eventKey)));
   }
 }

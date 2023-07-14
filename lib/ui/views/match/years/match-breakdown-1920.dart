@@ -8,8 +8,8 @@ import '../../../widgets/match-breakdown-row.dart';
 
 class MatchBreakdown1920 {
   static List<Widget> getRows(Match match, BuildContext context) {
-    TOALocalizations local = TOALocalizations.of(context);
-    SkyStoneMatchDetails details = match.gameData;
+    TOALocalizations local = TOALocalizations.of(context)!;
+    SkyStoneMatchDetails details = match.gameData as SkyStoneMatchDetails;
     return <Widget>[
       MatchBreakdownRow(
           name: local.get('breakdowns.autonomous'),
@@ -125,8 +125,8 @@ class MatchBreakdown1920 {
   }
 
   static getCapLevel(SkyStoneAllianceDetails allianceDetails) {
-    int level1 = allianceDetails.robot1CapLevel == -1 ? 0 : allianceDetails.robot1CapLevel;
-    int level2 = allianceDetails.robot2CapLevel == -1 ? 0 : allianceDetails.robot2CapLevel;
+    int level1 = allianceDetails.robot1CapLevel == -1 ? 0 : allianceDetails.robot1CapLevel!;
+    int level2 = allianceDetails.robot2CapLevel == -1 ? 0 : allianceDetails.robot2CapLevel!;
     return level1 + level2;
   }
 }

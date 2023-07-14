@@ -17,18 +17,18 @@ class SkyStoneMatchDetails extends MatchDetails {
     this.blue
   });
 
-  String matchDetailKey;
-  String matchKey;
-  int redMinPen;
-  int blueMinPen;
-  int redMajPen;
-  int blueMajPen;
-  int randomization;
+  String? matchDetailKey;
+  String? matchKey;
+  int? redMinPen;
+  int? blueMinPen;
+  int? redMajPen;
+  int? blueMajPen;
+  int? randomization;
 
   dynamic red;
   dynamic blue;
 
-  static List<SkyStoneMatchDetails> allFromResponse(String response) {
+  static List<SkyStoneMatchDetails>? allFromResponse(String response) {
     return json.decode(response)
         .map((obj) => SkyStoneMatchDetails.fromMap(obj))
         .toList()

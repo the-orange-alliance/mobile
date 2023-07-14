@@ -6,10 +6,10 @@ class EventType {
     this.description,
   });
 
-  final String eventTypeKey;
-  final String description;
+  final String? eventTypeKey;
+  final String? description;
 
-  static List<EventType> allFromResponse(String response) {
+  static List<EventType>? allFromResponse(String response) {
     return jsonDecode(response)
         .map((obj) => EventType.fromMap(obj))
         .toList()

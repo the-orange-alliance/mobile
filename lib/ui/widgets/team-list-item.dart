@@ -6,7 +6,7 @@ import '../views/team/team-page.dart';
 class TeamListItem extends StatelessWidget {
   TeamListItem(this.team);
 
-  final Team team;
+  final Team? team;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class TeamListItem extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Text(
-                  team.teamNumber.toString(),
+                  team!.teamNumber.toString(),
                   textScaleFactor: 1.6,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontWeight: FontWeight.w500),
@@ -34,13 +34,13 @@ class TeamListItem extends StatelessWidget {
               Expanded(
                 flex: 8,
                 child: ListTile(
-                  title: Text(team.getName(),
+                  title: Text(team!.getName()!,
                     overflow: TextOverflow.fade,
                     softWrap: false,
                     maxLines: 1,
                     style: TextStyle(fontWeight: FontWeight.w700)
                   ),
-                  subtitle: Text(team.getFullLocation(),
+                  subtitle: Text(team!.getFullLocation(),
                     overflow: TextOverflow.fade,
                     softWrap: false,
                     maxLines: 1,

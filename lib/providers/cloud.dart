@@ -17,12 +17,12 @@ class Cloud {
 
   static Future<bool> getNotificationsState() async {
     if (Platform.isAndroid) return true;
-    TOAUser user = await getUser();
-    return user != null && user.level >= 6; // Beta, Admins only.
+    TOAUser? user = await getUser();
+    return user != null && user.level! >= 6; // Beta, Admins only.
   }
 
-  static Future<TOAUser> getUser() async {
-    User user = FirebaseAuth.instance.currentUser;
+  static Future<TOAUser?> getUser() async {
+    User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       String token = await user.getIdToken();
       Map<String, String> headers = {
@@ -36,13 +36,13 @@ class Cloud {
     }
   }
 
-  static Future<EventSettings> getEventSettings(String eventKey) async {
-    User user = FirebaseAuth.instance.currentUser;
+  static Future<EventSettings?> getEventSettings(String? eventKey) async {
+    User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       String token = await user.getIdToken();
       Map<String, String> headers = {
         'authorization': 'Bearer $token',
-        'data': eventKey
+        'data': eventKey!
       };
       Response res =
           await http.get(Uri.parse(baseURL + '/user/getEventSettings'), headers: headers);
@@ -53,19 +53,19 @@ class Cloud {
   }
 
   static Future<bool> updateEventSettings(
-      String eventKey, EventSettings eventSettings) async {
-    User user = FirebaseAuth.instance.currentUser;
+      String? eventKey, EventSettings? eventSettings) async {
+    User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       String token = await user.getIdToken();
       Map<String, String> headers = {
         'authorization': 'Bearer $token',
         'Content-Type': 'application/json',
-        'data': eventKey
+        'data': eventKey!
       };
       Response res = await http.post(
         Uri.parse(baseURL + '/user/updateEventSettings'),
         headers: headers,
-        body: jsonEncode(eventSettings.toJson()),
+        body: jsonEncode(eventSettings!.toJson()),
       );
       return res.statusCode == 200;
     } else {
@@ -73,8 +73,8 @@ class Cloud {
     }
   }
 
-  static Future<String> getUID() async {
-    User user = FirebaseAuth.instance.currentUser;
+  static Future<String?> getUID() async {
+    User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       return user.uid;
     } else {
@@ -82,13 +82,13 @@ class Cloud {
     }
   }
 
-  static Future<bool> isFavTeam(String teamKey) async {
-    TOAUser user = await getUser();
-    return user != null ? user.favoriteTeams.contains(teamKey) : false;
+  static Future<bool> isFavTeam(String? teamKey) async {
+    TOAUser? user = await getUser();
+    return user != null ? user.favoriteTeams!.contains(teamKey) : false;
   }
 
-  static setFavTeam(String teamKey, bool fav) async {
-    User user = FirebaseAuth.instance.currentUser;
+  static setFavTeam(String? teamKey, bool fav) async {
+    User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       String token = await user.getIdToken();
       Map<String, String> headers = {
@@ -107,7 +107,7 @@ class Cloud {
   }
 
   static saveMessagingToken(String fcmToken, String deviceName) async {
-    User user = FirebaseAuth.instance.currentUser;
+    User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       String token = await user.getIdToken();
       Map<String, String> headers = {
@@ -142,8 +142,7 @@ class Cloud {
     if (await Cloud.getUID() == null) return; // no myTOA account
 
     // Generate token
-    String token = await firebaseMessaging.getToken();
-    assert(token != null);
+    String token = (await firebaseMessaging.getToken())!;
     print('Push Messaging token: $token');
 
     // Find the device name

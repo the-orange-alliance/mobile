@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate
             ],
             localeResolutionCallback: (
-              Locale locale,
+              Locale? locale,
               Iterable<Locale> supportedLocales,
             ) {
               // return supportedLocales.elementAt(1); // Debug Hebrew

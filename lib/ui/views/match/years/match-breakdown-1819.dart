@@ -7,8 +7,8 @@ import '../../../widgets/match-breakdown-row.dart';
 
 class MatchBreakdown1819 {
   static List<Widget> getRows(Match match, BuildContext context) {
-    TOALocalizations local = TOALocalizations.of(context);
-    RoverRuckusMatchDetails details = match.gameData;
+    TOALocalizations local = TOALocalizations.of(context)!;
+    RoverRuckusMatchDetails details = match.gameData as RoverRuckusMatchDetails;
     return <Widget>[
       MatchBreakdownRow(
           name: local.get('breakdowns.autonomous'),
