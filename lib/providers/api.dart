@@ -27,137 +27,146 @@ class ApiV3 {
       'Content-Type': 'application/json'
     };
 
-    var request = await http.get(Uri.parse(baseURL + endpoint), headers: headers);
+    var request =
+        await http.get(Uri.parse(baseURL + endpoint), headers: headers);
     if (request.statusCode != 200) {
       throw request.body;
     }
     return request.body;
   }
 
-  Future<List<EventType>?> getEventTypes() async {
+  Future<List<EventType>> getEventTypes() async {
     String res = await get('/event-types');
     return EventType.allFromResponse(res);
   }
 
-  Future<List<Season>?> getAllSeasons() async {
+  Future<List<Season>> getAllSeasons() async {
     String res = await get('/seasons');
     return Season.allFromResponse(res);
   }
 
-  Future<List<Team>?> getTeams() async {
+  Future<List<Team>> getTeams() async {
     String res = await get('/team');
     return Team.allFromResponse(res);
   }
 
-  Future<List<Event>?> getEvents() async {
+  Future<List<Event>> getEvents() async {
     String res = await get('/event');
     return Event.allFromResponse(res);
   }
 
-  Future<List<Event>?> getSeasonEvents(String seasonKey) async {
+  Future<List<Event>> getSeasonEvents(String seasonKey) async {
     String res = await get('/event?season_key=$seasonKey');
     return Event.allFromResponse(res);
   }
 
   Future<Event?> getEvent(String eventKey) async {
     String res = await get('/event/$eventKey');
-    return Event.allFromResponse(res)?.elementAt(0) ?? null;
+    var e = Event.allFromResponse(res);
+    return e.isNotEmpty ? e.first : null;
   }
 
-  Future<List<EventParticipant>?> getEventTeams(String? eventKey) async {
+  Future<List<EventParticipant>> getEventTeams(String? eventKey) async {
     String res = await get('/event/$eventKey/teams');
     return EventParticipant.allFromResponse(res);
   }
 
-  Future<List<Ranking>?> getEventRankings(String? eventKey) async {
+  Future<List<Ranking>> getEventRankings(String? eventKey) async {
     String res = await get('/event/$eventKey/rankings');
     return Ranking.allFromResponse(res);
   }
 
-  Future<List<Match>?> getEventMatches(String? eventKey) async {
+  Future<List<Match>> getEventMatches(String? eventKey) async {
     String res = await get('/event/$eventKey/matches');
     return Match.allFromResponse(res);
   }
 
-  Future<List<AwardRecipient>?> getEventAwards(String? eventKey) async {
+  Future<List<AwardRecipient>> getEventAwards(String? eventKey) async {
     String res = await get('/event/$eventKey/awards');
     return AwardRecipient.allFromResponse(res);
   }
 
-  Future<List<Media>?> getEventMedia(String eventKey) async {
+  Future<List<Media>> getEventMedia(String eventKey) async {
     String res = await get('/event/$eventKey/media');
     return Media.allFromResponse(res);
   }
 
-  Future<List<LiveStream>?> getEventStreams(String? eventKey) async {
+  Future<List<LiveStream>> getEventStreams(String? eventKey) async {
     String res = await get('/event/$eventKey/streams');
     return LiveStream.allFromResponse(res);
   }
 
   Future<Team?> getTeam(String? teamKey) async {
     String res = await get('/team/$teamKey');
-    return Team.allFromResponse(res)?.elementAt(0) ?? null;
+    var t = Team.allFromResponse(res);
+    return t.isNotEmpty ? t.first : null;
   }
 
-  Future<List<Ranking>?> getTeamResults(String? teamKey, String seasonKey) async {
+  Future<List<Ranking>> getTeamResults(
+      String? teamKey, String seasonKey) async {
     String res = await get('/team/$teamKey/results/$seasonKey');
     return Ranking.allFromResponse(res);
   }
 
-  Future<List<EventParticipant>?> getTeamEvents(
+  Future<List<EventParticipant>> getTeamEvents(
       String? teamKey, String seasonKey) async {
     String res = await get('/team/$teamKey/events/$seasonKey');
     return EventParticipant.allFromResponse(res);
   }
 
-  Future<List<AwardRecipient>?> getTeamAwards(
+  Future<List<AwardRecipient>> getTeamAwards(
       String teamKey, String seasonKey) async {
     String res = await get('/team/$teamKey/awards/$seasonKey');
     return AwardRecipient.allFromResponse(res);
   }
 
-  Future<List<MatchParticipant>?> getTeamMatches(
+  Future<List<MatchParticipant>> getTeamMatches(
       String teamKey, String seasonKey) async {
     String res = await get('/team/$teamKey/matches/$seasonKey');
     return MatchParticipant.allFromResponse(res);
   }
 
-  Future<List<Media>?> getTeamMedia(String? teamKey, String seasonKey) async {
+  Future<List<Media>> getTeamMedia(String teamKey, String seasonKey) async {
     String res = await get('/team/$teamKey/media/$seasonKey');
     return Media.allFromResponse(res);
   }
 
-  Future<TeamSeasonRecord?> getTeamWLT(String? teamKey, String seasonKey) async {
+  Future<TeamSeasonRecord?> getTeamWLT(String teamKey, String seasonKey) async {
     String res = await get('/team/$teamKey/wlt?season_key=$seasonKey');
-    return TeamSeasonRecord.allFromResponse(res)?.elementAt(0) ?? null;
+    var wlt = TeamSeasonRecord.allFromResponse(res);
+    return wlt.isNotEmpty ? wlt.first : null;
   }
 
   Future<Match?> getMatch(String? matchKey) async {
     String res = await get('/match/$matchKey');
-    return Match.allFromResponse(res)?.elementAt(0) ?? null;
+    List<Match> m = Match.allFromResponse(res);
+    return m.isNotEmpty ? m.first : null;
   }
 
-  Future<List<MatchParticipant>?> getMatchParticipants(String? matchKey) async {
+  Future<List<MatchParticipant>> getMatchParticipants(String matchKey) async {
     String res = await get('/match/$matchKey/participants');
     return MatchParticipant.allFromResponse(res);
   }
 
   Future<Match?> getHighScoreQual() async {
     String res = await get('/match/high-scores?type=quals');
-    return Match.allFromResponse(res)?.elementAt(0) ?? null;
+    var m = Match.allFromResponse(res);
+    return m.isNotEmpty ? m.first : null;
   }
 
   Future<Match?> getHighScoreElim() async {
     String res = await get('/match/high-scores?type=elims');
-    return Match.allFromResponse(res)?.elementAt(0) ?? null;
+    var m = Match.allFromResponse(res);
+    return m.isNotEmpty ? m.first : null;
   }
 
   Future<Match?> getHighScoreWithPenalty() async {
     String res = await get('/match/high-scores?type=all');
-    return Match.allFromResponse(res)?.elementAt(0) ?? null;
+    var m = Match.allFromResponse(res);
+    return m.isNotEmpty ? m.first : null;
   }
 
-  Future<int?> getMatchesSize() async {
+  Future<int> getMatchesSize() async {
     String res = await get('/match/size');
     return json.decode(res)['result'];
   }

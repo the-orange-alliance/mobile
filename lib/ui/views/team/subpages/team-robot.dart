@@ -12,7 +12,7 @@ class TeamRobot extends StatelessWidget {
 
   TeamRobot(this.teamKey);
 
-  final String? teamKey;
+  final String teamKey;
   List<Media>? data;
   TOALocalizations? local;
   late ThemeData theme;

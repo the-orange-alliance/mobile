@@ -14,9 +14,9 @@ import '../../widgets/title.dart';
 import '../event/event-page.dart';
 
 class MatchPage extends StatefulWidget {
-  MatchPage({this.matchKey, this.match, this.event});
+  MatchPage(this.matchKey, {this.match, this.event});
 
-  final String? matchKey;
+  final String matchKey;
   final Match? match;
   final Event? event;
 
@@ -25,7 +25,7 @@ class MatchPage extends StatefulWidget {
 }
 
 class MatchPageState extends State<MatchPage> {
-  String? matchKey;
+  late String matchKey;
   Match? match;
   Event? event;
   bool loadingBreakdown = true;
@@ -143,7 +143,7 @@ class MatchPageState extends State<MatchPage> {
           leading: Icon(MdiIcons.calendarClock,
               color: Theme.of(context).primaryColor),
           title: Text(DateFormat('MMM d, h:mm a')
-              .format(DateTime.parse(match!.scheduledTime).toLocal())),
+              .format(DateTime.parse(match!.scheduledTime!).toLocal())),
           subtitle: Text(local!.get('pages.match.scheduled_time'))));
     }
 

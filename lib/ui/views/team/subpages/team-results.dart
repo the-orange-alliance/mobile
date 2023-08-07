@@ -18,7 +18,7 @@ import '../../../widgets/no-data-widget.dart';
 class TeamResults extends StatelessWidget {
   TeamResults(this.teamKey);
 
-  final String? teamKey;
+  final String teamKey;
   List<TeamParticipant>? data;
   TOALocalizations? local;
 
@@ -30,7 +30,7 @@ class TeamResults extends StatelessWidget {
       future: getTeamParticipants(teamKey),
       builder: (BuildContext context,
           AsyncSnapshot<List<TeamParticipant>> teamParticipants) {
-        if (teamParticipants.data != null) {
+        if (teamParticipants.hasData) {
           data = teamParticipants.data;
         }
         return bulidPage();
@@ -58,7 +58,7 @@ class TeamResults extends StatelessWidget {
 
   Widget bulidItem(TeamParticipant teamParticipant) {
     List<Widget> card = [];
-    List<Match> matches = teamParticipant.matches!;
+    List<Match> matches = teamParticipant.matches;
 
     // Title
     card.add(EventListItem(teamParticipant.event));
@@ -125,13 +125,13 @@ class TeamResults extends StatelessWidget {
     final teamEvents = await (ApiV3().getTeamEvents(teamKey, StaticData.seasonKey) as FutureOr<List<EventParticipant>>);
 
     try {
-      teamEvents.sort(Sort().eventParticipantSorter);
+      teamEvents.sort(Sort.eventParticipantSorter);
 
       List<Future<void>> requests = [];
 
       for (final event in teamEvents) {
         EventParticipant eventParticipant = event;
-        TeamParticipant teamParticipant = TeamParticipant();
+        TeamParticipant teamParticipant = TeamParticipant(event.teamKey, []);
 
         // Get event detail
         requests.add(ApiV3()
@@ -141,12 +141,12 @@ class TeamResults extends StatelessWidget {
         // Get team matches
         requests.add(
             ApiV3().getEventMatches(eventParticipant.eventKey).then((matches) {
-          List<Match> teamMatches = matches!
+          List<Match> teamMatches = matches
               .where((match) => match.participants!
                   .any((participant) => participant.teamKey == teamKey))
               .toList();
 
-          teamMatches.sort(Sort().matchSorter);
+          teamMatches.sort(Sort.matchSorter);
           teamParticipant.matches = teamMatches;
         }));
 
@@ -163,7 +163,7 @@ class TeamResults extends StatelessWidget {
       print(e);
     }
 
-    teamParticipants.sort(Sort().teamParticipantSorter);
+    teamParticipants.sort(Sort.teamParticipantSorter);
     return teamParticipants;
   }
 }

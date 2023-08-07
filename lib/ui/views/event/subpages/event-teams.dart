@@ -26,7 +26,7 @@ class EventTeams extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<List<EventParticipant>?> teams) {
           if (teams.data != null) {
             data = teams.data;
-            data!.sort(Sort().eventParticipantSorter);
+            data!.sort(Sort.eventParticipantSorter);
 
           }
           return bulidPage();

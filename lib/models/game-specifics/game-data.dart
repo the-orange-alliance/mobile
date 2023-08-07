@@ -36,9 +36,9 @@ class GameData {
           return UltimateGoalMatchDetails.allFromResponse(json)?.elementAt(0) ??
               null;
         case '2122':
-          return MatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
+          return MatchDetails.allFromResponse(json).elementAt(0);
         default:
-          return MatchDetails.allFromResponse(json)?.elementAt(0);
+          return MatchDetails.allFromResponse(json).elementAt(0);
       }
     } catch (err) {
       return null;

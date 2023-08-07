@@ -11,7 +11,7 @@ class TeamSeasonRecord {
   int? losses;
   int? ties;
 
-  static List<TeamSeasonRecord>? allFromResponse(String response) {
+  static List<TeamSeasonRecord> allFromResponse(String response) {
     return jsonDecode(response)
         .map((obj) => TeamSeasonRecord.fromMap(obj))
         .toList()

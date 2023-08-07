@@ -5,38 +5,35 @@ import '../../models/award-recipient.dart';
 import '../views/team/team-page.dart';
 
 class AwardListItem extends StatelessWidget {
-
   AwardListItem(this.award);
   final AwardRecipient award;
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      type: MaterialType.transparency,
-      child: InkWell(
-        onTap: () {
-          if (award.teamKey != null) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (c) {
+        type: MaterialType.transparency,
+        child: InkWell(
+            onTap: () {
+              if (award.teamKey != null) {
+                Navigator.of(context).push(MaterialPageRoute(builder: (c) {
                   return TeamPage(teamKey: award.teamKey, team: award.team);
-                }
-              )
-            );
-          }
-        },
-        child: ListTile(
-          leading: Icon(getIcon()),
-          title: Text(award.award != null ? award.award!.awardDescription! : award.awardName!),
-          subtitle: Text(award.receiverName != null ? award.receiverName! :'#${award.team!.teamNumber} ${award.team!.teamNameShort}')
-        )
-      )
-    );
+                }));
+              }
+            },
+            child: ListTile(
+                leading: Icon(getIcon()),
+                title: Text(award.award != null
+                    ? award.award!.awardDescription!
+                    : award.awardName!),
+                subtitle: Text(award.receiverName != null
+                    ? award.receiverName!
+                    : '#${award.team!.teamNumber} ${award.team!.teamNameShort}'))));
   }
 
   IconData getIcon() {
-    String s = this.award.awardKey!.replaceAll(RegExp('\\D+'),''); // Strip all non-numeric characters (get the award number)
-    if (s != null  &&  double.parse(s) != null) {
+    String s = this.award.awardKey!.replaceAll(RegExp('\\D+'),
+        ''); // Strip all non-numeric characters (get the award number)
+    if (s != null && double.parse(s) != null) {
       int awardNum = int.parse(s);
       switch (awardNum) {
         case 0:

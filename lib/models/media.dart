@@ -19,7 +19,7 @@ class Media {
   final String? mediaTitle;
   final String? mediaLink;
   
-  static List<Media>? allFromResponse(String response) {
+  static List<Media> allFromResponse(String response) {
     return jsonDecode(response)
         .map((obj) => Media.fromMap(obj))
         .toList()

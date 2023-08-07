@@ -38,7 +38,7 @@ class EventsListPageState extends State<EventsListPage>
     }).then((List<Event>? cacheEvents) {
       setState(() {
         events = cacheEvents;
-        events!.sort(Sort().eventSorter);
+        events!.sort(Sort.eventSorter);
       });
     });
     Cloud.initFirebaseMessaging();

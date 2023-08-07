@@ -20,7 +20,7 @@ class Team {
 
   final String teamKey;
   final String regionKey;
-  final String leagueKey;
+  final String? leagueKey;
   final int teamNumber;
   final String? teamNameShort;
   final String? teamNameLong;
@@ -33,7 +33,7 @@ class Team {
   final int? rookieYear;
   final String? website;
 
-  static List<Team>? allFromResponse(String response) {
+  static List<Team> allFromResponse(String response) {
     return jsonDecode(response)
         .map((obj) => Team.fromMap(obj))
         .toList()

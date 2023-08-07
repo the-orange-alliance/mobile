@@ -25,7 +25,7 @@ class LiveStream {
   final String? endDateTime;
   final String? channelURL;
 
-  static List<LiveStream>? allFromResponse(String response) {
+  static List<LiveStream> allFromResponse(String response) {
     return jsonDecode(response)
         .map((obj) => LiveStream.fromMap(obj))
         .toList()

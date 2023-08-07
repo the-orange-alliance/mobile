@@ -96,7 +96,7 @@ class MatchListItem extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (c) {
-                return MatchPage(matchKey: match.matchKey, match: match, event: event);
+                return MatchPage(match.matchKey, match: match, event: event);
               }
             )
           );
@@ -131,7 +131,7 @@ class MatchListItem extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[Text(team.teamKey!)]
+              children: <Widget>[Text(team.teamKey)]
             )
           )
         )

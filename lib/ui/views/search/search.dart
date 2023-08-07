@@ -35,14 +35,14 @@ class SearchPageState extends State<SearchPage> {
     Cache().getEvents().then((List<Event>? events) {
       setState(() {
         allEvents = events;
-        allEvents!.sort(Sort().eventSorter);
+        allEvents!.sort(Sort.eventSorter);
         search();
       });
     });
     Cache().getTeams().then((List<Team>? teams) {
       setState(() {
         allTeams = teams;
-        allTeams!.sort(Sort().teamSorter);
+        allTeams!.sort(Sort.teamSorter);
         search();
       });
     });

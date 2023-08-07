@@ -26,7 +26,7 @@ class EventMatches extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<List<Match>?> matches) {
           if (matches.data != null) {
             data = matches.data;
-            data!.sort(Sort().matchSorter);
+            data!.sort(Sort.matchSorter);
           }
           return bulidPage();
         }

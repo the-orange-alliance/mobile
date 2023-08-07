@@ -8,6 +8,9 @@ import './ui/colors.dart' as TOAColors;
 import './ui/views/events/events-list-page.dart';
 
 Future<void> main() async {
+  FlutterError.onError = (details) {
+    FlutterError.presentError(details);
+  };
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());

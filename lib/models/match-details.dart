@@ -25,7 +25,7 @@ class MatchDetails {
   dynamic red;
   dynamic blue;
 
-  static List<MatchDetails>? allFromResponse(String response) {
+  static List<MatchDetails> allFromResponse(String response) {
     return json
         .decode(response)
         .map((obj) => MatchDetails.fromMap(obj))

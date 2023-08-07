@@ -59,7 +59,7 @@ class Event {
   final int? advanceSpots;
   final String? advanceEvent;
 
-  static List<Event>? allFromResponse(String response) {
+  static List<Event> allFromResponse(String response) {
     return jsonDecode(response)
         .map((obj) => Event.fromMap(obj))
         .toList()

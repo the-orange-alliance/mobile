@@ -26,7 +26,7 @@ class EventAwards extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<List<AwardRecipient>?> awards) {
           if (awards.data != null) {
             data = awards.data;
-            data!.sort(Sort().awardParticipantSorter);
+            data!.sort(Sort.awardParticipantSorter);
           }
           return bulidPage();
         }

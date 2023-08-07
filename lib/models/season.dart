@@ -11,7 +11,7 @@ class Season {
   final String? description;
   final bool? isActive;
 
-  static List<Season>? allFromResponse(String response) {
+  static List<Season> allFromResponse(String response) {
     return jsonDecode(response)
         .map((obj) => Season.fromMap(obj))
         .toList()

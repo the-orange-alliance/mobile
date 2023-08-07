@@ -25,8 +25,8 @@ class TeamPage extends StatefulWidget {
 
 class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
 
-  String? teamKey;
-  Team? team;
+  late String? teamKey;
+  late Team? team;
   TOALocalizations? local;
   late ThemeData theme;
 
@@ -47,8 +47,8 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
       teamKey = widget.team!.teamKey;
     }
 
-    teamResults = TeamResults(teamKey);
-    teamRobot = TeamRobot(teamKey);
+    teamResults = TeamResults(teamKey!);
+    teamRobot = TeamRobot(teamKey!);
 
     loadData();
     loadUser();
@@ -61,7 +61,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
       team = await ApiV3().getTeam(teamKey);
     }
 
-    TeamSeasonRecord? record = await ApiV3().getTeamWLT(teamKey, StaticData.seasonKey);
+    TeamSeasonRecord? record = await ApiV3().getTeamWLT(teamKey!, StaticData.seasonKey);
 
     setState(() {
       this.record = record;

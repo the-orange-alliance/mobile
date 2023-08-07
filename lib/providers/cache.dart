@@ -37,7 +37,7 @@ class Cache {
   Future<List<Event>?> getEvents() async {
     String key = '$cacheVersion-events-list';
     if (await shouldReDownload(key, maxAgeShort)) {
-      List<Event> events = await (ApiV3().getEvents() as FutureOr<List<Event>>);
+      List<Event> events = await (ApiV3().getEvents());
       setString(key, Event.encode(events));
       updateTime(key);
       return events;
@@ -49,7 +49,7 @@ class Cache {
   Future<List<Team>?> getTeams() async {
     String key = '$cacheVersion-teams-list';
     if (await shouldReDownload(key, maxAgeLong)) {
-      List<Team> teams = (await ApiV3().getTeams())!;
+      List<Team> teams = (await ApiV3().getTeams());
       setString(key, Team.encode(teams));
       updateTime(key);
       return teams;

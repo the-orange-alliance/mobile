@@ -38,7 +38,7 @@ class Ranking {
   final num? played;
   final Team? team;
 
-  static List<Ranking>? allFromResponse(String response) {
+  static List<Ranking> allFromResponse(String response) {
     return json
         .decode(response)
         .map((obj) => Ranking.fromMap(obj))

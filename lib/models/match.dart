@@ -31,7 +31,7 @@ class Match {
   String matchKey;
   String eventKey;
   int tournamentLevel;
-  String scheduledTime;
+  String? scheduledTime;
   String? matchName;
   int? playNumber;
   int? fieldNumber;
@@ -52,7 +52,7 @@ class Match {
   List<MatchParticipant>? participants;
   MatchDetails? gameData;
 
-  static List<Match>? allFromResponse(String response) {
+  static List<Match> allFromResponse(String response) {
     return jsonDecode(response)
         .map((obj) => Match.fromMap(obj))
         .toList()

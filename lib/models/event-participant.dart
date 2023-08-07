@@ -18,7 +18,7 @@ class EventParticipant {
   final String? cardStatus;
   final Team? team;
 
-  static List<EventParticipant>? allFromResponse(String response) {
+  static List<EventParticipant> allFromResponse(String response) {
     return jsonDecode(response)
         .map((obj) => EventParticipant.fromMap(obj))
         .toList()
