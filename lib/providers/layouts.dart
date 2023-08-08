@@ -7,7 +7,8 @@ class MatchBreakdownLayouts {
   static List<MatchBreakdownLayoutElement>? _loadedSeason;
   static String? _loadedSeasonYear;
 
-  static Future<List<MatchBreakdownLayoutElement>?> _load(String seasonKey, {bool cache = true}) async {
+  static Future<List<MatchBreakdownLayoutElement>?> _load(String seasonKey,
+      {bool cache = true}) async {
     print('trying to open ${seasonKey}');
 
     try {
@@ -21,6 +22,7 @@ class MatchBreakdownLayouts {
           .cast<MatchBreakdownLayoutElement>();
     } catch (e) {
       print(e);
+      return null;
     }
   }
 
@@ -42,6 +44,8 @@ class MatchBreakdownLayouts {
     } else if (seasonKey == StaticData.seasonKey) {
       return _currentSeason;
     }
+
+    return null;
   }
 }
 

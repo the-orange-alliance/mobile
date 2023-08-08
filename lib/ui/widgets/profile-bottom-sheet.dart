@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:package_info/package_info.dart';
-import 'package:toa_flutter/models/event.dart';
 
 import '../../internationalization/localizations.dart';
 import '../icon.dart';
@@ -58,7 +57,7 @@ class ProfileBottomSheet {
                       },
                       onLongPress: () {
                         final RenderBox overlay =
-                            Overlay.of(context)!.context.findRenderObject() as RenderBox;
+                            Overlay.of(context).context.findRenderObject() as RenderBox;
                         showMenu(
                           context: context,
                           // its 2 am -k

@@ -192,7 +192,7 @@ class TeamRobot extends StatelessWidget {
       child: Text(
         title,
         textAlign: TextAlign.start,
-        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: theme.primaryTextTheme.headline6!.color),
+        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500, color: theme.primaryTextTheme.titleLarge!.color),
       ),
     );
   }

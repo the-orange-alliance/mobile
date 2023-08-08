@@ -109,7 +109,7 @@ class RegisterPageState extends State<RegisterPage> {
                     child: Text(
                       local.get('pages.account.register.sign_up'),
                       style: TextStyle(
-                          color: theme.primaryTextTheme.headline6!.color),
+                          color: theme.primaryTextTheme.titleLarge!.color),
                     ),
                   ),
                 ),

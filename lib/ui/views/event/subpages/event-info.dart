@@ -53,9 +53,9 @@ class EventInfo extends StatelessWidget {
         event!.venue != null ? event!.venue! : event!.getShortLocation(),
         subtitle: event!.venue != null ? event!.getShortLocation() : null,
         onTap: () async {
-          final url = "geo:0,0?q=${ event!.getFullLocation() }";
-          if (await canLaunch(url)) {
-            await launch(url);
+          final url = Uri.parse("geo:0,0?q=${ event!.getFullLocation() }");
+          if (await canLaunchUrl(url)) {
+            await launchUrl(url);
           } else {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(local.get('general.error_occurred')),
@@ -69,9 +69,9 @@ class EventInfo extends StatelessWidget {
         MdiIcons.earth,
         local.get('pages.event.info.view_website'),
         onTap: () async {
-          final url = event!.website!;
-          if (await canLaunch(url)) {
-            await launch(url);
+          final url = Uri.parse(event!.website!);
+          if (await canLaunchUrl(url)) {
+            await launchUrl(url);
           } else {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(local.get('general.error_occurred')),
@@ -95,9 +95,9 @@ class EventInfo extends StatelessWidget {
                     icon: Icon(MdiIcons.videoOutline),
                   label:  Text(local.get('pages.event.info.stream_available')),
                   onPressed: () async {
-                    final url = stream.streamType == '1' ? stream.channelURL! : stream.streamURL!;
-                    if (await canLaunch(url)) {
-                      await launch(url);
+                    final url = Uri.parse(stream.streamType == '1' ? stream.channelURL! : stream.streamURL!);
+                    if (await canLaunchUrl(url)) {
+                      await launchUrl(url);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(local.get('general.error_occurred')),
@@ -165,7 +165,7 @@ class EventInfo extends StatelessWidget {
 
   Future<String?> getSeasonName(String? seasonKey) async {
     String? seasonName = "$seasonKey Season";
-    List<Season> seasons = await (ApiV3().getAllSeasons() as FutureOr<List<Season>>);
+    List<Season> seasons = await (ApiV3().getAllSeasons());
     for (int i = 0; i < seasons.length; i++) {
       Season season = seasons[i];
       if (season.seasonKey == seasonKey) {
@@ -177,7 +177,7 @@ class EventInfo extends StatelessWidget {
   }
   
   Future<LiveStream?> getLiveStream(String? eventKey) async {
-    List<LiveStream> streams = await (ApiV3().getEventStreams(eventKey) as FutureOr<List<LiveStream>>);
+    List<LiveStream> streams = await (ApiV3().getEventStreams(eventKey));
     if (streams.length > 0) {
       return streams[0];
     }

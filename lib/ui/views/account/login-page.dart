@@ -46,7 +46,7 @@ class LoginPageState extends State<LoginPage> {
                 Text(
                   local.get('pages.account.login.subtitle'),
                   textAlign: TextAlign.center,
-                  style: theme.textTheme.subtitle2,
+                  style: theme.textTheme.titleSmall,
                 ),
                 SizedBox(height: 48),
                 TextField(
@@ -99,7 +99,7 @@ class LoginPageState extends State<LoginPage> {
                     child: Text(
                       local.get('pages.account.login.login'),
                       style: TextStyle(
-                        color: theme.primaryTextTheme.headline6!.color,
+                        color: theme.primaryTextTheme.titleLarge!.color,
                       ),
                     ),
                   ),

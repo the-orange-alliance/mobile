@@ -122,7 +122,7 @@ class TeamResults extends StatelessWidget {
     final Future<List<Ranking>?> allRankings =
         ApiV3().getTeamResults(teamKey, StaticData.seasonKey);
 
-    final teamEvents = await (ApiV3().getTeamEvents(teamKey, StaticData.seasonKey) as FutureOr<List<EventParticipant>>);
+    final teamEvents = await (ApiV3().getTeamEvents(teamKey, StaticData.seasonKey));
 
     try {
       teamEvents.sort(Sort.eventParticipantSorter);

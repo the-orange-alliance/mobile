@@ -177,9 +177,7 @@ class EventsListPageState extends State<EventsListPage>
 
   String getWeekName(String weekKey) {
     String weekName = local!.get('weeks.${weekKey.toLowerCase()}', defaultValue: '');
-    if (weekName == null) {
-      return 'Unknown week';
-    } else if (weekName.isNotEmpty) {
+    if (weekName.isNotEmpty) {
       return weekName;
     } else if (double.tryParse(weekKey) != null) {
       // weekKey is a number
@@ -190,7 +188,7 @@ class EventsListPageState extends State<EventsListPage>
   }
 
   int findCurrentWeekTab() {
-    if (tabs != null && tabs.length > 0) {
+    if (tabs.length > 0) {
       String month = DateFormat('MMMM', 'en_US').format(DateTime.now());
       for (int i = 0; i < tabs.length; i++) {
         if (month.toLowerCase() == tabs[i].key.toLowerCase()) {

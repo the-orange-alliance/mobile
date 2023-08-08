@@ -18,8 +18,6 @@ class MatchParticipant {
   final int? refStatus;
 
   static List<MatchParticipant> allFromResponse(String response) {
-    if (response == null) return [];
-
     return jsonDecode(response)
         .map((obj) => MatchParticipant.fromMap(obj))
         .toList()

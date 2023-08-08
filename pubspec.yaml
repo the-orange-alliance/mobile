@@ -19,7 +19,7 @@ dependencies:
   device_info: ^2.0.2
   flutter_sticky_header: ^0.6.0
   http: ^0.13.3
-  intl: ^0.17.0
+  intl: ^0.18.0
   material_design_icons_flutter: ^7.0.7296
   package_info: ^2.0.2
   rect_getter: ^1.0.0

@@ -83,9 +83,9 @@ class MatchPageState extends State<MatchPage> {
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     TextTheme textTheme = theme.textTheme;
     TextStyle titleStyle =
-        textTheme.subtitle1!.copyWith(fontWeight: FontWeight.w600);
-    TextStyle subtitleStyle = textTheme.bodyText2!
-        .copyWith(fontWeight: FontWeight.w500, color: textTheme.caption!.color);
+        textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600);
+    TextStyle subtitleStyle = textTheme.bodyMedium!
+        .copyWith(fontWeight: FontWeight.w500, color: textTheme.bodySmall!.color);
 
     return Scaffold(
         appBar: AppBar(
@@ -191,7 +191,7 @@ class MatchPageState extends State<MatchPage> {
           style: TextStyle(
               fontSize: 18.0,
               fontWeight: FontWeight.w500,
-              color: theme.primaryTextTheme.headline6!.color),
+              color: theme.primaryTextTheme.titleLarge!.color),
         )));
 
     // Match breakdown

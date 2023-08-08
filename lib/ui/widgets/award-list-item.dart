@@ -14,11 +14,9 @@ class AwardListItem extends StatelessWidget {
         type: MaterialType.transparency,
         child: InkWell(
             onTap: () {
-              if (award.teamKey != null) {
-                Navigator.of(context).push(MaterialPageRoute(builder: (c) {
-                  return TeamPage(teamKey: award.teamKey, team: award.team);
-                }));
-              }
+              Navigator.of(context).push(MaterialPageRoute(builder: (c) {
+                return TeamPage(teamKey: award.teamKey, team: award.team);
+              }));
             },
             child: ListTile(
                 leading: Icon(getIcon()),
@@ -33,7 +31,7 @@ class AwardListItem extends StatelessWidget {
   IconData getIcon() {
     String s = this.award.awardKey!.replaceAll(RegExp('\\D+'),
         ''); // Strip all non-numeric characters (get the award number)
-    if (s != null && double.parse(s) != null) {
+    if (double.tryParse(s) != null) {
       int awardNum = int.parse(s);
       switch (awardNum) {
         case 0:
