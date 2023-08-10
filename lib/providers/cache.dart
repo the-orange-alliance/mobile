@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import './api.dart';
@@ -27,15 +29,15 @@ class Cache {
     sharedPreferences.setString(key, value);
   }
 
-  Future<String> getString(String key) async {
+  Future<String?> getString(String key) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return sharedPreferences.getString(key);
   }
 
-  Future<List<Event>> getEvents() async {
+  Future<List<Event>?> getEvents() async {
     String key = '$cacheVersion-events-list';
     if (await shouldReDownload(key, maxAgeShort)) {
-      List<Event> events = await ApiV3().getEvents();
+      List<Event> events = await (ApiV3().getEvents());
       setString(key, Event.encode(events));
       updateTime(key);
       return events;
@@ -44,10 +46,10 @@ class Cache {
     }
   }
 
-  Future<List<Team>> getTeams() async {
+  Future<List<Team>?> getTeams() async {
     String key = '$cacheVersion-teams-list';
     if (await shouldReDownload(key, maxAgeLong)) {
-      List<Team> teams = await ApiV3().getTeams();
+      List<Team> teams = (await ApiV3().getTeams());
       setString(key, Team.encode(teams));
       updateTime(key);
       return teams;

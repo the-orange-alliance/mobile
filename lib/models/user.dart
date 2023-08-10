@@ -1,16 +1,16 @@
 class TOAUser extends Object {
 
-  String uid;
-  String email;
-  bool isEmailVerified;
-  String displayName;
-  String photoURL;
-  String phoneNumber;
-  bool isDisabled;
-  String team;
-  num level;
-  List favoriteTeams;
-  List favoriteEvents;
+  String? uid;
+  String? email;
+  bool? isEmailVerified;
+  String? displayName;
+  String? photoURL;
+  String? phoneNumber;
+  bool? isDisabled;
+  String? team;
+  num? level;
+  List? favoriteTeams;
+  List? favoriteEvents;
 
 
   TOAUser({

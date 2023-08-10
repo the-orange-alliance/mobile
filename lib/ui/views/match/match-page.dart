@@ -14,23 +14,23 @@ import '../../widgets/title.dart';
 import '../event/event-page.dart';
 
 class MatchPage extends StatefulWidget {
-  MatchPage({this.matchKey, this.match, this.event});
+  MatchPage(this.matchKey, {this.match, this.event});
 
   final String matchKey;
-  final Match match;
-  final Event event;
+  final Match? match;
+  final Event? event;
 
   @override
   MatchPageState createState() => new MatchPageState();
 }
 
 class MatchPageState extends State<MatchPage> {
-  String matchKey;
-  Match match;
-  Event event;
+  late String matchKey;
+  Match? match;
+  Event? event;
   bool loadingBreakdown = true;
-  TOALocalizations local;
-  ThemeData theme;
+  TOALocalizations? local;
+  late ThemeData theme;
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class MatchPageState extends State<MatchPage> {
     event = widget.event;
 
     if (widget.match != null) {
-      matchKey = widget.match.matchKey;
+      matchKey = widget.match!.matchKey;
     } else {
       matchKey = widget.matchKey;
     }
@@ -48,13 +48,13 @@ class MatchPageState extends State<MatchPage> {
   }
 
   Future<void> loadData() async {
-    Match match = this.match;
-    Event event = this.event;
+    Match? match = this.match;
+    Event? event = this.event;
 
     if (match == null) {
       match = await ApiV3().getMatch(matchKey);
     }
-    if (match.participants == null || match.participants.length == 0) {
+    if (match!.participants == null || match.participants!.length == 0) {
       match.participants = await ApiV3().getMatchParticipants(matchKey);
     }
     if (match.gameData == null) {
@@ -83,9 +83,9 @@ class MatchPageState extends State<MatchPage> {
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     TextTheme textTheme = theme.textTheme;
     TextStyle titleStyle =
-        textTheme.subtitle1.copyWith(fontWeight: FontWeight.w600);
-    TextStyle subtitleStyle = textTheme.bodyText2
-        .copyWith(fontWeight: FontWeight.w500, color: textTheme.caption.color);
+        textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600);
+    TextStyle subtitleStyle = textTheme.bodyMedium!
+        .copyWith(fontWeight: FontWeight.w500, color: textTheme.bodySmall!.color);
 
     return Scaffold(
         appBar: AppBar(
@@ -97,10 +97,10 @@ class MatchPageState extends State<MatchPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                        Text(match.matchName, style: titleStyle),
-                        Text(event.getFullName(), style: subtitleStyle)
+                        Text(match!.matchName!, style: titleStyle),
+                        Text(event!.getFullName(), style: subtitleStyle)
                       ])
-                : Text(local.get('pages.match.loading')),
+                : Text(local!.get('pages.match.loading')),
             actions: event != null
                 ? <Widget>[
                     PopupMenuButton(onSelected: (String value) {
@@ -114,7 +114,7 @@ class MatchPageState extends State<MatchPage> {
                       return [
                         PopupMenuItem(
                           value: 'view_event',
-                          child: Text(local.get('pages.match.full_event')),
+                          child: Text(local!.get('pages.match.full_event')),
                         )
                       ];
                     })
@@ -132,36 +132,36 @@ class MatchPageState extends State<MatchPage> {
     }
 
     // Card title
-    card.add(TOATitle(local.get('pages.match.match_info'), context));
+    card.add(TOATitle(local!.get('pages.match.match_info'), context));
 
     // Scheduled time
-    if (this.match.scheduledTime != null &&
-        this.match.scheduledTime != '0000-00-00 00:00:00' &&
-        this.match.redScore <= 0 && this.match.blueScore <= 0
+    if (this.match!.scheduledTime != null &&
+        this.match!.scheduledTime != '0000-00-00 00:00:00' &&
+        this.match!.redScore! <= 0 && this.match!.blueScore! <= 0
         ) {
       card.add(ListTile(
           leading: Icon(MdiIcons.calendarClock,
               color: Theme.of(context).primaryColor),
           title: Text(DateFormat('MMM d, h:mm a')
-              .format(DateTime.parse(match.scheduledTime).toLocal())),
-          subtitle: Text(local.get('pages.match.scheduled_time'))));
+              .format(DateTime.parse(match!.scheduledTime!).toLocal())),
+          subtitle: Text(local!.get('pages.match.scheduled_time'))));
     }
 
     // Match video
     card.add(ListTile(
         leading: Icon(MdiIcons.playCircleOutline,
             color: Theme.of(context).primaryColor),
-        title: Text(local.get(
-            'pages.match.${match.videoURL != null ? 'watch_match' : 'no_video'}')),
+        title: Text(local!.get(
+            'pages.match.${match!.videoURL != null ? 'watch_match' : 'no_video'}')),
         onTap: () async {
-          final url = Uri.parse(match.videoURL != null
-              ? match.videoURL
+          final url = Uri.parse(match!.videoURL != null
+              ? match!.videoURL!
               : 'https://docs.google.com/forms/d/e/1FAIpQLSdpcIpr0uXe0SP5wzdMeVsQ6t3e5ebS5v_C-SDmtOyY2Gu8sw/viewform?entry.944495313=$matchKey');
           if (await canLaunchUrl(url)) {
             await launchUrl(url);
           } else {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(local.get('general.error_occurred')),
+              content: Text(local!.get('general.error_occurred')),
             ));
           }
         }));
@@ -186,21 +186,21 @@ class MatchPageState extends State<MatchPage> {
     column.add(Padding(
         padding: EdgeInsets.all(16),
         child: Text(
-          local.get('pages.match.match_breakdown'),
+          local!.get('pages.match.match_breakdown'),
           textAlign: TextAlign.start,
           style: TextStyle(
               fontSize: 18.0,
               fontWeight: FontWeight.w500,
-              color: theme.primaryTextTheme.headline6.color),
+              color: theme.primaryTextTheme.titleLarge!.color),
         )));
 
     // Match breakdown
     column.add(!loadingBreakdown
         ? Column(
             children: GameData.getBreakdown(
-            match,
+            match!,
             context,
-            match.participants.length == 1,
+            match!.participants!.length == 1,
           ))
         : Container(
             margin: EdgeInsets.only(top: 36, bottom: 24),

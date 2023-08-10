@@ -12,12 +12,12 @@ class MatchDetails {
     this.blue,
   });
 
-  String matchDetailKey;
-  String matchKey;
-  int redMinPen;
-  int blueMinPen;
-  int redMajPen;
-  int blueMajPen;
+  String? matchDetailKey;
+  String? matchKey;
+  int? redMinPen;
+  int? blueMinPen;
+  int? redMajPen;
+  int? blueMajPen;
 
   // Map<String, dynamic> red;
   // Map<String, dynamic> blue;

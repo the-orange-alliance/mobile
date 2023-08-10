@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart' show IterableNullableExtension;
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -15,8 +16,8 @@ import '../../colors.dart' as TOAColors;
 class TeamPage extends StatefulWidget {
   TeamPage({this.teamKey, this.team});
 
-  final String teamKey;
-  final Team team;
+  final String? teamKey;
+  final Team? team;
 
   @override
   TeamPageState createState() => new TeamPageState();
@@ -24,17 +25,17 @@ class TeamPage extends StatefulWidget {
 
 class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
 
-  String teamKey;
-  Team team;
-  TOALocalizations local;
-  ThemeData theme;
+  late String? teamKey;
+  late Team? team;
+  TOALocalizations? local;
+  late ThemeData theme;
 
   bool firebaseConnected = false;
   bool isFav = false;
 
-  TeamResults teamResults;
-  TeamRobot teamRobot;
-  TeamSeasonRecord record;
+  late TeamResults teamResults;
+  late TeamRobot teamRobot;
+  TeamSeasonRecord? record;
 
   @override
   void initState() {
@@ -43,24 +44,24 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
     team = widget.team;
 
     if (widget.team != null) {
-      teamKey = widget.team.teamKey;
+      teamKey = widget.team!.teamKey;
     }
 
-    teamResults = TeamResults(teamKey);
-    teamRobot = TeamRobot(teamKey);
+    teamResults = TeamResults(teamKey!);
+    teamRobot = TeamRobot(teamKey!);
 
     loadData();
     loadUser();
   }
 
   Future<void> loadData() async {
-    Team team = this.team;
+    Team? team = this.team;
 
     if (team == null) {
       team = await ApiV3().getTeam(teamKey);
     }
 
-    TeamSeasonRecord record = await ApiV3().getTeamWLT(teamKey, StaticData.seasonKey);
+    TeamSeasonRecord? record = await ApiV3().getTeamWLT(teamKey!, StaticData.seasonKey);
 
     setState(() {
       this.record = record;
@@ -69,7 +70,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
   }
 
   Future<void> loadUser() async {
-    String uid = await Firebase().getUID();
+    String? uid = await Firebase().getUID();
     bool isFav = await Cloud.isFavTeam(teamKey);
     setState(() {
       this.isFav = isFav;
@@ -107,13 +108,13 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
           ),
           Scaffold(
             appBar: AppBar(
-              title: Text('${team != null && team.teamNameShort != null ? team.teamNameShort : 'Team'} #${team?.teamNumber ?? teamKey}', overflow: TextOverflow.fade),
+              title: Text('${team != null && team!.teamNameShort != null ? team!.teamNameShort : 'Team'} #${team?.teamNumber ?? teamKey}', overflow: TextOverflow.fade),
               backgroundColor: Colors.transparent,
               elevation: 0,
-              actions: <Widget>[
+              actions: <Widget?>[
                 firebaseConnected && isFav ? IconButton(
                   icon: Icon(MdiIcons.star),
-                  tooltip: local.get('general.remove_from_mytoa'),
+                  tooltip: local!.get('general.remove_from_mytoa'),
                   onPressed: () {
                     Cloud.setFavTeam(teamKey, false).then((ok) {
                       setState(() {
@@ -124,7 +125,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
                 ) : null,
                 firebaseConnected && !isFav ? IconButton(
                   icon: Icon(MdiIcons.starOutline),
-                  tooltip: local.get('general.add_to_mytoa'),
+                  tooltip: local!.get('general.add_to_mytoa'),
                   onPressed: () {
                     Cloud.setFavTeam(teamKey, true).then((ok) {
                       setState(() {
@@ -133,7 +134,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
                     });
                   }
                 ) : null
-              ].where((o) => o != null).toList(),
+              ].whereNotNull().toList(),
             ),
             backgroundColor: Colors.transparent,
             body: Column(
@@ -150,8 +151,8 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
                         padding: const EdgeInsets.only(top: 8),
                         child: TabBar(
                           tabs: [
-                            Tab(text: local.get('pages.team.results.title')),
-                            Tab(text: local.get('pages.team.robot_profile.title'))
+                            Tab(text: local!.get('pages.team.results.title')),
+                            Tab(text: local!.get('pages.team.robot_profile.title'))
                           ],
                           indicatorColor: theme.brightness == Brightness.light ? Colors.black : Colors.white,
                         )
@@ -178,9 +179,9 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
     );
   }
 
-  Widget buildAppbar(String teamKey, BuildContext context) {
+  Widget buildAppbar(String? teamKey, BuildContext context) {
     if (team != null) {
-      return buildInfo(team, context);
+      return buildInfo(team!, context);
     } else {
       return Center(
         child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(theme.brightness == Brightness.light ? Colors.black : Colors.white))
@@ -192,11 +193,11 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
     List<Widget> details = [
       buildTeamDetail(MdiIcons.mapMarkerOutline, team.getFullLocation()),
       buildTeamDetail(MdiIcons.compassOutline, '${team.regionKey} Region'),
-      buildTeamDetail(MdiIcons.airballoon, '${local.get('pages.team.rookie_year')}: ${team.rookieYear}')
+      buildTeamDetail(MdiIcons.airballoon, '${local!.get('pages.team.rookie_year')}: ${team.rookieYear}')
     ];
 
     if (record != null) {
-      details.add(buildTeamDetail(MdiIcons.flagOutline, '${record.wins}-${record.losses}-${record.ties} WLT'));
+      details.add(buildTeamDetail(MdiIcons.flagOutline, '${record!.wins}-${record!.losses}-${record!.ties} WLT'));
     }
 
     return Wrap(
@@ -216,7 +217,7 @@ class TeamPageState extends State<TeamPage> with TickerProviderStateMixin {
           Icon(icon, color: color, size: 16),
           Padding(
             padding: const EdgeInsets.only(left: 8),
-            child: Text(text, style: Theme.of(context).textTheme.subtitle1.copyWith(color: color))
+            child: Text(text, style: Theme.of(context).textTheme.titleMedium!.copyWith(color: color))
           )
         ]
       )

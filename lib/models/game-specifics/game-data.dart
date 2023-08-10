@@ -16,7 +16,7 @@ import 'package:toa_flutter/ui/views/match/years/match-breakdown-2021.dart';
 import 'package:toa_flutter/ui/views/match/years/remote-match-breakdown-2021.dart';
 
 class GameData {
-  static MatchDetails fromResponse(String seasonKey, String json) {
+  static MatchDetails? fromResponse(String seasonKey, String json) {
     if (json.toString() == 'null' || json.toString() == '[]') {
       return null;
     }
@@ -36,9 +36,9 @@ class GameData {
           return UltimateGoalMatchDetails.allFromResponse(json)?.elementAt(0) ??
               null;
         case '2122':
-          return MatchDetails.allFromResponse(json)?.elementAt(0) ?? null;
+          return MatchDetails.allFromResponse(json).elementAt(0);
         default:
-          return MatchDetails.allFromResponse(json)?.elementAt(0);
+          return MatchDetails.allFromResponse(json).elementAt(0);
       }
     } catch (err) {
       return null;

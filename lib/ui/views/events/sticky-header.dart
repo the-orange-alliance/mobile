@@ -8,12 +8,12 @@ import '../../widgets/event-list-item.dart';
 
 class StickyHeader {
   List<Widget> buildSideHeaderGrids(
-      BuildContext context, int firstIndex, int count, List<Event> events) {
+      BuildContext context, int firstIndex, int count, List<Event>? events) {
     return List.generate(1, (sliverIndex) {
       sliverIndex += firstIndex;
       return SliverStickyHeader(
           overlapsContent: true,
-          header: buildSideHeader(context, sliverIndex, events),
+          header: buildSideHeader(context, sliverIndex, events!),
           sliver: SliverPadding(
               padding: EdgeInsets.only(left: 60.0),
               sliver: SliverList(
@@ -27,7 +27,7 @@ class StickyHeader {
   }
 
   Widget buildSideHeader(BuildContext context, int index, List<Event> events) {
-    var date = DateTime.parse(events[index].startDate);
+    var date = DateTime.parse(events[index].startDate!);
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
         child: Align(
@@ -42,7 +42,7 @@ class StickyHeader {
                           child: Text(
                               DateFormat(
                                       "EEE",
-                                      TOALocalizations.of(context)
+                                      TOALocalizations.of(context)!
                                           .locale
                                           .toString())
                                   .format(date)

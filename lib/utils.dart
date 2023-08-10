@@ -15,7 +15,7 @@ class Utils {
   }
 
   static String dateToString(Event event, BuildContext context) {
-    TOALocalizations local = TOALocalizations.of(context);
+    TOALocalizations local = TOALocalizations.of(context)!;
     String format = local.get('date.date_format', defaultValue: 'MMM d, yyyy');
     if (isSameDate(event.getStartDate(), event.getEndDate())) {
       return DateFormat(format, local.locale.toString()).format(event.getStartDate());
@@ -25,13 +25,13 @@ class Utils {
   }
 
   static String eventSubtitle(Event event, BuildContext context) {
-    TOALocalizations local = TOALocalizations.of(context);
+    TOALocalizations? local = TOALocalizations.of(context);
     String location = event.getShortLocation();
     String date = dateToString(event, context);
     if (isSameDate(event.getStartDate(), event.getStartDate())) {
-      return location + local.get('date.location_on_date')  + date;
+      return location + local!.get('date.location_on_date')  + date;
     } else {
-      return location + local.get('date.location_from_date') + date;
+      return location + local!.get('date.location_from_date') + date;
     }
   }
 

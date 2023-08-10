@@ -19,7 +19,7 @@ class RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    TOALocalizations local = TOALocalizations.of(context);
+    TOALocalizations local = TOALocalizations.of(context)!;
     ThemeData theme = Theme.of(context);
 
     return Scaffold(
@@ -96,20 +96,20 @@ class RegisterPageState extends State<RegisterPage> {
                         try {
                           UserCredential user = await FirebaseAuth.instance
                               .createUserWithEmailAndPassword(
-                                  email: this.email ?? '',
-                                  password: this.password ?? '');
-                          user.user.updateProfile(displayName: this.name);
+                                  email: this.email,
+                                  password: this.password);
+                          user.user!.updateDisplayName(this.name);
                           Cloud.initFirebaseMessaging();
                           Navigator.of(context).pop();
                         } on PlatformException catch (e) {
-                          showSnackbar(context, e.message);
+                          showSnackbar(context, e.message!);
                         }
                       }
                     },
                     child: Text(
                       local.get('pages.account.register.sign_up'),
                       style: TextStyle(
-                          color: theme.primaryTextTheme.headline6.color),
+                          color: theme.primaryTextTheme.titleLarge!.color),
                     ),
                   ),
                 ),

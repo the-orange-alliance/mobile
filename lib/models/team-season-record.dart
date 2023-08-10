@@ -7,9 +7,9 @@ class TeamSeasonRecord {
     this.ties
   });
 
-  int wins;
-  int losses;
-  int ties;
+  int? wins;
+  int? losses;
+  int? ties;
 
   static List<TeamSeasonRecord> allFromResponse(String response) {
     return jsonDecode(response)

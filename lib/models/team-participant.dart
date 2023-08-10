@@ -4,17 +4,17 @@ import 'package:toa_flutter/models/award-recipient.dart';
 import 'package:toa_flutter/models/ranking.dart';
 
 class TeamParticipant {
-  TeamParticipant({
+  TeamParticipant(
     this.teamKey,
+    this.matches, {
     this.event,
-    this.matches,
     this.awards,
     this.ranking,
   });
 
   String teamKey;
-  Event event;
+  Event? event;
   List<Match> matches;
-  List<AwardRecipient> awards;
-  Ranking ranking;
+  List<AwardRecipient>? awards;
+  Ranking? ranking;
 }

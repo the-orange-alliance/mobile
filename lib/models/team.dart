@@ -2,10 +2,10 @@ import 'dart:convert';
 
 class Team {
   Team({
-    this.teamKey,
-    this.regionKey,
-    this.leagueKey,
-    this.teamNumber,
+    required this.teamKey,
+    required this.regionKey,
+    required this.leagueKey,
+    required this.teamNumber,
     this.teamNameShort,
     this.teamNameLong,
     this.robotName,
@@ -20,18 +20,18 @@ class Team {
 
   final String teamKey;
   final String regionKey;
-  final String leagueKey;
+  final String? leagueKey;
   final int teamNumber;
-  final String teamNameShort;
-  final String teamNameLong;
-  final String robotName;
-  final String lastActive;
-  final String city;
-  final String state;
-  final String zipCode;
-  final String country;
-  final int rookieYear;
-  final String website;
+  final String? teamNameShort;
+  final String? teamNameLong;
+  final String? robotName;
+  final String? lastActive;
+  final String? city;
+  final String? state;
+  final String? zipCode;
+  final String? country;
+  final int? rookieYear;
+  final String? website;
 
   static List<Team> allFromResponse(String response) {
     return jsonDecode(response)
@@ -84,7 +84,7 @@ class Team {
     };
   }
 
-  String getName() {
+  String? getName() {
     return teamNameShort != null ? teamNameShort : 'Team #$teamNumber';
   }
 
@@ -93,6 +93,6 @@ class Team {
   }
 
   String getFullLocation() {
-    return city + ", " + (state != null && state.isNotEmpty ? state + ", " : "") + country;
+    return city! + ", " + (state != null && state!.isNotEmpty ? state! + ", " : "") + country!;
   }
 }

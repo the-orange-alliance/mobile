@@ -18,15 +18,15 @@ class RemoteMatchBreakdownRow extends StatelessWidget {
     }
   }
 
-  int team;
-  String teamText;
-  final int points;
-  final String name;
+  int? team;
+  late String teamText;
+  final int? points;
+  final String? name;
   final bool title;
   final bool text;
 
-  TOALocalizations local;
-  ThemeData theme;
+  TOALocalizations? local;
+  late ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class RemoteMatchBreakdownRow extends StatelessWidget {
     theme = Theme.of(context);
     List<Widget> row = [];
 
-    row.add(buildName(name));
+    row.add(buildName(name!));
     row.add(this.text ? buildText(teamText)
         : buildPoints(team, points));
 
@@ -48,7 +48,7 @@ class RemoteMatchBreakdownRow extends StatelessWidget {
   }
 
 
-  Widget buildPoints(int missions, int points) {
+  Widget buildPoints(int? missions, int? points) {
     String text = '0';
     bool isTure = missions == TRUE_VALUE;
     bool isFalse = missions == FALSE_VALUE;
@@ -57,11 +57,11 @@ class RemoteMatchBreakdownRow extends StatelessWidget {
     if (isFalse) {
       text = '';
     } else if (isTure) {
-      text = ' (${points > 0 ? '+' : ''}$points)';
+      text = ' (${points! > 0 ? '+' : ''}$points)';
     } else if (title) {
-      text = '$missions ${local.get('breakdowns.points')}';
+      text = '$missions ${local!.get('breakdowns.points')}';
     } else if (missions != 0) {
-      int total = missions != null ? missions * points : 0;
+      int total = missions != null ? missions * points! : 0;
       text = '$missions (${total > 0 ? '+' : ''}$total)';
     }
 
@@ -145,7 +145,7 @@ class RemoteMatchBreakdownRow extends StatelessWidget {
     );
   }
 
-  Border getBorder() {
+  Border? getBorder() {
     return title ? null : Border(bottom: BorderSide(width: 0.4, color: Colors.black12));
   }
 

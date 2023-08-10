@@ -12,21 +12,21 @@ class EventRankings extends StatelessWidget {
 
   EventRankings(this.event);
 
-  final Event event;
-  List<Ranking> data;
-  TOALocalizations local;
+  final Event? event;
+  List<Ranking>? data;
+  TOALocalizations? local;
 
   @override
   Widget build(BuildContext context) {
     local = TOALocalizations.of(context);
 
     if (data == null) {
-      return FutureBuilder<List<Ranking>>(
-        future: ApiV3().getEventRankings(event.eventKey),
-        builder: (BuildContext context, AsyncSnapshot<List<Ranking>> rankings) {
+      return FutureBuilder<List<Ranking>?>(
+        future: ApiV3().getEventRankings(event!.eventKey),
+        builder: (BuildContext context, AsyncSnapshot<List<Ranking>?> rankings) {
           if (rankings.data != null) {
             data = rankings.data;
-            data.sort(Sort().rankingSorter);
+            data!.sort(Sort.rankingSorter);
           }
           return bulidPage();
         }
@@ -38,16 +38,16 @@ class EventRankings extends StatelessWidget {
 
   Widget bulidPage() {
     if (data != null) {
-      if (data.length > 0) {
+      if (data!.length > 0) {
         return ListView.separated(
-          itemCount: data.length,
+          itemCount: data!.length,
           separatorBuilder: (BuildContext context, int index) => Divider(height: 0),
           itemBuilder: (BuildContext context, int index) {
-            return RankingListItem(data[index]);
+            return RankingListItem(data![index]);
           }
         );
       } else {
-        return NoDataWidget(MdiIcons.podium, local.get('no_data.rankings'));
+        return NoDataWidget(MdiIcons.podium, local!.get('no_data.rankings'));
       }
     } else {
       return Center(

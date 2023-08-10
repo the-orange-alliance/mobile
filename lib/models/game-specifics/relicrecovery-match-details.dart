@@ -38,40 +38,40 @@ class RelicRecoveryMatchDetails extends MatchDetails {
     this.blueEndRobotBalances,
   });
   
-  String matchDetailKey;
-  String matchKey;
-  int redMinPen;
-  int blueMinPen;
-  int redMajPen;
-  int blueMajPen;
-  int redAutoJewels;
-  int redAutoGlyphs;
-  int redAutoKeys;
-  int redAutoParks;
-  int redTeleGlyphs;
-  int redTeleRows;
-  int redTeleColumns;
-  int redTeleCypher;
-  int redEndRelic1;
-  int redEndRelic2;
-  int redEndRelic3;
-  int redEndRelicStanding;
-  int redEndRobotBalances;
-  int blueAutoJewels;
-  int blueAutoGlyphs;
-  int blueAutoKeys;
-  int blueAutoParks;
-  int blueTeleGlyphs;
-  int blueTeleRows;
-  int blueTeleColumns;
-  int blueTeleCypher;
-  int blueEndRelic1;
-  int blueEndRelic2;
-  int blueEndRelic3;
-  int blueEndRelicStanding;
-  int blueEndRobotBalances;
+  String? matchDetailKey;
+  String? matchKey;
+  int? redMinPen;
+  int? blueMinPen;
+  int? redMajPen;
+  int? blueMajPen;
+  int? redAutoJewels;
+  int? redAutoGlyphs;
+  int? redAutoKeys;
+  int? redAutoParks;
+  int? redTeleGlyphs;
+  int? redTeleRows;
+  int? redTeleColumns;
+  int? redTeleCypher;
+  int? redEndRelic1;
+  int? redEndRelic2;
+  int? redEndRelic3;
+  int? redEndRelicStanding;
+  int? redEndRobotBalances;
+  int? blueAutoJewels;
+  int? blueAutoGlyphs;
+  int? blueAutoKeys;
+  int? blueAutoParks;
+  int? blueTeleGlyphs;
+  int? blueTeleRows;
+  int? blueTeleColumns;
+  int? blueTeleCypher;
+  int? blueEndRelic1;
+  int? blueEndRelic2;
+  int? blueEndRelic3;
+  int? blueEndRelicStanding;
+  int? blueEndRobotBalances;
 
-  static List<RelicRecoveryMatchDetails> allFromResponse(String response) {
+  static List<RelicRecoveryMatchDetails>? allFromResponse(String response) {
     return json.decode(response)
         .map((obj) => RelicRecoveryMatchDetails.fromMap(obj))
         .toList()

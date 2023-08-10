@@ -21,13 +21,13 @@ class EventsListPage extends StatefulWidget {
 
 class EventsListPageState extends State<EventsListPage>
     with TickerProviderStateMixin {
-  TabController tabController;
-  List<Event> events = [];
+  TabController? tabController;
+  List<Event>? events = [];
   List<ContentTab> tabs = [];
-  TOALocalizations local;
+  TOALocalizations? local;
   bool tabChanged = false;
 
-  PackageInfo packageInfo;
+  PackageInfo? packageInfo;
 
   @override
   void initState() {
@@ -35,10 +35,10 @@ class EventsListPageState extends State<EventsListPage>
     PackageInfo.fromPlatform().then((info) {
       packageInfo = info;
       return Cache().getEvents();
-    }).then((List<Event> cacheEvents) {
+    }).then((List<Event>? cacheEvents) {
       setState(() {
         events = cacheEvents;
-        events.sort(Sort().eventSorter);
+        events!.sort(Sort.eventSorter);
       });
     });
     Cloud.initFirebaseMessaging();
@@ -54,12 +54,12 @@ class EventsListPageState extends State<EventsListPage>
       makeNewTabController();
     }
 
-    if (events.isEmpty) {
+    if (events!.isEmpty) {
       content = Center(
         child: CircularProgressIndicator(),
       );
     } else {
-      if (tabController.length != tabs.length || tabs.length == 0) {
+      if (tabController!.length != tabs.length || tabs.length == 0) {
         buildTabs(context);
       }
       content = TabBarView(
@@ -70,8 +70,8 @@ class EventsListPageState extends State<EventsListPage>
     }
 
     int tab = findCurrentWeekTab();
-    if (tab > -1 && tabController.length > tab && !tabChanged) {
-      tabController.animateTo(tab);
+    if (tab > -1 && tabController!.length > tab && !tabChanged) {
+      tabController!.animateTo(tab);
     }
 
     return Scaffold(
@@ -95,7 +95,7 @@ class EventsListPageState extends State<EventsListPage>
           actions: <Widget>[
             IconButton(
                 icon: Icon(MdiIcons.magnify),
-                tooltip: local.get('general.search'),
+                tooltip: local!.get('general.search'),
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (c) {
                     return SearchPage();
@@ -113,23 +113,23 @@ class EventsListPageState extends State<EventsListPage>
       length: tabs.length,
       initialIndex: 0,
     );
-    tabController.addListener(() {
+    tabController!.addListener(() {
       tabChanged = true;
     });
   }
 
   buildTabs(BuildContext context) {
-    List<Widget> slivers = List<Widget>();
+    List<Widget> slivers = [];
     int firstIndex = 0, count = 0, itemsPerTab = 0, firstIndexInTab = 0;
-    for (int i = 0; i < events.length; i++) {
-      if (i > 0 && events[i - 1].startDate != events[i].startDate) {
+    for (int i = 0; i < events!.length; i++) {
+      if (i > 0 && events![i - 1].startDate != events![i].startDate) {
         slivers.addAll(StickyHeader()
             .buildSideHeaderGrids(context, firstIndex, count, events));
         firstIndex = i;
-        count = i + 1 == events.length ? 1 : 0;
+        count = i + 1 == events!.length ? 1 : 0;
       }
 
-      if (i > 0 && getWeekName(events[i - 1].weekKey) != getWeekName(events[i].weekKey)) {
+      if (i > 0 && getWeekName(events![i - 1].weekKey!) != getWeekName(events![i].weekKey!)) {
         ScrollController scrollController = ScrollController(
           initialScrollOffset: findScrollOffset(firstIndexInTab, itemsPerTab)
         );
@@ -139,12 +139,12 @@ class EventsListPageState extends State<EventsListPage>
         );
 
         tabs.add(ContentTab(
-          key: events[i - 1].weekKey,
-          title: getWeekName(events[i - 1].weekKey),
+          key: events![i - 1].weekKey!,
+          title: getWeekName(events![i - 1].weekKey!),
           content: scrollView
         ));
         makeNewTabController();
-        slivers = List<Widget>();
+        slivers = [];
         slivers.addAll(StickyHeader().buildSideHeaderGrids(context, firstIndex, count, events));
         firstIndex = i;
         firstIndexInTab = i;
@@ -152,18 +152,18 @@ class EventsListPageState extends State<EventsListPage>
         itemsPerTab = 0;
       }
 
-      if (i + 1 == events.length) {
+      if (i + 1 == events!.length) {
         ScrollController scrollController = ScrollController(
           initialScrollOffset: findScrollOffset(firstIndexInTab, itemsPerTab)
         );
         CustomScrollView scrollView = CustomScrollView(slivers: slivers, controller: scrollController);
         tabs.add(ContentTab(
-          key: events[i].weekKey,
-          title: getWeekName(events[i].weekKey),
+          key: events![i].weekKey!,
+          title: getWeekName(events![i].weekKey!),
           content: scrollView
         ));
         makeNewTabController();
-        slivers = List<Widget>();
+        slivers = [];
         firstIndex = i;
         firstIndexInTab = i;
         count = 0;
@@ -176,21 +176,19 @@ class EventsListPageState extends State<EventsListPage>
   }
 
   String getWeekName(String weekKey) {
-    String weekName = local.get('weeks.${weekKey.toLowerCase()}', defaultValue: '');
-    if (weekName == null) {
-      return 'Unknown week';
-    } else if (weekName.isNotEmpty) {
+    String weekName = local!.get('weeks.${weekKey.toLowerCase()}', defaultValue: '');
+    if (weekName.isNotEmpty) {
       return weekName;
     } else if (double.tryParse(weekKey) != null) {
       // weekKey is a number
       return 'Week' + weekKey;
     } else {
-      return local.get('months.${weekKey.toLowerCase()}', defaultValue: weekKey);
+      return local!.get('months.${weekKey.toLowerCase()}', defaultValue: weekKey);
     }
   }
 
   int findCurrentWeekTab() {
-    if (tabs != null && tabs.length > 0) {
+    if (tabs.length > 0) {
       String month = DateFormat('MMMM', 'en_US').format(DateTime.now());
       for (int i = 0; i < tabs.length; i++) {
         if (month.toLowerCase() == tabs[i].key.toLowerCase()) {
@@ -211,7 +209,7 @@ class EventsListPageState extends State<EventsListPage>
   double findScrollOffset(int i, int count) {
     double itemHeight = 72;
     for (int j = 0; j < count; j++) {
-      DateTime eventDate = events[j + i].getStartDate();
+      DateTime eventDate = events![j + i].getStartDate();
       DateTime now = DateTime.now();
       if (eventDate.year == now.year && eventDate.month == now.month) {
         if (Utils.isSameDate(eventDate, now)) {

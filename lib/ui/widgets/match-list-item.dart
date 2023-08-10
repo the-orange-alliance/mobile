@@ -10,14 +10,14 @@ import '../views/team/team-page.dart';
 class MatchListItem extends StatelessWidget {
 
   MatchListItem(this.match, {this.justTable = false, this.event});
-  final Match match;
-  final Event event;
+  final Match? match;
+  final Event? event;
   final bool justTable;
 
   @override
   Widget build(BuildContext context) {
-    Match match = this.match;
-    List<MatchParticipant> participants = match.participants;
+    Match match = this.match!;
+    List<MatchParticipant> participants = match.participants!;
     bool points = match.redScore != null && match.redScore != -1
         && match.blueScore != null && match.blueScore != -1;
 
@@ -59,7 +59,7 @@ class MatchListItem extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 7.0),
           child: Text(
-            match.matchName,
+            match.matchName!,
             textScaleFactor: 1.1,
             textAlign: TextAlign.center
           ),
@@ -77,12 +77,12 @@ class MatchListItem extends StatelessWidget {
           buildRow(
             children: redRow,
             color: TOAColors.Colors.lighterRed,
-            border: points && match.redScore > match.blueScore ? Border.all(color: TOAColors.Colors.red, width: 2) : null
+            border: points && match.redScore! > match.blueScore! ? Border.all(color: TOAColors.Colors.red, width: 2) : null
           ),
           buildRow(
             children: blueRow,
             color: TOAColors.Colors.lighterBlue,
-            border: points && match.blueScore > match.redScore ? Border.all(color: TOAColors.Colors.blue, width: 2) : null
+            border: points && match.blueScore! > match.redScore! ? Border.all(color: TOAColors.Colors.blue, width: 2) : null
           ),
           buildRow(children: orangeRow, color: (Theme.of(context).brightness == Brightness.light) ? TOAColors.Colors.toaColors.shade100 : Colors.black.withOpacity(0.12))
         ]
@@ -96,7 +96,7 @@ class MatchListItem extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (c) {
-                return MatchPage(matchKey: match.matchKey, match: match, event: event);
+                return MatchPage(match.matchKey, match: match, event: event);
               }
             )
           );
@@ -125,7 +125,7 @@ class MatchListItem extends StatelessWidget {
               )
             );
           },
-          highlightColor: team.station > 20 ? TOAColors.Colors.lightBlue : TOAColors.Colors.lightRed,
+          highlightColor: team.station! > 20 ? TOAColors.Colors.lightBlue : TOAColors.Colors.lightRed,
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 12),
             child: Column(
@@ -156,7 +156,7 @@ class MatchListItem extends StatelessWidget {
     );
   }
 
-  Widget buildRow({@required List<Widget> children, @required Color color, BoxBorder border,}) {
+  Widget buildRow({required List<Widget> children, required Color color, BoxBorder? border,}) {
     if (children.isNotEmpty) {
       return Container(
         decoration: BoxDecoration(

@@ -4,10 +4,10 @@ import 'package:toa_flutter/models/match-details.dart';
 
 class Match {
   Match({
-    this.matchKey,
-    this.eventKey,
-    this.tournamentLevel,
-    this.scheduledTime,
+    required this.matchKey,
+    required this.eventKey,
+    required this.tournamentLevel,
+    required this.scheduledTime,
     this.matchName,
     this.playNumber,
     this.fieldNumber,
@@ -31,26 +31,26 @@ class Match {
   String matchKey;
   String eventKey;
   int tournamentLevel;
-  String scheduledTime;
-  String matchName;
-  int playNumber;
-  int fieldNumber;
-  int prestartTime;
-  int prestartCount;
-  String cycleTime;
-  int redScore;
-  int blueScore;
-  int redPenalty;
-  int bluePenalty;
-  int redAutoScore;
-  int blueAutoScore;
-  int redTeleScore;
-  int blueTeleScore;
-  int redEndScore;
-  int blueEndScore;
-  String videoURL;
-  List<MatchParticipant> participants;
-  MatchDetails gameData;
+  String? scheduledTime;
+  String? matchName;
+  int? playNumber;
+  int? fieldNumber;
+  int? prestartTime;
+  int? prestartCount;
+  String? cycleTime;
+  int? redScore;
+  int? blueScore;
+  int? redPenalty;
+  int? bluePenalty;
+  int? redAutoScore;
+  int? blueAutoScore;
+  int? redTeleScore;
+  int? blueTeleScore;
+  int? redEndScore;
+  int? blueEndScore;
+  String? videoURL;
+  List<MatchParticipant>? participants;
+  MatchDetails? gameData;
 
   static List<Match> allFromResponse(String response) {
     return jsonDecode(response)

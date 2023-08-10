@@ -9,12 +9,12 @@ class TOALocalizations {
 
   final Locale locale;
 
-  static TOALocalizations of(BuildContext context) {
+  static TOALocalizations? of(BuildContext context) {
     return Localizations.of<TOALocalizations>(context, TOALocalizations);
   }
 
-  Map<String, dynamic> english;
-  Map<String, dynamic> translations;
+  Map<String, dynamic>? english;
+  Map<String, dynamic>? translations;
 
   Future<bool> load() async {
     String data = await rootBundle.loadString(
@@ -32,7 +32,7 @@ class TOALocalizations {
     return true;
   }
 
-  String get(String key, {bool english = false, String defaultValue}) {
+  String get(String key, {bool english = false, String? defaultValue}) {
     if (defaultValue == null) {
       defaultValue = key;
     }
@@ -46,7 +46,7 @@ class TOALocalizations {
   }
 
   bool isRTL() {
-    return this.translations['config']['direction'].toString().toUpperCase() == 'RTL';
+    return this.translations!['config']['direction'].toString().toUpperCase() == 'RTL';
   }
 
   TextDirection getTextDirection() {

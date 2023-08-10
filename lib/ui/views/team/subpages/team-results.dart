@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -17,8 +19,8 @@ class TeamResults extends StatelessWidget {
   TeamResults(this.teamKey);
 
   final String teamKey;
-  List<TeamParticipant> data;
-  TOALocalizations local;
+  List<TeamParticipant>? data;
+  TOALocalizations? local;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class TeamResults extends StatelessWidget {
       future: getTeamParticipants(teamKey),
       builder: (BuildContext context,
           AsyncSnapshot<List<TeamParticipant>> teamParticipants) {
-        if (teamParticipants.data != null) {
+        if (teamParticipants.hasData) {
           data = teamParticipants.data;
         }
         return bulidPage();
@@ -38,16 +40,16 @@ class TeamResults extends StatelessWidget {
 
   Widget bulidPage() {
     if (data != null) {
-      if (data.length > 0) {
+      if (data!.length > 0) {
         return ListView.builder(
-          itemCount: data.length,
+          itemCount: data!.length,
           itemBuilder: (BuildContext context, int index) {
-            return bulidItem(data[index]);
+            return bulidItem(data![index]);
           },
         );
       } else {
         return NoDataWidget(
-            MdiIcons.calendarOutline, local.get('no_data.events'));
+            MdiIcons.calendarOutline, local!.get('no_data.events'));
       }
     } else {
       return Center(child: CircularProgressIndicator());
@@ -64,21 +66,21 @@ class TeamResults extends StatelessWidget {
 
     // Ranking
     if (teamParticipant.ranking != null &&
-        !teamParticipant.ranking.rank.isNaN) {
+        !teamParticipant.ranking!.rank!.isNaN) {
       card.add(ListTile(
         title: Text.rich(
           TextSpan(
             children: <TextSpan>[
-              TextSpan(text: '${local.get('pages.event.rankings.qual_rank')} '),
+              TextSpan(text: '${local!.get('pages.event.rankings.qual_rank')} '),
               TextSpan(
-                text: '#${teamParticipant.ranking.rank} ',
+                text: '#${teamParticipant.ranking!.rank} ',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               TextSpan(
-                  text: '${local.get('pages.event.rankings.with_record')} '),
+                  text: '${local!.get('pages.event.rankings.with_record')} '),
               TextSpan(
                 text:
-                    '${teamParticipant.ranking.wins}-${teamParticipant.ranking.losses}-${teamParticipant.ranking.ties}',
+                    '${teamParticipant.ranking!.wins}-${teamParticipant.ranking!.losses}-${teamParticipant.ranking!.ties}',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
@@ -96,7 +98,7 @@ class TeamResults extends StatelessWidget {
         padding: EdgeInsets.all(12),
         child: NoDataWidget(
           MdiIcons.gamepadVariant,
-          local.get('no_data.matches'),
+          local!.get('no_data.matches'),
           mini: true,
         ),
       ));
@@ -113,23 +115,23 @@ class TeamResults extends StatelessWidget {
     );
   }
 
-  Future<List<TeamParticipant>> getTeamParticipants(String teamKey) async {
+  Future<List<TeamParticipant>> getTeamParticipants(String? teamKey) async {
     List<TeamParticipant> teamParticipants = [];
 
     // Get all the team's rankings
-    final Future<List<Ranking>> allRankings =
+    final Future<List<Ranking>?> allRankings =
         ApiV3().getTeamResults(teamKey, StaticData.seasonKey);
 
-    final teamEvents = await ApiV3().getTeamEvents(teamKey, StaticData.seasonKey);
+    final teamEvents = await (ApiV3().getTeamEvents(teamKey, StaticData.seasonKey));
 
     try {
-      teamEvents.sort(Sort().eventParticipantSorter);
+      teamEvents.sort(Sort.eventParticipantSorter);
 
       List<Future<void>> requests = [];
 
       for (final event in teamEvents) {
         EventParticipant eventParticipant = event;
-        TeamParticipant teamParticipant = TeamParticipant();
+        TeamParticipant teamParticipant = TeamParticipant(event.teamKey, []);
 
         // Get event detail
         requests.add(ApiV3()
@@ -140,17 +142,17 @@ class TeamResults extends StatelessWidget {
         requests.add(
             ApiV3().getEventMatches(eventParticipant.eventKey).then((matches) {
           List<Match> teamMatches = matches
-              .where((match) => match.participants
+              .where((match) => match.participants!
                   .any((participant) => participant.teamKey == teamKey))
               .toList();
 
-          teamMatches.sort(Sort().matchSorter);
+          teamMatches.sort(Sort.matchSorter);
           teamParticipant.matches = teamMatches;
         }));
 
         // Find the ranking in the event
         requests.add(allRankings.then((rankings) => teamParticipant.ranking =
-            rankings.firstWhere(
+            rankings!.firstWhere(
                 (ranking) => ranking.eventKey == eventParticipant.eventKey)));
 
         teamParticipants.add(teamParticipant);
@@ -161,7 +163,7 @@ class TeamResults extends StatelessWidget {
       print(e);
     }
 
-    teamParticipants.sort(Sort().teamParticipantSorter);
+    teamParticipants.sort(Sort.teamParticipantSorter);
     return teamParticipants;
   }
 }

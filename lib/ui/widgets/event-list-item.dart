@@ -6,7 +6,7 @@ import '../views/event/event-page.dart';
 class EventListItem extends StatelessWidget {
 
   EventListItem(this.event, {this.showDate = true});
-  final Event event;
+  final Event? event;
   final bool showDate;
 
   @override
@@ -22,8 +22,8 @@ class EventListItem extends StatelessWidget {
         );
       },
       child: ListTile(
-        title: Text(event.getFullName(), overflow: TextOverflow.fade, softWrap: false, maxLines: 1, style: TextStyle(fontWeight: FontWeight.w700)),
-        subtitle: Text(showDate ? event.getSubtitle(context) : event.getShortLocation(), overflow: TextOverflow.fade, softWrap: false, maxLines: 1, style: TextStyle(fontWeight: FontWeight.w500))
+        title: Text(event!.getFullName(), overflow: TextOverflow.fade, softWrap: false, maxLines: 1, style: TextStyle(fontWeight: FontWeight.w700)),
+        subtitle: Text(showDate ? event!.getSubtitle(context) : event!.getShortLocation(), overflow: TextOverflow.fade, softWrap: false, maxLines: 1, style: TextStyle(fontWeight: FontWeight.w500))
       )
     );
   }

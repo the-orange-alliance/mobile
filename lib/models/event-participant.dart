@@ -3,10 +3,10 @@ import 'package:toa_flutter/models/team.dart';
 
 class EventParticipant {
   EventParticipant({
-    this.eventParticipantKey,
-    this.eventKey,
-    this.teamKey,
-    this.isActive,
+    required this.eventParticipantKey,
+    required this.eventKey,
+    required this.teamKey,
+    required this.isActive,
     this.cardStatus,
     this.team
   });
@@ -15,8 +15,8 @@ class EventParticipant {
   final String eventKey;
   final String teamKey;
   final bool isActive;
-  final String cardStatus;
-  final Team team;
+  final String? cardStatus;
+  final Team? team;
 
   static List<EventParticipant> allFromResponse(String response) {
     return jsonDecode(response)
