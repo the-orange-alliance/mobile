@@ -13,7 +13,7 @@ import '../models/event-settings.dart';
 import '../models/user.dart';
 
 class Cloud {
-  static final String baseURL = 'https://functions.theorangealliance.org';
+  static final String baseURL = 'https://api.theorangealliance.org';
 
   static Future<bool> getNotificationsState() async {
     if (Platform.isAndroid) return true;
