@@ -71,14 +71,16 @@ class MatchBreakdownRow extends StatelessWidget {
     bool isFalse = missions == FALSE_VALUE;
     bool isTrueFalse = isTure || isFalse;
 
-    if (isFalse) {
+    if (isTrueFalse) {
       text = '';
-    } else if (isTure) {
-      text = ' (${points! > 0 ? '+' : ''}$points)';
+    }
+
+    if (isTure && points != null) {
+      text = ' (${points > 0 ? '+' : ''}$points)';
     } else if (title) {
       text = '$missions ${local!.get('breakdowns.points')}';
-    } else if (missions != 0) {
-      int total = missions != null ? missions * points! : 0;
+    } else if (missions != 0 && points != null) {
+      int total = missions != null ? missions * points : 0;
       text = '$missions (${total > 0 ? '+' : ''}$total)';
     }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toa_flutter/internationalization/localizations.dart';
 import 'package:toa_flutter/models/game-specifics/2122-helper.dart';
 import 'package:toa_flutter/models/game-specifics/2223-helper.dart';
+import 'package:toa_flutter/models/game-specifics/2324-helper.dart';
 import 'package:toa_flutter/models/match-details.dart';
 import 'package:toa_flutter/models/match.dart';
 import 'package:toa_flutter/providers/layouts.dart';
@@ -64,7 +65,7 @@ class MatchBreakdownBuilder {
               name: name,
               red: red[value],
               blue: blue![value],
-              text: true,
+              text: false,
             ));
           } else {
             final localeStart = e.name!.substring(0, e.name!.lastIndexOf('.'));
@@ -113,6 +114,11 @@ class MatchBreakdownBuilder {
             case '2223':
               rows.addAll(
                   PowerPlayHelper.customBreakdownRow(e, details, local));
+              break;
+            case '2324':
+              rows.addAll(
+                  CenterStageHelper.customBreakdownRow(e, details, local));
+              break;
           }
       }
     }
@@ -133,6 +139,7 @@ class MatchBreakdownBuilder {
           case '2122':
             return FreightFrenzyHelper.getPenaltyPoints(m);
           case '2223':
+          case '2324': // same between years
             return PowerPlayHelper.getPenaltyPoints(m);
           default:
             throw Error();
