@@ -56,6 +56,7 @@ flutter:
     - assets/lang/es.json
     - assets/seasons/2122.json
     - assets/seasons/2223.json
+    - assets/seasons/2324.json
   fonts:
     - family: TOA Icons
       fonts:

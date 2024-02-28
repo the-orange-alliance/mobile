@@ -16,7 +16,7 @@ class Cloud {
   static final String baseURL = 'https://api.theorangealliance.org';
 
   static Future<bool> getNotificationsState() async {
-    if (Platform.isAndroid) return true;
+    // if (Platform.isAndroid) return true;
     TOAUser? user = await getUser();
     return user != null && user.level! >= 6; // Beta, Admins only.
   }
@@ -52,6 +52,7 @@ class Cloud {
     }
   }
 
+  // TODO: https://github.com/the-orange-alliance/the-orange-alliance/blob/bdcd67bb385f56d7516bfbcc804ce9e8c54172eb/providers/FirebaseProvider.ts#L727
   static Future<bool> updateEventSettings(
       String? eventKey, EventSettings? eventSettings) async {
     User? user = FirebaseAuth.instance.currentUser;

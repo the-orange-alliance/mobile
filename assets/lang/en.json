@@ -287,6 +287,30 @@
       "junctions_owned_cone": "Junctions Owned by Cones",
       "junctions_owned_beacon": "Junctions Owned by Beacons",
       "completed_circuit": "Completed Circuit"
+    },
+    
+    "centerstage": {
+      "init_team_prop_1": "Team 1 Prop",
+      "init_team_prop_2": "Team 2 Prop",
+      "backdrop_pixel": "Backdrop Pixels",
+      "backstage_pixel": "Backstage Pixels",
+      "purple_bonus_1": "Team 1 Purple Bonus",
+      "purple_bonus_2": "Team 2 Purple Bonus",
+      "yellow_bonus_1": "Team 1 Yellow Bonus",
+      "yellow_bonus_2": "Team 2 Yellow Bonus",
+      "with_team_prop": "w/ Team Prop",
+      "without_team_prop": "w/o Team Prop",
+      "completed_mosaics": "Completed Mosaics",
+      "set_line_bonus": "Set Line Bonus",
+      "drone_1": "Robot 1 Drone Launch",
+      "drone_2": "Robot 2 Drone Launch",
+      "zone_1": "Zone 1",
+      "zone_2": "Zone 2",
+      "zone_3": "Zone 3",
+      "zone_4": "Zone 4",
+      "backstage": "Backstage",
+      "rigging": "Rigging",
+      "none": "None"
     }
   }
 }

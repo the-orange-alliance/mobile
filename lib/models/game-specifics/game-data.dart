@@ -70,6 +70,7 @@ class GameData {
             ? noData // the 2122 remote match data has some anomalies
             : MatchBreakdownBuilder.getRows(match, context);
       case '2223':
+      case '2324':
         return MatchBreakdownBuilder.getRows(match, context);
       default:
         return noData;
